@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/require-default-props */
 import { Box, Flex, VStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';

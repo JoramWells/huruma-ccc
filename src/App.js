@@ -1,21 +1,31 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Homepage from './layouts/Homepage';
+import  Dashboard from './components/Dashboard'
+import PriceLists from './layouts/PriceLists';
+import Services from './layouts/Services';
+import AddService from './layouts/AddService';
 
 function App() {
+  const {pathname} = useLocation()
+  console.log(pathname)
   return (
     <ChakraProvider theme={theme}>
-<Text>Hello</Text>
+    <Dashboard display={pathname.includes('/add-service')}>
+
+    <Routes>
+            <Route path='/' element={<Homepage/>} />
+            <Route path='/price-lists' element={<PriceLists/>} />
+            <Route path='/add-service' element={<AddService/>} />
+            <Route path='/services' element={<Services/>} />
+
+    </Routes>
+    </Dashboard>
+
     </ChakraProvider>
   );
 }

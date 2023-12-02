@@ -26,7 +26,7 @@ function Sidebar() {
           textAlign="center"
           color="gray.700"
         >
-          O.T.Z
+          Huruma
         </Text>
       </Box>
       <Divider />
