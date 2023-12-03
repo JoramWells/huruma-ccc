@@ -1,13 +1,17 @@
 import {
  FaHome, FaHospitalAlt, FaListOl,
 } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SidebarItemButton from './SidebarItemButton';
+import { Box, Collapse, Text, useDisclosure } from '@chakra-ui/react';
 
 const SidebarListItems = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
+
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <>
       <SidebarItemButton
@@ -40,10 +44,17 @@ const SidebarListItems = () => {
 
       <SidebarItemButton
         selected={pathname === "/items" || pathname.includes("user")}
-        onClick={() => navigate("/items")}
+        onClick={onToggle}
         text="items"
         icon={<FaListOl />}
       />
+
+      <Collapse in={isOpen}>
+        <Box ml={5} mt={5}>
+          <Text></Text>
+          <Link to={"/price-list-items"}>Price List Items</Link>
+        </Box>
+      </Collapse>
     </>
   );
 };

@@ -13,6 +13,7 @@ import PriceListDetail from './layouts/PriceListDetail';
 import Items from './layouts/Items';
 import AddItem from './layouts/AddItem';
 import AddItemType from './layouts/AddItemType';
+import PriceListItems from './layouts/PriceListItems';
 
 function App() {
   const {pathname} = useLocation()
@@ -25,13 +26,15 @@ function App() {
       </Routes>
       <Dashboard
         display={
-          pathname.includes("/add-service") || pathname.includes("/add-item")
-|| pathname.includes('/add-item-type')
+          pathname.includes("/add-service") ||
+          pathname.includes("/add-item") ||
+          pathname.includes("/add-item-type")
         }
       >
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/price-lists" element={<PriceLists />} />
+          <Route path="/price-list-items" element={<PriceListItems />} />
           <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
 
           <Route path="/items" element={<Items />} />

@@ -1,112 +1,72 @@
-import { Badge, Box, FormControl, FormLabel, HStack, Input, VStack } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {useNavigate} from 'react-router-dom'
-import Select from 'react-select'
+import { Box, Button, HStack, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, VStack } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { getAllItemTypes } from "../_reducers/itemTypeSlice";
+import { nanoid } from "@reduxjs/toolkit";
+import Step1 from "../components/ItemSteps/Step1";
+import Step2 from "../components/ItemSteps/Step2";
+import Step3 from "../components/ItemSteps/Step3";
 
 const AddItem = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    const options = [
-      { value: "chocolate", label: "Chocolate" },
-      { value: "strawberry", label: "Strawberry" },
-      { value: "vanilla", label: "Vanilla" },
+  useEffect(() => {
+    dispatch(getAllItemTypes());
+  }, [dispatch]);
+
+    const [activeStep, setActiveStep] = useState(1);
+
+    const steps = [
+      { title: "First", description: "Item Info" },
+      { title: "Second", description: "Price Details" },
+      { title: "Third", description: "Store Info" },
     ];
 
-    const itemTypeData = useSelector(state=>state.itemType.data)
-    console.log(itemTypeData,'dfe')
-    useEffect(()=>{
-      dispatch(getAllItemTypes())
-    },[dispatch])
+    const handleNext = () => {
+      setActiveStep((prevStep) => prevStep + 1);
+      // navigate({
+      //   pathname: '/add-invoice',
+      //   search: `?id=${invoiceId}`,
+      // });
+    };
+
+    const handleBack = () => {
+      setActiveStep((prevStep) => prevStep - 1);
+    };
 
   return (
-    <VStack w={"full"} h={"100vh"}>
-      <Box w={"50%"} mt={5} boxShadow={"lg"} p={5} rounded={"lg"}>
-        <Select options={options} />
+    <VStack w={"full"} h={"100vh"} bgColor={'gray.50'} justifyContent={'center'} alignItems={'center'}>
+      <Box w={"50%"} mt={5} boxShadow={"lg"} p={5} rounded={"lg"} bgColor={'white'}>
+        <Stepper index={activeStep}>
+          {steps.map((step) => (
+            <Step key={nanoid()}>
+              <StepIndicator>
+                <StepStatus
+                  complete={<StepIcon />}
+                  incomplete={<StepNumber />}
+                  active={<StepNumber />}
+                />
+              </StepIndicator>
+              <Box flexShrink={0}>
+                <StepTitle>{step.title}</StepTitle>
+                <StepDescription>{step.description}</StepDescription>
+              </Box>
+              <StepSeparator />
+            </Step>
+          ))}
+        </Stepper>
 
-        <FormControl>
-        <HStack w={'full'}
-        justifyItems={'center'}
-        alignContent={'center'}
-        alignItems={'center'}
-        >
-          <FormLabel mt={1}>Item Type</FormLabel>
-          <Badge
-          _hover={{
-            cursor:'pointer',
-            bgColor:'gray.100'
-          }}
-          colorScheme="green"
-          onClick={()=>navigate('/add-item-type')}
-          >Add Item Type</Badge>
+        {activeStep === 1 && <Step1 />}
+
+        {/* payment info */}
+        {activeStep === 2 && <Step2 />}
+
+        {/* store info */}
+        {activeStep === 3 && <Step3/>}
+        <HStack mt={5} w={'full'} justifyContent={'flex-end'}>
+          <Button onClick={() => handleBack()} isDisabled={activeStep===1}>Back</Button>
+          <Button onClick={() => handleNext()}>Next</Button>
         </HStack>
-          <Input placeholder="Enter Item Type" />
-        </FormControl>
-
-        {/* sub item */}
-        <FormControl mt={5}>
-          <FormLabel>Sub Item of</FormLabel>
-          <Input placeholder="Enter Sub Item of" />
-        </FormControl>
-
-        {/* category */}
-        <FormControl mt={5}>
-          <FormLabel>Item Category</FormLabel>
-          <Input placeholder="Select Item Category" />
-        </FormControl>
-
-        {/* item code */}
-        <FormControl mt={5}>
-          <FormLabel>Item Code</FormLabel>
-          <Input placeholder="Enter Item code" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Item Description</FormLabel>
-          <Input as={"textarea"} placeholder="Enter Sub Item of" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Measuring Unit</FormLabel>
-          <Input placeholder="Select Measuring Unit" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Buying Price</FormLabel>
-          <Input placeholder="Select Buying Price" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Selling Price</FormLabel>
-          <Input placeholder="Select Selling Price" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Reorder Level</FormLabel>
-          <Input placeholder="Enter Reorder Level" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Expense Account</FormLabel>
-          <Input placeholder="Select Expense Account" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Select Income Account</FormLabel>
-          <Input placeholder="Select Income Account" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Brand</FormLabel>
-          <Input placeholder="Select Brand" />
-        </FormControl>
-
-        <FormControl mt={5}>
-          <FormLabel>Buying Price</FormLabel>
-          <Input placeholder="Select Store" />
-        </FormControl>
       </Box>
     </VStack>
   );

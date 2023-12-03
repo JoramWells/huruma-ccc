@@ -13,37 +13,29 @@ import {
   Tooltip,
   Input,
   IconButton,
-  Button,
 } from "@chakra-ui/react";
 import { nanoid } from "@reduxjs/toolkit";
 import { FaEllipsisH, FaFilter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useFilters, usePagination, useTable } from "react-table";
+import { useFilters, useSortBy, useTable } from "react-table";
 // import TableSearchInput from '../FormComponents/TableSearchInput';
 
-
-const PriceListTable = ({ columns, data }) => {
+const PriceListItemsTable = ({ columns, data }) => {
   const navigate = useNavigate();
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    rows,
     prepareRow,
-    state:{pageIndex, pageSize},
-    previousPage,
-    nextPage,
-    canPreviousPage,
-    canNextPage,
     setFilter,
   } = useTable(
     {
       columns,
       data,
-      initialState:{pageIndex:0, pageSize:10}
     },
     useFilters,
-    usePagination
+    useSortBy
   );
 
   return (
@@ -93,12 +85,11 @@ const PriceListTable = ({ columns, data }) => {
           ))}
         </Thead>
         <Tbody {...getTableBodyProps()} fontSize="normal">
-          {page.map((row) => {
+          {rows.map((row) => {
             prepareRow(row);
             return (
               <Tr fontSize="sm" key={nanoid()} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-
                   return (
                     <Td
                       fontSize="normal"
@@ -112,7 +103,7 @@ const PriceListTable = ({ columns, data }) => {
                 <Td>
                   <Tooltip
                     hasArrow
-                    label={`View ${row.original.phoneNumber} details`}
+                    label={`View ${row.original.service_name} details`}
                     fontSize="sm"
                   >
                     <Box
@@ -120,7 +111,7 @@ const PriceListTable = ({ columns, data }) => {
                         cursor: "pointer",
                       }}
                       onClick={() =>
-                        navigate(`/user-detail/${row.original.id}`)
+                        navigate(`/pricelist-detail/${row.original.id}`)
                       }
                     >
                       <FaEllipsisH style={{ margin: 0 }} />
@@ -132,25 +123,8 @@ const PriceListTable = ({ columns, data }) => {
           })}
         </Tbody>
       </Table>
-
-      {/* pagination */}
-      <HStack>
-        <Button
-        onClick={()=>previousPage()}
-        disabled={!canPreviousPage}
-        >
-            Prev
-        </Button>
-        {pageIndex + 1} of {Math.ceil(data.length/pageSize)}
-      
-      <Button onClick={()=>nextPage()}
-      disabled={!canNextPage}
-      >
-        Next
-      </Button>
-      </HStack>
     </Box>
   );
 };
 
-export default PriceListTable;
+export default PriceListItemsTable;
