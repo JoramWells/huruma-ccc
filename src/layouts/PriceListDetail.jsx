@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPriceListDetail } from '../components/_reducers/priceListReducers'
 import { Box, Button, Divider, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
 import { FaTrash, FaWindowClose } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import EditPriceList from '../components/pricelist/EditPriceList'
+import { getPriceListDetail } from '../_reducers/priceListSlice'
 
 const PriceListDetail = () => {
   const { id } = useParams()

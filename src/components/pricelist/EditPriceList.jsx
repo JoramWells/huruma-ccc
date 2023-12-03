@@ -5,8 +5,8 @@ import { FaEdit } from "react-icons/fa";
 import PropTypes from 'prop-types'
 import { useState } from "react";
 import {useDispatch} from 'react-redux'
-import { editPriceList } from "../_reducers/priceListReducers";
 import {useParams} from 'react-router-dom'
+import { editPriceList } from "../../_reducers/priceListSlice";
 
 
 const  EditPriceList = ({service_name, service_category}) => {

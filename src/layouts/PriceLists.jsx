@@ -3,7 +3,7 @@ import {  Box, Button, HStack, VStack } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { FaFileDownload, FaPrint } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllPriceLists } from "../components/_reducers/priceListReducers"
+import { getAllPriceLists } from "../_reducers/priceListSlice"
 import PriceListTable from "../components/tables/PriceListTable"
 
 

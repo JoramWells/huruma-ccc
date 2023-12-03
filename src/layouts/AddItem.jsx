@@ -1,11 +1,31 @@
 import { Badge, Box, FormControl, FormLabel, HStack, Input, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom'
+import Select from 'react-select'
+import { getAllItemTypes } from "../_reducers/itemTypeSlice";
 
 const AddItem = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const options = [
+      { value: "chocolate", label: "Chocolate" },
+      { value: "strawberry", label: "Strawberry" },
+      { value: "vanilla", label: "Vanilla" },
+    ];
+
+    const itemTypeData = useSelector(state=>state.itemType.data)
+    console.log(itemTypeData,'dfe')
+    useEffect(()=>{
+      dispatch(getAllItemTypes())
+    },[dispatch])
+
   return (
     <VStack w={"full"} h={"100vh"}>
       <Box w={"50%"} mt={5} boxShadow={"lg"} p={5} rounded={"lg"}>
+        <Select options={options} />
+
         <FormControl>
         <HStack w={'full'}
         justifyItems={'center'}
