@@ -5,20 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <BrowserRouter>
+    <Provider store={store}>
+      <StrictMode>
+        <ColorModeScript />
 
-  <StrictMode>
-    <ColorModeScript />
-
-    <App />
-  </StrictMode>
+        <App />
+      </StrictMode>
+    </Provider>
   </BrowserRouter>
-
 );
 
 // If you want your app to work offline and load faster, you can change

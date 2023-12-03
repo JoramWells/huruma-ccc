@@ -1,18 +1,54 @@
-import {  Button, HStack, Text, VStack } from "@chakra-ui/react"
-import axios from "axios"
-import { useEffect } from "react"
+import {  Box, Button, HStack, VStack } from "@chakra-ui/react"
+// import axios from "axios"
+import { useCallback, useEffect } from "react"
 import { FaFileDownload, FaPrint } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllPriceLists } from "../components/_reducers/priceListReducers"
+import PriceListTable from "../components/tables/PriceListTable"
+
+
+const columns =[
+  {
+    Header:'Service Category',
+    accessor:'service_category'
+  },
+  {
+    Header:'Service Name',
+    accessor:'service_name'
+  },
+  {
+    Header:'Service Cost(Cash)',
+    accessor:'service_cost_cash'
+  },
+  {
+    Header:'Service Cost(Foreigner)',
+    accessor:'service_cost_foreigner'
+  },
+  {
+    Header:'Service Cost(Insurance)',
+    accessor:'service_cost_insurance'
+  }
+]
 
 const PriceLists = () => {
-  const fetchData = async () =>{
-    await axios.get(
-      "http://localhost:5000/pricelists/get-all-pricelists"
-    ).then(res=> console.log(res.data)).catch(error=>console.log(error.message))
-  }
+
+  const dispatch = useDispatch()
+
+  const {data} = useSelector(state=>state.priceLists)
+
+  const subrowData = data && data.map(item=>({
+    ...item,
+    subRows:[]
+  }))
+  const fetchData = useCallback(()=>{
+    dispatch(getAllPriceLists())
+  },[dispatch])
 
   useEffect(()=>{
     fetchData()
-  },[])
+  console.log(data);
+
+  },[fetchData])
   return (
     <VStack mt={10}
     w={'full'}
@@ -29,9 +65,14 @@ const PriceLists = () => {
         <Button leftIcon={<FaFileDownload/>}>Download</Button>
 
     </HStack>
-        <Text>
-            PriceLists
-        </Text>
+        <Box
+        w={'100%'}
+        border={'1px'}
+        borderColor={'gray.100'}
+        rounded={'lg'}
+        >
+          <PriceListTable data={subrowData} columns={columns}/>
+        </Box>
     </VStack>
   )
 }

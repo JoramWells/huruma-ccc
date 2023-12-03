@@ -9,23 +9,23 @@ import  Dashboard from './components/Dashboard'
 import PriceLists from './layouts/PriceLists';
 import Services from './layouts/Services';
 import AddService from './layouts/AddService';
+import PriceListDetail from './layouts/PriceListDetail';
 
 function App() {
   const {pathname} = useLocation()
   console.log(pathname)
   return (
     <ChakraProvider theme={theme}>
-    <Dashboard display={pathname.includes('/add-service')}>
+      <Dashboard display={pathname.includes("/add-service")}>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/price-lists" element={<PriceLists />} />
+          <Route path="/price-details" element={<PriceListDetail />} />
 
-    <Routes>
-            <Route path='/' element={<Homepage/>} />
-            <Route path='/price-lists' element={<PriceLists/>} />
-            <Route path='/add-service' element={<AddService/>} />
-            <Route path='/services' element={<Services/>} />
-
-    </Routes>
-    </Dashboard>
-
+          <Route path="/add-service" element={<AddService />} />
+          <Route path="/services" element={<Services />} />
+        </Routes>
+      </Dashboard>
     </ChakraProvider>
   );
 }
