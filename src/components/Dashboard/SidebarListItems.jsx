@@ -25,7 +25,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/price-lists' || pathname.includes('user')}
+        selected={pathname === '/price-lists' || pathname.includes('pricelist')}
         onClick={() => navigate('/price-lists')}
         text="price lists"
         icon={<FaHospitalAlt />}

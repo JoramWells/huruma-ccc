@@ -91,7 +91,6 @@ const PriceListTable = ({ columns, data }) => {
             return (
               <Tr fontSize="sm" key={nanoid()} {...row.getRowProps()}>
                 {row.cells.map((cell) => {
-
                   return (
                     <Td
                       fontSize="normal"

@@ -20,6 +20,18 @@ export const getAllPriceLists = createAsyncThunk(
   }
 );
 
+export const getPriceListDetail = createAsyncThunk(
+  "data/getPriceListDetail",
+  async (id) => {
+    let data = [];
+    await axios
+      .get(`http://localhost:5000/pricelists/pricelist-detail/${id}`)
+      .then((res) => (data = res.data))
+      .catch((error) => console.error(error.message));
+    return data;
+  }
+);
+
 const priceListSlice = createSlice({
   name: "priceLists",
   initialState,
@@ -30,6 +42,17 @@ const priceListSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllPriceLists.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.data = action.payload;
+        state.loading = false;
+      });
+
+    builder
+      .addCase(getPriceListDetail.pending, (state) => {
+        state.status = "loading";
+        state.loading = true;
+      })
+      .addCase(getPriceListDetail.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.data = action.payload;
         state.loading = false;

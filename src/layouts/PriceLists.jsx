@@ -1,6 +1,6 @@
 import {  Box, Button, HStack, VStack } from "@chakra-ui/react"
 // import axios from "axios"
-import { useCallback, useEffect } from "react"
+import { useEffect } from "react"
 import { FaFileDownload, FaPrint } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllPriceLists } from "../components/_reducers/priceListReducers"
@@ -40,15 +40,13 @@ const PriceLists = () => {
     ...item,
     subRows:[]
   }))
-  const fetchData = useCallback(()=>{
-    dispatch(getAllPriceLists())
-  },[dispatch])
+  // const fetchData = useCallback(()=>{
+  //   dispatch(getAllPriceLists())
+  // },[dispatch])
 
   useEffect(()=>{
-    fetchData()
-  console.log(data);
-
-  },[fetchData])
+        dispatch(getAllPriceLists());
+  },[])
   return (
     <VStack mt={10}
     w={'full'}
