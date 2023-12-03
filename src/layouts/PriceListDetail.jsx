@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import EditPriceList from '../components/pricelist/EditPriceList'
 
 const PriceListDetail = () => {
-  const {id} = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch()
   const { data } = useSelector(state => state.priceLists)
 
@@ -43,7 +43,7 @@ const PriceListDetail = () => {
           </HStack>
           <HStack w={"full"} justifyContent={"space-between"} mb={2}>
             <Text fontWeight={"semibold"} color={"gray.500"} fontSize={"lg"}>
-              Service Name :
+              Service Names :
             </Text>
             <Text fontSize={"xl"} fontWeight={"semibold"}>
               {data.service_name}
@@ -98,7 +98,9 @@ const PriceListDetail = () => {
             </Text>
           </HStack>
           <HStack w={"full"} mt={5} justifyContent={"flex-end"}>
-            <EditPriceList />
+            <EditPriceList service_name={data.service_name}
+            service_category={data.service_category}
+            />
 
             <Button leftIcon={<FaTrash />} colorScheme="red">
               Delete
