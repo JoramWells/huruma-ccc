@@ -1,9 +1,9 @@
 import {
- FaHome, FaHospitalAlt, FaListOl,
+ FaHome, FaHospitalAlt, FaListOl, FaServicestack, FaStore,
 } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SidebarItemButton from './SidebarItemButton';
-import { Box, Collapse, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Collapse, useDisclosure } from '@chakra-ui/react';
 
 const SidebarListItems = () => {
   const navigate = useNavigate();
@@ -36,10 +36,17 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === "/services" || pathname.includes("user")}
+        selected={pathname === "/services" || pathname.includes("/add-service")}
         onClick={() => navigate("/services")}
         text="services"
-        icon={<FaHospitalAlt />}
+        icon={<FaServicestack />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === "/stores" || pathname.includes("user")}
+        onClick={() => navigate("/stores")}
+        text="stores"
+        icon={<FaStore />}
       />
 
       <SidebarItemButton
@@ -51,8 +58,10 @@ const SidebarListItems = () => {
 
       <Collapse in={isOpen}>
         <Box ml={5} mt={5}>
-          <Text></Text>
           <Link to={"/price-list-items"}>Price List Items</Link>
+        </Box>
+        <Box ml={5} mt={5}>
+          <Link to={"/item-type"}>Item Type</Link>
         </Box>
       </Collapse>
     </>
