@@ -17,10 +17,11 @@ import AddItemType from './layouts/AddItemType';
 import PriceListItems from './layouts/PriceListItems';
 import ItemType from './layouts/ItemType';
 import Stores from './layouts/Stores';
+import Departments from './layouts/Departments';
+import AddDepartment from './layouts/AddDepartment';
 
 function App() {
   const {pathname} = useLocation()
-  console.log(pathname)
   return (
     <ChakraProvider theme={theme}>
       <Routes>
@@ -29,12 +30,15 @@ function App() {
       </Routes>
       <Dashboard
         display={
-          pathname.includes("/add-item") ||
-          pathname.includes("/add-item-type")
+          pathname.includes("/add-item") || pathname.includes("/add-item-type")
         }
       >
         <Routes>
           <Route path="/" element={<Homepage />} />
+
+          <Route path="/departments" element={<Departments />} />
+          <Route path="/add-department" element={<AddDepartment />} />
+
           <Route path="/price-lists" element={<PriceLists />} />
           <Route path="/price-list-items" element={<PriceListItems />} />
           <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />

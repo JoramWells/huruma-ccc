@@ -1,4 +1,5 @@
 import {
+  FaDivide,
  FaHome, FaHospitalAlt, FaListOl, FaServicestack, FaStore,
 } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -19,6 +20,13 @@ const SidebarListItems = () => {
         onClick={() => navigate("/")}
         text="dashboard"
         icon={<FaHome />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === "/department" || pathname.includes("/add-department")}
+        onClick={() => navigate("/departments")}
+        text="departments"
+        icon={<FaDivide />}
       />
 
       <SidebarItemButton

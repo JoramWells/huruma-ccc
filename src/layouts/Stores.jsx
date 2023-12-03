@@ -7,18 +7,18 @@ import { FaBookMedical } from "react-icons/fa";
 const data = [
   {
     id: nanoid(),
-    text: "Non Pharmaceuticals",
-    quantity:34
+    text: "General Store",
+    quantity: "75",
   },
   {
     id: nanoid(),
     text: "Pharmaceuticals",
-    quantity:50
+    quantity: 34,
   },
   {
     id: nanoid(),
-    text: "General Store",
-    quantity:'75'
+    text: "Non Pharmaceuticals",
+    quantity: 50,
   },
 ];
 
