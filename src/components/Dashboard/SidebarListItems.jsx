@@ -5,6 +5,8 @@ import {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Box, Collapse, useDisclosure } from '@chakra-ui/react';
 import SidebarItemButton from './SidebarItemButton';
+import SidebarItemLink from './SidebarItemLink';
+import SidebarItemSubButton from './SidebarItemSubButton';
 
 const SidebarListItems = () => {
   const navigate = useNavigate();
@@ -57,14 +59,19 @@ const SidebarListItems = () => {
         icon={<FaStore />}
       />
 
-      <SidebarItemButton
+      <SidebarItemLink
         selected={pathname === '/items' || pathname.includes('user')}
         onClick={onToggle}
+        isOpen={isOpen}
         text="items"
         icon={<FaListOl />}
       />
 
       <Collapse in={isOpen}>
+        <SidebarItemSubButton
+          text="Price List Items"
+          selected={pathname.includes('price-list-items')}
+        />
         <Box ml={5} mt={5}>
           <Link to="/price-list-items">Price List Items</Link>
         </Box>
@@ -72,6 +79,12 @@ const SidebarListItems = () => {
           <Link to="/item-type">Item Type</Link>
         </Box>
       </Collapse>
+      <SidebarItemButton
+        selected={pathname === '/stores' || pathname.includes('pharmaceuticals')}
+        onClick={() => navigate('/stores')}
+        text="stores"
+        icon={<FaStore />}
+      />
     </>
   );
 };

@@ -1,18 +1,19 @@
+/* eslint-disable no-unused-vars */
 import {
   Box,
   Button,
+  Checkbox,
   FormControl,
   FormLabel,
   HStack,
-  IconButton,
   Input,
-  Text,
+  Stack,
   VStack,
 } from '@chakra-ui/react';
-import { FaArrowLeft, FaPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Select from 'react-select';
 import { addItemType } from '../_reducers/itemTypeSlice';
 
 const AddPharmaceuticals = () => {
@@ -25,6 +26,8 @@ const AddPharmaceuticals = () => {
   const inputValues = {
     itemTypeName,
   };
+
+  const options = [{ value: '85A', label: '85A' }];
 
   return (
     <VStack
@@ -39,35 +42,59 @@ const AddPharmaceuticals = () => {
         mt={5}
         bgColor="white"
         boxShadow="lg"
-        p={5}
+        p={3}
         rounded="lg"
       >
-        <HStack w="full" justifyContent="space-between">
-          <IconButton onClick={() => navigate('/add-item')}>
-            <FaArrowLeft />
-          </IconButton>
-          <Text fontSize="2xl" fontWeight="bold">
-            Register Item Type
-          </Text>
-        </HStack>
+
+        {/* select drug */}
+        <FormControl mt={5}>
+          <FormLabel fontSize="medium">Select Drug Name</FormLabel>
+          <Select options={options} />
+
+        </FormControl>
+
+        <FormControl mt={5}>
+          <FormLabel>Enter Buying Price</FormLabel>
+          <Input type="number" />
+        </FormControl>
+
+        <FormControl mt={5}>
+          <FormLabel>Is Taxed</FormLabel>
+          <Stack direction="row" spacing={4}>
+            <Checkbox>Yes</Checkbox>
+            <Checkbox>No</Checkbox>
+          </Stack>
+        </FormControl>
+
+        <FormControl mt={5}>
+          <FormLabel>Enter Quantity</FormLabel>
+          <Input type="number" />
+        </FormControl>
         {/* sub item */}
         <FormControl mt={5}>
-          <FormLabel fontSize="xl">Item Type</FormLabel>
+          <FormLabel fontSize="md">Serial Number</FormLabel>
           <Input
-            size="lg"
-            placeholder="Enter Sub Item of"
+            placeholder="Enter Serial Number"
             value={itemTypeName}
             onChange={(e) => setItemType(e.target.value)}
           />
         </FormControl>
+
+        <FormControl mt={5}>
+          <FormLabel fontSize="md">Expiry Date</FormLabel>
+          <Input
+            type="datetime-local"
+
+          />
+        </FormControl>
+
         <HStack mt={5} w="full" justifyContent="end">
           <Button
             size="lg"
-            leftIcon={<FaPlus />}
             colorScheme="blue"
             onClick={() => dispatch(addItemType(inputValues))}
           >
-            {loading ? 'loading...' : 'Save Item Type'}
+            {loading ? 'loading...' : 'Save'}
           </Button>
         </HStack>
       </Box>
