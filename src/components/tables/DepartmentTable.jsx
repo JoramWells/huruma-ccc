@@ -13,6 +13,7 @@ import {
   Tooltip,
   Input,
   IconButton,
+  VStack,
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
 import { FaEllipsisH, FaFilter } from 'react-icons/fa';
@@ -101,17 +102,21 @@ const DepartmentTable = ({ columns, data }) => {
                 <Td>
                   <Tooltip
                     hasArrow
-                    label={`View ${row.original.service_name} details`}
+                    label={`View ${row.original.departmentName} Details`}
                     fontSize="sm"
                   >
-                    <Box
+                    <VStack
                       _hover={{
                         cursor: 'pointer',
                       }}
-                      onClick={() => navigate(`/pricelist-detail/${row.original.id}`)}
+                      onClick={() => navigate(`/department-detail/${row.original.id}`)}
+                      w="20px"
+                      justifyContent="center"
+                      alignItems="center"
+
                     >
-                      <FaEllipsisH style={{ margin: 0 }} />
-                    </Box>
+                      <FaEllipsisH style={{ margin: 0, color: 'gray' }} />
+                    </VStack>
                   </Tooltip>
                 </Td>
               </Tr>

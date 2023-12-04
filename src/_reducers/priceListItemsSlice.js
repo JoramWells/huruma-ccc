@@ -14,7 +14,10 @@ export const getAllPriceListItems = createAsyncThunk(
     let data = [];
     await axios
       .get('http://localhost:5000/price-list-items/get-all-price-list-items')
-      .then((res) => (data = res.data))
+      .then((res) => {
+        (data = res.data);
+        console.log(res);
+      })
       .catch((error) => error.message);
     return data;
   },

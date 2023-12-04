@@ -34,7 +34,7 @@ const columns = [
 const PriceLists = () => {
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.priceLists);
+  const { data, error } = useSelector((state) => state.priceLists);
 
   const subrowData = data && data.map((item) => ({
     ...item,
@@ -47,6 +47,7 @@ const PriceLists = () => {
   useEffect(() => {
     dispatch(getAllPriceLists());
   }, [dispatch]);
+  console.log(error, 'wwee');
   return (
     <VStack
       mt={10}

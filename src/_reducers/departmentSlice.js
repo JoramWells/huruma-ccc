@@ -32,6 +32,19 @@ export const addDepartment = createAsyncThunk(
   },
 );
 
+// get by id
+export const getDepartmentDetail = createAsyncThunk(
+  'data/getDepartmentDetail',
+  async (id) => {
+    let data = [];
+    await axios
+      .get(`http://localhost:5000/departments/department-detail/${id}`)
+      .then((res) => (data = res.data))
+      .catch((error) => error.message);
+    return data;
+  },
+);
+
 const departmentSlice = createSlice({
   name: 'department',
   initialState,
@@ -46,6 +59,17 @@ const departmentSlice = createSlice({
         state.data = action.payload;
         state.loading = false;
       });
+    builder
+      .addCase(getDepartmentDetail.pending, (state) => {
+        state.status = 'loading';
+        state.loading = true;
+      })
+      .addCase(getDepartmentDetail.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+        state.loading = false;
+      });
+
     builder
       .addCase(addDepartment.pending, (state) => {
         state.status = 'loading';

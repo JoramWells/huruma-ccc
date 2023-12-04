@@ -23,7 +23,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/department' || pathname.includes('/add-department')}
+        selected={pathname === '/departments' || pathname.includes('/add-department')}
         onClick={() => navigate('/departments')}
         text="departments"
         icon={<FaDivide />}

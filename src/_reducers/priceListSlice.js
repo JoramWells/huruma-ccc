@@ -22,12 +22,12 @@ export const getAllPriceLists = createAsyncThunk(
 
 export const getPriceListDetail = createAsyncThunk(
   'data/getPriceListDetail',
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     let data = [];
     await axios
       .get(`http://localhost:5000/pricelists/pricelist-detail/${id}`)
       .then((res) => (data = res.data))
-      .catch((error) => error.message);
+      .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
@@ -68,6 +68,11 @@ const priceListSlice = createSlice({
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
+      })
+      .addCase(getPriceListDetail.rejected, (state, action) => {
+        state.status = 'failed';
+        state.loading = false;
+        state.error = action.error.message;
       });
 
     builder
