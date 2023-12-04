@@ -1,58 +1,58 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   data: [],
   loading: false,
   error: null,
-  response: "",
+  response: '',
 };
 
 export const addSubItem = createAsyncThunk(
-  "data/addItemType",
+  'data/addItemType',
   async (inputValues) => {
     // let data = []
     await axios
-      .post("http://localhost:5000/subItem/add", inputValues)
+      .post('http://localhost:5000/subItem/add', inputValues)
       .then((response) => console.log(response))
       .catch((error) => console.error(error.message));
-  }
+  },
 );
 
 // get all category
 export const getAllSubItems = createAsyncThunk(
-  "data/getAllPriceLists",
+  'data/getAllPriceLists',
   async () => {
     let data = [];
     await axios
-      .get("http://localhost:5000/subItem/fetchAll")
+      .get('http://localhost:5000/subItem/fetchAll')
       .then((res) => (data = res.data))
       .catch((error) => console.log(error.message));
     return data;
-  }
+  },
 );
 
 const subItemSlice = createSlice({
-  name: "subItem",
+  name: 'subItem',
   initialState,
   extraReducers: (builder) => {
     builder
       .addCase(addSubItem.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.loading = true;
       })
       .addCase(addSubItem.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
       .addCase(getAllSubItems.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.loading = true;
       })
       .addCase(getAllSubItems.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });

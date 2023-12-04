@@ -1,27 +1,27 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   data: [],
   loading: false,
   error: null,
-  response: "",
+  response: '',
 };
 
 export const getAllPriceListItems = createAsyncThunk(
-  "data/getAllPriceListItems",
+  'data/getAllPriceListItems',
   async () => {
     let data = [];
     await axios
-      .get("http://localhost:5000/price-list-items/get-all-price-list-items")
+      .get('http://localhost:5000/price-list-items/get-all-price-list-items')
       .then((res) => (data = res.data))
       .catch((error) => console.log(error.message));
     return data;
-  }
+  },
 );
 
 export const getPriceListDetail = createAsyncThunk(
-  "data/getPriceListDetail",
+  'data/getPriceListDetail',
   async (id) => {
     let data = [];
     await axios
@@ -29,54 +29,54 @@ export const getPriceListDetail = createAsyncThunk(
       .then((res) => (data = res.data))
       .catch((error) => console.error(error.message));
     return data;
-  }
+  },
 );
 
 export const editPriceList = createAsyncThunk(
-  "data/editPriceList",
+  'data/editPriceList',
   async (data) => {
-    let result = []
+    let result = [];
     await axios
-      .put("http://localhost:5000/pricelists/edit-pricelist", data)
+      .put('http://localhost:5000/pricelists/edit-pricelist', data)
       .then((response) => (result = response.data))
       .catch((error) => console.error(error));
     return result;
-  }
-)
+  },
+);
 
 const priceListSlice = createSlice({
-  name: "priceLists",
+  name: 'priceLists',
   initialState,
   extraReducers: (builder) => {
     builder
       .addCase(getAllPriceListItems.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.loading = true;
       })
       .addCase(getAllPriceListItems.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
       .addCase(getPriceListDetail.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.loading = true;
       })
       .addCase(getPriceListDetail.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
       .addCase(editPriceList.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
         state.loading = true;
       })
       .addCase(editPriceList.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });

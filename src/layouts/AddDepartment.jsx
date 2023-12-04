@@ -8,15 +8,15 @@ import {
   Input,
   Text,
   VStack,
-} from "@chakra-ui/react";
-import { FaArrowLeft } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { addDepartment } from "../_reducers/departmentSlice";
+} from '@chakra-ui/react';
+import { FaArrowLeft } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { addDepartment } from '../_reducers/departmentSlice';
 
 const AddDepartment = () => {
-  const [departmentName, setDepartmentName] = useState("");
+  const [departmentName, setDepartmentName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,45 +28,45 @@ const AddDepartment = () => {
 
   return (
     <VStack
-      w={"full"}
-      h={"100vh"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      bgColor={"gray.50"}
+      w="full"
+      h="100vh"
+      alignItems="center"
+      justifyContent="center"
+      bgColor="gray.50"
     >
       <Box
-        w={"50%"}
+        w="50%"
         mt={5}
-        bgColor={"white"}
-        boxShadow={"lg"}
+        bgColor="white"
+        boxShadow="lg"
         p={5}
-        rounded={"lg"}
+        rounded="lg"
       >
-        <HStack w={"full"} justifyContent={"space-between"}>
-          <IconButton onClick={() => navigate("/add-item")}>
+        <HStack w="full" justifyContent="space-between">
+          <IconButton onClick={() => navigate('/add-item')}>
             <FaArrowLeft />
           </IconButton>
-          <Text fontSize={"xl"} fontWeight={"semibold"} color={'gray.500'}>
+          <Text fontSize="xl" fontWeight="semibold" color="gray.500">
             Add Department
           </Text>
         </HStack>
         {/* sub item */}
         <FormControl mt={5}>
-          <FormLabel fontSize={"lg"}>Department Name</FormLabel>
+          <FormLabel fontSize="lg">Department Name</FormLabel>
           <Input
-            size={"lg"}
+            size="lg"
             placeholder="Enter Sub Item of"
             value={departmentName}
             onChange={(e) => setDepartmentName(e.target.value)}
           />
         </FormControl>
-        <HStack mt={5} w={"full"} justifyContent={"end"}>
+        <HStack mt={5} w="full" justifyContent="end">
           <Button
-            size={"lg"}
+            size="lg"
             colorScheme="blue"
             onClick={() => dispatch(addDepartment(inputValues))}
           >
-            {loading ? "loading..." : "Save"}
+            {loading ? 'loading...' : 'Save'}
           </Button>
         </HStack>
       </Box>
