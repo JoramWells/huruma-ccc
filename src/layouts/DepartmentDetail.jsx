@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import { getDepartmentDetail } from '../_reducers/departmentSlice';
 
 const DepartmentDetail = () => {
@@ -11,9 +12,19 @@ const DepartmentDetail = () => {
   useEffect(() => {
     dispatch(getDepartmentDetail(id));
   }, []);
-  console.log(data);
   return (
-    <div>DepartmentDetail</div>
+    <VStack
+      w="full"
+      mt={12}
+      alignItems="center"
+      justifyContent="center"
+      bgColor="gray.50"
+      h="100vh"
+    >
+      <Box>
+        <Text>{data.departmentName}</Text>
+      </Box>
+    </VStack>
   );
 };
 

@@ -20,6 +20,7 @@ import Stores from './layouts/Stores';
 import Departments from './layouts/Departments';
 import AddDepartment from './layouts/AddDepartment';
 import DepartmentDetail from './layouts/DepartmentDetail';
+import Pharmaceuticals from './layouts/Pharmaceuticals';
 
 function App() {
   const { pathname } = useLocation();
@@ -40,6 +41,8 @@ function App() {
           <Route path="/departments" element={<Departments />} />
           <Route path="/add-department" element={<AddDepartment />} />
           <Route path="/department-detail/:id" element={<DepartmentDetail />} />
+
+          <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
 
           <Route path="/price-lists" element={<PriceLists />} />
           <Route path="/price-list-items" element={<PriceListItems />} />
