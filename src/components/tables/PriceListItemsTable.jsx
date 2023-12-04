@@ -13,11 +13,11 @@ import {
   Tooltip,
   Input,
   IconButton,
-} from "@chakra-ui/react";
-import { nanoid } from "@reduxjs/toolkit";
-import { FaEllipsisH, FaFilter } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { useFilters, useSortBy, useTable } from "react-table";
+} from '@chakra-ui/react';
+import { nanoid } from '@reduxjs/toolkit';
+import { FaEllipsisH, FaFilter } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { useFilters, useSortBy, useTable } from 'react-table';
 // import TableSearchInput from '../FormComponents/TableSearchInput';
 
 const PriceListItemsTable = ({ columns, data }) => {
@@ -35,7 +35,7 @@ const PriceListItemsTable = ({ columns, data }) => {
       data,
     },
     useFilters,
-    useSortBy
+    useSortBy,
   );
 
   return (
@@ -43,7 +43,7 @@ const PriceListItemsTable = ({ columns, data }) => {
       <HStack w="98%" p={2} m="auto">
         <Input
           placeholder="Enter to search name"
-          onChange={(e) => setFilter("service_name", e.target.value)}
+          onChange={(e) => setFilter('service_name', e.target.value)}
           backgroundColor="gray.50"
           border="0"
           // borderColor="gray.100"
@@ -52,14 +52,14 @@ const PriceListItemsTable = ({ columns, data }) => {
           //   boxShadow: 'lg',
           // }}
           _selected={{
-            boxShadow: "md",
-            borderColor: "gray.100",
-            backgroundColor: "white",
+            boxShadow: 'md',
+            borderColor: 'gray.100',
+            backgroundColor: 'white',
           }}
           _focus={{
-            boxShadow: "md",
-            borderColor: "gray.100",
-            backgroundColor: "white",
+            boxShadow: 'md',
+            borderColor: 'gray.100',
+            backgroundColor: 'white',
           }}
         />
         <IconButton>
@@ -77,7 +77,7 @@ const PriceListItemsTable = ({ columns, data }) => {
             >
               {headerGroup.headers.map((column) => (
                 <Th fontSize="sm" key={nanoid()} {...column.getHeaderProps()}>
-                  {column.render("Header")}
+                  {column.render('Header')}
                 </Th>
               ))}
               <Th fontSize="sm">Action</Th>
@@ -89,17 +89,15 @@ const PriceListItemsTable = ({ columns, data }) => {
             prepareRow(row);
             return (
               <Tr fontSize="sm" key={nanoid()} {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <Td
-                      fontSize="normal"
-                      key={nanoid()}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </Td>
-                  );
-                })}
+                {row.cells.map((cell) => (
+                  <Td
+                    fontSize="normal"
+                    key={nanoid()}
+                    {...cell.getCellProps()}
+                  >
+                    {cell.render('Cell')}
+                  </Td>
+                ))}
                 <Td>
                   <Tooltip
                     hasArrow
@@ -108,11 +106,9 @@ const PriceListItemsTable = ({ columns, data }) => {
                   >
                     <Box
                       _hover={{
-                        cursor: "pointer",
+                        cursor: 'pointer',
                       }}
-                      onClick={() =>
-                        navigate(`/pricelist-detail/${row.original.id}`)
-                      }
+                      onClick={() => navigate(`/pricelist-detail/${row.original.id}`)}
                     >
                       <FaEllipsisH style={{ margin: 0 }} />
                     </Box>

@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFilters, useSortBy, useTable } from 'react-table';
 // import TableSearchInput from '../FormComponents/TableSearchInput';
 
-const PriceListTable = ({ columns, data }) => {
+const DepartmentTable = ({ columns, data }) => {
   const navigate = useNavigate();
   const {
     getTableProps,
@@ -123,4 +123,4 @@ const PriceListTable = ({ columns, data }) => {
   );
 };
 
-export default PriceListTable;
+export default DepartmentTable;

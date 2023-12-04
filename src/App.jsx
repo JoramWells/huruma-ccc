@@ -5,11 +5,11 @@ import {
 } from '@chakra-ui/react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Homepage from './layouts/Homepage';
-import  Dashboard from './components/Dashboard'
+import Dashboard from './components/Dashboard';
 import PriceLists from './layouts/PriceLists';
 import Services from './layouts/Services';
 import AddService from './layouts/AddService';
-import AddSubItem from "./layouts/AddSubItem";
+import AddSubItem from './layouts/AddSubItem';
 import PriceListDetail from './layouts/PriceListDetail';
 import Items from './layouts/Items';
 import AddItem from './layouts/AddItem';
@@ -21,7 +21,7 @@ import Departments from './layouts/Departments';
 import AddDepartment from './layouts/AddDepartment';
 
 function App() {
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
   return (
     <ChakraProvider theme={theme}>
       <Routes>
@@ -30,7 +30,7 @@ function App() {
       </Routes>
       <Dashboard
         display={
-          pathname.includes("/add-item") || pathname.includes("/add-item-type")
+          pathname.includes('/add-item') || pathname.includes('/add-item-type')
         }
       >
         <Routes>

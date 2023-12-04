@@ -13,14 +13,14 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { addItemType } from "../_reducers/itemTypeSlice";
+import { addDepartment } from "../_reducers/departmentSlice";
 
 const AddDepartment = () => {
   const [departmentName, setDepartmentName] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.itemType);
+  const { loading } = useSelector((state) => state.departments);
 
   const inputValues = {
     departmentName,
@@ -64,7 +64,7 @@ const AddDepartment = () => {
           <Button
             size={"lg"}
             colorScheme="blue"
-            onClick={() => dispatch(addItemType(inputValues))}
+            onClick={() => dispatch(addDepartment(inputValues))}
           >
             {loading ? "loading..." : "Save"}
           </Button>

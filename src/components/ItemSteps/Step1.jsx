@@ -5,13 +5,13 @@ import {
   FormLabel,
   HStack,
   Input,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 // import { useEffect } from "react";
-import {  useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Select from "react-select";
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 // import { getAllItemTypes } from "../../_reducers/itemTypeSlice";
-import SubItemSelect from "../Selects/SubItemSelect";
+import SubItemSelect from '../Selects/SubItemSelect';
 
 const Step1 = () => {
   const navigate = useNavigate();
@@ -20,13 +20,10 @@ const Step1 = () => {
   // fetchdata
   const itemTypeData = useSelector((state) => state.itemType.data);
 
-
   const options = itemTypeData.map((item) => ({
     value: item.itemTypeName,
     label: item.itemTypeName,
   }));
-
-
 
   // useEffect(() => {
   //   dispatch(getAllItemTypes());
@@ -36,19 +33,19 @@ const Step1 = () => {
     <Box>
       <FormControl mt={5}>
         <HStack
-          w={"full"}
-          justifyItems={"center"}
-          alignContent={"center"}
-          alignItems={"center"}
+          w="full"
+          justifyItems="center"
+          alignContent="center"
+          alignItems="center"
         >
           <FormLabel mt={1}>Item Type</FormLabel>
           <Badge
             _hover={{
-              cursor: "pointer",
-              bgColor: "gray.100",
+              cursor: 'pointer',
+              bgColor: 'gray.100',
             }}
             colorScheme="green"
-            onClick={() => navigate("/add-item-type")}
+            onClick={() => navigate('/add-item-type')}
           >
             Add Item Type
           </Badge>
@@ -57,8 +54,7 @@ const Step1 = () => {
       </FormControl>
 
       {/* sub item */}
-      <SubItemSelect/>
-
+      <SubItemSelect />
 
       {/* category */}
       <FormControl mt={5}>
@@ -77,7 +73,7 @@ const Step1 = () => {
 
       <FormControl mt={5}>
         <FormLabel>Item Description</FormLabel>
-        <Input as={"textarea"} placeholder="Enter Sub Item of" />
+        <Input as="textarea" placeholder="Enter Sub Item of" />
       </FormControl>
     </Box>
   );

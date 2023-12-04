@@ -1,10 +1,10 @@
 import {
   FaDivide,
- FaHome, FaHospitalAlt, FaListOl, FaServicestack, FaStore,
+  FaHome, FaHospitalAlt, FaListOl, FaServicestack, FaStore,
 } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import SidebarItemButton from './SidebarItemButton';
 import { Box, Collapse, useDisclosure } from '@chakra-ui/react';
+import SidebarItemButton from './SidebarItemButton';
 
 const SidebarListItems = () => {
   const navigate = useNavigate();
@@ -16,49 +16,49 @@ const SidebarListItems = () => {
   return (
     <>
       <SidebarItemButton
-        selected={pathname === "/" || pathname.includes("user")}
-        onClick={() => navigate("/")}
+        selected={pathname === '/' || pathname.includes('user')}
+        onClick={() => navigate('/')}
         text="dashboard"
         icon={<FaHome />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/department" || pathname.includes("/add-department")}
-        onClick={() => navigate("/departments")}
+        selected={pathname === '/department' || pathname.includes('/add-department')}
+        onClick={() => navigate('/departments')}
         text="departments"
         icon={<FaDivide />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/dd" || pathname.includes("users")}
-        onClick={() => navigate("/")}
+        selected={pathname === '/dd' || pathname.includes('users')}
+        onClick={() => navigate('/')}
         text="patients"
         icon={<FaHospitalAlt />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/price-lists" || pathname.includes("pricelist")}
-        onClick={() => navigate("/price-lists")}
+        selected={pathname === '/price-lists' || pathname.includes('pricelist')}
+        onClick={() => navigate('/price-lists')}
         text="price lists"
         icon={<FaHospitalAlt />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/services" || pathname.includes("/add-service")}
-        onClick={() => navigate("/services")}
+        selected={pathname === '/services' || pathname.includes('/add-service')}
+        onClick={() => navigate('/services')}
         text="services"
         icon={<FaServicestack />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/stores" || pathname.includes("user")}
-        onClick={() => navigate("/stores")}
+        selected={pathname === '/stores' || pathname.includes('user')}
+        onClick={() => navigate('/stores')}
         text="stores"
         icon={<FaStore />}
       />
 
       <SidebarItemButton
-        selected={pathname === "/items" || pathname.includes("user")}
+        selected={pathname === '/items' || pathname.includes('user')}
         onClick={onToggle}
         text="items"
         icon={<FaListOl />}
@@ -66,10 +66,10 @@ const SidebarListItems = () => {
 
       <Collapse in={isOpen}>
         <Box ml={5} mt={5}>
-          <Link to={"/price-list-items"}>Price List Items</Link>
+          <Link to="/price-list-items">Price List Items</Link>
         </Box>
         <Box ml={5} mt={5}>
-          <Link to={"/item-type"}>Item Type</Link>
+          <Link to="/item-type">Item Type</Link>
         </Box>
       </Collapse>
     </>

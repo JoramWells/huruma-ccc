@@ -1,36 +1,38 @@
-import { Button, FormControl, FormLabel, Input, Modal, 
-  ModalBody, ModalCloseButton, ModalContent, ModalFooter, 
-  ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
-import { FaEdit } from "react-icons/fa";
-import PropTypes from 'prop-types'
-import { useState } from "react";
-import {useDispatch} from 'react-redux'
-import {useParams} from 'react-router-dom'
-import { editPriceList } from "../../_reducers/priceListSlice";
+/* eslint-disable camelcase */
+import {
+  Button, FormControl, FormLabel, Input, Modal,
+  ModalBody, ModalCloseButton, ModalContent, ModalFooter,
+  ModalHeader, ModalOverlay, useDisclosure,
+} from '@chakra-ui/react';
+import { FaEdit } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { editPriceList } from '../../_reducers/priceListSlice';
 
-
-const  EditPriceList = ({service_name, service_category}) => {
+const EditPriceList = ({ service_name, service_category }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [serviceName, setServiceName] = useState(service_name)
-  const [serviceCategory, setServiceCategory] = useState(service_category)
+  const [serviceName, setServiceName] = useState(service_name);
+  const [serviceCategory, setServiceCategory] = useState(service_category);
 
-  const {id} = useParams()
+  const { id } = useParams();
 
-  const inputValues={
+  const inputValues = {
     id,
     serviceName,
-    serviceCategory
-  }
+    serviceCategory,
+  };
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   return (
     <>
       <Button onClick={onOpen} leftIcon={<FaEdit />}>
         Edit
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered size={"xl"}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Edit Price Lists</ModalHeader>
@@ -60,22 +62,22 @@ const  EditPriceList = ({service_name, service_category}) => {
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost" onClick={()=>dispatch(editPriceList(inputValues))}>Save</Button>
+            <Button variant="ghost" onClick={() => dispatch(editPriceList(inputValues))}>Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
   );
-}
+};
 
 export default EditPriceList;
 
 EditPriceList.propTypes = {
-  service_name:PropTypes.string,
-  service_category:PropTypes.string
-}
+  service_name: PropTypes.string,
+  service_category: PropTypes.string,
+};
 
-EditPriceList.defaultPropTypes={
-  service_name:'',
-  service_category:''
-}
+EditPriceList.defaultProps = {
+  service_name: '',
+  service_category: '',
+};

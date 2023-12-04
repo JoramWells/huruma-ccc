@@ -14,7 +14,7 @@ export const getAllDepartments = createAsyncThunk(
   async () => {
     let data = [];
     await axios
-      .get("http://localhost:5000/item-type/fetchAll")
+      .get("http://localhost:5000/departments/fetchAll")
       .then((res) => (data = res.data))
       .catch((error) => console.log(error.message));
     return data;
@@ -26,9 +26,10 @@ export const addDepartment = createAsyncThunk(
     'data/addDepartment',
     async(inputValues)=>{
         // let data = []
-        await axios.post("http://localhost:5000/item-type/add", inputValues)
-        .then(response=>console.log(response))
-        .catch(error=>console.error(error.message))
+        await axios
+          .post("http://localhost:5000/departments/add", inputValues)
+          .then((response) => console.log(response))
+          .catch((error) => console.error(error.message));
     }
 )
 
