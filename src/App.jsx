@@ -22,6 +22,9 @@ import AddDepartment from './layouts/AddDepartment';
 import DepartmentDetail from './layouts/DepartmentDetail';
 import Pharmaceuticals from './layouts/Pharmaceuticals';
 import AddPharmaceuticals from './layouts/AddPharceuticals';
+import WardPrice from './layouts/WardPrices';
+import Users from './layouts/Users';
+import AddUser from './layouts/AddUser';
 
 function App() {
   const { pathname } = useLocation();
@@ -40,24 +43,36 @@ function App() {
           <Route path="/" element={<Homepage />} />
 
           <Route path="/departments" element={<Departments />} />
-          <Route path="/add-department" element={<AddDepartment />} />
+          <Route path="/admin-departments" element={<Departments />} />
+
+          <Route path="/admin-add-department" element={<AddDepartment />} />
           <Route path="/department-detail/:id" element={<DepartmentDetail />} />
 
           <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
           <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
 
           <Route path="/price-lists" element={<PriceLists />} />
+          <Route path="/services-price-list" element={<PriceLists />} />
+
           <Route path="/price-list-items" element={<PriceListItems />} />
+          <Route path="/pharmaceutical-price-list" element={<PriceListItems />} />
+
           <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
 
           <Route path="/items" element={<Items />} />
           <Route path="/add-subitem" element={<AddSubItem />} />
           <Route path="/item-type" element={<ItemType />} />
 
+          <Route path="/ward-prices" element={<WardPrice />} />
+
           <Route path="/stores" element={<Stores />} />
 
           <Route path="/add-service" element={<AddService />} />
           <Route path="/services" element={<Services />} />
+
+          <Route path="/admin-users" element={<Users />} />
+          <Route path="/add-admin-user" element={<AddUser />} />
+
         </Routes>
       </Dashboard>
     </ChakraProvider>

@@ -6,6 +6,7 @@ import subItemSlice from './_reducers/subItemSlice';
 import departmentSlice from './_reducers/departmentSlice';
 import pharmaceuticalStoreSlice from './_reducers/pharmaceuticalStoreSlice';
 import cacheMiddleware from './middlewares/cacheMiddleware';
+import wardSlice from './_reducers/wardSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     subItems: subItemSlice,
     departments: departmentSlice,
     pharmaceuticals: pharmaceuticalStoreSlice,
+    wards: wardSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });

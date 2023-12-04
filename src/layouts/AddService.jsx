@@ -43,7 +43,7 @@ const AddService = () => {
         rounded="lg"
       >
         <HStack w="full" justifyContent="space-between">
-          <IconButton onClick={() => navigate('/add-item')}>
+          <IconButton onClick={() => navigate('/services')}>
             <FaArrowLeft />
           </IconButton>
           <Text fontSize="2xl" fontWeight="bold">
@@ -52,10 +52,10 @@ const AddService = () => {
         </HStack>
         {/* sub item */}
         <FormControl mt={5}>
-          <FormLabel fontSize="xl">Item Type</FormLabel>
+          <FormLabel fontSize="lg">Service Name</FormLabel>
           <Input
             size="lg"
-            placeholder="Enter Sub Item of"
+            placeholder="Enter Service Name"
             value={itemTypeName}
             onChange={(e) => setItemType(e.target.value)}
           />

@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import {
   Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import BreadCrumbNav from '../components/BreadCrumbNav';
 
 const Services = () => {
   const navigate = useNavigate();
@@ -12,16 +14,8 @@ const Services = () => {
       w="full"
       p={3}
     >
-      <HStack w="full" justifyContent="flex-end">
-        <Button
-          leftIcon={<FaPlus />}
-          colorScheme="blue"
-          onClick={() => navigate('/add-service')}
-        >
-          Add Service
+      <BreadCrumbNav link="/add-service" />
 
-        </Button>
-      </HStack>
       <Text>
         Services
       </Text>

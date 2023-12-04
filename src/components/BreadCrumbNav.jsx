@@ -3,8 +3,9 @@ import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack,
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronRight, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const breadCrumbData = [
   {
@@ -24,10 +25,10 @@ const breadCrumbData = [
   },
 ];
 
-const BreadCrumbNav = () => {
+const BreadCrumbNav = ({ link }) => {
   const navigate = useNavigate();
   return (
-    <HStack alignItems="center" justifyContent="center">
+    <HStack alignItems="center" justifyContent="center" w="full">
       <HStack
         mt={8}
         w="98%"
@@ -57,7 +58,8 @@ const BreadCrumbNav = () => {
           colorScheme="green"
           size="md"
           boxShadow="lg"
-          onClick={() => navigate('/add-pharmaceuticals')}
+          onClick={() => navigate(link)}
+          leftIcon={<FaPlus />}
         >
           NEW
 
@@ -68,3 +70,11 @@ const BreadCrumbNav = () => {
 };
 
 export default BreadCrumbNav;
+
+BreadCrumbNav.propTypes = {
+  link: PropTypes.string,
+};
+
+BreadCrumbNav.defaultProps = {
+  link: '/add-pharmaceuticals',
+};
