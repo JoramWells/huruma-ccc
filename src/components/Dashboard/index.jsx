@@ -15,7 +15,6 @@ function Index({ children, display }) {
         {/* container */}
         <Box w={{ base: '100%', sm: 'calc(100%-240px)' }}>
           <VStack
-            p={3}
             alignItems="center"
             justifyContent="center"
             w="calc(100%-240px)"

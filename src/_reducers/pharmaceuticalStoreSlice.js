@@ -13,10 +13,9 @@ export const getPharmaceuticalItems = createAsyncThunk(
   async () => {
     let data = [];
     await axios
-      .get('http://localhost:5000/price-list-items/get-all-price-list-items')
+      .get('http://localhost:5000/pharmaceutical/fetchAll')
       .then((res) => {
         (data = res.data);
-        console.log(res);
       })
       .catch((error) => error.message);
     return data;
@@ -28,7 +27,7 @@ export const getPharmaceuticalItemDetails = createAsyncThunk(
   async (id) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/pricelists/pricelist-detail/${id}`)
+      .get(`http://localhost:5000/pharmaceutical/pharmaceutical-item-detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => error.message);
     return data;
@@ -40,7 +39,7 @@ export const editPharmaceuticalItem = createAsyncThunk(
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/pricelists/edit-pricelist', data)
+      .put('http://localhost:5000/pharmaceutical/edit-pharmaceutical-item', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;

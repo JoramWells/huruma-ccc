@@ -4,6 +4,7 @@ import {
 import { nanoid } from '@reduxjs/toolkit';
 import { FaBookMedical } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import BreadCrumbNav from '../components/BreadCrumbNav';
 
 const data = [
   {
@@ -35,8 +36,10 @@ const Stores = () => {
       w="full"
       alignItems="center"
       bgColor="gray.50"
+      p={3}
     >
-      <HStack p={3} w="full" justifyContent="space-between">
+      <BreadCrumbNav />
+      <HStack w="full" justifyContent="space-between">
         {data.map((item) => (
           <Box
             rounded="lg"
