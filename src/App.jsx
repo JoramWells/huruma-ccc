@@ -71,7 +71,7 @@ function App() {
           <Route path="/services" element={<Services />} />
 
           <Route path="/admin-users" element={<Users />} />
-          <Route path="/add-admin-user" element={<AddUser />} />
+          <Route path="/admin-add-user" element={<AddUser />} />
 
         </Routes>
       </Dashboard>

@@ -8,79 +8,79 @@ const initialState = {
   response: '',
 };
 
-export const getWardPrices = createAsyncThunk(
-  'data/getWardPrices',
+export const getUsers = createAsyncThunk(
+  'data/getUsers',
   async () => {
     let data = [];
     await axios
-      .get('http://localhost:5000/wards/fetchAll')
+      .get('http://localhost:5000/users/fetchAll')
       .then((res) => (data = res.data))
       .catch((error) => error.message);
     return data;
   },
 );
 
-export const getPriceListDetail = createAsyncThunk(
-  'data/getPriceListDetail',
+export const getUserDetail = createAsyncThunk(
+  'data/getUserDetail',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/pricelists/pricelist-detail/${id}`)
+      .get(`http://localhost:5000/user/user-detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
 
-export const editPriceList = createAsyncThunk(
-  'data/editPriceList',
+export const editUser = createAsyncThunk(
+  'data/editUser',
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/pricelists/edit-pricelist', data)
+      .put('http://localhost:5000/user/edit-user', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;
   },
 );
 
-const wardSlice = createSlice({
-  name: 'wards',
+const userSlice = createSlice({
+  name: 'users',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getWardPrices.pending, (state) => {
+      .addCase(getUsers.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getWardPrices.fulfilled, (state, action) => {
+      .addCase(getUsers.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(getPriceListDetail.pending, (state) => {
+      .addCase(getUserDetail.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getPriceListDetail.fulfilled, (state, action) => {
+      .addCase(getUserDetail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getPriceListDetail.rejected, (state, action) => {
+      .addCase(getUserDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
       });
 
     builder
-      .addCase(editPriceList.pending, (state) => {
+      .addCase(editUser.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(editPriceList.fulfilled, (state, action) => {
+      .addCase(editUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -88,4 +88,4 @@ const wardSlice = createSlice({
   },
 });
 
-export default wardSlice.reducer;
+export default userSlice.reducer;
