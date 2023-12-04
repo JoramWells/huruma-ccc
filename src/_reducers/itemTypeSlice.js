@@ -16,7 +16,7 @@ export const getAllItemTypes = createAsyncThunk(
     await axios
       .get('http://localhost:5000/item-type/fetchAll')
       .then((res) => (data = res.data))
-      .catch((error) => console.log(error.message));
+      .catch((error) => error.message);
     return data;
   },
 );
@@ -26,8 +26,8 @@ export const addItemType = createAsyncThunk(
   async (inputValues) => {
     // let data = []
     await axios.post('http://localhost:5000/item-type/add', inputValues)
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error.message));
+      .then((response) => response)
+      .catch((error) => error.message);
   },
 );
 

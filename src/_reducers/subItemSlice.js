@@ -14,8 +14,8 @@ export const addSubItem = createAsyncThunk(
     // let data = []
     await axios
       .post('http://localhost:5000/subItem/add', inputValues)
-      .then((response) => console.log(response))
-      .catch((error) => console.error(error.message));
+      .then((response) => response)
+      .catch((error) => error.message);
   },
 );
 
@@ -27,7 +27,7 @@ export const getAllSubItems = createAsyncThunk(
     await axios
       .get('http://localhost:5000/subItem/fetchAll')
       .then((res) => (data = res.data))
-      .catch((error) => console.log(error.message));
+      .catch((error) => error.message);
     return data;
   },
 );

@@ -15,7 +15,7 @@ export const getAllPriceLists = createAsyncThunk(
     await axios
       .get('http://localhost:5000/pricelists/get-all-pricelists')
       .then((res) => (data = res.data))
-      .catch((error) => console.log(error.message));
+      .catch((error) => error.message);
     return data;
   },
 );
@@ -27,7 +27,7 @@ export const getPriceListDetail = createAsyncThunk(
     await axios
       .get(`http://localhost:5000/pricelists/pricelist-detail/${id}`)
       .then((res) => (data = res.data))
-      .catch((error) => console.error(error.message));
+      .catch((error) => error.message);
     return data;
   },
 );
@@ -39,7 +39,7 @@ export const editPriceList = createAsyncThunk(
     await axios
       .put('http://localhost:5000/pricelists/edit-pricelist', data)
       .then((response) => (result = response.data))
-      .catch((error) => console.error(error));
+      .catch((error) => error);
     return result;
   },
 );
