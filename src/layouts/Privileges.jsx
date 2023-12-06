@@ -1,38 +1,41 @@
 import {
-  Box, HStack, VStack,
+  Box, Button, HStack, VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import DepartmentTable from '../components/tables/DepartmentTable';
-import { getAllDepartments } from '../_reducers/departmentSlice';
+import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import HeaderAction from '../components/HeaderAction';
+import PrivilegeTable from '../components/tables/PrivilegeTable';
+import { getAllPrivileges } from '../_reducers/privilegeSlice';
 
 const columns = [
   {
-    Header: 'Department Name',
-    accessor: 'departmentName',
+    Header: 'Privilege Name',
+    accessor: 'privilegeName',
   },
 ];
 
-const Departments = () => {
+const Privileges = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.departments);
+  const { data } = useSelector((state) => state.privileges);
   const subrowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
         }));
 
+  console.log(subrowData, 'dfr');
+
   useEffect(() => {
-    dispatch(getAllDepartments());
+    dispatch(getAllPrivileges());
   }, []);
   return (
     <VStack mt={10} w="full">
 
       <BreadCrumbNav link="/admin-add-department" />
-      <HeaderAction text="Department" subrowData={subrowData} />
+      <Button onClick={() => navigate('/admin-group-privileges')}>Group Privileges</Button>
       <HStack
         mt={5}
         w="100%"
@@ -40,10 +43,10 @@ const Departments = () => {
         p={3}
       />
       <Box w="50%" border="1px" borderColor="gray.100" rounded="lg">
-        <DepartmentTable data={subrowData} columns={columns} />
+        <PrivilegeTable data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );
 };
 
-export default Departments;
+export default Privileges;

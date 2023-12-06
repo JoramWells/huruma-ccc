@@ -3,22 +3,22 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import DepartmentTable from '../components/tables/DepartmentTable';
-import { getAllDepartments } from '../_reducers/departmentSlice';
 import BreadCrumbNav from '../components/BreadCrumbNav';
+import DrugTable from '../components/tables/DrugsTable';
+import { getAllDrugs } from '../_reducers/drugsSlice';
 import HeaderAction from '../components/HeaderAction';
 
 const columns = [
   {
-    Header: 'Department Name',
-    accessor: 'departmentName',
+    Header: 'Drug Name',
+    accessor: 'drugName',
   },
 ];
 
-const Departments = () => {
+const Drugs = () => {
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.departments);
+  const { data } = useSelector((state) => state.drugs);
   const subrowData = data
         && data.map((item) => ({
           ...item,
@@ -26,13 +26,13 @@ const Departments = () => {
         }));
 
   useEffect(() => {
-    dispatch(getAllDepartments());
+    dispatch(getAllDrugs());
   }, []);
   return (
     <VStack mt={10} w="full">
 
       <BreadCrumbNav link="/admin-add-department" />
-      <HeaderAction text="Department" subrowData={subrowData} />
+      <HeaderAction subrowData={subrowData} />
       <HStack
         mt={5}
         w="100%"
@@ -40,10 +40,10 @@ const Departments = () => {
         p={3}
       />
       <Box w="50%" border="1px" borderColor="gray.100" rounded="lg">
-        <DepartmentTable data={subrowData} columns={columns} />
+        <DrugTable data={subrowData} columns={columns} />
       </Box>
     </VStack>
   );
 };
 
-export default Departments;
+export default Drugs;

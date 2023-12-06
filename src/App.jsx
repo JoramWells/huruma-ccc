@@ -25,6 +25,11 @@ import AddPharmaceuticals from './layouts/AddPharceuticals';
 import WardPrice from './layouts/WardPrices';
 import Users from './layouts/Users';
 import AddUser from './layouts/AddUser';
+import Privileges from './layouts/Privileges';
+import GroupPrivileges from './layouts/GroupPrivileges';
+import GroupPrivilegesDetails from './layouts/GroupPrivilegesDetail';
+import Administration from './layouts/Administration';
+import Drugs from './layouts/Drugs';
 
 function App() {
   const { pathname } = useLocation();
@@ -41,6 +46,9 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<Homepage />} />
+
+          <Route path="/administration" element={<Administration />} />
+          <Route path="/drugs" element={<Drugs />} />
 
           <Route path="/departments" element={<Departments />} />
           <Route path="/admin-departments" element={<Departments />} />
@@ -72,6 +80,10 @@ function App() {
 
           <Route path="/admin-users" element={<Users />} />
           <Route path="/admin-add-user" element={<AddUser />} />
+
+          <Route path="/admin-privileges" element={<Privileges />} />
+          <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
+          <Route path="/admin-group-privileges-details/:id" element={<GroupPrivilegesDetails />} />
 
         </Routes>
       </Dashboard>

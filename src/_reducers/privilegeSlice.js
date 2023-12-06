@@ -9,48 +9,48 @@ const initialState = {
 };
 
 // get all category
-export const getAllItemTypes = createAsyncThunk(
-  'data/getAllItemTypes',
+export const getAllPrivileges = createAsyncThunk(
+  'data/getAllPrivileges',
   async () => {
     let data = [];
     await axios
-      .get('http://localhost:5000/item-type/fetchAll')
+      .get('http://localhost:5000/privileges/fetchAll')
       .then((res) => (data = res.data))
       .catch((error) => error.message);
     return data;
   },
 );
 
-export const addItemType = createAsyncThunk(
-  'data/addItemType',
+export const addPrivileges = createAsyncThunk(
+  'data/addPrivileges',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/item-type/add', inputValues)
+    await axios.post('http://localhost:5000/privileges/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-const itemTypeSlice = createSlice({
-  name: 'itemType',
+const privilegeSlice = createSlice({
+  name: 'privileges',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAllItemTypes.pending, (state) => {
+      .addCase(getAllPrivileges.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAllItemTypes.fulfilled, (state, action) => {
+      .addCase(getAllPrivileges.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
-      .addCase(addItemType.pending, (state) => {
+      .addCase(addPrivileges.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addItemType.fulfilled, (state, action) => {
+      .addCase(addPrivileges.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -59,4 +59,4 @@ const itemTypeSlice = createSlice({
 
 });
 
-export default itemTypeSlice.reducer;
+export default privilegeSlice.reducer;

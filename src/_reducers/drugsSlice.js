@@ -9,48 +9,48 @@ const initialState = {
 };
 
 // get all category
-export const getAllItemTypes = createAsyncThunk(
-  'data/getAllItemTypes',
+export const getAllDrugs = createAsyncThunk(
+  'data/getAllDrugs',
   async () => {
     let data = [];
     await axios
-      .get('http://localhost:5000/item-type/fetchAll')
+      .get('http://localhost:5000/drugs/fetchAll')
       .then((res) => (data = res.data))
       .catch((error) => error.message);
     return data;
   },
 );
 
-export const addItemType = createAsyncThunk(
-  'data/addItemType',
+export const addDrugs = createAsyncThunk(
+  'data/addDrugs',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/item-type/add', inputValues)
+    await axios.post('http://localhost:5000/drugs/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-const itemTypeSlice = createSlice({
-  name: 'itemType',
+const drugsSlice = createSlice({
+  name: 'drugs',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAllItemTypes.pending, (state) => {
+      .addCase(getAllDrugs.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAllItemTypes.fulfilled, (state, action) => {
+      .addCase(getAllDrugs.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
-      .addCase(addItemType.pending, (state) => {
+      .addCase(addDrugs.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addItemType.fulfilled, (state, action) => {
+      .addCase(addDrugs.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -59,4 +59,4 @@ const itemTypeSlice = createSlice({
 
 });
 
-export default itemTypeSlice.reducer;
+export default drugsSlice.reducer;

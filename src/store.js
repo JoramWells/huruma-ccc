@@ -8,6 +8,9 @@ import pharmaceuticalStoreSlice from './_reducers/pharmaceuticalStoreSlice';
 import cacheMiddleware from './middlewares/cacheMiddleware';
 import wardSlice from './_reducers/wardSlice';
 import userSlice from './_reducers/userSlice';
+import groupPrivilegesSlice from './_reducers/groupPrivilegesSlice';
+import drugsSlice from './_reducers/drugsSlice';
+import privilegeSlice from './_reducers/privilegeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +22,9 @@ export const store = configureStore({
     pharmaceuticals: pharmaceuticalStoreSlice,
     wards: wardSlice,
     users: userSlice,
+    drugs: drugsSlice,
+    groupPrivileges: groupPrivilegesSlice,
+    privileges: privilegeSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });
