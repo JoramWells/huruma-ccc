@@ -44,7 +44,7 @@ const PrivilegeTable = ({ columns, data }) => {
       <HStack w="98%" p={2} m="auto">
         <Input
           placeholder="Enter to search name"
-          onChange={(e) => setFilter('service_name', e.target.value)}
+          onChange={(e) => setFilter('privilegeName', e.target.value)}
           backgroundColor="gray.50"
           border="0"
           // borderColor="gray.100"

@@ -10,6 +10,7 @@ function Sidebar() {
     <Box
       w={{ base: '100%', sm: '240px' }}
       h="100vh"
+      overflowX="auto"
       bgColor="white"
       display={{ base: 'none', sm: 'block' }}
       p={2}

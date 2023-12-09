@@ -34,6 +34,8 @@ import Physiotherapy from './layouts/Physiotherapy';
 import AddPhysiotherapyItems from './layouts/AddPhysiotherapy';
 import DispensesPhysioTherapy from './layouts/DispensesPhysioTherapy';
 import AddDispensePhysioItem from './layouts/AddDispensePhysioItem';
+import Insurance from './layouts/Insurances';
+import AddInsurance from './layouts/AddInsurance';
 
 function App() {
   const { pathname } = useLocation();
@@ -53,6 +55,9 @@ function App() {
 
           <Route path="/administration" element={<Administration />} />
           <Route path="/drugs" element={<Drugs />} />
+
+          <Route path="/insurances" element={<Insurance />} />
+          <Route path="/add-insurance" element={<AddInsurance />} />
 
           <Route path="/physiotherapy" element={<Physiotherapy />} />
           <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />

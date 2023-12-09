@@ -13,7 +13,7 @@ const SidebarItemSubButton = ({
       fontWeight={selected && 'bold'}
       bgColor={selected && 'gray.50'}
       p={2}
-      mt={2}
+      mt={1}
       ml={5}
       _hover={{
         cursor: 'pointer',

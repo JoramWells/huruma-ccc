@@ -26,8 +26,6 @@ const Privileges = () => {
           subRows: [],
         }));
 
-  console.log(subrowData, 'dfr');
-
   useEffect(() => {
     dispatch(getAllPrivileges());
   }, []);
