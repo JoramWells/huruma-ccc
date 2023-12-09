@@ -30,6 +30,10 @@ import GroupPrivileges from './layouts/GroupPrivileges';
 import GroupPrivilegesDetails from './layouts/GroupPrivilegesDetail';
 import Administration from './layouts/Administration';
 import Drugs from './layouts/Drugs';
+import Physiotherapy from './layouts/Physiotherapy';
+import AddPhysiotherapyItems from './layouts/AddPhysiotherapy';
+import DispensesPhysioTherapy from './layouts/DispensesPhysioTherapy';
+import AddDispensePhysioItem from './layouts/AddDispensePhysioItem';
 
 function App() {
   const { pathname } = useLocation();
@@ -49,6 +53,11 @@ function App() {
 
           <Route path="/administration" element={<Administration />} />
           <Route path="/drugs" element={<Drugs />} />
+
+          <Route path="/physiotherapy" element={<Physiotherapy />} />
+          <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />
+          <Route path="/dispenses-physiotherapy-items" element={<DispensesPhysioTherapy />} />
+          <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
 
           <Route path="/departments" element={<Departments />} />
           <Route path="/admin-departments" element={<Departments />} />

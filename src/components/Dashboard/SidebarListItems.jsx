@@ -55,6 +55,19 @@ const SidebarListItems = () => {
         icon={<FaHospitalAlt />}
       />
 
+      {/* physiotherapy */}
+      <SidebarItemLink
+        selected={pathname === '/physiotherapy' || pathname.includes('physiotherapy')}
+        onClick={onToggle}
+        text="Physiotherapy"
+        link="/physiotherapy"
+        itemList={[
+          { id: nanoid(), title: 'Dispenses', link: '/dispenses-physiotherapy-items' },
+
+        ]}
+        icon={<FaUser />}
+      />
+
       {/* price lists */}
       <SidebarItemLink
         selected={pathname === '/price-lists' || pathname.includes('services-price-list') || pathname.includes('pharmaceutical-price-list')}

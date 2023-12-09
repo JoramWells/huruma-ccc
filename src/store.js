@@ -11,6 +11,7 @@ import userSlice from './_reducers/userSlice';
 import groupPrivilegesSlice from './_reducers/groupPrivilegesSlice';
 import drugsSlice from './_reducers/drugsSlice';
 import privilegeSlice from './_reducers/privilegeSlice';
+import physioItemSlice from './_reducers/physioItemSlice';
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     drugs: drugsSlice,
     groupPrivileges: groupPrivilegesSlice,
     privileges: privilegeSlice,
+    physioItem: physioItemSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });
