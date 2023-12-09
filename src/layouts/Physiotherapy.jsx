@@ -11,7 +11,7 @@ import { getAllPhysioItem } from '../_reducers/physioItemSlice';
 
 const columns = [
   {
-    Header: 'Full Name',
+    Header: 'Item Name',
     accessor: 'itemName',
   },
   {

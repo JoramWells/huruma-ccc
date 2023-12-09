@@ -16,10 +16,17 @@ const AddUser = () => {
   const dispatch = useDispatch();
 
   const { loading } = useSelector((state) => state.itemType);
+  const departmentData = useSelector((state) => state.departments.data);
 
   const inputValues = {
     itemTypeName,
   };
+
+  const departmentOptions = departmentData && departmentData.map((item) => (
+    { value: item.id, label: item.departmentName }
+  ));
+
+  console.log(departmentOptions);
 
   const options = [{ value: '85A', label: '85A' }];
 
@@ -43,7 +50,7 @@ const AddUser = () => {
 
         {/* department */}
         <FormControl>
-          <FormLabel>Username</FormLabel>
+          <FormLabel>Full Name</FormLabel>
           <Input placeholder="Enter Full Name" />
         </FormControl>
 
@@ -53,15 +60,26 @@ const AddUser = () => {
           <Input placeholder="Enter Mobile Number" />
         </FormControl>
 
+        {/* email */}
+        {/* sub item */}
+        <FormControl>
+          <FormLabel>Email Address</FormLabel>
+          <Input
+            placeholder="Enter Email Address"
+            value={itemTypeName}
+            onChange={(e) => setItemType(e.target.value)}
+          />
+        </FormControl>
+
         {/* department */}
         <FormControl>
           <FormLabel>Select Department</FormLabel>
-          <Select options={options} />
+          <Select options={departmentOptions} />
         </FormControl>
 
         {/* hospital */}
         <FormControl>
-          <FormLabel>Select Hospital</FormLabel>
+          <FormLabel>Select User Type</FormLabel>
           <Select options={options} />
         </FormControl>
 
@@ -79,20 +97,12 @@ const AddUser = () => {
           <Input placeholder="Enter password" />
         </FormControl>
 
-        {/* sub item */}
-        <FormControl>
-          <FormLabel>Service Name</FormLabel>
-          <Input
-            placeholder="Enter Service Name"
-            value={itemTypeName}
-            onChange={(e) => setItemType(e.target.value)}
-          />
-        </FormControl>
         <HStack w="full" justifyContent="end">
           <Button
             size="md"
             colorScheme="blue"
             onClick={() => dispatch(addItemType(inputValues))}
+            w="full"
           >
             {loading ? 'loading...' : 'Save'}
           </Button>

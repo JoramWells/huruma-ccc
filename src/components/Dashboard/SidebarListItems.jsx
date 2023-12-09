@@ -1,6 +1,5 @@
 import {
-  FaDivide,
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaStore, FaUser,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaStore, FaToolbox, FaUser,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -31,22 +30,16 @@ const SidebarListItems = () => {
         link="/administration"
         itemList={[
           { id: nanoid(), title: 'Departments', link: '/admin-departments' },
-          { id: nanoid(), title: 'Drugs', link: '/drugs' },
+          { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },
           { id: nanoid(), title: 'Hospital Branch', link: '/general-store' },
-          { id: nanoid(), title: 'Insurances', link: '/insurances' },
+          { id: nanoid(), title: 'Insurances', link: '/admin-insurances' },
           { id: nanoid(), title: 'Privileges', link: '/admin-privileges' },
-          { id: nanoid(), title: 'Services', link: '/services' },
+          { id: nanoid(), title: 'Services', link: '/admin-services' },
+          { id: nanoid(), title: 'User Type', link: '/admin-user-type' },
           { id: nanoid(), title: 'Users', link: '/admin-users' },
 
         ]}
         icon={<FaUser />}
-      />
-
-      <SidebarItemButton
-        selected={pathname === '/departments'}
-        onClick={() => navigate('/departments')}
-        text="departments"
-        icon={<FaDivide />}
       />
 
       <SidebarItemButton
@@ -66,7 +59,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Dispenses', link: '/dispenses-physiotherapy-items' },
 
         ]}
-        icon={<FaUser />}
+        icon={<FaToolbox />}
       />
 
       {/* price lists */}

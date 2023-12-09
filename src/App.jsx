@@ -36,6 +36,8 @@ import DispensesPhysioTherapy from './layouts/DispensesPhysioTherapy';
 import AddDispensePhysioItem from './layouts/AddDispensePhysioItem';
 import Insurance from './layouts/Insurances';
 import AddInsurance from './layouts/AddInsurance';
+import UserTypes from './layouts/UserTypes';
+import AddUserType from './layouts/AddUserType';
 
 function App() {
   const { pathname } = useLocation();
@@ -54,9 +56,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
 
           <Route path="/administration" element={<Administration />} />
-          <Route path="/drugs" element={<Drugs />} />
+          <Route path="/admin-drugs" element={<Drugs />} />
 
-          <Route path="/insurances" element={<Insurance />} />
+          <Route path="/admin-insurances" element={<Insurance />} />
           <Route path="/add-insurance" element={<AddInsurance />} />
 
           <Route path="/physiotherapy" element={<Physiotherapy />} />
@@ -64,7 +66,7 @@ function App() {
           <Route path="/dispenses-physiotherapy-items" element={<DispensesPhysioTherapy />} />
           <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
 
-          <Route path="/departments" element={<Departments />} />
+          <Route path="/admin-departments" element={<Departments />} />
           <Route path="/admin-departments" element={<Departments />} />
 
           <Route path="/admin-add-department" element={<AddDepartment />} />
@@ -90,10 +92,13 @@ function App() {
           <Route path="/stores" element={<Stores />} />
 
           <Route path="/add-service" element={<AddService />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/admin-services" element={<Services />} />
 
           <Route path="/admin-users" element={<Users />} />
           <Route path="/admin-add-user" element={<AddUser />} />
+
+          <Route path="/admin-user-type" element={<UserTypes />} />
+          <Route path="/admin-add-user-type" element={<AddUserType />} />
 
           <Route path="/admin-privileges" element={<Privileges />} />
           <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
