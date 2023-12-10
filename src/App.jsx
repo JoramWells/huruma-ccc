@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   ChakraProvider,
@@ -44,19 +45,18 @@ import Requisitions from './layouts/Requisitions';
 import AddRequisitions from './layouts/AddRequisitions';
 import MeasuringUnit from './layouts/MeasuringUnit';
 import AddMeasuringUnit from './layouts/AddMeasuringUnit';
+import ItemCategory from './layouts/ItemCategory';
+import AddItemCategory from './layouts/AddItemCategory';
 
 function App() {
   const { pathname } = useLocation();
   return (
     <ChakraProvider theme={theme}>
-      <Routes>
-        <Route path="/add-item" element={<AddItem />} />
+      {/* <Routes>
         <Route path="/add-item-type" element={<AddItemType />} />
-      </Routes>
+      </Routes> */}
       <Dashboard
-        display={
-          pathname.includes('/add-item') || pathname.includes('/add-item-type')
-        }
+        display={false}
       >
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -98,8 +98,12 @@ function App() {
           <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
 
           <Route path="/items" element={<Items />} />
+          <Route path="/add-item" element={<AddItem />} />
+
           <Route path="/add-subitem" element={<AddSubItem />} />
           <Route path="/item-type" element={<ItemType />} />
+          <Route path="/item-category" element={<ItemCategory />} />
+          <Route path="/add-item-category" element={<AddItemCategory />} />
 
           <Route path="/ward-prices" element={<WardPrice />} />
 

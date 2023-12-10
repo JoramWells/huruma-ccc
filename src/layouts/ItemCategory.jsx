@@ -7,20 +7,24 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import PrivilegeTable from '../components/tables/PrivilegeTable';
-import { getAllMeasuringUnit } from '../_reducers/measuringUnitSlice';
+import { getAllItemCategories } from '../_reducers/itemCategorySlice';
 
 const columns = [
   {
-    Header: 'Measuring Unit',
-    accessor: 'measuringUnitName',
+    Header: 'Category Name',
+    accessor: 'itemCategoryName',
+  },
+  {
+    Header: 'Code Prefix',
+    accessor: 'itemCodePrefix',
   },
 ];
 
-const MeasuringUnit = () => {
+const ItemCategory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.measuringUnit);
+  const { data } = useSelector((state) => state.itemCategory);
   const subrowData = data
         && data.map((item) => ({
           ...item,
@@ -28,12 +32,12 @@ const MeasuringUnit = () => {
         }));
 
   useEffect(() => {
-    dispatch(getAllMeasuringUnit());
+    dispatch(getAllItemCategories());
   }, []);
   return (
     <VStack mt={10} w="full">
 
-      <BreadCrumbNav link="/add-measuring-unit" />
+      <BreadCrumbNav link="/add-item-category" />
       <HStack
         mt={5}
         w="100%"
@@ -47,4 +51,4 @@ const MeasuringUnit = () => {
   );
 };
 
-export default MeasuringUnit;
+export default ItemCategory;

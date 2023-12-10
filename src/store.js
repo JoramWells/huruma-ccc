@@ -15,6 +15,8 @@ import physioItemSlice from './_reducers/physioItemSlice';
 import insuranceSlice from './_reducers/insuranceSlice';
 import userTypeSlice from './_reducers/userTypeSlice';
 import measuringUnitSlice from './_reducers/measuringUnitSlice';
+import itemCategorySlice from './_reducers/itemCategorySlice';
+import itemSlice from './_reducers/itemSlice';
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +35,8 @@ export const store = configureStore({
     insurances: insuranceSlice,
     userType: userTypeSlice,
     measuringUnit: measuringUnitSlice,
+    itemCategory: itemCategorySlice,
+    items: itemSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });
