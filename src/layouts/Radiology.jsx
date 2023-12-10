@@ -9,67 +9,54 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import { getAllItems } from '../_reducers/itemSlice';
 import DataTable2 from '../components/tables/DataTable';
+import { getAllRadiologyRequests } from '../_reducers/radiologySlice';
 
-const Items = () => {
+const Radiology = () => {
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.items);
+  const { data } = useSelector((state) => state.radiology);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Item Code',
-        accessorKey: 'itemCode',
+        header: 'Service Category',
+        accessorKey: 'serviceCategory',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Item Description',
-        accessorKey: 'itemDescription',
+        header: 'Service Name',
+        accessorKey: 'serviceName',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Brand',
-        accessorKey: 'brand',
+        header: 'Service Cost (Cash)',
+        accessorKey: 'serviceCostCash',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'U.O.M',
-        accessorKey: 'uom',
+        header: 'Service Cost (Corporate)',
+        accessorKey: 'serviceCostCorporate',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Buying Price',
-        accessorKey: 'buyingPrice',
+        header: 'Service Cost (Insurance)',
+        accessorKey: 'serviceCostInsurance',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
 
       {
-        header: 'Selling Price',
-        accessorKey: 'sellingPrice',
+        header: 'Service Cost (Foreigner)',
+        accessorKey: 'serviceCostForeigner',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Expense Account',
-        accessorKey: 'expenseAccount',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Income Account',
-        accessorKey: 'incomeAccount',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -79,16 +66,16 @@ const Items = () => {
   );
 
   const subrowData = data
-    && data.map((item) => ({
-      ...item,
-      subRows: [],
-    }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
+        && data.map((item) => ({
+          ...item,
+          subRows: [],
+        }));
+    // const fetchData = useCallback(()=>{
+    //   dispatch(getAllPriceLists())
+    // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllItems());
+    dispatch(getAllRadiologyRequests());
   }, [dispatch]);
 
   return (
@@ -145,4 +132,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default Radiology;

@@ -17,6 +17,7 @@ import userTypeSlice from './_reducers/userTypeSlice';
 import measuringUnitSlice from './_reducers/measuringUnitSlice';
 import itemCategorySlice from './_reducers/itemCategorySlice';
 import itemSlice from './_reducers/itemSlice';
+import radiologySlice from './_reducers/radiologySlice';
 
 export const store = configureStore({
   reducer: {
@@ -37,6 +38,7 @@ export const store = configureStore({
     measuringUnit: measuringUnitSlice,
     itemCategory: itemCategorySlice,
     items: itemSlice,
+    radiology: radiologySlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });
