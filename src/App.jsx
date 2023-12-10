@@ -41,6 +41,9 @@ import AddUserType from './layouts/AddUserType';
 import DispenseDrugs from './layouts/DispenseDrugs';
 import AddDispenseDrugs from './layouts/AddDispenseDrugs';
 import Requisitions from './layouts/Requisitions';
+import AddRequisitions from './layouts/AddRequisitions';
+import MeasuringUnit from './layouts/MeasuringUnit';
+import AddMeasuringUnit from './layouts/AddMeasuringUnit';
 
 function App() {
   const { pathname } = useLocation();
@@ -67,6 +70,7 @@ function App() {
           <Route path="/add-insurance" element={<AddInsurance />} />
 
           <Route path="/requisitions" element={<Requisitions />} />
+          <Route path="/add-requisitions" element={<AddRequisitions />} />
 
           <Route path="/physiotherapy" element={<Physiotherapy />} />
           <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />
@@ -81,6 +85,9 @@ function App() {
 
           <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
           <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
+
+          <Route path="measuring-unit" element={<MeasuringUnit />} />
+          <Route path="add-measuring-unit" element={<AddMeasuringUnit />} />
 
           <Route path="/price-lists" element={<PriceLists />} />
           <Route path="/services-price-list" element={<PriceLists />} />

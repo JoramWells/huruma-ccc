@@ -1,5 +1,6 @@
 import {
   FaCalendarTimes,
+  FaCar,
   FaChild,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
   FaRadiation, FaStore, FaToolbox, FaTools, FaUser,
@@ -128,7 +129,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/requisitions'}
+        selected={pathname === '/requisitions' || pathname.includes('/add-requisitions')}
         onClick={onToggle}
         text="Store Requisitions"
         link="/requisitions"
@@ -154,10 +155,32 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/items'}
+        selected={pathname === '/items' || pathname.includes('/add-measuring-unit')}
         onClick={onToggle}
-        text="items"
+        text="Items"
+        link="/items"
+        itemList={[
+          { id: nanoid(), title: 'Brand', link: '/brand' },
+          { id: nanoid(), title: 'Item Category', link: '/item-category' },
+          { id: nanoid(), title: 'Measuring Unit', link: '/measuring-unit' },
+          { id: nanoid(), title: 'Non Pharmaceutical', link: '/non-pharmaceuticals' },
+
+        ]}
         icon={<FaListOl />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/vehicles' || pathname.includes('pharmaceuticals')}
+        onClick={onToggle}
+        text="Vehicles"
+        link="/vehicles"
+        itemList={[
+          { id: nanoid(), title: 'Vehicle Category', link: '/non-pharmaceuticals' },
+          { id: nanoid(), title: 'Vehicles', link: '/vehicles' },
+          { id: nanoid(), title: 'Mileage', link: '/mileage' },
+
+        ]}
+        icon={<FaCar />}
       />
 
     </>

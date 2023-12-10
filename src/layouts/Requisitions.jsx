@@ -31,8 +31,8 @@ const Requisitions = () => {
   return (
     <VStack mt={10} w="full">
 
-      <BreadCrumbNav link="/admin-add-department" />
-      <HeaderAction text="Department" subrowData={subrowData} />
+      <BreadCrumbNav link="/add-requisitions" />
+      <HeaderAction text="Requisitions" subrowData={subrowData} />
       <HStack
         mt={5}
         w="100%"
