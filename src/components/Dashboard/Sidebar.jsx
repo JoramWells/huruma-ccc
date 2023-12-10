@@ -13,7 +13,6 @@ function Sidebar() {
       overflowX="auto"
       bgColor="blue.900"
       display={{ base: 'none', sm: 'block' }}
-      p={2}
       // pt={14}
       borderRight="1px"
       borderColor="gray.100"

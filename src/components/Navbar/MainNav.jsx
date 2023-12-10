@@ -16,7 +16,7 @@ const MainNav = () => (
     borderColor="gray.100"
     position="fixed"
     zIndex={10}
-    w="84%"
+    w="83%"
     h={14}
     top={0}
     justifyContent="end"

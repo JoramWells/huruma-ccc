@@ -128,6 +128,18 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
+        selected={pathname === '/requisitions'}
+        onClick={onToggle}
+        text="Store Requisitions"
+        link="/requisitions"
+        itemList={[
+          { id: nanoid(), title: 'Requisitions', link: '/requisitions' },
+          { id: nanoid(), title: 'Order Note', link: '/general-store' },
+        ]}
+        icon={<FaStore />}
+      />
+
+      <SidebarItemLink
         selected={pathname === '/stores' || pathname.includes('pharmaceuticals')}
         onClick={onToggle}
         text="Stores"

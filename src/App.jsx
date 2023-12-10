@@ -40,6 +40,7 @@ import UserTypes from './layouts/UserTypes';
 import AddUserType from './layouts/AddUserType';
 import DispenseDrugs from './layouts/DispenseDrugs';
 import AddDispenseDrugs from './layouts/AddDispenseDrugs';
+import Requisitions from './layouts/Requisitions';
 
 function App() {
   const { pathname } = useLocation();
@@ -64,6 +65,8 @@ function App() {
 
           <Route path="/admin-insurances" element={<Insurance />} />
           <Route path="/add-insurance" element={<AddInsurance />} />
+
+          <Route path="/requisitions" element={<Requisitions />} />
 
           <Route path="/physiotherapy" element={<Physiotherapy />} />
           <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />

@@ -22,19 +22,17 @@ const SidebarItemLink = ({
       <>
         <HStack
           justifyContent="space-between"
-          rounded="md"
           fontWeight="semibold"
           color={selected ? 'white' : 'gray.500'}
-          bgColor={selected && 'pink.700'}
-          bgGradient={selected && 'linear(to-r, blue.600, blue.500)'}
-          boxShadow={selected && 'lg'}
+          bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
+          // boxShadow={selected && 'lg'}
           p={2}
           mt={3}
           _hover={{
             cursor: 'pointer',
-            bgColor: 'gray.50',
-            color: selected ? 'white' : 'gray.600',
-            boxShadow: 'xs',
+            bgColor: 'blue.800',
+            color: selected ? 'white' : 'gray.50',
+            // boxShadow: 'xs',
           }}
         >
           <HStack>

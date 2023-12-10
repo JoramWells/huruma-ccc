@@ -8,17 +8,14 @@ const SidebarItemSubButton = ({
   (
     <HStack
       justifyContent="flex-start"
-      rounded="md"
-      color={selected ? 'blue.500' : 'gray.500'}
-      fontWeight={selected && 'bold'}
-      bgColor={selected && 'gray.50'}
+      color={selected ? 'white' : 'gray.400'}
+      // fontWeight={selected && 'semibold'}
+      bgColor={selected && 'blue.800'}
       p={2}
-      mt={1}
-      ml={5}
+      pl={10}
       _hover={{
         cursor: 'pointer',
-        bgColor: 'gray.50',
-        color: selected ? 'blue.700' : 'gray.600',
+        color: selected ? 'gray.400' : 'gray.300',
         boxShadow: 'xs',
       }}
       onClick={onClick}
