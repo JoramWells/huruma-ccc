@@ -12,7 +12,7 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllRadiologyRequests } from '../_reducers/radiologySlice';
 
-const Radiology = () => {
+const VitalSignsAndAllergies = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.radiology);
@@ -132,4 +132,4 @@ const Radiology = () => {
   );
 };
 
-export default Radiology;
+export default VitalSignsAndAllergies;

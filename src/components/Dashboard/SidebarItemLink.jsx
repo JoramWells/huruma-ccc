@@ -7,7 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import { FaChevronDown, FaChevronRight, FaUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import SidebarItemSubButton from './SidebarItemSubButton';
 
 const SidebarItemLink = ({
@@ -16,6 +16,7 @@ const SidebarItemLink = ({
   const location = useLocation();
   const { pathname } = location;
   const { isOpen, onToggle } = useDisclosure();
+  const [chevronColor, setChevronColor] = useState(false);
 
   return (
     (
@@ -45,7 +46,14 @@ const SidebarItemLink = ({
             onClick={onToggle}
 
           >
-            {isOpen ? <FaChevronDown /> : <FaChevronRight />}
+            {isOpen ? (
+              <Box _hover={{
+                bgColor: 'black',
+              }}
+              >
+                <FaChevronDown />
+              </Box>
+            ) : <FaChevronRight />}
 
           </Box>
 

@@ -3,7 +3,8 @@ import {
   FaCar,
   FaChild,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
-  FaRadiation, FaStore, FaToolbox, FaTools, FaUser,
+  FaProcedures,
+  FaRadiation, FaStore, FaToolbox, FaTools, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -67,6 +68,23 @@ const SidebarListItems = () => {
         icon={<FaChild />}
       />
 
+      <SidebarItemLink
+        selected={pathname === '/nursing-station'}
+        onClick={onToggle}
+        text="Nursing Station"
+        link="/nursing-station"
+        itemList={[
+          { id: nanoid(), title: 'Dialysis Package', link: '/ward-prices' },
+          { id: nanoid(), title: 'Patient Queue', link: '/ward-prices' },
+          { id: nanoid(), title: 'Pharmacy Requests', link: '/pharmeuticals' },
+          { id: nanoid(), title: 'Procedure Reports', link: '/pharmeuticals' },
+          { id: nanoid(), title: 'Triaged Patients', link: '/pharmaceutical-price-list' },
+          { id: nanoid(), title: 'Vital Signs & Allergies', link: '/services-price-list' },
+
+        ]}
+        icon={<FaUserNurse />}
+      />
+
       <SidebarItemButton
         selected={pathname === '/dd'}
         onClick={() => navigate('/')}
@@ -122,9 +140,21 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/radiology'}
-        onClick={() => navigate('/radiology')}
+        selected={pathname === '/procedures'}
+        onClick={() => navigate('/procedures')}
+        text="procedures"
+        icon={<FaProcedures />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/radiology' || pathname.includes('/add-radiology-request')}
+        onClick={onToggle}
         text="Radiology"
+        link="/radiology"
+        itemList={[
+          { id: nanoid(), title: 'Radiology Requests', link: '/radiology-requests' },
+          { id: nanoid(), title: 'Radiology Visits', link: '/radiology-visits' },
+        ]}
         icon={<FaRadiation />}
       />
 

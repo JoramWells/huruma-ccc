@@ -48,6 +48,7 @@ import AddMeasuringUnit from './layouts/AddMeasuringUnit';
 import ItemCategory from './layouts/ItemCategory';
 import AddItemCategory from './layouts/AddItemCategory';
 import Radiology from './layouts/Radiology';
+import NursingStation from './layouts/NursingStation';
 
 function App() {
   const { pathname } = useLocation();
@@ -83,6 +84,8 @@ function App() {
 
           <Route path="/admin-add-department" element={<AddDepartment />} />
           <Route path="/department-detail/:id" element={<DepartmentDetail />} />
+
+          <Route path="/nursing-station" element={<NursingStation />} />
 
           <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
           <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
