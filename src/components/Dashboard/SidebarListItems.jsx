@@ -1,5 +1,8 @@
 import {
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaStore, FaToolbox, FaUser,
+  FaCalendarTimes,
+  FaChild,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
+  FaRadiation, FaStore, FaToolbox, FaTools, FaUser,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -43,10 +46,49 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
+        selected={pathname === '/appointments'}
+        onClick={() => navigate('/appointments')}
+        text="appointments"
+        icon={<FaCalendarTimes />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === '/labs'}
+        onClick={() => navigate('/labs')}
+        text="lab"
+        icon={<FaTools />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === '/maternity'}
+        onClick={() => navigate('/maternity')}
+        text="Maternity"
+        icon={<FaChild />}
+      />
+
+      <SidebarItemButton
         selected={pathname === '/dd'}
         onClick={() => navigate('/')}
         text="patients"
         icon={<FaHospitalAlt />}
+      />
+
+      <SidebarItemLink
+        selected={
+          pathname === '/pharmacy'
+}
+        onClick={onToggle}
+        text="Pharmacy"
+        link="/pharmacy"
+        itemList={[
+          { id: nanoid(), title: 'Over Counter Request', link: '/services-price-list' },
+          { id: nanoid(), title: 'OTC Patient Queue', link: '/pharmaceutical-price-list' },
+          { id: nanoid(), title: 'Walk-In Patient Queue', link: '/pharmeuticals' },
+          { id: nanoid(), title: 'Pharmacy Request', link: '/ward-prices' },
+          { id: nanoid(), title: 'Dispense Drugs', link: '/dispense-drugs' },
+
+        ]}
+        icon={<FaPills />}
       />
 
       {/* physiotherapy */}
@@ -76,6 +118,13 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaMoneyBill />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === '/radiology'}
+        onClick={() => navigate('/radiology')}
+        text="Radiology"
+        icon={<FaRadiation />}
       />
 
       <SidebarItemLink

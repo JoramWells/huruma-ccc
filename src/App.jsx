@@ -38,6 +38,8 @@ import Insurance from './layouts/Insurances';
 import AddInsurance from './layouts/AddInsurance';
 import UserTypes from './layouts/UserTypes';
 import AddUserType from './layouts/AddUserType';
+import DispenseDrugs from './layouts/DispenseDrugs';
+import AddDispenseDrugs from './layouts/AddDispenseDrugs';
 
 function App() {
   const { pathname } = useLocation();
@@ -57,6 +59,8 @@ function App() {
 
           <Route path="/administration" element={<Administration />} />
           <Route path="/admin-drugs" element={<Drugs />} />
+          <Route path="/dispense-drugs" element={<DispenseDrugs />} />
+          <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
 
           <Route path="/admin-insurances" element={<Insurance />} />
           <Route path="/add-insurance" element={<AddInsurance />} />

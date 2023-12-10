@@ -11,7 +11,7 @@ function Sidebar() {
       w={{ base: '100%', sm: '240px' }}
       h="100vh"
       overflowX="auto"
-      bgColor="white"
+      bgColor="blue.900"
       display={{ base: 'none', sm: 'block' }}
       p={2}
       // pt={14}
@@ -25,7 +25,7 @@ function Sidebar() {
           fontSize="2xl"
           fontWeight="extrabold"
           textAlign="center"
-          color="gray.700"
+          color="white"
         >
           Huruma
         </Text>

@@ -4,6 +4,7 @@ import {
   FormLabel,
   HStack,
   Input,
+  Tag,
   VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ const AddUser = () => {
 
   const { loading } = useSelector((state) => state.itemType);
   const departmentData = useSelector((state) => state.departments.data);
+  const userTypeData = useSelector((state) => state.userType.data);
 
   const inputValues = {
     itemTypeName,
@@ -26,9 +28,9 @@ const AddUser = () => {
     { value: item.id, label: item.departmentName }
   ));
 
-  console.log(departmentOptions);
-
-  const options = [{ value: '85A', label: '85A' }];
+  const userTypeOptions = userTypeData && userTypeData.map((item) => (
+    { value: item.id, label: item.userTypeName }
+  ));
 
   return (
     <VStack
@@ -37,6 +39,7 @@ const AddUser = () => {
       alignItems="center"
       justifyContent="center"
       bgColor="gray.50"
+      mt="55px"
     >
       <VStack
         w="50%"
@@ -51,13 +54,13 @@ const AddUser = () => {
         {/* department */}
         <FormControl>
           <FormLabel>Full Name</FormLabel>
-          <Input placeholder="Enter Full Name" />
+          <Input size="lg" placeholder="Enter Full Name" />
         </FormControl>
 
         {/* department */}
         <FormControl>
           <FormLabel>Mobile Number</FormLabel>
-          <Input placeholder="Enter Mobile Number" />
+          <Input size="lg" placeholder="Enter Mobile Number" />
         </FormControl>
 
         {/* email */}
@@ -67,6 +70,7 @@ const AddUser = () => {
           <Input
             placeholder="Enter Email Address"
             value={itemTypeName}
+            size="lg"
             onChange={(e) => setItemType(e.target.value)}
           />
         </FormControl>
@@ -79,8 +83,14 @@ const AddUser = () => {
 
         {/* hospital */}
         <FormControl>
-          <FormLabel>Select User Type</FormLabel>
-          <Select options={options} />
+          <HStack
+            w="full"
+            justifyContent="space-between"
+          >
+            <FormLabel>Select User Type</FormLabel>
+            <Tag colorScheme="green">Add New</Tag>
+          </HStack>
+          <Select options={userTypeOptions} />
         </FormControl>
 
         <FormControl>
@@ -94,12 +104,12 @@ const AddUser = () => {
             </FormLabel>
             <Button size="sm">Generate</Button>
           </HStack>
-          <Input placeholder="Enter password" />
+          <Input size="lg" placeholder="Enter password" />
         </FormControl>
 
         <HStack w="full" justifyContent="end">
           <Button
-            size="md"
+            size="lg"
             colorScheme="blue"
             onClick={() => dispatch(addItemType(inputValues))}
             w="full"
