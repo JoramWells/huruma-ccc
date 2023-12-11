@@ -55,6 +55,9 @@ import AddSuppliers from './layouts/AddSuppliers';
 import SupplierClassification from './layouts/SupplierClassification';
 import AddSupplierClassification from './layouts/AddSupplierClassification';
 import SupplierClassificationDetail from './layouts/SupplierClassificationDetail';
+import ProcedureGroups from './layouts/ProcedureGroups';
+import AddProcedureGroup from './layouts/AddProcedureGroup';
+import AddProcedures from './layouts/AddProcedures';
 
 function App() {
   const { pathname } = useLocation();
@@ -99,6 +102,9 @@ function App() {
           <Route path="/nursing-station" element={<NursingStation />} />
 
           <Route path="/procedures" element={<Procedures />} />
+          <Route path="/add-procedures" element={<AddProcedures />} />
+          <Route path="/procedure-groups" element={<ProcedureGroups />} />
+          <Route path="/add-procedure-group" element={<AddProcedureGroup />} />
 
           <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
           <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />

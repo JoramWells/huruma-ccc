@@ -11,53 +11,38 @@ import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllRadiologyRequests } from '../_reducers/radiologySlice';
+import { getAllSuppliers } from '../_reducers/supplierSlice';
 
-const Procedures = () => {
+const Suppliers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.radiology);
+  const { data } = useSelector((state) => state.suppliers);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Service Category',
-        accessorKey: 'serviceCategory',
+        header: 'Supplier Name',
+        accessorKey: 'supplierName',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Service Name',
-        accessorKey: 'serviceName',
+        header: 'Mobile No.',
+        accessorKey: 'mobileNo',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Service Cost (Cash)',
-        accessorKey: 'serviceCostCash',
+        header: 'Classification',
+        accessorKey: 'classification',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Service Cost (Corporate)',
-        accessorKey: 'serviceCostCorporate',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Service Cost (Insurance)',
-        accessorKey: 'serviceCostInsurance',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-
-      {
-        header: 'Service Cost (Foreigner)',
-        accessorKey: 'serviceCostForeigner',
+        header: 'Status',
+        accessorKey: 'status',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
@@ -77,7 +62,7 @@ const Procedures = () => {
     // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllRadiologyRequests());
+    dispatch(getAllSuppliers());
   }, [dispatch]);
 
   return (
@@ -90,17 +75,18 @@ const Procedures = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-procedures" />
-        <HStack p={3} w="full">
+        <BreadCrumbNav link="/add-suppliers" />
+        <HStack p={3}>
           <Button
-            rounded="full"
             colorScheme="purple"
             variant="outline"
-            onClick={() => navigate('/procedure-groups')}
+            rounded="full"
+            onClick={() => navigate('/supplier-classification')}
           >
-            Group Procedures
+            Supplier Classification
 
           </Button>
+
         </HStack>
         <HStack
           w="100%"
@@ -111,7 +97,7 @@ const Procedures = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Procedures
+            Suppliers
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -145,4 +131,4 @@ const Procedures = () => {
   );
 };
 
-export default Procedures;
+export default Suppliers;

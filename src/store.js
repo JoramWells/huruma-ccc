@@ -20,6 +20,8 @@ import itemSlice from './_reducers/itemSlice';
 import radiologySlice from './_reducers/radiologySlice';
 import supplierSlice from './_reducers/supplierSlice';
 import supplierClassificationSlice from './_reducers/supplierClassificationSlice';
+import procedureGroupSlice from './_reducers/procedureGroupSlice';
+import procedureSlice from './_reducers/procedureSlice';
 
 export const store = configureStore({
   reducer: {
@@ -43,6 +45,8 @@ export const store = configureStore({
     radiology: radiologySlice,
     suppliers: supplierSlice,
     supplierClassification: supplierClassificationSlice,
+    procedures: procedureSlice,
+    procedureGroup: procedureGroupSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });
