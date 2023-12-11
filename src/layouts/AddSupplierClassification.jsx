@@ -9,18 +9,18 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { FaArrowLeft, FaPlus } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addItemType } from '../_reducers/itemTypeSlice';
+import { addSupplierClassification } from '../_reducers/supplierClassificationSlice';
 
 const AddSupplierClassification = () => {
   const [classificationName, setClassificationName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.itemType);
+  const { loading } = useSelector((state) => state.supplierClassification);
 
   const inputValues = {
     classificationName,
@@ -43,7 +43,7 @@ const AddSupplierClassification = () => {
         rounded="lg"
       >
         <HStack w="full" justifyContent="space-between">
-          <IconButton onClick={() => navigate('/add-item')}>
+          <IconButton onClick={() => navigate('/add-suppliers')}>
             <FaArrowLeft />
           </IconButton>
           <Text fontSize="2xl" fontWeight="bold">
@@ -55,7 +55,7 @@ const AddSupplierClassification = () => {
           <FormLabel fontSize="xl">Classification Type</FormLabel>
           <Input
             size="lg"
-            placeholder="Enter Sub Item of"
+            placeholder="Enter Classification Type"
             value={classificationName}
             onChange={(e) => setClassificationName(e.target.value)}
           />
@@ -63,11 +63,10 @@ const AddSupplierClassification = () => {
         <HStack mt={5} w="full" justifyContent="end">
           <Button
             size="lg"
-            leftIcon={<FaPlus />}
             colorScheme="blue"
-            onClick={() => dispatch(addItemType(inputValues))}
+            onClick={() => dispatch(addSupplierClassification(inputValues))}
           >
-            {loading ? 'loading...' : 'Save Item Type'}
+            {loading ? 'loading...' : 'Save'}
           </Button>
         </HStack>
       </Box>

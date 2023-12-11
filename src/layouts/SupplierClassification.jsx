@@ -12,39 +12,30 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllSuppliers } from '../_reducers/supplierSlice';
+import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
 
 const SupplierClassification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.suppliers);
+  const { data } = useSelector((state) => state.supplierClassification);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Supplier Name',
-        accessorKey: 'supplierName',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Mobile No.',
-        accessorKey: 'mobileNo',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-        size: 200,
-
-      },
-      {
-        header: 'Classification',
-        accessorKey: 'classification',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Status',
-        accessorKey: 'status',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Classification Name',
+        accessorKey: 'classificationName',
+        cell: (props) => (
+          <Box
+            onClick={() => navigate('/supplier-classification-detail')}
+            _hover={{
+              cursor: 'pointer',
+              bgColor: 'gray.100',
+            }}
+          >
+            <Text>{props.getValue()}</Text>
+          </Box>
+        ),
 
       },
     ],
@@ -62,7 +53,7 @@ const SupplierClassification = () => {
     // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllSuppliers());
+    dispatch(getAllSupplierClassification());
   }, [dispatch]);
 
   return (
@@ -85,7 +76,7 @@ const SupplierClassification = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Suppliers
+            Supplier Classification
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',

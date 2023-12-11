@@ -9,26 +9,33 @@ import {
   HStack,
   Input,
   Stack,
+  Tag,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { addItemType } from '../_reducers/itemTypeSlice';
 import { addSuppliers } from '../_reducers/supplierSlice';
+import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
 
 const AddSuppliers = () => {
   const [supplierName, setSupplierName] = useState('');
   const [mobileNo, setMobileNo] = useState('');
-  const [classification, setClassification] = useState({ value: '85A', label: '85A' });
-  const [status, setStatus] = useState({ value: '85A', label: '85A' });
+  const [classification, setClassification] = useState({ value: '', label: '' });
+  const [status, setStatus] = useState({ value: 'Active', label: 'Active' });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { loading } = useSelector((state) => state.suppliers);
+  const classificationSupplierData = useSelector((state) => state.supplierClassification.data);
+
+  const classificationSupplierOptions = classificationSupplierData
+  && classificationSupplierData.map((item) => (
+    { value: item.classificationName, label: item.classificationName }
+  ));
 
   const inputValues = {
     supplierName,
@@ -41,6 +48,10 @@ const AddSuppliers = () => {
   const statusOptions = [{ value: 'Active', label: 'Active' },
     { value: 'In Active', label: 'In Active' },
   ];
+
+  useEffect(() => {
+    dispatch(getAllSupplierClassification());
+  }, []);
 
   return (
     <VStack
@@ -86,9 +97,21 @@ const AddSuppliers = () => {
 
         {/* select Department */}
         <FormControl>
-          <FormLabel fontSize="medium">Select Classification</FormLabel>
+          <HStack w="full" alignItems="center" justifyContent="space-between">
+            <FormLabel fontSize="medium">Select Classification</FormLabel>
+            <Tag
+              onClick={() => navigate('/add-supplier-classification')}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              NEW
+
+            </Tag>
+
+          </HStack>
           <Select
-            options={options}
+            options={classificationSupplierOptions}
             value={classification}
             onChange={(e) => setClassification(e)}
           />
