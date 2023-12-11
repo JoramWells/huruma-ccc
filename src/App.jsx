@@ -49,6 +49,9 @@ import ItemCategory from './layouts/ItemCategory';
 import AddItemCategory from './layouts/AddItemCategory';
 import Radiology from './layouts/Radiology';
 import NursingStation from './layouts/NursingStation';
+import Procedures from './layouts/Procedures';
+import Suppliers from './layouts/Suppliers';
+import AddSuppliers from './layouts/AddSuppliers';
 
 function App() {
   const { pathname } = useLocation();
@@ -80,12 +83,16 @@ function App() {
           <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
 
           <Route path="/admin-departments" element={<Departments />} />
-          <Route path="/admin-departments" element={<Departments />} />
+
+          <Route path="/suppliers" element={<Suppliers />} />
+          <Route path="/add-suppliers" element={<AddSuppliers />} />
 
           <Route path="/admin-add-department" element={<AddDepartment />} />
           <Route path="/department-detail/:id" element={<DepartmentDetail />} />
 
           <Route path="/nursing-station" element={<NursingStation />} />
+
+          <Route path="/procedures" element={<Procedures />} />
 
           <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
           <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />

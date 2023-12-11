@@ -4,7 +4,7 @@ import {
   FaChild,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
   FaProcedures,
-  FaRadiation, FaStore, FaToolbox, FaTools, FaUser, FaUserNurse,
+  FaRadiation, FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -182,6 +182,13 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaStore />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === '/suppliers' || pathname.includes('add-suppliers')}
+        onClick={() => navigate('/suppliers')}
+        text="suppliers"
+        icon={<FaTrain />}
       />
 
       <SidebarItemLink
