@@ -185,7 +185,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/suppliers' || pathname.includes('add-suppliers')}
+        selected={pathname === '/suppliers' || pathname.includes('add-suppliers') || pathname.includes('supplier-classification')}
         onClick={() => navigate('/suppliers')}
         text="suppliers"
         icon={<FaTrain />}

@@ -13,7 +13,7 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllSuppliers } from '../_reducers/supplierSlice';
 
-const Suppliers = () => {
+const SupplierClassification = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -75,19 +75,7 @@ const Suppliers = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-suppliers" />
-        <HStack p={3}>
-          <Button
-            colorScheme="purple"
-            variant="outline"
-            rounded="full"
-            onClick={() => navigate('/supplier-classification')}
-          >
-            Supplier Classification
-
-          </Button>
-
-        </HStack>
+        <BreadCrumbNav link="/add-supplier-classification" />
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -131,4 +119,4 @@ const Suppliers = () => {
   );
 };
 
-export default Suppliers;
+export default SupplierClassification;

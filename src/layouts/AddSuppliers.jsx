@@ -17,16 +17,24 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Select from 'react-select';
 import { addItemType } from '../_reducers/itemTypeSlice';
+import { addSuppliers } from '../_reducers/supplierSlice';
 
 const AddSuppliers = () => {
-  const [itemTypeName, setItemType] = useState('');
+  const [supplierName, setSupplierName] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [classification, setClassification] = useState({ value: '85A', label: '85A' });
+  const [status, setStatus] = useState({ value: '85A', label: '85A' });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.itemType);
+  const { loading } = useSelector((state) => state.suppliers);
 
   const inputValues = {
-    itemTypeName,
+    supplierName,
+    mobileNo,
+    classification: classification.value,
+    status: status.value,
   };
 
   const options = [{ value: '85A', label: '85A' }];
@@ -60,25 +68,41 @@ const AddSuppliers = () => {
         {/* supplier name */}
         <FormControl>
           <FormLabel>Supplier Name</FormLabel>
-          <Input placeholder="Enter Supplier Name" />
+          <Input
+            placeholder="Enter Supplier Name"
+            value={supplierName}
+            onChange={(e) => setSupplierName(e.target.value)}
+          />
         </FormControl>
 
         <FormControl>
           <FormLabel>Mobile No.</FormLabel>
-          <Input placeholder="Enter Mobile No." />
+          <Input
+            placeholder="Enter Mobile No."
+            value={mobileNo}
+            onChange={(e) => setMobileNo(e.target.value)}
+          />
         </FormControl>
 
         {/* select Department */}
         <FormControl>
           <FormLabel fontSize="medium">Select Classification</FormLabel>
-          <Select options={options} />
+          <Select
+            options={options}
+            value={classification}
+            onChange={(e) => setClassification(e)}
+          />
 
         </FormControl>
 
         {/* select Store */}
         <FormControl>
           <FormLabel fontSize="medium">Select Status</FormLabel>
-          <Select options={statusOptions} />
+          <Select
+            value={status}
+            options={statusOptions}
+            onChange={(e) => setStatus(e)}
+          />
 
         </FormControl>
 
@@ -86,7 +110,7 @@ const AddSuppliers = () => {
           <Button
             size="lg"
             colorScheme="blue"
-            onClick={() => dispatch(addItemType(inputValues))}
+            onClick={() => dispatch(addSuppliers(inputValues))}
           >
             {loading ? 'loading...' : 'Save'}
           </Button>

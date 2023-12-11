@@ -52,6 +52,8 @@ import NursingStation from './layouts/NursingStation';
 import Procedures from './layouts/Procedures';
 import Suppliers from './layouts/Suppliers';
 import AddSuppliers from './layouts/AddSuppliers';
+import SupplierClassification from './layouts/SupplierClassification';
+import AddSupplierClassification from './layouts/AddSupplierClassification';
 
 function App() {
   const { pathname } = useLocation();
@@ -86,6 +88,8 @@ function App() {
 
           <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/add-suppliers" element={<AddSuppliers />} />
+          <Route path="/supplier-classification" element={<SupplierClassification />} />
+          <Route path="/add-supplier-classification" element={<AddSupplierClassification />} />
 
           <Route path="/admin-add-department" element={<AddDepartment />} />
           <Route path="/department-detail/:id" element={<DepartmentDetail />} />
