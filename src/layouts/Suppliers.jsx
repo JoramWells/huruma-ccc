@@ -24,7 +24,13 @@ const Suppliers = () => {
       {
         header: 'Supplier Name',
         accessorKey: 'supplierName',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Box
+            onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
+          >
+            <Text>{props.getValue()}</Text>
+          </Box>
+        ),
 
       },
       {

@@ -13,30 +13,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { addSuppliers } from '../_reducers/supplierSlice';
-import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
+import { addProcedures } from '../_reducers/procedureSlice';
+import { getAllProcedureGroups } from '../_reducers/procedureGroupSlice';
 
 const AddProcedures = () => {
-  const [supplierName, setSupplierName] = useState('');
-  const [classification, setClassification] = useState({ value: '', label: '' });
+  const [procedureName, setProcedureName] = useState('');
+  const [procedureGroup, setProcedureGroup] = useState({ value: '', label: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.suppliers);
-  const classificationSupplierData = useSelector((state) => state.supplierClassification.data);
+  const { loading } = useSelector((state) => state.procedures);
+  const classificationSupplierData = useSelector((state) => state.procedureGroup.data);
 
   const classificationSupplierOptions = classificationSupplierData
   && classificationSupplierData.map((item) => (
-    { value: item.classificationName, label: item.classificationName }
+    { value: item.procedureGroupName, label: item.procedureGroupName }
   ));
 
   const inputValues = {
-    supplierName,
-    classification: classification.value,
+    procedureName,
+    procedureGroup: procedureGroup.value,
   };
 
   useEffect(() => {
-    dispatch(getAllSupplierClassification());
+    dispatch(getAllProcedureGroups());
   }, []);
 
   return (
@@ -67,8 +67,8 @@ const AddProcedures = () => {
           <FormLabel>Procedure Name</FormLabel>
           <Input
             placeholder="Enter Procedure Name"
-            value={supplierName}
-            onChange={(e) => setSupplierName(e.target.value)}
+            value={procedureName}
+            onChange={(e) => setProcedureName(e.target.value)}
           />
         </FormControl>
 
@@ -89,8 +89,8 @@ const AddProcedures = () => {
           </HStack>
           <Select
             options={classificationSupplierOptions}
-            value={classification}
-            onChange={(e) => setClassification(e)}
+            value={procedureGroup}
+            onChange={(e) => setProcedureGroup(e)}
           />
 
         </FormControl>
@@ -99,7 +99,7 @@ const AddProcedures = () => {
           <Button
             size="lg"
             colorScheme="blue"
-            onClick={() => dispatch(addSuppliers(inputValues))}
+            onClick={() => dispatch(addProcedures(inputValues))}
           >
             {loading ? 'loading...' : 'Save'}
           </Button>

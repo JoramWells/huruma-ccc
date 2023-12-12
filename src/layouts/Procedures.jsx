@@ -19,7 +19,7 @@ const Procedures = () => {
 
   const { data } = useSelector((state) => state.radiology);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Service Category',
@@ -67,7 +67,7 @@ const Procedures = () => {
     [],
   );
 
-  const subrowData = data
+  const subRowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
@@ -120,7 +120,7 @@ const Procedures = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subRowData.length}
               )
 
             </span>
@@ -138,7 +138,7 @@ const Procedures = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 data={subRowData} columns={columns} />
         </Box>
       </Box>
     </VStack>

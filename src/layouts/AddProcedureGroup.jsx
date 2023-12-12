@@ -13,17 +13,17 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addSupplierClassification } from '../_reducers/supplierClassificationSlice';
+import { addProcedureGroup } from '../_reducers/procedureGroupSlice';
 
 const AddProcedureGroup = () => {
-  const [procedureName, setProcedureName] = useState('');
+  const [procedureGroupName, setProcedureGroupName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.supplierClassification);
+  const { loading } = useSelector((state) => state.procedureGroup);
 
   const inputValues = {
-    procedureName,
+    procedureGroupName,
   };
 
   return (
@@ -56,15 +56,15 @@ const AddProcedureGroup = () => {
           <Input
             size="lg"
             placeholder="Enter Procedure Name"
-            value={procedureName}
-            onChange={(e) => setProcedureName(e.target.value)}
+            value={procedureGroupName}
+            onChange={(e) => setProcedureGroupName(e.target.value)}
           />
         </FormControl>
         <HStack mt={5} w="full" justifyContent="end">
           <Button
             size="lg"
             colorScheme="blue"
-            onClick={() => dispatch(addSupplierClassification(inputValues))}
+            onClick={() => dispatch(addProcedureGroup(inputValues))}
           >
             {loading ? 'loading...' : 'Save'}
           </Button>

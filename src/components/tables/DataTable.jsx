@@ -52,8 +52,8 @@ const DataTable2 = ({ data, columns }) => {
                       </Text>
                       {header.column.getCanSort() && (
                         <FaSort onClick={
-                                                    header.column.getToggleSortingHandler()
-                                                }
+                          header.column.getToggleSortingHandler()
+                        }
                         />
                       )}
                       <Text>
@@ -78,21 +78,40 @@ const DataTable2 = ({ data, columns }) => {
                 {row.getVisibleCells().map((cell) => (
                   <Td key={cell.id}>
                     {
-                                            flexRender(
-                                              cell.column.columnDef.cell,
-                                              cell.getContext(),
-                                            )
-                                        }
+                      flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )
+                    }
                   </Td>
                 ))}
               </Tr>
             ))}
           </Tbody>
         </Table>
-        <HStack justifyContent="space-between">
+        <HStack
+          justifyContent="flex-start"
+          // bgColor="gray.50"
+          w="100px"
+          mt={2}
+          p={2}
+          rounded="lg"
+          fontWeight="semibold"
+          color="gray.600"
+          border="1px"
+          borderColor="gray.200"
+          boxShadow="lg"
+        >
           <Text>
-            {table.getState().pagination.pageIndex}
+            Page
+            {' '}
+            {table.getState().pagination.pageIndex + 1}
+          </Text>
+          <Text>
+            of
+            {' '}
             {table.getPageCount()}
+
           </Text>
           <HStack>
             {/* <Button

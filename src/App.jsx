@@ -58,6 +58,7 @@ import SupplierClassificationDetail from './layouts/SupplierClassificationDetail
 import ProcedureGroups from './layouts/ProcedureGroups';
 import AddProcedureGroup from './layouts/AddProcedureGroup';
 import AddProcedures from './layouts/AddProcedures';
+import SupplierDetail from './layouts/SupplierDetail';
 
 function App() {
   const { pathname } = useLocation();
@@ -92,6 +93,7 @@ function App() {
 
           <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/add-suppliers" element={<AddSuppliers />} />
+          <Route path="/supplier-detail/:id" element={<SupplierDetail />} />
           <Route path="/supplier-classification" element={<SupplierClassification />} />
           <Route path="/add-supplier-classification" element={<AddSupplierClassification />} />
           <Route path="/supplier-classification-detail" element={<SupplierClassificationDetail />} />
