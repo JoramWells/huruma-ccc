@@ -86,8 +86,8 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/dd'}
-        onClick={() => navigate('/')}
+        selected={pathname === '/patients'}
+        onClick={() => navigate('/patients')}
         text="patients"
         icon={<FaHospitalAlt />}
       />

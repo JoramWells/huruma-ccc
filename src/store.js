@@ -22,6 +22,7 @@ import supplierSlice from './_reducers/supplierSlice';
 import supplierClassificationSlice from './_reducers/supplierClassificationSlice';
 import procedureGroupSlice from './_reducers/procedureGroupSlice';
 import procedureSlice from './_reducers/procedureSlice';
+import patientSlice from './_reducers/patientSlice';
 
 export const store = configureStore({
   reducer: {
@@ -47,6 +48,7 @@ export const store = configureStore({
     supplierClassification: supplierClassificationSlice,
     procedures: procedureSlice,
     procedureGroup: procedureGroupSlice,
+    patients: patientSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });

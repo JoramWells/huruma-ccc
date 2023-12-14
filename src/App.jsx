@@ -59,6 +59,7 @@ import ProcedureGroups from './layouts/ProcedureGroups';
 import AddProcedureGroup from './layouts/AddProcedureGroup';
 import AddProcedures from './layouts/AddProcedures';
 import SupplierDetail from './layouts/SupplierDetail';
+import Patients from './layouts/Patients';
 
 function App() {
   const { pathname } = useLocation();
@@ -80,6 +81,8 @@ function App() {
 
           <Route path="/admin-insurances" element={<Insurance />} />
           <Route path="/add-insurance" element={<AddInsurance />} />
+
+          <Route path="/patients" element={<Patients />} />
 
           <Route path="/requisitions" element={<Requisitions />} />
           <Route path="/add-requisitions" element={<AddRequisitions />} />

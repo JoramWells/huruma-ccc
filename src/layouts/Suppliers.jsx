@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllSuppliers } from '../_reducers/supplierSlice';
+import SupplierStatusCell from '../components/SupplierStatusCell';
 
 const Suppliers = () => {
   const dispatch = useDispatch();
@@ -19,13 +20,20 @@ const Suppliers = () => {
 
   const { data } = useSelector((state) => state.suppliers);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Supplier Name',
         accessorKey: 'supplierName',
         cell: (props) => (
           <Box
+            h="full"
+            color="blue.500"
+            _hover={{
+              cursor: 'pointer',
+              color: 'gray.500',
+              textDecoration: 'underline',
+            }}
             onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
           >
             <Text>{props.getValue()}</Text>
@@ -50,7 +58,7 @@ const Suppliers = () => {
         header: 'Status',
         accessorKey: 'status',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: SupplierStatusCell,
 
       },
     ],
@@ -127,10 +135,9 @@ const Suppliers = () => {
         <Box
           w="100%"
           bgColor="white"
-          p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 data={subrowData} columns={columns} />
         </Box>
       </Box>
     </VStack>

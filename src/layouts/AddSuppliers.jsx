@@ -44,7 +44,6 @@ const AddSuppliers = () => {
     status: status.value,
   };
 
-  const options = [{ value: '85A', label: '85A' }];
   const statusOptions = [{ value: 'Active', label: 'Active' },
     { value: 'In Active', label: 'In Active' },
   ];

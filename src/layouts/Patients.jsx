@@ -12,37 +12,38 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllSuppliers } from '../_reducers/supplierSlice';
+import { getAllPatients } from '../_reducers/patientSlice';
 
-const Suppliers = () => {
+const Patients = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.suppliers);
+  const { data } = useSelector((state) => state.patients);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Supplier Name',
-        accessorKey: 'supplierName',
+        header: 'First Name',
+        accessorKey: 'first_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'mobileNo',
+        header: 'Last Name',
+        accessorKey: 'last_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Classification',
-        accessorKey: 'classification',
+        header: 'Mobile No.',
+        accessorKey: 'cell_phone',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Status',
-        accessorKey: 'status',
+        header: 'Gender',
+        accessorKey: 'patient_gender',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
@@ -62,7 +63,7 @@ const Suppliers = () => {
     // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllSuppliers());
+    dispatch(getAllPatients());
   }, [dispatch]);
 
   return (
@@ -131,4 +132,4 @@ const Suppliers = () => {
   );
 };
 
-export default Suppliers;
+export default Patients;

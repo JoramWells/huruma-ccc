@@ -33,7 +33,7 @@ const DataTable2 = ({ data, columns }) => {
         setColumFilters={setColumnFilters}
         columnFilters={columnFilters}
       />
-      <TableContainer>
+      <TableContainer h="700px" overflowY="auto">
         <Table>
           {table.getHeaderGroups()
             .map((headerGroup) => (
