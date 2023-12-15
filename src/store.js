@@ -23,6 +23,8 @@ import supplierClassificationSlice from './_reducers/supplierClassificationSlice
 import procedureGroupSlice from './_reducers/procedureGroupSlice';
 import procedureSlice from './_reducers/procedureSlice';
 import patientSlice from './_reducers/patientSlice';
+import doctorAdmissionSlice from './_reducers/doctorAdmissionSlice';
+import doctorAdmissionBeadAllocationSlice from './_reducers/doctorAdmissionBeadAllocationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -49,6 +51,9 @@ export const store = configureStore({
     procedures: procedureSlice,
     procedureGroup: procedureGroupSlice,
     patients: patientSlice,
+    doctorAdmission: doctorAdmissionSlice,
+    doctorAdmissionBedAllocation: doctorAdmissionBeadAllocationSlice,
+
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
 });

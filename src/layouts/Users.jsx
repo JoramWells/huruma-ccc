@@ -12,11 +12,11 @@ import { getUsers } from '../_reducers/userSlice';
 const columns = [
   {
     Header: 'Full Name',
-    accessor: 'fullname',
+    accessor: 'full_name',
   },
   {
     Header: 'user Name',
-    accessor: 'username',
+    accessor: 'user_name',
   },
   {
     Header: 'Mobile Number',

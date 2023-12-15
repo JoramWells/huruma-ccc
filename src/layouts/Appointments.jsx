@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
@@ -11,46 +11,39 @@ import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllSuppliers } from '../_reducers/supplierSlice';
-import SupplierStatusCell from '../components/SupplierStatusCell';
+import { fetchAllDoctorAdmission } from '../_reducers/doctorAdmissionSlice';
 
-const Suppliers = () => {
+const Appointments = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.suppliers);
+  const { data } = useSelector((state) => state.doctorAdmission);
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
-        header: 'Supplier Name',
-        accessorKey: 'supplier_name',
-        cell: (props) => (
-          <Box
-            h="full"
-            color="blue.500"
-            _hover={{
-              cursor: 'pointer',
-              color: 'gray.500',
-              textDecoration: 'underline',
-            }}
-            onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
-          >
-            <Text>{props.getValue()}</Text>
-          </Box>
-        ),
+        header: 'Appointment ID',
+        accessorKey: 'appointment_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'supplier_phone',
+        header: 'Admission ID',
+        accessorKey: 'admission_id',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Supplier Address',
-        accessorKey: 'supplier_address',
+        header: 'Patient ID',
+        accessorKey: 'patient_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Admission Date',
+        accessorKey: 'admission_date',
+        enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -60,16 +53,16 @@ const Suppliers = () => {
   );
 
   const subrowData = data
-        && data.map((item) => ({
-          ...item,
-          subRows: [],
-        }));
-    // const fetchData = useCallback(()=>{
-    //   dispatch(getAllPriceLists())
-    // },[dispatch])
+    && data.map((item) => ({
+      ...item,
+      subRows: [],
+    }));
+  // const fetchData = useCallback(()=>{
+  //   dispatch(getAllPriceLists())
+  // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllSuppliers());
+    dispatch(fetchAllDoctorAdmission());
   }, [dispatch]);
 
   return (
@@ -128,13 +121,14 @@ const Suppliers = () => {
         <Box
           w="100%"
           bgColor="white"
+          p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columns} />
+          <DataTable2 data={subrowData} columns={columnsx} />
         </Box>
       </Box>
     </VStack>
   );
 };
 
-export default Suppliers;
+export default Appointments;

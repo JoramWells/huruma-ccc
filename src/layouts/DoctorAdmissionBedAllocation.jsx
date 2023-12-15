@@ -11,46 +11,40 @@ import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllSuppliers } from '../_reducers/supplierSlice';
-import SupplierStatusCell from '../components/SupplierStatusCell';
+import { fetchAllDoctorAdmission } from '../_reducers/doctorAdmissionSlice';
+import { fetchAllAdmissionDoctorBedAllocation } from '../_reducers/doctorAdmissionBeadAllocationSlice';
 
-const Suppliers = () => {
+const DoctorAdmissionBedAllocation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.suppliers);
+  const { data } = useSelector((state) => state.doctorAdmissionBedAllocation);
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
-        header: 'Supplier Name',
-        accessorKey: 'supplier_name',
-        cell: (props) => (
-          <Box
-            h="full"
-            color="blue.500"
-            _hover={{
-              cursor: 'pointer',
-              color: 'gray.500',
-              textDecoration: 'underline',
-            }}
-            onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
-          >
-            <Text>{props.getValue()}</Text>
-          </Box>
-        ),
+        header: 'Appointment ID',
+        accessorKey: 'appointment_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'supplier_phone',
+        header: 'Admission ID',
+        accessorKey: 'admission_id',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Supplier Address',
-        accessorKey: 'supplier_address',
+        header: 'Patient ID',
+        accessorKey: 'patient_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Admission Date',
+        accessorKey: 'admission_date',
+        enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -69,7 +63,7 @@ const Suppliers = () => {
     // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllSuppliers());
+    dispatch(fetchAllAdmissionDoctorBedAllocation());
   }, [dispatch]);
 
   return (
@@ -128,13 +122,14 @@ const Suppliers = () => {
         <Box
           w="100%"
           bgColor="white"
+          p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columns} />
+          <DataTable2 data={subrowData} columns={columnsx} />
         </Box>
       </Box>
     </VStack>
   );
 };
 
-export default Suppliers;
+export default DoctorAdmissionBedAllocation;

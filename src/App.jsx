@@ -60,6 +60,8 @@ import AddProcedureGroup from './layouts/AddProcedureGroup';
 import AddProcedures from './layouts/AddProcedures';
 import SupplierDetail from './layouts/SupplierDetail';
 import Patients from './layouts/Patients';
+// import DoctorAdmission from './layouts/DoctorAdmission';
+import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 
 function App() {
   const { pathname } = useLocation();
@@ -78,11 +80,16 @@ function App() {
           <Route path="/admin-drugs" element={<Drugs />} />
           <Route path="/dispense-drugs" element={<DispenseDrugs />} />
           <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
+          <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
           <Route path="/admin-insurances" element={<Insurance />} />
           <Route path="/add-insurance" element={<AddInsurance />} />
 
           <Route path="/patients" element={<Patients />} />
+
+          {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
+
+          {/* <Route path="/admission" element={<Admission />} /> */}
 
           <Route path="/requisitions" element={<Requisitions />} />
           <Route path="/add-requisitions" element={<AddRequisitions />} />

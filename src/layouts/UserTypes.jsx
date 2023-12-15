@@ -11,7 +11,7 @@ import { getUserTypes } from '../_reducers/userTypeSlice';
 const columns = [
   {
     Header: 'User Type',
-    accessor: 'userTypeName',
+    accessor: 'user_type_desc',
   },
 ];
 

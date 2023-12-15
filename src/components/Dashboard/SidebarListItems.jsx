@@ -47,6 +47,18 @@ const SidebarListItems = () => {
         icon={<FaUser />}
       />
 
+      <SidebarItemLink
+        selected={pathname === '/admission'}
+        onClick={onToggle}
+        text="Admission"
+        link="/admission"
+        itemList={[
+          { id: nanoid(), title: 'Bed Allocation', link: '/bed-allocation' },
+          { id: nanoid(), title: 'Bed Billing', link: '/bed-billing' },
+        ]}
+        icon={<FaRadiation />}
+      />
+
       <SidebarItemButton
         selected={pathname === '/appointments'}
         onClick={() => navigate('/appointments')}
