@@ -151,10 +151,15 @@ const SidebarListItems = () => {
         icon={<FaMoneyBill />}
       />
 
-      <SidebarItemButton
+      <SidebarItemLink
         selected={pathname === '/procedures'}
-        onClick={() => navigate('/procedures')}
-        text="procedures"
+        onClick={onToggle}
+        text="Procedures"
+        link="/procedures"
+        itemList={[
+          { id: nanoid(), title: 'Items', link: '/procedure-items' },
+
+        ]}
         icon={<FaProcedures />}
       />
 

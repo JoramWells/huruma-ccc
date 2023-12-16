@@ -25,6 +25,8 @@ import procedureSlice from './_reducers/procedureSlice';
 import patientSlice from './_reducers/patientSlice';
 import doctorAdmissionSlice from './_reducers/doctorAdmissionSlice';
 import doctorAdmissionBeadAllocationSlice from './_reducers/doctorAdmissionBeadAllocationSlice';
+import appointmentSlice from './_reducers/appointment.reducers';
+import admissionSlice from './_reducers/admissionSlice';
 
 export const store = configureStore({
   reducer: {
@@ -53,6 +55,9 @@ export const store = configureStore({
     patients: patientSlice,
     doctorAdmission: doctorAdmissionSlice,
     doctorAdmissionBedAllocation: doctorAdmissionBeadAllocationSlice,
+    appointment: appointmentSlice,
+    admission: admissionSlice,
+    appointments: appointmentSlice,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),

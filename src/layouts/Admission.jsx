@@ -12,13 +12,12 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { fetchAllAdmission } from '../_reducers/admissionSlice';
-import { fetchAllAppointment } from '../_reducers/appointment.reducers';
 
-const Appointments = () => {
+const Admission = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.appointments);
+  const { data } = useSelector((state) => state.admission);
 
   const columnsx = useMemo(
     () => [
@@ -63,7 +62,7 @@ const Appointments = () => {
   // },[dispatch])
 
   useEffect(() => {
-    dispatch(fetchAllAppointment());
+    dispatch(fetchAllAdmission());
   }, [dispatch]);
 
   return (
@@ -132,4 +131,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default Admission;
