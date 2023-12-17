@@ -4,7 +4,7 @@ import {
   FaChild,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
   FaProcedures,
-  FaRadiation, FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
+  FaRadiation, FaRegAddressBook, FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -48,15 +48,19 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/admission'}
+        selected={pathname === '/admission'
+        || pathname.includes('/bed-allocation')
+        || pathname.includes('/miscellaneous-charges')
+        || pathname.includes('/bed-billing')}
         onClick={onToggle}
         text="Admission"
         link="/admission"
         itemList={[
           { id: nanoid(), title: 'Bed Allocation', link: '/bed-allocation' },
           { id: nanoid(), title: 'Bed Billing', link: '/bed-billing' },
+          { id: nanoid(), title: 'Miscellaneous Charges', link: '/miscellaneous-charges' },
         ]}
-        icon={<FaRadiation />}
+        icon={<FaRegAddressBook />}
       />
 
       <SidebarItemButton

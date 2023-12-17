@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import { configureStore } from '@reduxjs/toolkit';
 import itemTypeSlice from './_reducers/itemTypeSlice';
 import priceListSlice from './_reducers/priceListSlice';
@@ -7,7 +9,6 @@ import departmentSlice from './_reducers/departmentSlice';
 import pharmaceuticalStoreSlice from './_reducers/pharmaceuticalStoreSlice';
 import cacheMiddleware from './middlewares/cacheMiddleware';
 import wardSlice from './_reducers/wardSlice';
-import userSlice from './_reducers/userSlice';
 import groupPrivilegesSlice from './_reducers/groupPrivilegesSlice';
 import drugsSlice from './_reducers/drugsSlice';
 import privilegeSlice from './_reducers/privilegeSlice';
@@ -27,6 +28,9 @@ import doctorAdmissionSlice from './_reducers/doctorAdmissionSlice';
 import doctorAdmissionBeadAllocationSlice from './_reducers/doctorAdmissionBeadAllocationSlice';
 import appointmentSlice from './_reducers/appointment.reducers';
 import admissionSlice from './_reducers/admissionSlice';
+import userSlice from './_reducers/userSlice';
+import admMartenityServicesSlice from './_reducers/admMartenityServicesSlice';
+import admMiscellaneousChargeSlice from './_reducers/admMiscellaneousChargeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -58,6 +62,8 @@ export const store = configureStore({
     appointment: appointmentSlice,
     admission: admissionSlice,
     appointments: appointmentSlice,
+    maternityServices: admMartenityServicesSlice,
+    miscellaneousCharges: admMiscellaneousChargeSlice,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),

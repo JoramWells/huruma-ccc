@@ -64,6 +64,9 @@ import Patients from './layouts/Patients';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 import Admission from './layouts/Admission';
 import Appointments from './layouts/Appointments';
+import MaternityServices from './layouts/MaternityServices';
+import MiscellaneousCharges from './layouts/MiscellaneousCharges';
+import PatientDetail from './layouts/PatientDetail';
 
 function App() {
   const { pathname } = useLocation();
@@ -88,10 +91,14 @@ function App() {
           <Route path="/add-insurance" element={<AddInsurance />} />
 
           <Route path="/patients" element={<Patients />} />
+          <Route path="/patient-detail/:id" element={<PatientDetail />} />
+          <Route path="/maternity" element={<MaternityServices />} />
 
           {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
           <Route path="/admission" element={<Admission />} />
+
+          <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
 
           <Route path="/requisitions" element={<Requisitions />} />
           <Route path="/add-requisitions" element={<AddRequisitions />} />

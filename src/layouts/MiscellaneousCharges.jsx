@@ -11,43 +11,58 @@ import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllSuppliers } from '../_reducers/supplierSlice';
-import { getAllPatients } from '../_reducers/patientSlice';
+import { getAllMaternityServices } from '../_reducers/admMartenityServicesSlice';
+import { getAllMiscellaneousCharges } from '../_reducers/admMiscellaneousChargeSlice';
 
-const Patients = () => {
+const MiscellaneousCharges = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.patients);
+  const { data } = useSelector((state) => state.miscellaneousCharges);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
-        header: 'First Name',
-        accessorKey: 'first_name',
+        header: 'Description',
+        accessorKey: 'admission_miscellaneous_charge_description',
         cell: (props) => (
-          <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
+          <Box
+            h="full"
+            color="blue.500"
+            _hover={{
+              cursor: 'pointer',
+              color: 'gray.500',
+              textDecoration: 'underline',
+            }}
+            onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
+          >
             <Text>{props.getValue()}</Text>
           </Box>
         ),
+
       },
       {
-        header: 'Last Name',
-        accessorKey: 'last_name',
+        header: 'Charge Type',
+        accessorKey: 'charge_type',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'cell_phone',
+        header: 'Cost Cash',
+        accessorKey: 'cost_cash',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Gender',
-        accessorKey: 'patient_gender',
-        enableSorting: false,
+        header: 'Cost Corporate',
+        accessorKey: 'cost_corporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Adm Category Id',
+        accessorKey: 'admission_category_id',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -66,7 +81,7 @@ const Patients = () => {
     // },[dispatch])
 
   useEffect(() => {
-    dispatch(getAllPatients());
+    dispatch(getAllMiscellaneousCharges());
   }, [dispatch]);
 
   return (
@@ -80,18 +95,7 @@ const Patients = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-suppliers" />
-        <HStack p={3}>
-          <Button
-            colorScheme="purple"
-            variant="outline"
-            rounded="full"
-            onClick={() => navigate('/supplier-classification')}
-          >
-            Supplier Classification
 
-          </Button>
-
-        </HStack>
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -101,7 +105,7 @@ const Patients = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Suppliers
+            Maternity
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -125,14 +129,13 @@ const Patients = () => {
         <Box
           w="100%"
           bgColor="white"
-          p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 data={subrowData} columns={columns} />
         </Box>
       </Box>
     </VStack>
   );
 };
 
-export default Patients;
+export default MiscellaneousCharges;
