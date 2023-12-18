@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import { Suspense, lazy } from 'react';
 import {
   ChakraProvider,
   theme,
 } from '@chakra-ui/react';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import Homepage from './layouts/Homepage';
+import {
+  Route, Routes, useLocation,
+} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import PriceLists from './layouts/PriceLists';
 import Services from './layouts/Services';
@@ -63,10 +64,14 @@ import Patients from './layouts/Patients';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 import Admission from './layouts/Admission';
-import Appointments from './layouts/Appointments';
-import MaternityServices from './layouts/MaternityServices';
-import MiscellaneousCharges from './layouts/MiscellaneousCharges';
-import PatientDetail from './layouts/PatientDetail';
+
+const Appointments = lazy(() => import('./layouts/Appointments'));
+
+const MaternityServices = lazy(() => import('./layouts/MaternityServices'));
+
+const Homepage = lazy(() => import('./layouts/Homepage'));
+const PatientDetail = lazy(() => import('./layouts/PatientDetail'));
+const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges'));
 
 function App() {
   const { pathname } = useLocation();
@@ -78,100 +83,105 @@ function App() {
       <Dashboard
         display={false}
       >
-        <Routes>
-          <Route path="/" element={<Homepage />} />
 
-          <Route path="/administration" element={<Administration />} />
-          <Route path="/admin-drugs" element={<Drugs />} />
-          <Route path="/dispense-drugs" element={<DispenseDrugs />} />
-          <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
-          <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
+        <Suspense fallback={<div>loading..</div>}>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
 
-          <Route path="/admin-insurances" element={<Insurance />} />
-          <Route path="/add-insurance" element={<AddInsurance />} />
+            <Route path="/administration" element={<Administration />} />
+            <Route path="/admin-drugs" element={<Drugs />} />
+            <Route path="/dispense-drugs" element={<DispenseDrugs />} />
+            <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
+            <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
-          <Route path="/patients" element={<Patients />} />
-          <Route path="/patient-detail/:id" element={<PatientDetail />} />
-          <Route path="/maternity" element={<MaternityServices />} />
+            <Route path="/admin-insurances" element={<Insurance />} />
+            <Route path="/add-insurance" element={<AddInsurance />} />
 
-          {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
+            <Route path="/patients" element={<Patients />} />
+            <Route path="/patient-detail/:id" element={<PatientDetail />} />
+            <Route path="/maternity" element={<MaternityServices />} />
 
-          <Route path="/admission" element={<Admission />} />
+            {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
-          <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
+            <Route path="/admission" element={<Admission />} />
 
-          <Route path="/requisitions" element={<Requisitions />} />
-          <Route path="/add-requisitions" element={<AddRequisitions />} />
+            <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
 
-          <Route path="/physiotherapy" element={<Physiotherapy />} />
-          <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />
-          <Route path="/dispenses-physiotherapy-items" element={<DispensesPhysioTherapy />} />
-          <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
+            <Route path="/requisitions" element={<Requisitions />} />
+            <Route path="/add-requisitions" element={<AddRequisitions />} />
 
-          <Route path="/admin-departments" element={<Departments />} />
+            <Route path="/physiotherapy" element={<Physiotherapy />} />
+            <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />
+            <Route path="/dispenses-physiotherapy-items" element={<DispensesPhysioTherapy />} />
+            <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
 
-          <Route path="/appointments" element={<Appointments />} />
+            <Route path="/admin-departments" element={<Departments />} />
 
-          <Route path="/suppliers" element={<Suppliers />} />
-          <Route path="/add-suppliers" element={<AddSuppliers />} />
-          <Route path="/supplier-detail/:id" element={<SupplierDetail />} />
-          <Route path="/supplier-classification" element={<SupplierClassification />} />
-          <Route path="/add-supplier-classification" element={<AddSupplierClassification />} />
-          <Route path="/supplier-classification-detail" element={<SupplierClassificationDetail />} />
+            <Route path="/appointments" element={<Appointments />} />
 
-          <Route path="/admin-add-department" element={<AddDepartment />} />
-          <Route path="/department-detail/:id" element={<DepartmentDetail />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/add-suppliers" element={<AddSuppliers />} />
+            <Route path="/supplier-detail/:id" element={<SupplierDetail />} />
+            <Route path="/supplier-classification" element={<SupplierClassification />} />
+            <Route path="/add-supplier-classification" element={<AddSupplierClassification />} />
+            <Route path="/supplier-classification-detail" element={<SupplierClassificationDetail />} />
 
-          <Route path="/nursing-station" element={<NursingStation />} />
+            <Route path="/admin-add-department" element={<AddDepartment />} />
+            <Route path="/department-detail/:id" element={<DepartmentDetail />} />
 
-          <Route path="/procedures" element={<Procedures />} />
-          <Route path="/add-procedures" element={<AddProcedures />} />
-          <Route path="/procedure-groups" element={<ProcedureGroups />} />
-          <Route path="/add-procedure-group" element={<AddProcedureGroup />} />
+            <Route path="/nursing-station" element={<NursingStation />} />
 
-          <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
-          <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
+            <Route path="/procedures" element={<Procedures />} />
+            <Route path="/add-procedures" element={<AddProcedures />} />
+            <Route path="/procedure-groups" element={<ProcedureGroups />} />
+            <Route path="/add-procedure-group" element={<AddProcedureGroup />} />
 
-          <Route path="measuring-unit" element={<MeasuringUnit />} />
-          <Route path="add-measuring-unit" element={<AddMeasuringUnit />} />
+            <Route path="pharmaceuticals" element={<Pharmaceuticals />} />
+            <Route path="add-pharmaceuticals" element={<AddPharmaceuticals />} />
 
-          <Route path="/price-lists" element={<PriceLists />} />
-          <Route path="/services-price-list" element={<PriceLists />} />
+            <Route path="measuring-unit" element={<MeasuringUnit />} />
+            <Route path="add-measuring-unit" element={<AddMeasuringUnit />} />
 
-          <Route path="/price-list-items" element={<PriceListItems />} />
-          <Route path="/pharmaceutical-price-list" element={<PriceListItems />} />
+            <Route path="/price-lists" element={<PriceLists />} />
+            <Route path="/services-price-list" element={<PriceLists />} />
 
-          <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
+            <Route path="/price-list-items" element={<PriceListItems />} />
+            <Route path="/pharmaceutical-price-list" element={<PriceListItems />} />
 
-          <Route path="/items" element={<Items />} />
-          <Route path="/add-item" element={<AddItem />} />
+            <Route path="/pricelist-detail/:id" element={<PriceListDetail />} />
 
-          <Route path="/radiology" element={<Radiology />} />
+            <Route path="/items" element={<Items />} />
+            <Route path="/add-item" element={<AddItem />} />
 
-          <Route path="/add-subitem" element={<AddSubItem />} />
-          <Route path="/item-type" element={<ItemType />} />
-          <Route path="/item-category" element={<ItemCategory />} />
-          <Route path="/add-item-category" element={<AddItemCategory />} />
+            <Route path="/radiology" element={<Radiology />} />
 
-          <Route path="/ward-prices" element={<WardPrice />} />
+            <Route path="/add-subitem" element={<AddSubItem />} />
+            <Route path="/item-type" element={<ItemType />} />
+            <Route path="/item-category" element={<ItemCategory />} />
+            <Route path="/add-item-category" element={<AddItemCategory />} />
 
-          <Route path="/stores" element={<Stores />} />
+            <Route path="/ward-prices" element={<WardPrice />} />
 
-          <Route path="/add-service" element={<AddService />} />
-          <Route path="/admin-services" element={<Services />} />
+            <Route path="/stores" element={<Stores />} />
 
-          <Route path="/admin-users" element={<Users />} />
-          <Route path="/admin-add-user" element={<AddUser />} />
+            <Route path="/add-service" element={<AddService />} />
+            <Route path="/admin-services" element={<Services />} />
 
-          <Route path="/admin-user-type" element={<UserTypes />} />
-          <Route path="/admin-add-user-type" element={<AddUserType />} />
+            <Route path="/admin-users" element={<Users />} />
+            <Route path="/admin-add-user" element={<AddUser />} />
 
-          <Route path="/admin-privileges" element={<Privileges />} />
-          <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
-          <Route path="/admin-group-privileges-details/:id" element={<GroupPrivilegesDetails />} />
+            <Route path="/admin-user-type" element={<UserTypes />} />
+            <Route path="/admin-add-user-type" element={<AddUserType />} />
 
-        </Routes>
+            <Route path="/admin-privileges" element={<Privileges />} />
+            <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
+            <Route path="/admin-group-privileges-details/:id" element={<GroupPrivilegesDetails />} />
+
+          </Routes>
+        </Suspense>
+
       </Dashboard>
+
     </ChakraProvider>
   );
 }
