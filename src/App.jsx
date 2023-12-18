@@ -64,6 +64,7 @@ import Patients from './layouts/Patients';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 import Admission from './layouts/Admission';
+import AdmissionDetail from './layouts/AdmissionDetail';
 
 const Appointments = lazy(() => import('./layouts/Appointments'));
 
@@ -104,6 +105,7 @@ function App() {
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
             <Route path="/admission" element={<Admission />} />
+            <Route path="/admission-detail/:id" element={<AdmissionDetail />} />
 
             <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
 

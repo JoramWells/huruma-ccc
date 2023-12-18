@@ -80,18 +80,7 @@ const Patients = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-suppliers" />
-        <HStack p={3}>
-          <Button
-            colorScheme="purple"
-            variant="outline"
-            rounded="full"
-            onClick={() => navigate('/supplier-classification')}
-          >
-            Supplier Classification
 
-          </Button>
-
-        </HStack>
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -101,7 +90,7 @@ const Patients = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Suppliers
+            Patients
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',

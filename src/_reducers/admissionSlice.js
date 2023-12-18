@@ -30,8 +30,8 @@ export const addAdmission = createAsyncThunk(
   },
 );
 
-export const getAdmission = createAsyncThunk(
-  'data/getAdmission',
+export const getAdmissionDetail = createAsyncThunk(
+  'data/getAdmissionDetail',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
@@ -79,16 +79,16 @@ const admissionSlice = createSlice({
       });
 
     builder
-      .addCase(getAdmission.pending, (state) => {
+      .addCase(getAdmissionDetail.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAdmission.fulfilled, (state, action) => {
+      .addCase(getAdmissionDetail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getAdmission.rejected, (state, action) => {
+      .addCase(getAdmissionDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;

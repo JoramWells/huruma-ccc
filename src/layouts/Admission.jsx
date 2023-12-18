@@ -24,7 +24,9 @@ const Admission = () => {
       {
         header: 'Appointment ID',
         accessorKey: 'appointment_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Box onClick={() => navigate(`/admission-detail/${props.row.original.admission_id}`)}>
+          <Text>{props.getValue()}</Text>
+        </Box>,
 
       },
       {
@@ -76,18 +78,7 @@ const Admission = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-suppliers" />
-        <HStack p={3}>
-          <Button
-            colorScheme="purple"
-            variant="outline"
-            rounded="full"
-            onClick={() => navigate('/supplier-classification')}
-          >
-            Supplier Classification
 
-          </Button>
-
-        </HStack>
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -97,7 +88,7 @@ const Admission = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Suppliers
+            Admissions
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
