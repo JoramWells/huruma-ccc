@@ -1,28 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unstable-nested-components */
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import UserTable from '../components/tables/UserTable';
 import { getAllInsurance } from '../_reducers/insuranceSlice';
-
-const columns = [
-  {
-    Header: 'Insurance Name',
-    accessor: 'insuranceName',
-  },
-  {
-    Header: 'Insurance Category',
-    accessor: 'insuranceCategory',
-  },
-  {
-    Header: 'Charges',
-    accessor: 'charges',
-  },
-];
+import DataTable2 from '../components/tables/DataTable';
 
 const Insurance = () => {
   const dispatch = useDispatch();
@@ -41,6 +28,27 @@ const Insurance = () => {
   useEffect(() => {
     dispatch(getAllInsurance());
   }, [dispatch]);
+
+  const columns = useMemo(() => [
+
+    [
+      {
+        header: 'Insurance Name',
+        accessorKey: 'insuranceName',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Insurance Category',
+        accessorKey: 'insuranceCategory',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Charges',
+        accessorKey: 'charges',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+    ],
+  ], []);
 
   return (
     <VStack
@@ -89,7 +97,7 @@ const Insurance = () => {
           p={3}
           h="89%"
         >
-          <UserTable data={subrowData} columns={columns} />
+          <DataTable2 data={subrowData} columns={columns} />
         </Box>
       </Box>
     </VStack>
