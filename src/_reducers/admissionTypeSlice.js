@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useAdmissionQuery } from '../api/admission.api';
 
 const initialState = {
   data: [],
@@ -9,120 +8,119 @@ const initialState = {
   response: '',
 };
 
-export const fetchAllAdmission = createAsyncThunk(
-  'data/fetchAllAdmission',
+export const fetchAllAdmissionType = createAsyncThunk(
+  'data/fetchAllAdmissionType',
   async () => {
-    const data = await useAdmissionQuery();
-    console.log(data, 'dtx');
-    // await axios
-    //   .get('http://localhost:5000/admission/fetchAll')
-    //   .then((res) => (data = res.data))
-    //   .catch((error) => error.message);
+    let data = [];
+    await axios
+      .get('http://localhost:5000/admission-type/fetchAll')
+      .then((res) => (data = res.data))
+      .catch((error) => error.message);
     return data;
   },
 );
 
-export const addAdmission = createAsyncThunk(
-  'data/addAdmission',
+export const addAdmissionType = createAsyncThunk(
+  'data/addAdmissionType',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/admission/add', inputValues)
+    await axios.post('http://localhost:5000/admission-type/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-export const getAdmissionDetail = createAsyncThunk(
-  'data/getAdmissionDetail',
+export const getAdmissionType = createAsyncThunk(
+  'data/getAdmissionType',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/admission/detail/${id}`)
+      .get(`http://localhost:5000/admission-type/detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
 
-export const deleteAdmission = createAsyncThunk(
-  'data/deleteAdmission',
+export const deleteAdmissionType = createAsyncThunk(
+  'data/deleteAdmissionType',
   async (id) => {
-    await axios.delete(`http://localhost:5000/admission/delete/${id}`)
+    await axios.delete(`http://localhost:5000/admission-type/delete/${id}`)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
 );
 
-export const editAdmission = createAsyncThunk(
-  'data/editAdmission',
+export const editAdmissionType = createAsyncThunk(
+  'data/editAdmissionType',
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/admission/edit', data)
+      .put('http://localhost:5000/admission-type/edit', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;
   },
 );
 
-const admissionSlice = createSlice({
-  name: 'admission',
+const admissionTypeSlice = createSlice({
+  name: 'admissionType',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllAdmission.pending, (state) => {
+      .addCase(fetchAllAdmissionType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(fetchAllAdmission.fulfilled, (state, action) => {
+      .addCase(fetchAllAdmissionType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(getAdmissionDetail.pending, (state) => {
+      .addCase(getAdmissionType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAdmissionDetail.fulfilled, (state, action) => {
+      .addCase(getAdmissionType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getAdmissionDetail.rejected, (state, action) => {
+      .addCase(getAdmissionType.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
       });
 
     builder
-      .addCase(editAdmission.pending, (state) => {
+      .addCase(editAdmissionType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(editAdmission.fulfilled, (state, action) => {
+      .addCase(editAdmissionType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
-      .addCase(addAdmission.pending, (state) => {
+      .addCase(addAdmissionType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addAdmission.fulfilled, (state, action) => {
+      .addCase(addAdmissionType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(deleteAdmission.pending, (state) => {
+      .addCase(deleteAdmissionType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(deleteAdmission.fulfilled, (state, action) => {
+      .addCase(deleteAdmissionType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -130,4 +128,4 @@ const admissionSlice = createSlice({
   },
 });
 
-export default admissionSlice.reducer;
+export default admissionTypeSlice.reducer;

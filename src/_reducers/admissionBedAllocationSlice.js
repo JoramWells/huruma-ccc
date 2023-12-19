@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useAdmissionQuery } from '../api/admission.api';
 
 const initialState = {
   data: [],
@@ -9,120 +8,119 @@ const initialState = {
   response: '',
 };
 
-export const fetchAllAdmission = createAsyncThunk(
-  'data/fetchAllAdmission',
+export const fetchAllBedAllocation = createAsyncThunk(
+  'data/fetchAllBedAllocation',
   async () => {
-    const data = await useAdmissionQuery();
-    console.log(data, 'dtx');
-    // await axios
-    //   .get('http://localhost:5000/admission/fetchAll')
-    //   .then((res) => (data = res.data))
-    //   .catch((error) => error.message);
+    let data = [];
+    await axios
+      .get('http://localhost:5000/bed-allocation/fetchAll')
+      .then((res) => (data = res.data))
+      .catch((error) => error.message);
     return data;
   },
 );
 
-export const addAdmission = createAsyncThunk(
-  'data/addAdmission',
+export const addBedAllocation = createAsyncThunk(
+  'data/addBedAllocation',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/admission/add', inputValues)
+    await axios.post('http://localhost:5000/bed-allocation/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-export const getAdmissionDetail = createAsyncThunk(
-  'data/getAdmissionDetail',
+export const getBedAllocation = createAsyncThunk(
+  'data/getBedAllocation',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/admission/detail/${id}`)
+      .get(`http://localhost:5000/bed-allocation/detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
 
-export const deleteAdmission = createAsyncThunk(
-  'data/deleteAdmission',
+export const deleteBedAllocation = createAsyncThunk(
+  'data/deleteBedAllocation',
   async (id) => {
-    await axios.delete(`http://localhost:5000/admission/delete/${id}`)
+    await axios.delete(`http://localhost:5000/bed-allocation/delete/${id}`)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
 );
 
-export const editAdmission = createAsyncThunk(
-  'data/editAdmission',
+export const editBedAllocation = createAsyncThunk(
+  'data/editBedAllocation',
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/admission/edit', data)
+      .put('http://localhost:5000/bed-allocation/edit', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;
   },
 );
 
-const admissionSlice = createSlice({
-  name: 'admission',
+const bedAllocationSlice = createSlice({
+  name: 'bedAllocation',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllAdmission.pending, (state) => {
+      .addCase(fetchAllBedAllocation.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(fetchAllAdmission.fulfilled, (state, action) => {
+      .addCase(fetchAllBedAllocation.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(getAdmissionDetail.pending, (state) => {
+      .addCase(getBedAllocation.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAdmissionDetail.fulfilled, (state, action) => {
+      .addCase(getBedAllocation.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getAdmissionDetail.rejected, (state, action) => {
+      .addCase(getBedAllocation.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
       });
 
     builder
-      .addCase(editAdmission.pending, (state) => {
+      .addCase(editBedAllocation.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(editAdmission.fulfilled, (state, action) => {
+      .addCase(editBedAllocation.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
-      .addCase(addAdmission.pending, (state) => {
+      .addCase(addBedAllocation.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addAdmission.fulfilled, (state, action) => {
+      .addCase(addBedAllocation.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(deleteAdmission.pending, (state) => {
+      .addCase(deleteBedAllocation.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(deleteAdmission.fulfilled, (state, action) => {
+      .addCase(deleteBedAllocation.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -130,4 +128,4 @@ const admissionSlice = createSlice({
   },
 });
 
-export default admissionSlice.reducer;
+export default bedAllocationSlice.reducer;

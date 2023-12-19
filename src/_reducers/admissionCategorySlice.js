@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useAdmissionQuery } from '../api/admission.api';
 
 const initialState = {
   data: [],
@@ -9,120 +8,119 @@ const initialState = {
   response: '',
 };
 
-export const fetchAllAdmission = createAsyncThunk(
-  'data/fetchAllAdmission',
+export const fetchAllAdmissionCategory = createAsyncThunk(
+  'data/fetchAllAdmissionCategory',
   async () => {
-    const data = await useAdmissionQuery();
-    console.log(data, 'dtx');
-    // await axios
-    //   .get('http://localhost:5000/admission/fetchAll')
-    //   .then((res) => (data = res.data))
-    //   .catch((error) => error.message);
+    let data = [];
+    await axios
+      .get('http://localhost:5000/admission-category/fetchAll')
+      .then((res) => (data = res.data))
+      .catch((error) => error.message);
     return data;
   },
 );
 
-export const addAdmission = createAsyncThunk(
-  'data/addAdmission',
+export const addAdmissionCategory = createAsyncThunk(
+  'data/addAdmissionCategory',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/admission/add', inputValues)
+    await axios.post('http://localhost:5000/admission-category/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-export const getAdmissionDetail = createAsyncThunk(
-  'data/getAdmissionDetail',
+export const getAdmissionCategoryDetail = createAsyncThunk(
+  'data/getAdmissionCategoryDetail',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/admission/detail/${id}`)
+      .get(`http://localhost:5000/admission-category/detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
 
-export const deleteAdmission = createAsyncThunk(
-  'data/deleteAdmission',
+export const deleteAdmissionCategory = createAsyncThunk(
+  'data/deleteAdmissionCategory',
   async (id) => {
-    await axios.delete(`http://localhost:5000/admission/delete/${id}`)
+    await axios.delete(`http://localhost:5000/admission-category/delete/${id}`)
       .then((response) => console.log(response))
       .catch((err) => console.log(err));
   },
 );
 
-export const editAdmission = createAsyncThunk(
-  'data/editAdmission',
+export const editAdmissionCAtegory = createAsyncThunk(
+  'data/editAdmissionCAtegory',
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/admission/edit', data)
+      .put('http://localhost:5000/admission-category/edit', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;
   },
 );
 
-const admissionSlice = createSlice({
-  name: 'admission',
+const admissionCategorySlice = createSlice({
+  name: 'admissionCategory',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllAdmission.pending, (state) => {
+      .addCase(fetchAllAdmissionCategory.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(fetchAllAdmission.fulfilled, (state, action) => {
+      .addCase(fetchAllAdmissionCategory.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(getAdmissionDetail.pending, (state) => {
+      .addCase(getAdmissionCategoryDetail.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAdmissionDetail.fulfilled, (state, action) => {
+      .addCase(getAdmissionCategoryDetail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getAdmissionDetail.rejected, (state, action) => {
+      .addCase(getAdmissionCategoryDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
       });
 
     builder
-      .addCase(editAdmission.pending, (state) => {
+      .addCase(editAdmissionCAtegory.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(editAdmission.fulfilled, (state, action) => {
+      .addCase(editAdmissionCAtegory.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
     builder
-      .addCase(addAdmission.pending, (state) => {
+      .addCase(addAdmissionCategory.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addAdmission.fulfilled, (state, action) => {
+      .addCase(addAdmissionCategory.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(deleteAdmission.pending, (state) => {
+      .addCase(deleteAdmissionCategory.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(deleteAdmission.fulfilled, (state, action) => {
+      .addCase(deleteAdmissionCategory.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -130,4 +128,4 @@ const admissionSlice = createSlice({
   },
 });
 
-export default admissionSlice.reducer;
+export default admissionCategorySlice.reducer;

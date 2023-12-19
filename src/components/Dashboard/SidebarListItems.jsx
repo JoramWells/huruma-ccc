@@ -4,7 +4,8 @@ import {
   FaChild,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
   FaProcedures,
-  FaRadiation, FaRegAddressBook, FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
+  FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
+  FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@chakra-ui/react';
@@ -51,14 +52,20 @@ const SidebarListItems = () => {
         selected={pathname === '/admission'
         || pathname.includes('/bed-allocation')
         || pathname.includes('/miscellaneous-charges')
-        || pathname.includes('/bed-billing')}
+        || pathname.includes('/bed-billing')
+        || pathname.includes('/admission-detail')
+          || pathname.includes('/admission-category')
+          || pathname.includes('/add-admission-category')
+          || pathname.includes('/admission-type')}
         onClick={onToggle}
         text="Admission"
         link="/admission"
         itemList={[
           { id: nanoid(), title: 'Bed Allocation', link: '/bed-allocation' },
           { id: nanoid(), title: 'Bed Billing', link: '/bed-billing' },
+          { id: nanoid(), title: 'Category', link: '/admission-category' },
           { id: nanoid(), title: 'Miscellaneous Charges', link: '/miscellaneous-charges' },
+          { id: nanoid(), title: 'Type', link: '/admission-type' },
         ]}
         icon={<FaRegAddressBook />}
       />
@@ -210,6 +217,13 @@ const SidebarListItems = () => {
         onClick={() => navigate('/suppliers')}
         text="suppliers"
         icon={<FaTrain />}
+      />
+
+      <SidebarItemButton
+        selected={pathname === '/tax'}
+        onClick={() => navigate('/tax')}
+        text="tax"
+        icon={<FaRegMoneyBillAlt />}
       />
 
       <SidebarItemLink

@@ -31,6 +31,9 @@ import admissionSlice from './_reducers/admissionSlice';
 import userSlice from './_reducers/userSlice';
 import admMartenityServicesSlice from './_reducers/admMartenityServicesSlice';
 import admMiscellaneousChargeSlice from './_reducers/admMiscellaneousChargeSlice';
+import admissionCategorySlice from './_reducers/admissionCategorySlice';
+import admissionTypeSlice from './_reducers/admissionTypeSlice';
+import bedAllocationSlice from './_reducers/admissionBedAllocationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -64,6 +67,9 @@ export const store = configureStore({
     appointments: appointmentSlice,
     maternityServices: admMartenityServicesSlice,
     miscellaneousCharges: admMiscellaneousChargeSlice,
+    admissionCategory: admissionCategorySlice,
+    admissionType: admissionTypeSlice,
+    bedAllocation: bedAllocationSlice,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),
