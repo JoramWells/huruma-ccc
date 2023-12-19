@@ -11,6 +11,7 @@ function Index({ children, display }) {
       <Flex>
         {/* sidebar */}
         <Sidebar />
+        <MainNav />
 
         {/* container */}
         <Box w={{ base: '100%', sm: 'calc(100%-240px)' }}>
@@ -18,9 +19,8 @@ function Index({ children, display }) {
             alignItems="center"
             justifyContent="center"
             w="calc(100%-240px)"
-            ml="240px"
+            ml="270px"
           >
-            <MainNav />
             {children}
           </VStack>
         </Box>

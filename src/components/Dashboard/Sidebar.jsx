@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import {
-  Box, Divider, Text,
+  Box, Divider,
 } from '@chakra-ui/react';
 
 import SidebarListItems from './SidebarListItems';
@@ -8,7 +8,7 @@ import SidebarListItems from './SidebarListItems';
 function Sidebar() {
   return (
     <Box
-      w={{ base: '100%', sm: '240px' }}
+      w={{ base: '100%', sm: '270px' }}
       h="100vh"
       overflowX="auto"
       bgColor="blue.900"
@@ -17,18 +17,10 @@ function Sidebar() {
       borderRight="1px"
       borderColor="gray.100"
       position="fixed"
-      top={0}
+      top="55px"
+      // p={1}
     >
-      <Box p={1.5} display={{ sm: 'none', md: 'block' }}>
-        <Text
-          fontSize="2xl"
-          fontWeight="extrabold"
-          textAlign="center"
-          color="white"
-        >
-          Huruma
-        </Text>
-      </Box>
+
       <Divider />
       <SidebarListItems />
 

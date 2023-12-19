@@ -63,14 +63,15 @@ import SupplierDetail from './layouts/SupplierDetail';
 import Patients from './layouts/Patients';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
-import Admission from './layouts/Admission';
 import AdmissionDetail from './layouts/AdmissionDetail';
 import AdmissionCategory from './layouts/AdmissionCategory';
 import AddAdmissionCategory from './layouts/AddAdmissionCategory';
 import AdmissionType from './layouts/AdmissionType';
 import AdmissionBedAllocation from './layouts/AdmissionBedAllocation';
+import AppointmentDetail from './layouts/AppointmentDetail';
 
 const Appointments = lazy(() => import('./layouts/Appointments'));
+const Admission = lazy(() => import('./layouts/Admission'));
 
 const MaternityServices = lazy(() => import('./layouts/MaternityServices'));
 
@@ -110,6 +111,7 @@ function App() {
 
             <Route path="/admission" element={<Admission />} />
             <Route path="/admission-type" element={<AdmissionType />} />
+            <Route path="/admission-detail" element={<AdmissionDetail />} />
             <Route path="/bed-allocation" element={<AdmissionBedAllocation />} />
             <Route path="/admission-category" element={<AdmissionCategory />} />
             <Route path="/add-admission-category" element={<AddAdmissionCategory />} />
@@ -128,6 +130,7 @@ function App() {
             <Route path="/admin-departments" element={<Departments />} />
 
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/appointment-detail/:id" element={<AppointmentDetail />} />
 
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/add-suppliers" element={<AddSuppliers />} />

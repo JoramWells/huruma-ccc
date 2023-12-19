@@ -26,7 +26,7 @@ const SidebarListItems = () => {
         selected={pathname === '/'}
         onClick={() => navigate('/')}
         text="dashboard"
-        icon={<FaHome />}
+        icon={<FaHome size={20} />}
       />
 
       <SidebarItemLink
@@ -45,7 +45,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Users', link: '/admin-users' },
 
         ]}
-        icon={<FaUser />}
+        icon={<FaUser size={20} />}
       />
 
       <SidebarItemLink
@@ -67,13 +67,14 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Miscellaneous Charges', link: '/miscellaneous-charges' },
           { id: nanoid(), title: 'Type', link: '/admission-type' },
         ]}
-        icon={<FaRegAddressBook />}
+        icon={<FaRegAddressBook size={20} />}
       />
 
       <SidebarItemLink
         selected={pathname === '/appointments'
           || pathname.includes('/appointment-checklist')
-          || pathname.includes('/appointment-diagnosis')}
+          || pathname.includes('/appointment-diagnosis')
+          || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"
         link="/appointments"
@@ -81,21 +82,21 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
           { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
         ]}
-        icon={<FaCalendarTimes />}
+        icon={<FaCalendarTimes size={20} />}
       />
 
       <SidebarItemButton
         selected={pathname === '/labs'}
         onClick={() => navigate('/labs')}
         text="lab"
-        icon={<FaTools />}
+        icon={<FaTools size={20} />}
       />
 
       <SidebarItemButton
         selected={pathname === '/maternity'}
         onClick={() => navigate('/maternity')}
         text="Maternity"
-        icon={<FaChild />}
+        icon={<FaChild size={20} />}
       />
 
       <SidebarItemLink
@@ -112,14 +113,14 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Vital Signs & Allergies', link: '/services-price-list' },
 
         ]}
-        icon={<FaUserNurse />}
+        icon={<FaUserNurse size={20} />}
       />
 
       <SidebarItemButton
         selected={pathname === '/patients' || pathname.includes('/patient-detail')}
         onClick={() => navigate('/patients')}
         text="patients"
-        icon={<FaHospitalAlt />}
+        icon={<FaHospitalAlt size={20} />}
       />
 
       <SidebarItemLink
@@ -137,7 +138,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Dispense Drugs', link: '/dispense-drugs' },
 
         ]}
-        icon={<FaPills />}
+        icon={<FaPills size={20} />}
       />
 
       {/* physiotherapy */}
@@ -150,7 +151,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Dispenses', link: '/dispenses-physiotherapy-items' },
 
         ]}
-        icon={<FaToolbox />}
+        icon={<FaToolbox size={20} />}
       />
 
       {/* price lists */}
@@ -166,7 +167,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Ward Charges', link: '/ward-prices' },
 
         ]}
-        icon={<FaMoneyBill />}
+        icon={<FaMoneyBill size={20} />}
       />
 
       <SidebarItemLink
@@ -178,7 +179,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Items', link: '/procedure-items' },
 
         ]}
-        icon={<FaProcedures />}
+        icon={<FaProcedures size={20} />}
       />
 
       <SidebarItemLink
@@ -190,7 +191,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Radiology Requests', link: '/radiology-requests' },
           { id: nanoid(), title: 'Radiology Visits', link: '/radiology-visits' },
         ]}
-        icon={<FaRadiation />}
+        icon={<FaRadiation size={20} />}
       />
 
       <SidebarItemLink
@@ -202,7 +203,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Requisitions', link: '/requisitions' },
           { id: nanoid(), title: 'Order Note', link: '/general-store' },
         ]}
-        icon={<FaStore />}
+        icon={<FaStore size={20} />}
       />
 
       <SidebarItemLink
@@ -216,7 +217,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Non Pharmaceutical', link: '/non-pharmaceuticals' },
 
         ]}
-        icon={<FaStore />}
+        icon={<FaStore size={20} />}
       />
 
       <SidebarItemButton
@@ -230,7 +231,7 @@ const SidebarListItems = () => {
         selected={pathname === '/tax'}
         onClick={() => navigate('/tax')}
         text="tax"
-        icon={<FaRegMoneyBillAlt />}
+        icon={<FaRegMoneyBillAlt size={20} />}
       />
 
       <SidebarItemLink
@@ -245,7 +246,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Non Pharmaceutical', link: '/non-pharmaceuticals' },
 
         ]}
-        icon={<FaListOl />}
+        icon={<FaListOl size={20} />}
       />
 
       <SidebarItemLink
@@ -259,7 +260,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Mileage', link: '/mileage' },
 
         ]}
-        icon={<FaCar />}
+        icon={<FaCar size={20} />}
       />
 
     </>

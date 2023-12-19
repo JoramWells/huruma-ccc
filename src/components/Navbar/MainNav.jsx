@@ -3,24 +3,33 @@ import {
   Box,
   Button,
   // eslint-disable-next-line no-unused-vars
-  HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer,
+  HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, Text,
 } from '@chakra-ui/react';
 import { FaBell, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const MainNav = () => (
   <HStack
-    p={1}
+    p={2}
     bg="white"
-    borderBottom="1px"
-    borderColor="gray.100"
     position="fixed"
     zIndex={10}
-    w="83%"
-    h={14}
+    w="100%"
+    h="65px"
     top={0}
-    justifyContent="end"
+    justifyContent="space-between"
+    borderBottom="1px"
+    borderColor="gray.200"
+    // boxShadow="lg"
+    // bgColor="blue.900"
   >
+    <Text
+      fontSize="3xl"
+      color="gray.800"
+      fontWeight="bold"
+    >
+      Mother Angela
+    </Text>
 
     <IconButton>
       <FaBell />

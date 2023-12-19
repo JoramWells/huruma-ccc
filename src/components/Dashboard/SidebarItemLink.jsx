@@ -23,10 +23,9 @@ const SidebarItemLink = ({
       <>
         <HStack
           justifyContent="space-between"
-          fontWeight="semibold"
-          color={selected ? 'white' : 'gray.500'}
+          fontWeight={selected && 'semibold'}
+          color={selected ? 'white' : 'gray.400'}
           bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
-          // boxShadow={selected && 'lg'}
           p={2}
           mt={3}
           _hover={{
@@ -35,10 +34,14 @@ const SidebarItemLink = ({
             color: selected ? 'white' : 'gray.50',
             // boxShadow: 'xs',
           }}
+          borderLeft={selected && '4px'}
+          boxShadow={selected && 'sm'}
+          rounded="sm"
+
         >
           <HStack>
             {icon}
-            <Link to={link}>
+            <Link to={link} style={{ fontSize: '20px' }}>
               {text}
             </Link>
           </HStack>

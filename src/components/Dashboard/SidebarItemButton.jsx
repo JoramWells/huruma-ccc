@@ -8,10 +8,13 @@ const SidebarItemButton = ({
   (
     <HStack
       justifyContent="flex-start"
-      fontWeight="semibold"
-      color={selected ? 'white' : 'gray.500'}
+      fontWeight={selected && 'semibold'}
+      borderLeft={selected && '4px'}
+      color={selected ? 'white' : 'gray.400'}
       bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
-      // boxShadow={selected && 'lg'}
+      boxShadow={selected && 'sm'}
+      rounded="sm"
+      // boxShadow="lg"
       p={2}
       mt={3}
       _hover={{
@@ -26,7 +29,8 @@ const SidebarItemButton = ({
       <Text
         display={{ sm: 'none', md: 'block' }}
         textTransform="capitalize"
-        fontSize={{ md: 'sm', lg: 'md' }}
+        // fontSize={{ md: 'lg', lg: 'md' }}
+        fontSize="xl"
       >
         {text}
 

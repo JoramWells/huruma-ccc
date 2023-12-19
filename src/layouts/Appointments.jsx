@@ -24,7 +24,18 @@ const Appointments = () => {
       {
         header: 'Appointment ID',
         accessorKey: 'appointment_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Box
+            padding={2}
+            _hover={{
+              cursor: 'pointer',
+              bgColor: 'gray.50',
+            }}
+            onClick={() => navigate(`/appointment-detail/${props.getValue()}`)}
+          >
+            <Text>{props.getValue()}</Text>
+          </Box>
+        ),
 
       },
       {
