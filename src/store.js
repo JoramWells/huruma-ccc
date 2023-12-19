@@ -26,7 +26,7 @@ import procedureSlice from './_reducers/procedureSlice';
 import patientSlice from './_reducers/patientSlice';
 import doctorAdmissionSlice from './_reducers/doctorAdmissionSlice';
 import doctorAdmissionBeadAllocationSlice from './_reducers/doctorAdmissionBeadAllocationSlice';
-import appointmentSlice from './_reducers/appointment.reducers';
+// import appointmentSlice from './_reducers/appointment.reducers';
 import admissionSlice from './_reducers/admissionSlice';
 import userSlice from './_reducers/userSlice';
 import admMartenityServicesSlice from './_reducers/admMartenityServicesSlice';
@@ -34,6 +34,7 @@ import admMiscellaneousChargeSlice from './_reducers/admMiscellaneousChargeSlice
 import admissionCategorySlice from './_reducers/admissionCategorySlice';
 import admissionTypeSlice from './_reducers/admissionTypeSlice';
 import bedAllocationSlice from './_reducers/admissionBedAllocationSlice';
+import appointmentSlice from './_reducers/appointmentSlice';
 
 export const store = configureStore({
   reducer: {
@@ -62,7 +63,6 @@ export const store = configureStore({
     patients: patientSlice,
     doctorAdmission: doctorAdmissionSlice,
     doctorAdmissionBedAllocation: doctorAdmissionBeadAllocationSlice,
-    appointment: appointmentSlice,
     admission: admissionSlice,
     appointments: appointmentSlice,
     maternityServices: admMartenityServicesSlice,

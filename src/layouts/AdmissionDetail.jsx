@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import {
-  Avatar, Box, Divider, HStack, IconButton, Text, VStack,
+  Avatar, Box, Button, Divider, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import moment from 'moment/moment';
-import { getPatientDetail } from '../_reducers/patientSlice';
-import { getAdmissionDetail } from '../_reducers/admissionSlice';
+import { deleteAdmission, getAdmissionDetail } from '../_reducers/admissionSlice';
 import { getAdmissionType } from '../_reducers/admissionTypeSlice';
+import { useFetchApi } from '../hooks/useFecthApi';
 
 const HorizontalStack = ({ title, text }) => (
   <HStack
@@ -59,16 +59,13 @@ const AdmissionDetail = () => {
 
   useEffect(() => {
     dispatch(getAdmissionDetail(id));
-    // dispatch(getAdmissionType(data));
-    if (data && data.length > 0) {
-      getPatientInfo(data.admissionType);
-      console.log(admissionTypeData, 'hjy');
-    }
   }, []);
 
-  const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
+  const gy = 37627;
+  const navigate = useNavigate();
 
-  // console.log(admissionTypeData);
+  const results = useFetchApi(`http://localhost:5000/patient/detail/${data.patient_id}`);
+  console.log(results);
   return (
     <VStack
       h="100vh"
@@ -90,28 +87,26 @@ const AdmissionDetail = () => {
 
               <Box
                 bgColor="white"
-                rounded="3xl"
+                rounded="2xl"
                 // w="350px"
                 flex={1}
                 border="1px"
-                borderColor="blue.100"
+                borderColor="gray.100"
               >
                 <HStack
                   w="full"
                   justifyContent="space-between"
                   p={2}
-                  bgColor="blue.50"
+                  bgGradient="linear(to-l, gray.200, gray.300)"
                   // bgGradient="linear(to-l, cyan.300,cyan.400)"
-                  roundedTopEnd="3xl"
-                  roundedTopLeft="3xl"
+                  roundedTopEnd="2xl"
+                  roundedTopLeft="2xl"
                   // color="white"
-                  border="1px"
-                  borderColor="blue.100"
                 >
                   <Text
                     fontSize="2xl"
                     fontWeight="semibold"
-                    color="blue.500"
+                    color="blue.900"
                   >
                     Admission Details
                   </Text>
@@ -138,6 +133,23 @@ const AdmissionDetail = () => {
                   <HorizontalStack title="Admission Date" text={moment(new Date(data.admission_date)).format('LL')} />
                   <HorizontalStack title="Admission Type" text={data.admission_type_id} />
 
+                  <HStack w="full" justifyContent="flex-end" p={2}>
+                    <Button
+                      colorScheme="red"
+                      leftIcon={<FaTrashAlt />}
+                      size="lg"
+                      onClick={() => {
+                        dispatch(deleteAdmission(id));
+                        if (data === 'OK') {
+                          navigate('/admissions');
+                        }
+                      }}
+                    >
+                      {loading ? 'Loading..' : 'Delete'}
+
+                    </Button>
+                  </HStack>
+
                 </VStack>
 
                 {/*  */}
@@ -154,7 +166,9 @@ const AdmissionDetail = () => {
                   w="full"
                   justifyContent="space-between"
                   p={3}
-                  bgColor="teal"
+                  roundedTopEnd="3xl"
+                  roundedTopLeft="3xl"
+                  bgColor="gray.200"
                 >
                   <Text
                     fontSize="2xl"

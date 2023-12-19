@@ -70,10 +70,17 @@ const SidebarListItems = () => {
         icon={<FaRegAddressBook />}
       />
 
-      <SidebarItemButton
-        selected={pathname === '/appointments'}
-        onClick={() => navigate('/appointments')}
-        text="appointments"
+      <SidebarItemLink
+        selected={pathname === '/appointments'
+          || pathname.includes('/appointment-checklist')
+          || pathname.includes('/appointment-diagnosis')}
+        onClick={onToggle}
+        text="Appointments"
+        link="/appointments"
+        itemList={[
+          { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
+          { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
+        ]}
         icon={<FaCalendarTimes />}
       />
 

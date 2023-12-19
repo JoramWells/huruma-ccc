@@ -8,19 +8,19 @@ import { useNavigate } from 'react-router-dom';
 const data = [
   {
     id: nanoid(),
-    text: 'General Store',
+    text: 'Total Registered Patients',
     quantity: '75',
     link: '/',
   },
   {
     id: nanoid(),
-    text: 'Pharmaceuticals',
+    text: 'Maternity Cases',
     quantity: 34,
     link: '/pharmaceuticals',
   },
   {
     id: nanoid(),
-    text: 'Non Pharmaceuticals',
+    text: 'Theatre',
     quantity: 50,
     link: '/',
   },
@@ -34,37 +34,51 @@ const Homepage = () => {
       w="full"
       h="100vh"
       bgColor="gray.50"
+      p={3}
     >
-      <HStack w="full" justifyContent="space-between">
-        {data.map((item) => (
-          <Box
-            rounded="lg"
-            // boxShadow="lg"
-            p={3}
-            key={item.id}
-            border="1px"
-            borderColor="gray.100"
-            onClick={() => navigate('/pharmaceuticals')}
-            _hover={{
-              cursor: 'pointer',
-              boxShadow: 'sm',
-            }}
-            bgColor="white"
-          >
-            <IconButton rounded="full">
-              <FaBookMedical />
-            </IconButton>
-            <Box ml={10} w="200px">
-              <Text fontSize="lg" color="gray.500">
-                {item.text}
-              </Text>
-              <Text fontSize="2xl" fontWeight="semibold">
-                {item.quantity}
-              </Text>
+      <VStack w="full" alignItems="flex-start">
+        <Text
+          fontSize="3xl"
+          fontWeight="semibold"
+          color="gray.800"
+        >
+          Overview
+
+        </Text>
+        <HStack w="full" justifyContent="space-between" spacing={8}>
+          {data.map((item) => (
+            <Box
+              rounded="3xl"
+              // boxShadow="lg"
+              p={3}
+              key={item.id}
+              border="1px"
+              flex={1}
+              height="200px"
+              borderColor="gray.200"
+              onClick={() => navigate('/pharmaceuticals')}
+              _hover={{
+                cursor: 'pointer',
+                boxShadow: 'sm',
+              }}
+              bgColor="white"
+            >
+              <IconButton rounded="full" size="lg">
+                <FaBookMedical size={25} color="gray" />
+              </IconButton>
+              <Box ml={10}>
+                <Text fontSize="3xl" fontWeight="bold">
+                  {item.quantity}
+                </Text>
+                <Text fontSize="xl" color="gray.500">
+                  {item.text}
+                </Text>
+
+              </Box>
             </Box>
-          </Box>
-        ))}
-      </HStack>
+          ))}
+        </HStack>
+      </VStack>
     </VStack>
   );
 };

@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { fetchAllAdmission } from '../_reducers/admissionSlice';
+import moment from 'moment/moment';
 
 const Admission = () => {
   const dispatch = useDispatch();
@@ -46,13 +47,14 @@ const Admission = () => {
         header: 'Admission Date',
         accessorKey: 'admission_date',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{moment(new Date(props.getValue())).format('LL')}</Text>,
 
       },
     ],
 
     [],
   );
+
 
   const subrowData = data
     && data.map((item) => ({

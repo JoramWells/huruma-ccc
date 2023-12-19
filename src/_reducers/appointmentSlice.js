@@ -8,8 +8,8 @@ const initialState = {
   response: '',
 };
 
-export const fetchAllAppointment = createAsyncThunk(
-  'data/fetchAllAppointment',
+export const fetchAllAppointments = createAsyncThunk(
+  'data/fetchAllAppointments',
   async () => {
     let data = [];
     await axios
@@ -20,8 +20,8 @@ export const fetchAllAppointment = createAsyncThunk(
   },
 );
 
-export const addAppointment = createAsyncThunk(
-  'data/addAppointment',
+export const addAppointments = createAsyncThunk(
+  'data/addAppointments',
   async (inputValues) => {
     // let data = []
     await axios.post('http://localhost:5000/appointments/add', inputValues)
@@ -45,9 +45,14 @@ export const getAppointmentDetail = createAsyncThunk(
 export const deleteAppointment = createAsyncThunk(
   'data/deleteAppointment',
   async (id) => {
+    let data = [];
     await axios.delete(`http://localhost:5000/appointments/delete/${id}`)
-      .then((response) => console.log(response))
+      .then((response) => {
+        data = response.data;
+        console.log(response);
+      })
       .catch((err) => console.log(err));
+    return data;
   },
 );
 
@@ -68,11 +73,11 @@ const appointmentSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllAppointment.pending, (state) => {
+      .addCase(fetchAllAppointments.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(fetchAllAppointment.fulfilled, (state, action) => {
+      .addCase(fetchAllAppointments.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -105,11 +110,11 @@ const appointmentSlice = createSlice({
         state.loading = false;
       });
     builder
-      .addCase(addAppointment.pending, (state) => {
+      .addCase(addAppointments.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addAppointment.fulfilled, (state, action) => {
+      .addCase(addAppointments.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;

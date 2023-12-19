@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useAdmissionQuery } from '../api/admission.api';
+// import { useAdmissionQuery } from '../api/admission.api';
 
 const initialState = {
   data: [],
@@ -12,12 +12,11 @@ const initialState = {
 export const fetchAllAdmission = createAsyncThunk(
   'data/fetchAllAdmission',
   async () => {
-    const data = await useAdmissionQuery();
-    console.log(data, 'dtx');
-    // await axios
-    //   .get('http://localhost:5000/admission/fetchAll')
-    //   .then((res) => (data = res.data))
-    //   .catch((error) => error.message);
+    let data = [];
+    await axios
+      .get('http://localhost:5000/admission/fetchAll')
+      .then((res) => (data = res.data))
+      .catch((error) => error.message);
     return data;
   },
 );
@@ -47,9 +46,14 @@ export const getAdmissionDetail = createAsyncThunk(
 export const deleteAdmission = createAsyncThunk(
   'data/deleteAdmission',
   async (id) => {
+    let data = [];
     await axios.delete(`http://localhost:5000/admission/delete/${id}`)
-      .then((response) => console.log(response))
+      .then((response) => {
+        data = response.data;
+        console.log(response);
+      })
       .catch((err) => console.log(err));
+    return data;
   },
 );
 
