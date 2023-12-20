@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, Divider, HStack, IconButton, Text, VStack,
+  Box, Button, Collapse, Divider, HStack, IconButton, Text, VStack, useDisclosure,
 } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { FaChevronRight, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import moment from 'moment/moment';
 import { deleteAdmission } from '../_reducers/admissionSlice';
 // import { useFetchApi } from '../hooks/useFecthApi';
@@ -45,16 +46,23 @@ const HorizontalStack = ({ title, text }) => (
 const AppointmentDetail = () => {
   const { id } = useParams();
   const { data, loading } = useSelector((state) => state.appointments);
+  const [show, setShow] = useState(false);
 
+  const handleToggle = () => setShow(!show);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const {
+    isOpen: isOpenTest1, isOpen: isOpenTest2,
+    onToggle: onToggleTest1, onToggle: onToggleTest2,
+  } = useDisclosure();
 
   useEffect(() => {
     dispatch(getAppointmentDetail(id));
   }, []);
 
   // const results = useFetchApi(`http://localhost:5000/patient/detail/${data.patient_id}`);
-  // console.log(results);
+  console.log(data);
   return (
     <VStack
       h="100vh"
@@ -97,7 +105,7 @@ const AppointmentDetail = () => {
                     fontWeight="semibold"
                     color="blue.900"
                   >
-                    Admission Details
+                    Appointment Details
                   </Text>
 
                   <IconButton
@@ -116,11 +124,10 @@ const AppointmentDetail = () => {
                   // ml={8}
                   // mr={8}
                 >
-                  <HorizontalStack title="Admission Category" text={data.admission_category_id} />
-                  <HorizontalStack title="Admission Charge" text={`${data.admission_charge}KSH`} />
+                  <HorizontalStack title="Admission Status" text={data.admission_status} />
+                  <HorizontalStack title="Charges" text={`${data.charges} KSH`} />
 
-                  <HorizontalStack title="Admission Date" text={moment(new Date(data.admission_date)).format('LL')} />
-                  <HorizontalStack title="Admission Type" text={data.admission_type_id} />
+                  <HorizontalStack title="Appointment Date" text={moment(new Date(data.appointment_date)).format('LL')} />
 
                   <HStack w="full" justifyContent="flex-end" p={2}>
                     <Button
@@ -145,25 +152,27 @@ const AppointmentDetail = () => {
               </Box>
               <Box
                 flex={1}
-                bgColor="white"
-                rounded="3xl"
-                border="1px"
-                borderColor="gray.200"
+                bgColor="blue.50"
+                rounded="xl"
+                // border="1px"
+                // borderColor="blue.500"
+                boxShadow="sm"
               >
                 {/* header */}
                 <HStack
                   w="full"
                   justifyContent="space-between"
                   p={3}
-                  roundedTopEnd="3xl"
-                  roundedTopLeft="3xl"
-                  bgColor="gray.200"
+                  roundedTopEnd="xl"
+                  roundedTopLeft="xl"
+                  bgGradient="linear(to-l, blue.50, blue.100)"
                 >
                   <Text
                     fontSize="2xl"
                     fontWeight="semibold"
+                    color="blue.800"
                   >
-                    Hospital Details
+                    Diagnosis
                   </Text>
 
                   <IconButton
@@ -174,11 +183,38 @@ const AppointmentDetail = () => {
                     <FaEdit color="gray" />
                   </IconButton>
                 </HStack>
-                <HorizontalStack title="Doctor" text={data.doctor_id} />
+                <Divider />
+
+                <HorizontalStack title="BMI" text={data?.body_mass_index} />
                 <HorizontalStack
-                  title="Daily Doctor Ward Round Charges"
-                  text={data.bill_daily_doctor_ward_round_charges}
+                  title="Diastolic"
+                  text={data.diastolic}
                 />
+
+                {/* 1 */}
+                <Box>
+                  <HStack
+                    w="full"
+                    justifyContent="space-between"
+                    p={3}
+                    onClick={onToggleTest1}
+                  >
+                    <Text fontSize="xl" color="gray.500">Diastolic</Text>
+                    <IconButton>
+                      <FaChevronRight />
+                    </IconButton>
+                  </HStack>
+                  <Collapse mt={4} in={isOpenTest1}>
+                    <HStack p={4} w="full" justifyContent="space-between">
+                      <Text>Test 1</Text>
+                      <Text>0</Text>
+                    </HStack>
+                    <HStack p={4} w="full" justifyContent="space-between">
+                      <Text>Test 2</Text>
+                      <Text>0</Text>
+                    </HStack>
+                  </Collapse>
+                </Box>
 
               </Box>
             </HStack>

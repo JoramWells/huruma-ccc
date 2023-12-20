@@ -9,10 +9,51 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllSuppliers } from '../_reducers/supplierSlice';
 import { getAllPatients } from '../_reducers/patientSlice';
+
+const outPatientList = [
+
+  {
+    id: nanoid(),
+    text: 'ANC',
+  },
+  {
+    id: nanoid(),
+    text: 'Cervical Screening',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Health Information',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Weight Gaps',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Height Gaps',
+  },
+  {
+    id: nanoid(),
+    text: 'FP',
+  },
+  {
+    id: nanoid(),
+    text: 'PNC',
+  },
+  {
+    id: nanoid(),
+    text: 'FP',
+  },
+  {
+    id: nanoid(),
+    text: 'SGBV',
+  },
+];
 
 const Patients = () => {
   const dispatch = useDispatch();
@@ -80,6 +121,12 @@ const Patients = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-suppliers" />
+
+        <HStack w="full" p={2} flexWrap="wrap">
+          {outPatientList.map((item) => (
+            <Button key={item.id}>{item.text}</Button>
+          ))}
+        </HStack>
 
         <HStack
           w="100%"

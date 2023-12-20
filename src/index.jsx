@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { store } from './store';
 import 'react-datepicker/dist/react-datepicker.css';
+import './css/index.css';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
