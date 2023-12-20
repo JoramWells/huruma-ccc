@@ -21,21 +21,27 @@ const Appointments = () => {
 
   const columnsx = useMemo(
     () => [
+      // {
+      //   header: 'Appointment ID',
+      //   accessorKey: 'appointment_id',
+      //   cell: (props) => (
+      //     <Box
+      //       padding={2}
+      //       _hover={{
+      //         cursor: 'pointer',
+      //         bgColor: 'gray.50',
+      //       }}
+      //       onClick={() => navigate(`/appointment-detail/${props.getValue()}`)}
+      //     >
+      //       <Text>{props.getValue()}</Text>
+      //     </Box>
+      //   ),
+
+      // },
       {
-        header: 'Appointment ID',
-        accessorKey: 'appointment_id',
-        cell: (props) => (
-          <Box
-            padding={2}
-            _hover={{
-              cursor: 'pointer',
-              bgColor: 'gray.50',
-            }}
-            onClick={() => navigate(`/appointment-detail/${props.getValue()}`)}
-          >
-            <Text>{props.getValue()}</Text>
-          </Box>
-        ),
+        header: 'Full Name',
+        accessorKey: 'patient_detail',
+        cell: (props) => <Text>{`${props.getValue().first_name} ${props.getValue().middle_name}`}</Text>,
 
       },
       {
@@ -45,12 +51,7 @@ const Appointments = () => {
         size: 200,
 
       },
-      {
-        header: 'Patient ID',
-        accessorKey: 'patient_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
 
-      },
       {
         header: 'Admission Date',
         accessorKey: 'appointment_date',

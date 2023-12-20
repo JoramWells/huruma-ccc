@@ -2,6 +2,7 @@ import {
   FaCalendarTimes,
   FaCar,
   FaChild,
+  FaFileInvoiceDollar,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
   FaProcedures,
   FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
@@ -114,6 +115,22 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaUserNurse size={20} />}
+      />
+      <SidebarItemLink
+        selected={pathname === '/patient-invoices'}
+        onClick={onToggle}
+        text="Patient Invoices"
+        link="/patient-invoices"
+        itemList={[
+          { id: nanoid(), title: 'Individual Accounts', link: '/individual-accounts' },
+          { id: nanoid(), title: 'Invoices', link: '/invoices' },
+          { id: nanoid(), title: 'Discharged Patients', link: '/discharged-patients' },
+          { id: nanoid(), title: 'Miscellaneous Income Invoices', link: '/miscellaneous-invoices' },
+          { id: nanoid(), title: 'Consultation Retainer Invoice', link: '/consultation-retainer' },
+          { id: nanoid(), title: 'Dispatched Invoices', link: '/dispatched-invoices' },
+
+        ]}
+        icon={<FaFileInvoiceDollar size={20} />}
       />
 
       <SidebarItemButton

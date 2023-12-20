@@ -29,19 +29,13 @@ const Users = () => {
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'Mobile Number',
-        accessorKey: 'mobilenumber',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-      },
-
-      {
         header: 'Email',
         accessorKey: 'email',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
         header: 'User Type',
-        accessorKey: 'usertype',
+        accessorKey: 'user_type_id',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
     ],

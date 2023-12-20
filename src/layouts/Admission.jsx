@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, Text, VStack, Tag
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
@@ -23,24 +23,10 @@ const Admission = () => {
   const columnsx = useMemo(
     () => [
       {
-        header: 'Appointment ID',
-        accessorKey: 'appointment_id',
-        cell: (props) => <Box onClick={() => navigate(`/admission-detail/${props.row.original.admission_id}`)}>
-          <Text>{props.getValue()}</Text>
-        </Box>,
-
-      },
-      {
-        header: 'Admission ID',
-        accessorKey: 'admission_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-        size: 200,
-
-      },
-      {
-        header: 'Patient ID',
-        accessorKey: 'patient_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Patient Name',
+        accessorKey: 'patient_detail',
+        cell: (props) => <Text>{props.getValue() ? props.getValue()?.first_name 
+        + ' ' + props.getValue()?.middle_name : '0'}</Text>,
 
       },
       {
@@ -48,6 +34,13 @@ const Admission = () => {
         accessorKey: 'admission_date',
         enableSorting: false,
         cell: (props) => <Text>{moment(new Date(props.getValue())).format('LL')}</Text>,
+
+      },
+      {
+        header: 'Payment Status',
+        accessorKey: 'pay_status',
+        enableSorting: false,
+        cell: (props) => <Box>{props.getValue() === 1 ? <Tag>PAID</Tag> : <Tag>NOT PAID</Tag>}</Box>,
 
       },
     ],

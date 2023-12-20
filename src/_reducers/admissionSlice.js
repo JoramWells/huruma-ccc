@@ -15,7 +15,10 @@ export const fetchAllAdmission = createAsyncThunk(
     let data = [];
     await axios
       .get('http://localhost:5000/admission/fetchAll')
-      .then((res) => (data = res.data))
+      .then((res) => {
+        (data = res.data);
+        console.log(data);
+      })
       .catch((error) => error.message);
     return data;
   },

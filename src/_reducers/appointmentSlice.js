@@ -14,7 +14,10 @@ export const fetchAllAppointments = createAsyncThunk(
     let data = [];
     await axios
       .get('http://localhost:5000/appointments/fetchAll')
-      .then((res) => (data = res.data))
+      .then((res) => {
+        (data = res.data);
+        console.log(data);
+      })
       .catch((error) => error.message);
     return data;
   },
