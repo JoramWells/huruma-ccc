@@ -127,7 +127,7 @@ const AdmissionDetail = () => {
                   // ml={8}
                   // mr={8}
                 >
-                  <HorizontalStack title="Admission Category" text={data.admission_category.admission_category_description} />
+                  <HorizontalStack title="Admission Category" text={data.admission_category?.admission_category_description} />
                   <HorizontalStack title="Admission Charge" text={`${data.admission_charge}KSH`} />
 
                   <HorizontalStack title="Admission Date" text={moment(new Date(data.admission_date)).format('LL')} />

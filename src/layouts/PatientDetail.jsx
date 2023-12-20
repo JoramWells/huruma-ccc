@@ -6,36 +6,46 @@ import {
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaEdit, FaFileInvoice, FaUser,
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
+import Step1 from '../components/PatientProfile/Step1';
+import Step2 from '../components/PatientProfile/Step2';
+import Step3 from '../components/PatientProfile/Step3';
 
-const PatientCard = ({ text, icon }) => (
-  <VStack w="full">
-    <HStack
+const PatientCard = ({ text, icon, onClick }) => {
+  const [step, setStep] = useState(0);
+  return (
+    <VStack
       w="full"
-      justifyContent="flex-start"
-      bgColor="whitesmoke"
-      p={4}
-      rounded="lg"
-      _hover={{
-        cursor: 'pointer',
-        // colorScheme: 'blue',
-        color: 'blue.500',
-        bgColor: 'blue.50',
-      }}
-      color="blue.800"
+      onClick={onClick}
+
     >
-      {icon}
-      <Text>
-        {text}
-      </Text>
-    </HStack>
-  </VStack>
-);
+      <HStack
+        w="full"
+        justifyContent="flex-start"
+        bgColor="whitesmoke"
+        p={4}
+        rounded="lg"
+        _hover={{
+          cursor: 'pointer',
+          // colorScheme: 'blue',
+          color: 'blue.500',
+          bgColor: 'blue.50',
+        }}
+        color="blue.800"
+      >
+        {icon}
+        <Text>
+          {text}
+        </Text>
+      </HStack>
+    </VStack>
+  );
+};
 
 const profileData = [
   {
@@ -100,9 +110,15 @@ const HorizontalStack = ({ title, text }) => (
 );
 
 const PatientDetail = () => {
+  const [sideItem, setSideItem] = useState(0);
   const { id } = useParams();
   const { data, loading } = useSelector((state) => state.patients);
   const dispatch = useDispatch();
+
+  const handleSetSideItem = useCallback((step) => {
+    setSideItem(step);
+  }, [setSideItem]);
+
   useEffect(() => {
     dispatch(getPatientDetail(id));
   }, []);
@@ -151,14 +167,27 @@ const PatientDetail = () => {
 
               </Text>
               <Text color="gray.500">{data?.id_number}</Text>
-              <Text>{data?.cell_phone}</Text>
+              <Text>
+                {data?.cell_phone}
+                {' '}
+                {sideItem}
+              </Text>
             </VStack>
             <VStack w="full" spacing={4}>
-              {profileData.map((item) => (
-                <PatientCard key={item.id} icon={item.icon} text={item.text} />
+              {profileData.map((item, idx) => (
+                <PatientCard
+                  key={item.id}
+                  icon={item.icon}
+                  text={item.text}
+                  onClick={() => handleSetSideItem(idx)}
+                />
               ))}
             </VStack>
           </VStack>
+          {sideItem === 0 && <Step1 />}
+          {sideItem === 1 && <Step2 />}
+          {sideItem === 2 && <Step3 />}
+
         </HStack>
       )}
       <Box w="full">

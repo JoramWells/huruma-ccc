@@ -1,23 +1,35 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, HStack, Text, VStack,
+  Avatar,
+  Box, Button, HStack, Tag, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { fetchAllAppointments } from '../_reducers/appointmentSlice';
 
+const UserNameAvatar = ({ fullName }) => (
+  <HStack>
+    <Avatar
+      // size="sm"
+      name={fullName}
+      color="white"
+    />
+    <Text>{fullName}</Text>
+  </HStack>
+);
+
 const Appointments = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { data } = useSelector((state) => state.appointments);
+  const navigate = useNavigate();
 
   const columnsx = useMemo(
     () => [
@@ -41,7 +53,19 @@ const Appointments = () => {
       {
         header: 'Full Name',
         accessorKey: 'patient_detail',
-        cell: (props) => <Text>{`${props.getValue().first_name} ${props.getValue().middle_name}`}</Text>,
+        cell: (props) => (
+          <Box
+            _hover={{
+              cursor: 'pointer',
+            }}
+            onClick={() => navigate(`/appointment-detail/${props.row.original.appointment_id}`)}
+
+          >
+            <UserNameAvatar
+              fullName={`${props.getValue().first_name} ${props.getValue().middle_name}`}
+            />
+          </Box>
+        ),
 
       },
       {
@@ -53,16 +77,40 @@ const Appointments = () => {
       },
 
       {
-        header: 'Admission Date',
+        header: 'Appointment Date',
         accessorKey: 'appointment_date',
         enableSorting: false,
-        cell: (props) => <Text>{moment(props.getValue()).format('LL')}</Text>,
+        cell: (props) => (
+          <VStack alignItems="flex-start">
+            <Text>{moment(props.getValue()).format('LL')}</Text>
+            <Text color="gray.500">{moment(props.row.original.appointment_time, 'HH:mm:ss.SSS').format('h:mm A')}</Text>
+          </VStack>
+        ),
 
       },
       {
-        header: 'Status',
-        accessorKey: 'admission_status',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Appointment Status',
+        accessorKey: 'appointment_status',
+        cell: (props) => (
+          <Box>
+            {props.getValue() === 'Seen' ? (
+              <Tag
+                colorScheme="green"
+                rounded="full"
+              >
+                Seen
+              </Tag>
+            )
+              : (
+                <Tag
+                  colorScheme="red"
+                  rounded="full"
+                >
+                  Waiting
+                </Tag>
+              )}
+          </Box>
+        ),
 
       },
     ],
@@ -82,6 +130,7 @@ const Appointments = () => {
   useEffect(() => {
     dispatch(fetchAllAppointments());
   }, [dispatch]);
+  console.log(data);
 
   return (
     <VStack
@@ -94,18 +143,7 @@ const Appointments = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-suppliers" />
-        <HStack p={3}>
-          <Button
-            colorScheme="purple"
-            variant="outline"
-            rounded="full"
-            onClick={() => navigate('/supplier-classification')}
-          >
-            Supplier Classification
 
-          </Button>
-
-        </HStack>
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -115,7 +153,7 @@ const Appointments = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Suppliers
+            Appointments
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
