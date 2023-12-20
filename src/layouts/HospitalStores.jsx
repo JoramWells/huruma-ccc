@@ -11,7 +11,7 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import { getUsers } from '../_reducers/userSlice';
 import DataTable2 from '../components/tables/DataTable';
 
-const Users = () => {
+const HospitalStores = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.users);
@@ -111,4 +111,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default HospitalStores;

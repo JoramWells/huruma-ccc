@@ -86,6 +86,22 @@ const SidebarListItems = () => {
         icon={<FaCalendarTimes size={20} />}
       />
 
+      <SidebarItemLink
+        selected={pathname === '/hospitals'
+          || pathname.includes('/hospital-clinics')
+          || pathname.includes('/hospital-stores')
+          || pathname.includes('/hospital-types')}
+        onClick={onToggle}
+        text="Hospitals"
+        link="/hospitals"
+        itemList={[
+          { id: nanoid(), title: 'Clinics', link: '/hospital-clinics' },
+          { id: nanoid(), title: 'Stores', link: '/hospital-stores' },
+          { id: nanoid(), title: 'Types', link: '/hospital-types' },
+        ]}
+        icon={<FaHospitalAlt size={20} />}
+      />
+
       <SidebarItemButton
         selected={pathname === '/labs'}
         onClick={() => navigate('/labs')}

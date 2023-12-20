@@ -125,6 +125,8 @@ const AppointmentDetail = () => {
                   // mr={8}
                 >
                   <HorizontalStack title="Admission Status" text={data.admission_status} />
+                  <HorizontalStack title="Account Type" text={data.account_type?.account_type_description} />
+                  <HorizontalStack title="Appointment Status" text={data.appointment_status} />
                   <HorizontalStack title="Charges" text={`${data.charges} KSH`} />
 
                   <HorizontalStack title="Appointment Date" text={moment(new Date(data.appointment_date)).format('LL')} />
