@@ -20,13 +20,17 @@ const Admission = () => {
 
   const { data } = useSelector((state) => state.admission);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
         accessorKey: 'patient_detail',
-        cell: (props) => <Text>{props.getValue() ? props.getValue()?.first_name 
-        + ' ' + props.getValue()?.middle_name : '0'}</Text>,
+        cell: (props) => <Box onClick={()=>
+        navigate('/admission-detail/' + props.row.original.admission_id)
+        }>
+          <Text>{props.getValue() ? props.getValue()?.first_name
+            + ' ' + props.getValue()?.middle_name : '0'}</Text>
+        </Box>,
 
       },
       {
@@ -40,7 +44,8 @@ const Admission = () => {
         header: 'Payment Status',
         accessorKey: 'pay_status',
         enableSorting: false,
-        cell: (props) => <Box>{props.getValue() === 1 ? <Tag>PAID</Tag> : <Tag>NOT PAID</Tag>}</Box>,
+        cell: (props) => <Box>{props.getValue() === 1 ? <Tag colorScheme='green'
+        variant={'subtle'} rounded={'full'} border={'1px'}>PAID</Tag> : <Tag rounded={'full'} colorScheme='red' variant={'subtle'}>NOT PAID</Tag>}</Box>,
 
       },
     ],
@@ -49,7 +54,7 @@ const Admission = () => {
   );
 
 
-  const subrowData = data
+  const subRowData = data
     && data.map((item) => ({
       ...item,
       subRows: [],
@@ -92,7 +97,7 @@ const Admission = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subRowData.length}
               )
 
             </span>
@@ -110,7 +115,9 @@ const Admission = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 
+          searchQueryColumn={'pay_status'}
+          data={subRowData} columns={columns} />
         </Box>
       </Box>
     </VStack>

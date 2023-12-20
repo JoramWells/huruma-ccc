@@ -4,8 +4,8 @@ import { HStack, Input } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 // import TableSearchFilter from './Tables/TableSearchFilter';
 
-const TableSearchInput = ({ columnFilters, setColumFilters }) => {
-  const patientName = columnFilters.find((f) => f.id === 'patient_id')?.value || '';
+const TableSearchInput = ({ columnFilters, setColumFilters, searchQueryColumn }) => {
+  const patientName = columnFilters.find((f) => f.id === 'patient_detail')?.value || '';
 
   const onFilterChange = (id, value) => setColumFilters(
     (prev) => prev.filter((f) => f.id !== id).concat({
@@ -16,8 +16,8 @@ const TableSearchInput = ({ columnFilters, setColumFilters }) => {
   return (
     <HStack w="98%" p={2} m="auto">
       <Input
-        placeholder="Enter Item Description"
-        onChange={(e) => onFilterChange('patient_id', e.target.value)}
+        placeholder="Search..."
+        onChange={(e) => onFilterChange('patient_detail', e.target.value)}
         backgroundColor="gray.50"
         border="0"
                 // borderColor="gray.100"

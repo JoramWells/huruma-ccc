@@ -23,7 +23,7 @@ const SidebarItemLink = ({
       <>
         <HStack
           justifyContent="space-between"
-          fontWeight={selected && 'semibold'}
+          fontWeight="semibold"
           color={selected ? 'white' : 'gray.400'}
           bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
           p={2}
@@ -41,7 +41,7 @@ const SidebarItemLink = ({
         >
           <HStack>
             {icon}
-            <Link to={link} style={{ fontSize: '20px' }}>
+            <Link to={link} style={{ fontSize: '18px' }}>
               {text}
             </Link>
           </HStack>

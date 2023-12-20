@@ -30,7 +30,8 @@ const SidebarItemButton = ({
         display={{ sm: 'none', md: 'block' }}
         textTransform="capitalize"
         // fontSize={{ md: 'lg', lg: 'md' }}
-        fontSize="xl"
+        fontSize="18px"
+        fontWeight="semibold"
       >
         {text}
 

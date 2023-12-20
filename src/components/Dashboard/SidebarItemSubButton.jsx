@@ -24,7 +24,7 @@ const SidebarItemSubButton = ({
       <Link
         to={subButtonLink}
         style={{
-          fontSize: '18px',
+          fontSize: '16px',
         }}
 
       >

@@ -10,7 +10,6 @@ import { useEffect } from 'react';
 import {
   FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaEdit, FaFileInvoice, FaUser,
 } from 'react-icons/fa';
-import moment from 'moment/moment';
 import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
 

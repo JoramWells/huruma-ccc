@@ -12,7 +12,7 @@ import { useMemo, useState } from 'react';
 import { FaSort } from 'react-icons/fa';
 import TableSearchInput from '../TableSearchInput';
 
-const DataTable2 = ({ data, columns }) => {
+const DataTable2 = ({ data, columns, searchQueryColumn }) => {
   const [columnFilters, setColumnFilters] = useState([]);
 
   const table = useReactTable({
@@ -32,6 +32,7 @@ const DataTable2 = ({ data, columns }) => {
       <TableSearchInput
         setColumFilters={setColumnFilters}
         columnFilters={columnFilters}
+        searchQueryColumn={searchQueryColumn}
       />
       <TableContainer h="700px" overflowY="auto">
         <Table>
@@ -142,9 +143,11 @@ export default DataTable2;
 DataTable2.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array,
+  searchQueryColumn: PropTypes.string,
 };
 
 DataTable2.defaultProps = {
   data: [],
   columns: [],
+  searchQueryColumn: 'first_name',
 };
