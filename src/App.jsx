@@ -68,13 +68,14 @@ import AdmissionCategory from './layouts/AdmissionCategory';
 import AddAdmissionCategory from './layouts/AddAdmissionCategory';
 import AdmissionType from './layouts/AdmissionType';
 import AdmissionBedAllocation from './layouts/AdmissionBedAllocation';
-import AppointmentDetail from './layouts/AppointmentDetail';
+import HospitalStores from './layouts/HospitalStores';
+import MaternityAntenatalProfile from './layouts/MaternityAntenatalProfile';
+import MaternityProfile from './layouts/MaternityProfile';
 
+const AppointmentDetail = lazy(() => import('./layouts/AppointmentDetail'));
 const Appointments = lazy(() => import('./layouts/Appointments'));
 const Admission = lazy(() => import('./layouts/Admission'));
-
 const MaternityServices = lazy(() => import('./layouts/MaternityServices'));
-
 const Homepage = lazy(() => import('./layouts/Homepage'));
 const PatientDetail = lazy(() => import('./layouts/PatientDetail'));
 const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges'));
@@ -177,6 +178,9 @@ function App() {
 
             <Route path="/stores" element={<Stores />} />
 
+            <Route path="/maternity-antenatal-profile" element={<MaternityAntenatalProfile />} />
+            <Route path="/maternity-profile" element={<MaternityProfile />} />
+
             <Route path="/add-service" element={<AddService />} />
             <Route path="/admin-services" element={<Services />} />
 
@@ -189,6 +193,8 @@ function App() {
             <Route path="/admin-privileges" element={<Privileges />} />
             <Route path="/admin-group-privileges" element={<GroupPrivileges />} />
             <Route path="/admin-group-privileges-details/:id" element={<GroupPrivilegesDetails />} />
+
+            <Route path="/hospital-stores" element={<HospitalStores />} />
 
           </Routes>
         </Suspense>

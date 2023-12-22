@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
@@ -7,36 +8,72 @@ import {
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { fetchAllHospitalStores } from '../_reducers/hospitalStoreSlice';
+import { getAllMaternityServices } from '../_reducers/admMartenityServicesSlice';
+import { fetchAllMaternityProfile } from '../_reducers/maternityProfileSlice';
 
-const HospitalStores = () => {
+const MaternityProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.hospitalStores);
+  const { data } = useSelector((state) => state.maternityProfile);
+  console.log(data);
 
   const columns = useMemo(
     () => [
+      // {
+      //   header: 'Admission ID',
+      //   accessorKey: 'admission_id',
+      //   cell: (props) => (
+      //     <Box
+      //       h="full"
+      //       color="blue.500"
+      //       _hover={{
+      //         cursor: 'pointer',
+      //         color: 'gray.500',
+      //         textDecoration: 'underline',
+      //       }}
+      //       onClick={() => navigate(`/supplier-detail/${props.row.original.id}`)}
+      //     >
+      //       <Text>{props.getValue()}</Text>
+      //     </Box>
+      //   ),
+
+      // },
       {
-        header: 'Hospital Description',
-        accessorKey: 'hospital_store_description',
+        header: 'Name of Client',
+        accessorKey: 'name_of_client',
         cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
       {
-        header: 'user Name',
-        accessorKey: 'user_name',
+        header: 'Delivery Date',
+        accessorKey: 'date_of_delivery',
+        cell: (props) => <Text>{moment(props.getValue()).format('LL')}</Text>,
+        size: 200,
+
+      },
+
+      {
+        header: 'Education',
+        accessorKey: 'education',
         cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
       {
-        header: 'Email',
-        accessorKey: 'email',
+        header: 'Marital Status',
+        accessorKey: 'marital_status',
         cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
       {
-        header: 'User Type',
-        accessorKey: 'user_type_id',
+        header: 'Address',
+        accessorKey: 'address',
         cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
     ],
 
@@ -44,17 +81,16 @@ const HospitalStores = () => {
   );
 
   const subrowData = data
-    && data.map((item) => ({
-      ...item,
-      subRows: [],
-    }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
-  console.log(data);
+        && data.map((item) => ({
+          ...item,
+          subRows: [],
+        }));
+    // const fetchData = useCallback(()=>{
+    //   dispatch(getAllPriceLists())
+    // },[dispatch])
 
   useEffect(() => {
-    dispatch(fetchAllHospitalStores());
+    dispatch(fetchAllMaternityProfile());
   }, [dispatch]);
 
   return (
@@ -67,7 +103,8 @@ const HospitalStores = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/admin-add-user" />
+        <BreadCrumbNav link="/add-suppliers" />
+
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -77,7 +114,7 @@ const HospitalStores = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Users
+            Maternity Profile
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -101,7 +138,6 @@ const HospitalStores = () => {
         <Box
           w="100%"
           bgColor="white"
-          p={3}
           h="89%"
         >
           <DataTable2 data={subrowData} columns={columns} />
@@ -111,4 +147,4 @@ const HospitalStores = () => {
   );
 };
 
-export default HospitalStores;
+export default MaternityProfile;

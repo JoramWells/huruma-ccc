@@ -36,6 +36,9 @@ import admissionTypeSlice from './_reducers/admissionTypeSlice';
 import bedAllocationSlice from './_reducers/admissionBedAllocationSlice';
 import appointmentSlice from './_reducers/appointmentSlice';
 import outPatientServicesCHSlice from './_reducers/outPatientServicesCHSlice';
+import hospitalStoreSlice from './_reducers/hospitalStoreSlice';
+import maternityAntenatalProfileSlice from './_reducers/maternityAntenatalProfileSlice';
+import maternityProfileSlice from './_reducers/maternityProfileSlice';
 
 export const store = configureStore({
   reducer: {
@@ -72,6 +75,9 @@ export const store = configureStore({
     admissionType: admissionTypeSlice,
     bedAllocation: bedAllocationSlice,
     outPatientServicesCH: outPatientServicesCHSlice,
+    hospitalStores: hospitalStoreSlice,
+    maternityAntenatalProfile: maternityAntenatalProfileSlice,
+    maternityProfile: maternityProfileSlice,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),

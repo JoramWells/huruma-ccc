@@ -109,10 +109,18 @@ const SidebarListItems = () => {
         icon={<FaTools size={20} />}
       />
 
-      <SidebarItemButton
-        selected={pathname === '/maternity'}
-        onClick={() => navigate('/maternity')}
+      <SidebarItemLink
+        selected={pathname === '/maternity'
+        || pathname.includes('/maternity-antenatal-profile')
+        || pathname.includes('/maternity-profile')}
+        onClick={onToggle}
         text="Maternity"
+        link="/maternity"
+        itemList={[
+          { id: nanoid(), title: 'Maternity Profile', link: '/maternity-profile' },
+          { id: nanoid(), title: 'Maternity Antenatal Profile', link: '/maternity-antenatal-profile' },
+
+        ]}
         icon={<FaChild size={20} />}
       />
 

@@ -9,6 +9,7 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllMaternityServices } from '../_reducers/admMartenityServicesSlice';
@@ -18,6 +19,7 @@ const MaternityServices = () => {
   const navigate = useNavigate();
 
   const { data } = useSelector((state) => state.maternityServices);
+  console.log(data);
 
   const columns = useMemo(
     () => [
@@ -40,16 +42,41 @@ const MaternityServices = () => {
         ),
 
       },
+      // {
+      //   header: 'Appointment ID',
+      //   accessorKey: 'appointment_id',
+      //   cell: (props) => <Text>{props.getValue()}</Text>,
+      //   size: 200,
+
+      // },
       {
-        header: 'Appointment ID',
-        accessorKey: 'appointment_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Delivery Date',
+        accessorKey: 'date_of_delivery',
+        cell: (props) => <Text>{moment(props.getValue()).format('LL')}</Text>,
         size: 200,
 
       },
       {
         header: 'Patient ID',
         accessorKey: 'patient_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Normal Delivery',
+        accessorKey: 'normal_delivery',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Caesarean Section',
+        accessorKey: 'caesarean_section',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Neonatal Death',
+        accessorKey: 'neonatal_death',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -92,7 +119,7 @@ const MaternityServices = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Maternity
+            Admissions Maternity
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
