@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Button,
   CloseButton,
@@ -7,11 +8,12 @@ import {
   Input,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import Select from 'react-select';
-import { addWard } from '../_reducers/wardSlice';
+// import { addWard } from '../_reducers/wardSlice';
+import { useAddWardMutation } from '../api/ward.api';
 
 const AddWard = () => {
   const [branchName, setBranchName] = useState();
@@ -23,9 +25,13 @@ const AddWard = () => {
   const [dailyRateCorporate, setDailyRateCorporate] = useState();
   const [nursingDailyChargeNonCorporate, setNursingDailyChargeNonCorporate] = useState();
   const [nursingDailyChargeCorporate, setNursingDailyChargeCorporate] = useState();
-  const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.wards);
+  const toast = useToast();
+  const errorToastId = 'error-toast';
+
+  const [addWard, {
+    isLoading, isError, isSuccess, error,
+  }] = useAddWardMutation();
 
   const inputValues = {
     branchName: branchName?.value,
@@ -41,6 +47,7 @@ const AddWard = () => {
   };
 
   const options = [{ value: '85A', label: '85A' }];
+  console.log(isSuccess, 'yht');
 
   return (
     <VStack
@@ -140,11 +147,23 @@ const AddWard = () => {
         <Button
           size="lg"
           colorScheme="blue"
-          onClick={() => dispatch(addWard(inputValues))}
+          onClick={() => addWard(inputValues)}
           w="full"
         >
-          {loading ? 'loading...' : 'Save'}
+          {isLoading ? 'loading...' : 'Save'}
         </Button>
+        {/* <Text>
+          {isSuccess === '1' ? 'success' : 'waiting..'}
+        </Text> */}
+        {/* {isError && (
+          toast.isActive(errorToastId) && toast({
+            title: 'The following error occurred.',
+            description: error.status,
+            status: 'error',
+            isClosable: true,
+            position: 'top-right',
+          })
+        )} */}
       </VStack>
     </VStack>
   );

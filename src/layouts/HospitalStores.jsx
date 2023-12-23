@@ -5,16 +5,13 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { fetchAllHospitalStores } from '../_reducers/hospitalStoreSlice';
+import { useGetHospitalStoresQuery } from '../api/hospital.api';
 
 const HospitalStores = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.hospitalStores);
+  const { data } = useGetHospitalStoresQuery();
 
   const columns = useMemo(
     () => [
@@ -43,19 +40,11 @@ const HospitalStores = () => {
     [],
   );
 
-  const subrowData = data
+  const subRowData = data
     && data.map((item) => ({
       ...item,
       subRows: [],
     }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(fetchAllHospitalStores());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -86,7 +75,7 @@ const HospitalStores = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subRowData?.length}
               )
 
             </span>
@@ -104,7 +93,7 @@ const HospitalStores = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columns} />
+          <DataTable2 data={subRowData} columns={columns} />
         </Box>
       </Box>
     </VStack>

@@ -6,13 +6,12 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { fetchAllAppointments } from '../_reducers/appointmentSlice';
+import { useGetAppointmentsQuery } from '../api/appointments.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -26,12 +25,11 @@ const UserNameAvatar = ({ fullName }) => (
 );
 
 const Appointments = () => {
-  const dispatch = useDispatch();
+  const { data } = useGetAppointmentsQuery();
 
-  const { data } = useSelector((state) => state.appointments);
   const navigate = useNavigate();
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       // {
       //   header: 'Appointment ID',
@@ -115,22 +113,14 @@ const Appointments = () => {
       },
     ],
 
-    [],
+    [navigate],
   );
 
-  const subrowData = data
+  const subRowData = data
     && data.map((item) => ({
       ...item,
       subRows: [],
     }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
-
-  useEffect(() => {
-    dispatch(fetchAllAppointments());
-  }, [dispatch]);
-  console.log(data);
 
   return (
     <VStack
@@ -162,7 +152,7 @@ const Appointments = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subRowData?.length}
               )
 
             </span>
@@ -180,7 +170,7 @@ const Appointments = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 data={subRowData} columns={columns} />
         </Box>
       </Box>
     </VStack>

@@ -6,9 +6,9 @@ import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import { store } from './store';
 import 'react-datepicker/dist/react-datepicker.css';
 import './css/index.css';
+import { store } from './store';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);

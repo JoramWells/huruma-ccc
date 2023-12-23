@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
@@ -5,37 +6,53 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import { getUsers } from '../_reducers/userSlice';
 import DataTable2 from '../components/tables/DataTable';
+import { useGetWardsQuery } from '../api/ward.api';
 
 const Wards = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.users);
-
+  const { data } = useGetWardsQuery();
   const columns = useMemo(
     () => [
       {
-        header: 'Full Name',
-        accessorKey: 'full_name',
+        header: 'Ward Type',
+        accessorKey: 'wardType',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'user Name',
-        accessorKey: 'user_name',
+        header: 'Ward Description',
+        accessorKey: 'wardDescription',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'Email',
-        accessorKey: 'email',
+        header: 'Admission Charge Non Corporate',
+        accessorKey: 'admissionChargeNonCorporate',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'User Type',
-        accessorKey: 'user_type_id',
+        header: 'Admission Charge Corporate',
+        accessorKey: 'admissionChargeCorporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Daily Rate Non Corporate',
+        accessorKey: 'dailyRateNonCorporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Daily Rate Corporate',
+        accessorKey: 'dailyRateCorporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Nursing Daily Charge Non Corporate',
+        accessorKey: 'nursingDailyChargeNonCorporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'Nursing Daily Charge Corporate',
+        accessorKey: 'nursingDailyChargeCorporate',
         cell: (props) => <Text>{props.getValue()}</Text>,
       },
     ],
@@ -48,14 +65,6 @@ const Wards = () => {
       ...item,
       subRows: [],
     }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -86,7 +95,7 @@ const Wards = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subrowData?.length}
               )
 
             </span>

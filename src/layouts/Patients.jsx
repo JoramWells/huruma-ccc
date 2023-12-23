@@ -1,20 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import {
   Avatar,
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllSuppliers } from '../_reducers/supplierSlice';
-import { getAllPatients } from '../_reducers/patientSlice';
+import { useGetPatientsQuery } from '../api/patients.api';
 
 const outPatientList = [
 
@@ -68,11 +66,14 @@ const UserNameAvatar = ({ fullName }) => (
 );
 
 const Patients = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.patients);
-  console.log(data);
+  const {
+    data, error, isLoading, isFetching, isSuccess,
+  } = useGetPatientsQuery();
+
+  // const { data } = useSelector((state) => state.patients);
+  // console.log(data);
 
   const columnsx = useMemo(
     () => [
@@ -118,13 +119,6 @@ const Patients = () => {
           ...item,
           subRows: [],
         }));
-    // const fetchData = useCallback(()=>{
-    //   dispatch(getAllPriceLists())
-    // },[dispatch])
-
-  useEffect(() => {
-    dispatch(getAllPatients());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -162,7 +156,7 @@ const Patients = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subrowData?.length}
               )
 
             </span>
