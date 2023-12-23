@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
@@ -7,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import WardPricesTable from '../components/tables/WardPricesTable';
-import { getWardPrices } from '../_reducers/wardSlice';
+// import { getWardPrices } from '../_reducers/wardSlice';
 
 const columns = [
   {
@@ -49,7 +50,7 @@ const columns = [
 ];
 
 const WardPrice = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state.wards);
 
@@ -62,9 +63,9 @@ const WardPrice = () => {
     //   dispatch(getAllPriceLists())
     // },[dispatch])
 
-  useEffect(() => {
-    dispatch(getWardPrices());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getWardPrices());
+  // }, [dispatch]);
 
   return (
     <VStack

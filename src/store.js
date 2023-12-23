@@ -39,6 +39,7 @@ import outPatientServicesCHSlice from './_reducers/outPatientServicesCHSlice';
 import hospitalStoreSlice from './_reducers/hospitalStoreSlice';
 import maternityAntenatalProfileSlice from './_reducers/maternityAntenatalProfileSlice';
 import maternityProfileSlice from './_reducers/maternityProfileSlice';
+import wardTypeSlice from './_reducers/wardTypeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -78,6 +79,7 @@ export const store = configureStore({
     hospitalStores: hospitalStoreSlice,
     maternityAntenatalProfile: maternityAntenatalProfileSlice,
     maternityProfile: maternityProfileSlice,
+    wardType: wardTypeSlice,
 
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cacheMiddleware),

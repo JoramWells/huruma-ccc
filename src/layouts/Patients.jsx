@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import {
+  Avatar,
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
@@ -55,27 +56,36 @@ const outPatientList = [
   },
 ];
 
+const UserNameAvatar = ({ fullName }) => (
+  <HStack>
+    <Avatar
+      // size="sm"
+      name={fullName}
+      color="white"
+    />
+    <Text>{fullName}</Text>
+  </HStack>
+);
+
 const Patients = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { data } = useSelector((state) => state.patients);
+  console.log(data);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'First Name',
-        accessorKey: 'first_name',
+        header: 'Patient Name',
+        accessorKey: 'last_name',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
-            <Text>{props.getValue()}</Text>
+            <UserNameAvatar
+              fullName={`${props.row.original.first_name} ${props.row.original.last_name}`}
+            />
           </Box>
         ),
-      },
-      {
-        header: 'Last Name',
-        accessorKey: 'last_name',
-        cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
@@ -89,6 +99,12 @@ const Patients = () => {
         header: 'Gender',
         accessorKey: 'patient_gender',
         enableSorting: false,
+        cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
+
+      },
+      {
+        header: 'Patient Type',
+        accessorKey: 'patient_type',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },

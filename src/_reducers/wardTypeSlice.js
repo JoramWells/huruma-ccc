@@ -8,99 +8,99 @@ const initialState = {
   response: '',
 };
 
-export const addWard = createAsyncThunk(
-  'data/addWard',
+export const addWardType = createAsyncThunk(
+  'data/addWardType',
   async (inputValues) => {
     // let data = []
-    await axios.post('http://localhost:5000/wards/add', inputValues)
+    await axios.post('http://localhost:5000/ward-type/add', inputValues)
       .then((response) => response)
       .catch((error) => error.message);
   },
 );
 
-export const getAllWards = createAsyncThunk(
-  'data/getAllWards',
+export const getAllWardTypes = createAsyncThunk(
+  'data/getAllWardTypes',
   async () => {
     let data = [];
     await axios
-      .get('http://localhost:5000/wards/fetchAll')
+      .get('http://localhost:5000/ward-type/fetchAll')
       .then((res) => (data = res.data))
       .catch((error) => error.message);
     return data;
   },
 );
 
-export const getWardDetail = createAsyncThunk(
-  'data/getWardDetail',
+export const getWardTypeDetail = createAsyncThunk(
+  'data/getWardTypeDetail',
   async (id, { rejectWithValue }) => {
     let data = [];
     await axios
-      .get(`http://localhost:5000/wards/detail/${id}`)
+      .get(`http://localhost:5000/ward-type/detail/${id}`)
       .then((res) => (data = res.data))
       .catch((error) => rejectWithValue(error.message));
     return data;
   },
 );
 
-export const editWard = createAsyncThunk(
-  'data/editWard',
+export const editWardType = createAsyncThunk(
+  'data/editWardType',
   async (data) => {
     let result = [];
     await axios
-      .put('http://localhost:5000/wards/edit', data)
+      .put('http://localhost:5000/ward-type/edit', data)
       .then((response) => (result = response.data))
       .catch((error) => error);
     return result;
   },
 );
 
-const wardSlice = createSlice({
-  name: 'wards',
+const wardTypeSlice = createSlice({
+  name: 'ward-type',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getAllWards.pending, (state) => {
+      .addCase(getAllWardTypes.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getAllWards.fulfilled, (state, action) => {
+      .addCase(getAllWardTypes.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(getWardDetail.pending, (state) => {
+      .addCase(getWardTypeDetail.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(getWardDetail.fulfilled, (state, action) => {
+      .addCase(getWardTypeDetail.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       })
-      .addCase(getWardDetail.rejected, (state, action) => {
+      .addCase(getWardTypeDetail.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
         state.error = action.error.message;
       });
     builder
-      .addCase(addWard.pending, (state) => {
+      .addCase(addWardType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(addWard.fulfilled, (state, action) => {
+      .addCase(addWardType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
       });
 
     builder
-      .addCase(editWard.pending, (state) => {
+      .addCase(editWardType.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
       })
-      .addCase(editWard.fulfilled, (state, action) => {
+      .addCase(editWardType.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.data = action.payload;
         state.loading = false;
@@ -108,4 +108,4 @@ const wardSlice = createSlice({
   },
 });
 
-export default wardSlice.reducer;
+export default wardTypeSlice.reducer;

@@ -69,9 +69,13 @@ import AddAdmissionCategory from './layouts/AddAdmissionCategory';
 import AdmissionType from './layouts/AdmissionType';
 import AdmissionBedAllocation from './layouts/AdmissionBedAllocation';
 import HospitalStores from './layouts/HospitalStores';
-import MaternityAntenatalProfile from './layouts/MaternityAntenatalProfile';
-import MaternityProfile from './layouts/MaternityProfile';
+import AddWard from './layouts/AddWard';
+import WardType from './layouts/WardType';
+import AddWardType from './layouts/AddWardType';
 
+const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
+const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
+const MaternityProfile = lazy(() => import('./layouts/MaternityProfile'));
 const AppointmentDetail = lazy(() => import('./layouts/AppointmentDetail'));
 const Appointments = lazy(() => import('./layouts/Appointments'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -79,6 +83,7 @@ const MaternityServices = lazy(() => import('./layouts/MaternityServices'));
 const Homepage = lazy(() => import('./layouts/Homepage'));
 const PatientDetail = lazy(() => import('./layouts/PatientDetail'));
 const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges'));
+const Wards = lazy(() => import('./layouts/Wards'));
 
 function App() {
   const { pathname } = useLocation();
@@ -111,6 +116,9 @@ function App() {
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
             <Route path="/admission" element={<Admission />} />
+            <Route path="/admission" element={<Admission />} />
+            <Route path="/add-admission" element={<AddAdmission />} />
+
             <Route path="/admission-type" element={<AdmissionType />} />
             <Route path="/admission-detail" element={<AdmissionDetail />} />
             <Route path="/bed-allocation" element={<AdmissionBedAllocation />} />
@@ -174,7 +182,11 @@ function App() {
             <Route path="/item-category" element={<ItemCategory />} />
             <Route path="/add-item-category" element={<AddItemCategory />} />
 
+            <Route path="/wards" element={<Wards />} />
+            <Route path="/add-ward" element={<AddWard />} />
+            <Route path="/add-ward-type" element={<AddWardType />} />
             <Route path="/ward-prices" element={<WardPrice />} />
+            <Route path="/ward-type" element={<WardType />} />
 
             <Route path="/stores" element={<Stores />} />
 

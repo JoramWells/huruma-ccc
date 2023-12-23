@@ -57,6 +57,7 @@ const SidebarListItems = () => {
         || pathname.includes('/admission-detail')
           || pathname.includes('/admission-category')
           || pathname.includes('/add-admission-category')
+          || pathname.includes('/add-admission')
           || pathname.includes('/admission-type')}
         onClick={onToggle}
         text="Admission"
@@ -302,6 +303,34 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaCar size={20} />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/wards' || pathname.includes('add-ward')
+        || pathname.includes('ward-type')
+        || pathname.includes('add-ward-type')}
+        onClick={onToggle}
+        text="Wards"
+        link="/wards"
+        itemList={[
+          { id: nanoid(), title: 'Ward Type', link: '/ward-type' },
+
+        ]}
+        icon={<FaHospitalAlt size={20} />}
+      />
+      <SidebarItemLink
+        selected={pathname === '/items' || pathname.includes('/add-measuring-unit')}
+        onClick={onToggle}
+        text="Items"
+        link="/items"
+        itemList={[
+          { id: nanoid(), title: 'Brand', link: '/brand' },
+          { id: nanoid(), title: 'Item Category', link: '/item-category' },
+          { id: nanoid(), title: 'Measuring Unit', link: '/measuring-unit' },
+          { id: nanoid(), title: 'Non Pharmaceutical', link: '/non-pharmaceuticals' },
+
+        ]}
+        icon={<FaListOl size={20} />}
       />
 
     </>

@@ -9,7 +9,7 @@ function Sidebar() {
   return (
     <Box
       w={{ base: '100%', sm: '270px' }}
-      h="100vh"
+      h="100%"
       overflowX="auto"
       bgColor="blue.900"
       display={{ base: 'none', sm: 'block' }}

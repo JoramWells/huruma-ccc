@@ -1,60 +1,49 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-/* eslint-disable */
 import {
-  Box, Button, HStack, Text, VStack, Tag
+  Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
+import { getUsers } from '../_reducers/userSlice';
 import DataTable2 from '../components/tables/DataTable';
-import { fetchAllAdmission } from '../_reducers/admissionSlice';
-import moment from 'moment/moment';
 
-const Admission = () => {
+const Wards = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.admission);
+  const { data } = useSelector((state) => state.users);
 
   const columns = useMemo(
     () => [
       {
-        header: 'Patient Name',
-        accessorKey: 'patient_detail',
-        cell: (props) => <Box onClick={()=>
-        navigate('/admission-detail/' + props.row.original.admission_id)
-        }>
-          <Text>{props.getValue() ? props.getValue()?.first_name
-            + ' ' + props.getValue()?.middle_name : '0'}</Text>
-        </Box>,
-
+        header: 'Full Name',
+        accessorKey: 'full_name',
+        cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'Admission Date',
-        accessorKey: 'admission_date',
-        enableSorting: false,
-        cell: (props) => <Text>{moment(new Date(props.getValue())).format('LL')}</Text>,
-
+        header: 'user Name',
+        accessorKey: 'user_name',
+        cell: (props) => <Text>{props.getValue()}</Text>,
       },
       {
-        header: 'Payment Status',
-        accessorKey: 'pay_status',
-        enableSorting: false,
-        cell: (props) => <Box>{props.getValue() === 1 ? <Tag colorScheme='green'
-        variant={'subtle'} rounded={'full'} border={'1px'}>PAID</Tag> : <Tag rounded={'full'} colorScheme='red' variant={'subtle'}>NOT PAID</Tag>}</Box>,
-
+        header: 'Email',
+        accessorKey: 'email',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+      },
+      {
+        header: 'User Type',
+        accessorKey: 'user_type_id',
+        cell: (props) => <Text>{props.getValue()}</Text>,
       },
     ],
 
     [],
   );
 
-
-  const subRowData = data
+  const subrowData = data
     && data.map((item) => ({
       ...item,
       subRows: [],
@@ -62,14 +51,15 @@ const Admission = () => {
   // const fetchData = useCallback(()=>{
   //   dispatch(getAllPriceLists())
   // },[dispatch])
+  console.log(data);
 
   useEffect(() => {
-    dispatch(fetchAllAdmission());
+    dispatch(getUsers());
   }, [dispatch]);
 
   return (
     <VStack
-      mt={'45px'}
+      mt="55px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -77,8 +67,7 @@ const Admission = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-admission" />
-
+        <BreadCrumbNav link="/add-ward" />
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -88,7 +77,7 @@ const Admission = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Admissions
+            Wards
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -97,7 +86,7 @@ const Admission = () => {
             >
               {' '}
               (
-              {subRowData.length}
+              {subrowData.length}
               )
 
             </span>
@@ -115,13 +104,11 @@ const Admission = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 
-          searchQueryColumn={'pay_status'}
-          data={subRowData} columns={columns} />
+          <DataTable2 data={subrowData} columns={columns} />
         </Box>
       </Box>
     </VStack>
   );
 };
 
-export default Admission;
+export default Wards;
