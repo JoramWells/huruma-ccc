@@ -31,7 +31,11 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/administration' || pathname.includes('administration') || pathname.includes('admin') || pathname.includes('add-service')}
+        selected={pathname === '/administration'
+        || pathname.includes('administration')
+          || pathname.includes('admin')
+          || pathname.includes('user-detail')
+        || pathname.includes('add-service')}
         onClick={onToggle}
         text="Administration"
         link="/administration"
@@ -112,7 +116,9 @@ const SidebarListItems = () => {
 
       <SidebarItemLink
         selected={pathname === '/maternity-profile'
-        || pathname.includes('/maternity-antenatal-profile')
+          || pathname.includes('/maternity-antenatal-profile')
+          || pathname.includes('/add-maternity-antenatal-profile')
+          || pathname.includes('/add-maternity-profile')
         || pathname.includes('/maternity-profile')}
         onClick={onToggle}
         text="Maternity"

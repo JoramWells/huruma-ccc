@@ -7,7 +7,6 @@ const initialState = {
   error: null,
   response: '',
 };
-
 export const getUserTypes = createAsyncThunk(
   'data/getUserTypes',
   async () => {

@@ -73,6 +73,7 @@ import AddWard from './layouts/AddWard';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
 import AddMaternityProfile from './layouts/AddMaternityProfile';
+import UserDetail from './layouts/UserDetail';
 
 const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
@@ -199,6 +200,7 @@ function App() {
             <Route path="/admin-services" element={<Services />} />
 
             <Route path="/admin-users" element={<Users />} />
+            <Route path="/user-detail/:id" element={<UserDetail />} />
             <Route path="/admin-add-user" element={<AddUser />} />
 
             <Route path="/admin-user-type" element={<UserTypes />} />

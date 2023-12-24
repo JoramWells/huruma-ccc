@@ -21,10 +21,10 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
     state: {
       columnFilters,
     },
-    getCoreRowModel: useMemo(() => getCoreRowModel()),
-    getFilteredRowModel: useMemo(() => getFilteredRowModel()),
-    getSortedRowModel: useMemo(() => getSortedRowModel()),
-    getPaginationRowModel: useMemo(() => getPaginationRowModel()),
+    getCoreRowModel: useMemo(() => getCoreRowModel(), []),
+    getFilteredRowModel: useMemo(() => getFilteredRowModel(), []),
+    getSortedRowModel: useMemo(() => getSortedRowModel(), []),
+    getPaginationRowModel: useMemo(() => getPaginationRowModel(), []),
     columnResizeMode: 'onChange',
   });
   return (

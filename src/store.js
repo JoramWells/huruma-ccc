@@ -5,6 +5,8 @@ import { admissionApi } from './api/admissions.api';
 import { appointmentApi } from './api/appointments.api';
 import { hospitalApi } from './api/hospital.api';
 import { maternityProfileApi } from './api/maternity.api';
+import { userApi } from './api/users.api';
+import { userTypeApi } from './api/userType.api';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     [appointmentApi.reducerPath]: appointmentApi.reducer,
     [hospitalApi.reducerPath]: hospitalApi.reducer,
     [maternityProfileApi.reducerPath]: maternityProfileApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
+    [userTypeApi.reducerPath]: userTypeApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -22,5 +26,7 @@ export const store = configureStore({
     .concat(appointmentApi.middleware)
     .concat(hospitalApi.middleware)
     .concat(maternityProfileApi.middleware)
+    .concat(userApi.middleware)
+    .concat(userTypeApi.middleware)
   ,
 });

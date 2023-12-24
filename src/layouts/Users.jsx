@@ -3,25 +3,27 @@
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
-// import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import { getUsers } from '../_reducers/userSlice';
 import DataTable2 from '../components/tables/DataTable';
+import { useGetUsersQuery } from '../api/users.api';
+import UserNameAvatar from '../components/UserNameAvatar';
 
 const Users = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.users);
+  const { data } = useGetUsersQuery();
 
   const columns = useMemo(
     () => [
       {
         header: 'Full Name',
         accessorKey: 'full_name',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <UserNameAvatar
+            link={`/user-detail/${props.row.original.user_id}`}
+            fullName={props.getValue()}
+          />
+        ),
       },
       {
         header: 'user Name',
@@ -43,19 +45,11 @@ const Users = () => {
     [],
   );
 
-  const subrowData = data
+  const subRowData = data
     && data.map((item) => ({
       ...item,
       subRows: [],
     }));
-  // const fetchData = useCallback(()=>{
-  //   dispatch(getAllPriceLists())
-  // },[dispatch])
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -86,7 +80,7 @@ const Users = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subRowData?.length}
               )
 
             </span>
@@ -104,7 +98,7 @@ const Users = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columns} />
+          <DataTable2 data={subRowData} columns={columns} />
         </Box>
       </Box>
     </VStack>
