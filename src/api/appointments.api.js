@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const appointmentApi = createApi({
-  // reducerPath: 'wards',
+  reducerPath: 'appointmentsApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/appointments',
   }),

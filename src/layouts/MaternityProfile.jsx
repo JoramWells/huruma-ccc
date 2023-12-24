@@ -92,7 +92,7 @@ const MaternityProfile = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-suppliers" />
+        <BreadCrumbNav link="/add-maternity-profile" />
 
         <HStack
           w="100%"

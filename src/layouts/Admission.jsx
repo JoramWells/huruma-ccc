@@ -15,7 +15,9 @@ import { useGetAdmissionsQuery } from '../api/admissions.api';
 const Admission = () => {
   const navigate = useNavigate();
 
-  const { data } = useGetAdmissionsQuery();
+  const {
+    data, isLoading,
+  } = useGetAdmissionsQuery();
 
   // const { data } = useSelector((state) => state.admission);
 
@@ -71,6 +73,8 @@ const Admission = () => {
       ...item,
       subRows: [],
     }));
+
+  if (isLoading) return <div>loading..</div>;
 
   return (
     <VStack

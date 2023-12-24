@@ -111,14 +111,13 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/maternity'
+        selected={pathname === '/maternity-profile'
         || pathname.includes('/maternity-antenatal-profile')
         || pathname.includes('/maternity-profile')}
         onClick={onToggle}
         text="Maternity"
-        link="/maternity"
+        link="/maternity-profile"
         itemList={[
-          { id: nanoid(), title: 'Maternity Profile', link: '/maternity-profile' },
           { id: nanoid(), title: 'Maternity Antenatal Profile', link: '/maternity-antenatal-profile' },
 
         ]}

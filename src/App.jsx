@@ -72,6 +72,7 @@ import HospitalStores from './layouts/HospitalStores';
 import AddWard from './layouts/AddWard';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
+import AddMaternityProfile from './layouts/AddMaternityProfile';
 
 const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
@@ -192,6 +193,7 @@ function App() {
 
             <Route path="/maternity-antenatal-profile" element={<MaternityAntenatalProfile />} />
             <Route path="/maternity-profile" element={<MaternityProfile />} />
+            <Route path="/add-maternity-profile" element={<AddMaternityProfile />} />
 
             <Route path="/add-service" element={<AddService />} />
             <Route path="/admin-services" element={<Services />} />
