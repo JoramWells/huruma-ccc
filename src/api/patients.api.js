@@ -9,7 +9,17 @@ export const patientsApi = createApi({
     getPatients: builder.query({
       query: () => 'fetchAll',
     }),
+    addPatient: builder.mutation({
+      query: (newUser) => ({
+        url: 'add',
+        method: 'POST',
+        body: newUser,
+      }),
+    }),
+    getPatient: builder.query({
+      query: (id) => `detail/${id}`,
+    }),
   }),
 });
 
-export const { useGetPatientsQuery } = patientsApi;
+export const { useGetPatientsQuery, useAddPatientMutation, useGetPatientQuery } = patientsApi;

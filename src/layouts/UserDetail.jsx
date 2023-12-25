@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
-import Step1 from '../components/PatientProfile/Step1';
+import Step1 from '../components/PatientProfile/Medical';
 import Step2 from '../components/PatientProfile/Step2';
 import { useGetUserQuery } from '../api/users.api';
 

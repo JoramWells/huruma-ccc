@@ -65,7 +65,7 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const Patients = () => {
+const PatientVisits = () => {
   const navigate = useNavigate();
 
   const {
@@ -111,7 +111,7 @@ const Patients = () => {
       },
     ],
 
-    [navigate],
+    [],
   );
 
   const subrowData = data
@@ -122,7 +122,7 @@ const Patients = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="55px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -131,12 +131,6 @@ const Patients = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient" />
-
-        <HStack w="full" p={2} flexWrap="wrap">
-          {outPatientList.map((item) => (
-            <Button key={item.id}>{item.text}</Button>
-          ))}
-        </HStack>
 
         <HStack
           w="100%"
@@ -181,4 +175,4 @@ const Patients = () => {
   );
 };
 
-export default Patients;
+export default PatientVisits;

@@ -12,9 +12,11 @@ import {
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
-import Step1 from '../components/PatientProfile/Step1';
 import Step2 from '../components/PatientProfile/Step2';
 import AppointmentCard from '../components/PatientProfile/AppointmentCard';
+import { useGetPatientQuery } from '../api/patients.api';
+import PaymentCard from '../components/PatientProfile/PaymentCard';
+import Medical from '../components/PatientProfile/Medical';
 
 const PatientCard = ({ text, icon, onClick }) => {
   const [step, setStep] = useState(0);
@@ -112,31 +114,28 @@ const HorizontalStack = ({ title, text }) => (
 const PatientDetail = () => {
   const [sideItem, setSideItem] = useState(0);
   const { id } = useParams();
-  const { data, loading } = useSelector((state) => state.patients);
   const dispatch = useDispatch();
+
+  const { data, isLoading } = useGetPatientQuery(id);
 
   const handleSetSideItem = useCallback((step) => {
     setSideItem(step);
   }, [setSideItem]);
 
-  useEffect(() => {
-    dispatch(getPatientDetail(id));
-  }, []);
-
-  const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
-  console.log(data);
+  // const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
+  // console.log(data);
 
   return (
     <VStack
       h="100vh"
       w="full"
       mt="55px"
-      bgColor="whitesmoke"
+      bgColor="gray.50"
       alignItems="center"
       // justifyContent="center"
       p={3}
     >
-      {loading ? <Text>loading...</Text> : (
+      {isLoading ? <Text>loading...</Text> : (
         <HStack
           p={3}
           w="full"
@@ -184,14 +183,15 @@ const PatientDetail = () => {
               ))}
             </VStack>
           </VStack>
-          {sideItem === 0 && <Step1 />}
+          {sideItem === 0 && <Medical />}
           {sideItem === 1 && <Step2 />}
           {sideItem === 2 && <AppointmentCard />}
+          {sideItem === 4 && <PaymentCard />}
 
         </HStack>
       )}
       <Box w="full">
-        {loading ? <Text>loading...</Text>
+        {isLoading ? <Text>loading...</Text>
           : (
             <HStack
               w="full"

@@ -87,6 +87,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
           { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
+          { id: nanoid(), title: 'Patient Queue', link: '/patient-queue' },
         ]}
         icon={<FaCalendarTimes size={20} />}
       />
@@ -164,7 +165,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/patients' || pathname.includes('/patient-detail')}
+        selected={pathname === '/patients' || pathname.includes('/patient-detail') || pathname.includes('/add-patient')}
         onClick={() => navigate('/patients')}
         text="patients"
         icon={<FaHospitalAlt size={20} />}

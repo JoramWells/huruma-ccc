@@ -60,7 +60,6 @@ import ProcedureGroups from './layouts/ProcedureGroups';
 import AddProcedureGroup from './layouts/AddProcedureGroup';
 import AddProcedures from './layouts/AddProcedures';
 import SupplierDetail from './layouts/SupplierDetail';
-import Patients from './layouts/Patients';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
 import AdmissionDetail from './layouts/AdmissionDetail';
@@ -72,10 +71,13 @@ import HospitalStores from './layouts/HospitalStores';
 import AddWard from './layouts/AddWard';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
-import AddMaternityProfile from './layouts/AddMaternityProfile';
-import UserDetail from './layouts/UserDetail';
-import MaternityProfileDetail from './layouts/MaternityProfileDetail';
+import PatientQueue from './layouts/PatientQueue';
 
+const Patients = lazy(() => import('./layouts/Patients'));
+const AddMaternityProfile = lazy(() => import('./layouts/AddMaternityProfile'));
+const UserDetail = lazy(() => import('./layouts/UserDetail'));
+const MaternityProfileDetail = lazy(() => import('./layouts/MaternityProfileDetail'));
+const AddPatient = lazy(() => import('./layouts/AddPatient'));
 const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
 const MaternityProfile = lazy(() => import('./layouts/MaternityProfile'));
@@ -113,6 +115,8 @@ function App() {
             <Route path="/add-insurance" element={<AddInsurance />} />
 
             <Route path="/patients" element={<Patients />} />
+            <Route path="/patient-queue" element={<PatientQueue />} />
+            <Route path="/add-patient" element={<AddPatient />} />
             <Route path="/patient-detail/:id" element={<PatientDetail />} />
 
             <Route path="/maternity" element={<MaternityServices />} />

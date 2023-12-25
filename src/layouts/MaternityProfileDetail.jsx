@@ -11,7 +11,7 @@ import {
   FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaFileInvoice, FaUser,
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
-import Step1 from '../components/PatientProfile/Step1';
+import Step1 from '../components/PatientProfile/Medical';
 import Step2 from '../components/PatientProfile/Step2';
 import { useGetMaternityProfileQuery } from '../api/maternity.api';
 import AppointmentCard from '../components/PatientProfile/AppointmentCard';

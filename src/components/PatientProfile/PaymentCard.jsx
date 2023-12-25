@@ -2,7 +2,7 @@ import {
   Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 
-const Step2 = () => (
+const PaymentCard = () => (
   <VStack
     bgColor="white"
     // w="full"
@@ -17,7 +17,7 @@ const Step2 = () => (
       w="full"
       justifyContent="space-between"
     >
-      <Text fontSize="xl" fontWeight="semibold">Recent Admissions</Text>
+      <Text fontSize="xl" fontWeight="semibold">Payments</Text>
       <Button
         rounded="full"
         variant="outline"
@@ -30,4 +30,4 @@ const Step2 = () => (
   </VStack>
 );
 
-export default Step2;
+export default PaymentCard;
