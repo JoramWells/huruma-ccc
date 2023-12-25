@@ -6,7 +6,7 @@ export const maternityProfileApi = createApi({
     baseUrl: 'http://localhost:5000',
   }),
   endpoints: (builder) => ({
-    getMaternityProfile: builder.query({
+    getMaternityProfiles: builder.query({
       query: () => 'maternity-profile/fetchAll',
     }),
 
@@ -14,17 +14,20 @@ export const maternityProfileApi = createApi({
     getMaternityAntenatalProfile: builder.query({
       query: () => 'maternity-antenatal-profile/fetchAll',
     }),
-    addWard: builder.mutation({
-      query: (newWard) => ({
+    addMaternityProfile: builder.mutation({
+      query: (newMaternity) => ({
         url: 'add',
         method: 'POST',
-        body: newWard,
+        body: newMaternity,
       }),
+    }),
+    getMaternityProfile: builder.query({
+      query: (id) => `maternity-profile/detail/${id}`,
     }),
   }),
 });
 
 export const {
-  useGetMaternityProfileQuery, useGetMaternityAntenatalProfileQuery,
-  useAddWardMutation,
+  useGetMaternityProfilesQuery, useGetMaternityAntenatalProfileQuery,
+  useAddMaternityProfileMutation, useGetMaternityProfileQuery,
 } = maternityProfileApi;

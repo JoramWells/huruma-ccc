@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Badge,
   Box,
@@ -5,6 +6,7 @@ import {
   FormLabel,
   HStack,
   Input,
+  VStack,
 } from '@chakra-ui/react';
 // import { useEffect } from "react";
 // import { useSelector } from 'react-redux';
@@ -31,49 +33,41 @@ const MedicalSurgicalInfo = () => {
   const options = [];
 
   return (
-    <Box>
-      <FormControl mt={5}>
-        <HStack
-          w="full"
-          justifyItems="center"
-          alignContent="center"
-          alignItems="center"
-        >
-          <FormLabel mt={1}>Item Type</FormLabel>
-          <Badge
-            _hover={{
-              cursor: 'pointer',
-              bgColor: 'gray.100',
-            }}
-            colorScheme="green"
-            onClick={() => navigate('/add-item-type')}
-          >
-            Add Item Type
-          </Badge>
-        </HStack>
-        <Select options={options} />
+    <VStack spacing={8}>
+      <FormControl>
+
+        <FormLabel mt={1}>Surgical Operations History</FormLabel>
+        <Input size="lg" placeholder="Select..." />
+
       </FormControl>
 
       {/* category */}
-      <FormControl mt={5}>
-        <HStack>
-          <FormLabel>Item Category</FormLabel>
-          <Badge>Add New</Badge>
-        </HStack>
-        <Input placeholder="Select Item Category" />
+      <FormControl>
+        <FormLabel>Diabetes</FormLabel>
+        <Input size="lg" />
       </FormControl>
 
-      {/* item code */}
-      <FormControl mt={5}>
-        <FormLabel>Item Code</FormLabel>
-        <Input placeholder="Enter Item code" />
+      <FormControl>
+        <FormLabel>Hypertension</FormLabel>
+        <Input
+          size="lg"
+        />
       </FormControl>
 
-      <FormControl mt={5}>
-        <FormLabel>Item Description</FormLabel>
-        <Input as="textarea" placeholder="Enter Sub Item of" />
+      <FormControl>
+        <FormLabel>Blood Transfusion</FormLabel>
+        <Input
+          size="lg"
+        />
       </FormControl>
-    </Box>
+
+      <FormControl>
+        <FormLabel>Tuberculosis</FormLabel>
+        <Input
+          size="lg"
+        />
+      </FormControl>
+    </VStack>
   );
 };
 

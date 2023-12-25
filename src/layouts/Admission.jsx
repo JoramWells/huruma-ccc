@@ -88,6 +88,15 @@ const Admission = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-admission" />
 
+        <HStack>
+          <Box>
+            <Text>
+              Paid
+            </Text>
+            <Text>34</Text>
+          </Box>
+        </HStack>
+
         <HStack
           w="100%"
           justifyContent="space-between"

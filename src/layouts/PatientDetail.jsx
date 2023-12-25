@@ -14,7 +14,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
 import Step1 from '../components/PatientProfile/Step1';
 import Step2 from '../components/PatientProfile/Step2';
-import Step3 from '../components/PatientProfile/Step3';
+import AppointmentCard from '../components/PatientProfile/AppointmentCard';
 
 const PatientCard = ({ text, icon, onClick }) => {
   const [step, setStep] = useState(0);
@@ -186,7 +186,7 @@ const PatientDetail = () => {
           </VStack>
           {sideItem === 0 && <Step1 />}
           {sideItem === 1 && <Step2 />}
-          {sideItem === 2 && <Step3 />}
+          {sideItem === 2 && <AppointmentCard />}
 
         </HStack>
       )}

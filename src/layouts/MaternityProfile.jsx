@@ -8,11 +8,11 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetMaternityProfileQuery } from '../api/maternity.api';
+import { useGetMaternityProfilesQuery } from '../api/maternity.api';
 import UserNameAvatar from '../components/UserNameAvatar';
 
 const MaternityProfile = () => {
-  const { data } = useGetMaternityProfileQuery();
+  const { data } = useGetMaternityProfilesQuery();
 
   const columns = useMemo(
     () => [
@@ -38,7 +38,12 @@ const MaternityProfile = () => {
       {
         header: 'Name of Client',
         accessorKey: 'name_of_client',
-        cell: (props) => <UserNameAvatar fullName={props.getValue()} />,
+        cell: (props) => (
+          <UserNameAvatar
+            fullName={props.getValue()}
+            link={`/maternity-profile-detail/${props.row.original.maternity_profile_id}`}
+          />
+        ),
 
       },
       {

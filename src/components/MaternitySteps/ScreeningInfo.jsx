@@ -20,38 +20,38 @@ const ScreeningInfo = () => {
     <VStack spacing={8}>
       <FormControl>
 
-        <FormLabel mt={1}>Name  of Client</FormLabel>
-        <Input size="lg" placeholder="Enter Name of the Client" />
+        <FormLabel mt={1}>Gravida</FormLabel>
+        <Input size="lg" />
 
       </FormControl>
 
       {/* category */}
       <FormControl>
-        <FormLabel>DOB</FormLabel>
-        <Input size="lg" type="date" />
+        <FormLabel>Parity</FormLabel>
+        <Input size="lg" type="number" />
       </FormControl>
 
       <FormControl>
-        <FormLabel>Phone Number</FormLabel>
+        <FormLabel>Height</FormLabel>
         <Input
           size="lg"
-          placeholder="Enter phone number"
+          type="number"
         />
       </FormControl>
 
       <FormControl>
-        <FormLabel>Occupation</FormLabel>
+        <FormLabel>L.M.P</FormLabel>
         <Input
           size="lg"
-          placeholder="Enter Occupation"
+          type="number"
         />
       </FormControl>
 
       <FormControl>
-        <FormLabel>Address</FormLabel>
+        <FormLabel>EDD</FormLabel>
         <Input
           size="lg"
-          placeholder="Enter Address"
+          type="number"
         />
       </FormControl>
 

@@ -14,7 +14,6 @@ import { nanoid } from '@reduxjs/toolkit';
 import { getPatientDetail } from '../_reducers/patientSlice';
 import Step1 from '../components/PatientProfile/Step1';
 import Step2 from '../components/PatientProfile/Step2';
-import Step3 from '../components/PatientProfile/Step3';
 import { useGetUserQuery } from '../api/users.api';
 
 const PatientCard = ({ text, icon, onClick }) => {
@@ -114,7 +113,6 @@ const UserDetail = () => {
   const { id } = useParams();
 
   const { data } = useGetUserQuery(id);
-  console.log(data);
 
   return (
     <VStack
