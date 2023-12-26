@@ -72,6 +72,7 @@ import AddWard from './layouts/AddWard';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
 import PatientQueue from './layouts/PatientQueue';
+import ProceduresItems from './layouts/ProceduresItems';
 
 const Patients = lazy(() => import('./layouts/Patients'));
 const AddMaternityProfile = lazy(() => import('./layouts/AddMaternityProfile'));
@@ -163,6 +164,7 @@ function App() {
             <Route path="/nursing-station" element={<NursingStation />} />
 
             <Route path="/procedures" element={<Procedures />} />
+            <Route path="/procedure-items" element={<ProceduresItems />} />
             <Route path="/add-procedures" element={<AddProcedures />} />
             <Route path="/procedure-groups" element={<ProcedureGroups />} />
             <Route path="/add-procedure-group" element={<AddProcedureGroup />} />

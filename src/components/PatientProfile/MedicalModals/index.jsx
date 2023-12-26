@@ -7,6 +7,7 @@ import {
 import { useMemo } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import VitalSignsTable from './VitalSignsTable';
+import InputCell from '../InputCell';
 
 const columns = [
 
@@ -32,7 +33,7 @@ const columns = [
   {
     header: 'Input',
     accessorKey: 'Normal Values',
-    cell: (props) => <Text>{props.getValue()}</Text>,
+    cell: (props) => <InputCell initialValue={props.getValue()} />,
 
   },
   {

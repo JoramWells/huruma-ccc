@@ -190,58 +190,6 @@ const PatientDetail = () => {
 
         </HStack>
       )}
-      <Box w="full">
-        {isLoading ? <Text>loading...</Text>
-          : (
-            <HStack
-              w="full"
-              p={3}
-              flexWrap="wrap"
-              alignItems="flex-start"
-            >
-              <Box
-                // w="full"
-                bgColor="white"
-                rounded="3xl"
-                flex={1}
-
-              >
-                <HStack p={3}>
-                  <Text fontSize="2xl" fontWeight="bold">Hospital Details</Text>
-
-                </HStack>
-                <Divider />
-                <HorizontalStack title="Registered:" text={data.existing_patient} />
-
-                <HorizontalStack title="Hospital ID:" text={data.hospital_id} />
-                <HorizontalStack title="Patient Category" text={data.patient_category_id} />
-                <HorizontalStack title=" Out/In patient file:" text={data.out_patient_file_no} />
-                <HorizontalStack title="Membership enabled" text={data.membership_enabled} />
-
-              </Box>
-
-              {/* payment details */}
-              <Box
-                flex={1}
-                bgColor="white"
-                rounded="3xl"
-
-              >
-                <HStack p={3}>
-                  <Text fontSize="2xl" fontWeight="bold">Payment Details</Text>
-
-                </HStack>
-                <Divider />
-                <HorizontalStack title="Copay Account" text={data.copay_payment_account_id} />
-
-                <HorizontalStack title="Insurance Membership Number" text={data.insurance_membership_number} />
-                <HorizontalStack title="Patient Category" text={data.patient_category_id} />
-
-              </Box>
-
-            </HStack>
-          )}
-      </Box>
 
     </VStack>
   );

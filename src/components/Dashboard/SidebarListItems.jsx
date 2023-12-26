@@ -219,7 +219,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/procedures'}
+        selected={pathname === '/procedures' || pathname.includes('/procedure-items')}
         onClick={onToggle}
         text="Procedures"
         link="/procedures"

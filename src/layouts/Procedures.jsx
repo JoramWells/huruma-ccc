@@ -12,52 +12,45 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { getAllRadiologyRequests } from '../_reducers/radiologySlice';
+import { useGetProceduresQuery } from '../api/procedureDetails.api';
 
 const Procedures = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.radiology);
+  const { data } = useGetProceduresQuery();
 
   const columns = useMemo(
     () => [
       {
-        header: 'Service Category',
-        accessorKey: 'serviceCategory',
+        header: 'Procedure Name',
+        accessorKey: 'procedure_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Service Name',
-        accessorKey: 'serviceName',
+        header: 'Procedure Cost',
+        accessorKey: 'procedure_cost',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Service Cost (Cash)',
-        accessorKey: 'serviceCostCash',
+        header: 'Procedure Cost(Corporate)',
+        accessorKey: 'procedure_cost_corporate',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Service Cost (Corporate)',
-        accessorKey: 'serviceCostCorporate',
+        header: 'Procedure Cost (Foreigner)',
+        accessorKey: 'procedure_cost_foreigner',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text whiteSpace="nowrap">{props.getValue()}</Text>,
 
       },
       {
-        header: 'Service Cost (Insurance)',
-        accessorKey: 'serviceCostInsurance',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-
-      {
-        header: 'Service Cost (Foreigner)',
-        accessorKey: 'serviceCostForeigner',
+        header: 'Procedure Cost(Insurance)',
+        accessorKey: 'procedure_cost_insurance',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
@@ -72,13 +65,6 @@ const Procedures = () => {
           ...item,
           subRows: [],
         }));
-    // const fetchData = useCallback(()=>{
-    //   dispatch(getAllPriceLists())
-    // },[dispatch])
-
-  useEffect(() => {
-    dispatch(getAllRadiologyRequests());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -120,7 +106,7 @@ const Procedures = () => {
             >
               {' '}
               (
-              {subRowData.length}
+              {subRowData?.length}
               )
 
             </span>
