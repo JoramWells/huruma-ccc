@@ -74,7 +74,6 @@ const PatientQueue = () => {
   } = useGetAppointmentsQuery();
 
   // const { data } = useSelector((state) => state.patients);
-  console.log(data);
 
   const columnsx = useMemo(
     () => [

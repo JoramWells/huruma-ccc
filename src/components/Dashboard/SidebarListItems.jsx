@@ -41,6 +41,7 @@ const SidebarListItems = () => {
         link="/administration"
         itemList={[
           { id: nanoid(), title: 'Departments', link: '/admin-departments' },
+          { id: nanoid(), title: 'Diseases', link: '/diseases' },
           { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },
           { id: nanoid(), title: 'Hospital Branch', link: '/general-store' },
           { id: nanoid(), title: 'Insurances', link: '/admin-insurances' },

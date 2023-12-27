@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 import {
   Box,
@@ -22,6 +23,8 @@ import { useGetInsurancesQuery } from '../../api/insurance.api';
 const Corporate = () => {
   const [supplierName, setSupplierName] = useState('');
   const [mobileNo, setMobileNo] = useState('');
+  const [payment_type_id, setPaymentTypeId] = useState('');
+  const [insurance_membership_number, setInsuranceMemberShipNo] = useState('');
   const [classification, setClassification] = useState({ value: '', label: '' });
   const [status, setStatus] = useState({ value: 'Active', label: 'Active' });
 
@@ -128,8 +131,8 @@ const Corporate = () => {
         <FormLabel>Insurance Membership Number</FormLabel>
         <Input
           size="lg"
-          value={mobileNo}
-          onChange={(e) => setMobileNo(e.target.value)}
+          value={insurance_membership_number}
+          onChange={(e) => setInsuranceMemberShipNo(e.target.value)}
         />
       </FormControl>
 

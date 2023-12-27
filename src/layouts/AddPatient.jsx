@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import {
   Box, Button, HStack, Step, StepDescription, StepIcon,
@@ -6,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
+import { useSearchParams } from 'react-router-dom';
 import { HospitalDetail, PaymentDetail, PersonalDetail } from '../components/PatientForm';
 import { useAddPatientMutation } from '../api/patients.api';
 
@@ -26,12 +28,15 @@ const AddPatient = () => {
     { title: 'Payment', description: 'Payment Details' },
   ];
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
     // navigate({
     //   pathname: '/add-invoice',
     //   search: `?id=${invoiceId}`,
     // });
+    setSearchParams(activeStep);
   };
 
   const handleBack = () => {

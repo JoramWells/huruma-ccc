@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import {
   Box,
@@ -46,7 +47,6 @@ const AddVitals = () => {
     sp02,
   };
 
-  console.log(error);
   return (
     <VStack
       w="full"

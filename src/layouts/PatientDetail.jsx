@@ -119,7 +119,6 @@ const PatientDetail = () => {
   }, [setSideItem]);
 
   // const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
-  console.log(data);
 
   return (
     <VStack

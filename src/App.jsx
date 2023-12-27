@@ -62,19 +62,21 @@ import AddProcedures from './layouts/AddProcedures';
 import SupplierDetail from './layouts/SupplierDetail';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
-import AdmissionDetail from './layouts/AdmissionDetail';
-import AdmissionCategory from './layouts/AdmissionCategory';
 import AddAdmissionCategory from './layouts/AddAdmissionCategory';
 import AdmissionType from './layouts/AdmissionType';
 import AdmissionBedAllocation from './layouts/AdmissionBedAllocation';
 import HospitalStores from './layouts/HospitalStores';
-import AddWard from './layouts/AddWard';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
 import PatientQueue from './layouts/PatientQueue';
 import ProceduresItems from './layouts/ProceduresItems';
-import AddVitals from './layouts/AddVitals';
 
+const AddVitals = lazy(() => import('./layouts/AddVitals'));
+const Admission = lazy(() => import('./layouts/Admission'));
+const AdmissionCategory = lazy(() => import('./layouts/AdmissionCategory'));
+const AdmissionDetail = lazy(() => import('./layouts/AdmissionDetail'));
+const AddWard = lazy(() => import('./layouts/AddWard'));
+const Disease = lazy(() => import('./layouts/Disease'));
 const Patients = lazy(() => import('./layouts/Patients'));
 const AddMaternityProfile = lazy(() => import('./layouts/AddMaternityProfile'));
 const UserDetail = lazy(() => import('./layouts/UserDetail'));
@@ -85,7 +87,7 @@ const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenata
 const MaternityProfile = lazy(() => import('./layouts/MaternityProfile'));
 const AppointmentDetail = lazy(() => import('./layouts/AppointmentDetail'));
 const Appointments = lazy(() => import('./layouts/Appointments'));
-const Admission = lazy(() => import('./layouts/Admission'));
+// const Admission = lazy(() => import('./layouts/Admission'));
 const MaternityServices = lazy(() => import('./layouts/MaternityServices'));
 const Homepage = lazy(() => import('./layouts/Homepage'));
 const PatientDetail = lazy(() => import('./layouts/PatientDetail'));
@@ -113,6 +115,8 @@ function App() {
             <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
+            <Route path="/diseases" element={<Disease />} />
+
             <Route path="/admin-insurances" element={<Insurance />} />
             <Route path="/add-insurance" element={<AddInsurance />} />
 
@@ -126,7 +130,6 @@ function App() {
 
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
-            <Route path="/admission" element={<Admission />} />
             <Route path="/admission" element={<Admission />} />
             <Route path="/add-admission" element={<AddAdmission />} />
 
