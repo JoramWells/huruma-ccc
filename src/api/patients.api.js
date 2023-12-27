@@ -19,7 +19,25 @@ export const patientsApi = createApi({
     getPatient: builder.query({
       query: (id) => `detail/${id}`,
     }),
+    updatePatient: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `edit/${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+    }),
+    deletePatient: builder.mutation({
+      query(id) {
+        return {
+          url: `delete${id}`,
+          method: 'DELETE',
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetPatientsQuery, useAddPatientMutation, useGetPatientQuery } = patientsApi;
+export const {
+  useGetPatientsQuery, useUpdatePatientMutation,
+  useDeletePatientMutation, useAddPatientMutation, useGetPatientQuery,
+} = patientsApi;

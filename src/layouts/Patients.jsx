@@ -109,6 +109,9 @@ const Patients = () => {
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
+      {
+        header: 'Action',
+      },
     ],
 
     [navigate],

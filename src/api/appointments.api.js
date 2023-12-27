@@ -9,7 +9,7 @@ export const appointmentApi = createApi({
     getAppointments: builder.query({
       query: () => 'fetchAll',
     }),
-    addWard: builder.mutation({
+    addAppointment: builder.mutation({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
@@ -19,4 +19,4 @@ export const appointmentApi = createApi({
   }),
 });
 
-export const { useGetAppointmentsQuery, useAddWardMutation } = appointmentApi;
+export const { useGetAppointmentsQuery, useAddAppointmentMutation } = appointmentApi;

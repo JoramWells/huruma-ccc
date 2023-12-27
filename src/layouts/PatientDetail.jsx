@@ -11,12 +11,12 @@ import {
   FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaEdit, FaFileInvoice, FaUser,
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
-import { getPatientDetail } from '../_reducers/patientSlice';
 import Step2 from '../components/PatientProfile/Step2';
 import AppointmentCard from '../components/PatientProfile/AppointmentCard';
 import { useGetPatientQuery } from '../api/patients.api';
 import PaymentCard from '../components/PatientProfile/PaymentCard';
 import Medical from '../components/PatientProfile/Medical';
+import EditDeletePatientModal from '../components/PatientProfile/EditDeletePatientModal';
 
 const PatientCard = ({ text, icon, onClick }) => {
   const [step, setStep] = useState(0);
@@ -32,6 +32,7 @@ const PatientCard = ({ text, icon, onClick }) => {
         bgColor="whitesmoke"
         p={4}
         rounded="lg"
+        transition="all 1s ease"
         _hover={{
           cursor: 'pointer',
           // colorScheme: 'blue',
@@ -74,11 +75,6 @@ const profileData = [
     id: nanoid(),
     text: 'Payments',
     icon: <FaCreditCard />,
-  },
-  {
-    id: nanoid(),
-    text: 'View Profile',
-    icon: <FaUser />,
   },
 ];
 
@@ -129,7 +125,7 @@ const PatientDetail = () => {
     <VStack
       h="100vh"
       w="full"
-      mt="55px"
+      mt="65px"
       bgColor="gray.50"
       alignItems="center"
       // justifyContent="center"
@@ -137,7 +133,6 @@ const PatientDetail = () => {
     >
       {isLoading ? <Text>loading...</Text> : (
         <HStack
-          p={3}
           w="full"
           alignItems="flex-start"
         >
@@ -154,7 +149,7 @@ const PatientDetail = () => {
           >
             <Avatar
               name={`${data.first_name} ${data.last_name}`}
-              size="2xl"
+              size="xl"
               color="white"
             />
             <VStack spacing={2}>
@@ -162,7 +157,7 @@ const PatientDetail = () => {
                 textTransform="capitalize"
                 fontWeight="bold"
               >
-                {data?.first_name + data?.middle_name + data?.last_name}
+                {`${data?.first_name} ${data?.middle_name} ${data?.last_name}`}
 
               </Text>
               <Text color="gray.500">{data?.id_number}</Text>
@@ -181,6 +176,12 @@ const PatientDetail = () => {
                   onClick={() => handleSetSideItem(idx)}
                 />
               ))}
+              <EditDeletePatientModal
+                firstName={data?.first_name}
+                middleName={data?.middle_name}
+                lastName={data?.last_name}
+                idNumber={data?.id_number}
+              />
             </VStack>
           </VStack>
           {sideItem === 0 && <Medical />}

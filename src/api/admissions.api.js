@@ -9,7 +9,7 @@ export const admissionApi = createApi({
     getAdmissions: builder.query({
       query: () => 'fetchAll',
     }),
-    addWard: builder.mutation({
+    addAdmission: builder.mutation({
       query: (newWard) => ({
         url: 'add',
         method: 'POST',
@@ -19,4 +19,4 @@ export const admissionApi = createApi({
   }),
 });
 
-export const { useGetAdmissionsQuery, useAddWardMutation } = admissionApi;
+export const { useGetAdmissionsQuery, useAddAdmissionMutation } = admissionApi;
