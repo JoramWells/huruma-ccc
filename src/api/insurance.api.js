@@ -1,32 +1,32 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const patientsApi = createApi({
-  reducerPath: 'patientsApi',
+export const insuranceApi = createApi({
+  reducerPath: 'insuranceApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/patient',
+    baseUrl: 'http://localhost:5000/insurance',
   }),
   endpoints: (builder) => ({
-    getPatients: builder.query({
+    getInsurances: builder.query({
       query: () => 'fetchAll',
     }),
-    addPatient: builder.mutation({
+    addInsurance: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getPatient: builder.query({
+    getInsurance: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updatePatient: builder.mutation({
+    updateInsurance: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `edit/${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deletePatient: builder.mutation({
+    deleteInsurance: builder.mutation({
       query(id) {
         return {
           url: `delete/${id}`,
@@ -38,6 +38,6 @@ export const patientsApi = createApi({
 });
 
 export const {
-  useGetPatientsQuery, useUpdatePatientMutation,
-  useDeletePatientMutation, useAddPatientMutation, useGetPatientQuery,
-} = patientsApi;
+  useGetInsurancesQuery, useUpdateInsuranceMutation,
+  useDeleteInsuranceMutation, useAddInsuranceMutation, useGetInsuranceQuery,
+} = insuranceApi;

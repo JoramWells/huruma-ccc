@@ -111,6 +111,7 @@ const Patients = () => {
       },
       {
         header: 'Action',
+        cell: () => <Button>more</Button>,
       },
     ],
 

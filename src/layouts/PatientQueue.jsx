@@ -13,6 +13,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
+import { useGetAppointmentsQuery } from '../api/appointments.api';
 
 const outPatientList = [
 
@@ -70,20 +71,20 @@ const PatientQueue = () => {
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetPatientsQuery();
+  } = useGetAppointmentsQuery();
 
   // const { data } = useSelector((state) => state.patients);
-  // console.log(data);
+  console.log(data);
 
   const columnsx = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'last_name',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
-              fullName={`${props.row.original.first_name} ${props.row.original.last_name}`}
+              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
             />
           </Box>
         ),

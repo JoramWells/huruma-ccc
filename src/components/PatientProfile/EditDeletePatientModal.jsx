@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import Select from 'react-select';
 import { useParams } from 'react-router-dom';
-import { useUpdatePatientMutation } from '../../api/patients.api';
+import { useDeletePatientMutation, useUpdatePatientMutation } from '../../api/patients.api';
 
 const PatientCard = ({ text, icon, onClick }) => (
   <VStack
@@ -52,6 +52,7 @@ const EditDeletePatientModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [updatePatient, { isLoading }] = useUpdatePatientMutation();
+  const [deletePatient, { isLoading: isLoadingDelete }] = useDeletePatientMutation();
 
   const { id } = useParams();
   const inputValues = {
@@ -141,7 +142,9 @@ const EditDeletePatientModal = ({
             <Button colorScheme="gray" mr={3} onClick={() => updatePatient(inputValues)}>
               {isLoading ? 'loading...' : 'Save'}
             </Button>
-            <Button variant="ghost" colorScheme="red">Delete</Button>
+            <Button variant="ghost" colorScheme="red" onClick={() => deletePatient(id)}>
+              {isLoading ? 'loading..' : 'Delete'}
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

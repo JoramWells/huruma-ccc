@@ -5,6 +5,9 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import Cash from '../PaymentOptions/Cash';
+import Corporate from '../PaymentOptions/Cooporate';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -205,6 +208,7 @@ HospitalDetail.defaultProps = {
 
 // hospital details
 const PaymentDetail = () => {
+  const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
   const options = [
     { value: '1', label: 'CASH' },
     { value: '2', label: 'CORPORATE' },
@@ -217,9 +221,15 @@ const PaymentDetail = () => {
     >
       <FormControl>
         <FormLabel>Select Payment Type</FormLabel>
-        <Select options={options} styles={customStyles} />
+        <Select
+          options={options}
+          styles={customStyles}
+          onChange={(value) => setPaymentOption(value)}
+        />
+        {paymentOption.value === '2' && <Corporate />}
 
       </FormControl>
+      {paymentOption.value === '1' && <Cash />}
 
     </VStack>
   );
