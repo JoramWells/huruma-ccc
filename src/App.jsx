@@ -70,6 +70,7 @@ import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
 import PatientQueue from './layouts/PatientQueue';
 import ProceduresItems from './layouts/ProceduresItems';
+import DiseaseMinistry from './layouts/DiseaseMinistry';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -116,6 +117,7 @@ function App() {
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
             <Route path="/diseases" element={<Disease />} />
+            <Route path="/disease-ministry" element={<DiseaseMinistry />} />
 
             <Route path="/admin-insurances" element={<Insurance />} />
             <Route path="/add-insurance" element={<AddInsurance />} />

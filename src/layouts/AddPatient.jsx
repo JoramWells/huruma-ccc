@@ -8,7 +8,9 @@ import {
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
-import { HospitalDetail, PaymentDetail, PersonalDetail } from '../components/PatientForm';
+import {
+  Consultation, HospitalDetail, PaymentDetail, PersonalDetail,
+} from '../components/PatientForm';
 import { useAddPatientMutation } from '../api/patients.api';
 
 const AddPatient = () => {
@@ -25,6 +27,7 @@ const AddPatient = () => {
   const steps = [
     { title: 'Personal', description: 'Personal Information' },
     { title: 'Next of Kin', description: 'Next of Kin Details' },
+    { title: 'Consultation', description: 'Consultation Details' },
     { title: 'Payment', description: 'Payment Details' },
   ];
 
@@ -61,7 +64,7 @@ const AddPatient = () => {
       <Stepper
         index={activeStep}
         mb={2}
-        w="50%"
+        w="65%"
         mt={5}
         rounded="lg"
         bgColor="white"
@@ -118,7 +121,9 @@ const AddPatient = () => {
         />
         )}
 
-        {activeStep === 3 && <PaymentDetail />}
+        {activeStep === 3 && <Consultation />}
+
+        {activeStep === 4 && <PaymentDetail />}
 
         {/* payment info */}
 
@@ -130,7 +135,7 @@ const AddPatient = () => {
             Back
 
           </Button>
-          {activeStep === 3 ? (
+          {activeStep === 4 ? (
             <Button
               onClick={() => addPatient(inputValues)}
             >

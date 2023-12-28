@@ -42,6 +42,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Departments', link: '/admin-departments' },
           { id: nanoid(), title: 'Diseases', link: '/diseases' },
+          { id: nanoid(), title: 'Ministry Diseases', link: '/disease-ministry' },
           { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },
           { id: nanoid(), title: 'Hospital Branch', link: '/general-store' },
           { id: nanoid(), title: 'Insurances', link: '/admin-insurances' },
@@ -78,13 +79,28 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/appointments'
+        selected={pathname === '/Charges'
           || pathname.includes('/appointment-checklist')
           || pathname.includes('/appointment-diagnosis')
           || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"
         link="/appointments"
+        itemList={[
+          { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
+          { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
+          { id: nanoid(), title: 'Patient Queue', link: '/patient-queue' },
+        ]}
+        icon={<FaCalendarTimes size={20} />}
+      />
+      <SidebarItemLink
+        selected={pathname === '/charges'
+          || pathname.includes('/charges-checklist')
+          || pathname.includes('/charges-diagnosis')
+          || pathname.includes('/charges-detail')}
+        onClick={onToggle}
+        text="Charges"
+        link="/charges"
         itemList={[
           { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
           { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },

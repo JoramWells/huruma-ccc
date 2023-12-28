@@ -6,44 +6,41 @@ import {
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetDiseasesQuery } from '../api/disease.api';
+import { useGetDiseaseMinistriesQuery } from '../api/diseaseMinistry.api copy';
 
-const Disease = () => {
-  const navigate = useNavigate();
-
+const DiseaseMinistry = () => {
   const {
     data, isLoading,
-  } = useGetDiseasesQuery();
+  } = useGetDiseaseMinistriesQuery();
 
   // const { data } = useSelector((state) => state.admission);
 
   const columns = useMemo(
     () => [
       {
-        header: 'Disease Name',
-        accessorKey: 'disease_name',
+        header: 'Ministry Disease Name',
+        accessorKey: 'ministry_disease_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Ministry Disease',
-        accessorKey: 'ministry_disease_id',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-      },
-      {
-        header: 'ICD ten Code',
-        accessorKey: 'disease_icd_ten_code',
+        header: 'Over Five Years Index',
+        accessorKey: 'over_five_years_index',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
+      },
+      {
+        header: 'Under Five Years Index',
+        accessorKey: 'under_five_years_index',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()}</Text>,
       },
     ],
 
-    [navigate],
+    [],
   );
 
   const subRowData = data
@@ -66,15 +63,6 @@ const Disease = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-admission" />
 
-        <HStack>
-          <Box>
-            <Text>
-              Paid
-            </Text>
-            <Text>34</Text>
-          </Box>
-        </HStack>
-
         <HStack
           w="100%"
           justifyContent="space-between"
@@ -84,7 +72,7 @@ const Disease = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Diseases
+            Ministry Diseases
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -122,4 +110,4 @@ const Disease = () => {
   );
 };
 
-export default Disease;
+export default DiseaseMinistry;
