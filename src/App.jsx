@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable array-callback-return */
 import { Suspense, lazy } from 'react';
 import {
   ChakraProvider,
   theme,
 } from '@chakra-ui/react';
 import {
-  Route, Routes, useLocation,
+  Route, Routes,
 } from 'react-router-dom';
+
 import Dashboard from './components/Dashboard';
 import PriceLists from './layouts/PriceLists';
 import Services from './layouts/Services';
@@ -15,7 +16,7 @@ import AddSubItem from './layouts/AddSubItem';
 import PriceListDetail from './layouts/PriceListDetail';
 import Items from './layouts/Items';
 import AddItem from './layouts/AddItem';
-import AddItemType from './layouts/AddItemType';
+// import AddItemType from './layouts/AddItemType';
 import PriceListItems from './layouts/PriceListItems';
 import ItemType from './layouts/ItemType';
 import Stores from './layouts/Stores';
@@ -71,6 +72,8 @@ import AddWardType from './layouts/AddWardType';
 import PatientQueue from './layouts/PatientQueue';
 import ProceduresItems from './layouts/ProceduresItems';
 import DiseaseMinistry from './layouts/DiseaseMinistry';
+import Charges from './layouts/Charges';
+import ChargesDetail from './layouts/ChargesDetail';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -96,7 +99,6 @@ const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges')
 const Wards = lazy(() => import('./layouts/Wards'));
 
 function App() {
-  const { pathname } = useLocation();
   return (
     <ChakraProvider theme={theme}>
       {/* <Routes>
@@ -115,6 +117,9 @@ function App() {
             <Route path="/dispense-drugs" element={<DispenseDrugs />} />
             <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
+
+            <Route path="/charges" element={<Charges />} />
+            <Route path="/charges-detail/:id" element={<ChargesDetail />} />
 
             <Route path="/diseases" element={<Disease />} />
             <Route path="/disease-ministry" element={<DiseaseMinistry />} />

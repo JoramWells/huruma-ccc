@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
@@ -8,115 +9,76 @@ import {
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import moment from 'moment/moment';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetAppointmentsQuery } from '../api/appointments.api';
+import { useGetCreditPaymentsQuery } from '../api/creditPayment.api';
 
-const UserNameAvatar = ({ fullName }) => (
+const UserNameAvatar = ({ fullName, link }) => (
   <HStack>
     <Avatar
-      // size="sm"
+      size="sm"
       name={fullName}
       color="white"
     />
-    <Text>{fullName}</Text>
+    <Link to={link}>{fullName}</Link>
   </HStack>
 );
 
-const Appointments = () => {
-  const { data } = useGetAppointmentsQuery();
+const Charges = () => {
+  const { data } = useGetCreditPaymentsQuery();
 
   const navigate = useNavigate();
 
   const columns = useMemo(
     () => [
-      // {
-      //   header: 'Appointment ID',
-      //   accessorKey: 'appointment_id',
-      //   cell: (props) => (
-      //     <Box
-      //       padding={2}
-      //       _hover={{
-      //         cursor: 'pointer',
-      //         bgColor: 'gray.50',
-      //       }}
-      //       onClick={() => navigate(`/appointment-detail/${props.getValue()}`)}
-      //     >
-      //       <Text>{props.getValue()}</Text>
-      //     </Box>
-      //   ),
-
-      // },
       {
-        header: 'Full Name',
-        accessorKey: 'patient_detail',
+        header: 'Patient Name',
+        accessorKey: 'patient_full_name',
         cell: (props) => (
-          <Box
-            _hover={{
-              cursor: 'pointer',
-            }}
-            onClick={() => navigate(`/appointment-detail/${props.row.original.appointment_id}`)}
-
-          >
-            <UserNameAvatar
-              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
-            />
-          </Box>
+          <UserNameAvatar
+            fullName={props.getValue()}
+            link={`/charges-detail/${props.row.original.credit_payment_id}`}
+          />
         ),
-
-      },
-      {
-        header: 'Doctor ID',
-        accessorKey: 'doctor_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
       },
 
       {
         header: 'Appointment Date',
-        accessorKey: 'appointment_date',
+        accessorKey: 'date_of_invoice',
         enableSorting: false,
         cell: (props) => (
           <VStack alignItems="flex-start">
             <Text>{moment(props.getValue()).format('LL')}</Text>
-            <Text color="gray.500">{moment(props.row.original.appointment_time, 'HH:mm:ss.SSS').format('h:mm A')}</Text>
+            <Text color="gray.500">{moment(props.row.original.time_of_invoice, 'HH:mm:ss.SSS').format('h:mm A')}</Text>
           </VStack>
         ),
 
       },
       {
-        header: 'Appointment Status',
-        accessorKey: 'appointment_status',
-        cell: (props) => (
-          <Box>
-            {props.getValue() === 'Seen' ? (
-              <Tag
-                colorScheme="green"
-                rounded="full"
-              >
-                Seen
-              </Tag>
-            )
-              : (
-                <Tag
-                  colorScheme="red"
-                  rounded="full"
-                >
-                  Waiting
-                </Tag>
-              )}
-          </Box>
-        ),
+        header: 'Service Description',
+        accessorKey: 'service_desc',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Amount',
+        accessorKey: 'amount',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Total Charge Payment',
+        accessorKey: 'total_charge_payments',
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
     ],
 
-    [navigate],
+    [],
   );
-
-  console.log(data);
 
   const subRowData = data
     && data.map((item) => ({
@@ -179,4 +141,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default Charges;
