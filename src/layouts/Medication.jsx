@@ -108,6 +108,7 @@ const Medication = () => {
           <Button onClick={() => navigate('/medication-category')}>Categories</Button>
           <Button>Groups</Button>
           <Button>Packaging</Button>
+          <Button onClick={() => navigate('/medication-purchases')}>Purchases</Button>
           <Button>Stock Take</Button>
         </HStack>
 

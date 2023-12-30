@@ -18,6 +18,7 @@ import { companyApi } from './api/company.api';
 import { consultationTypeApi } from './api/consultationType.api';
 import { medicationApi } from './api/medication.api';
 import { medicationCategoryApi } from './api/medicationCategory.api';
+import { medicationPurchasesApi } from './api/medicationPurchases.api';
 
 export const store = configureStore({
   reducer: {
@@ -40,6 +41,7 @@ export const store = configureStore({
     [consultationTypeApi.reducerPath]: consultationTypeApi.reducer,
     [medicationApi.reducerPath]: medicationApi.reducer,
     [medicationCategoryApi.reducerPath]: medicationCategoryApi.reducer,
+    [medicationPurchasesApi.reducerPath]: medicationPurchasesApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -61,5 +63,6 @@ export const store = configureStore({
     .concat(consultationTypeApi.middleware)
     .concat(medicationApi.middleware)
     .concat(medicationCategoryApi.middleware)
+    .concat(medicationPurchasesApi.middleware)
   ,
 });

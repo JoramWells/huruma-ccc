@@ -10,9 +10,10 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetAllMedicationCategoryQuery } from '../api/medicationCategory.api';
+import { useGetAllMedicationPurchasesQuery } from '../api/medicationPurchases.api';
 
 const breadCrumbData = [
   {
@@ -22,38 +23,45 @@ const breadCrumbData = [
   },
   {
     id: nanoid(),
-    title: 'Medication Category',
-    link: '/medication-category',
+    title: 'Medication Purchases',
+    link: '/medication-purchases',
     isCurrentPage: true,
   },
 ];
 
 const MedicationPurchases = () => {
-  const { data } = useGetAllMedicationCategoryQuery();
+  const { data } = useGetAllMedicationPurchasesQuery();
 
   const navigate = useNavigate();
 
   const columns = useMemo(
     () => [
       {
-        header: 'Category Name',
-        accessorKey: 'category_name',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Medication Name',
+        accessorKey: 'medication',
+        cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
         width: 50,
 
       },
 
       {
-        header: 'Hospital',
-        accessorKey: 'hospital_id',
+        header: 'Price',
+        accessorKey: 'price',
         enableSorting: false,
-        cell: (props) => <Text>MAIN BRANCH</Text>,
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Credit Account',
-        accessorKey: 'credit_account_id',
+        header: 'Quantity',
+        accessorKey: 'quantity',
+        enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Date of Receipt',
+        accessorKey: 'date_of_receipt',
+        cell: (props) => <Text>{moment(props.getValue()).format('LL')}</Text>,
 
       },
     ],
@@ -66,6 +74,8 @@ const MedicationPurchases = () => {
       ...item,
       subRows: [],
     }));
+
+  const outOfStock = subRowData?.filter((item) => item.quantity === 0);
 
   return (
     <VStack
@@ -81,35 +91,66 @@ const MedicationPurchases = () => {
 
         <HStack
           w="100%"
-          justifyContent="space-between"
-          bgColor="white"
-          p={2}
+          justifyContent="flex-start"
+          // p={1}
           rounded="lg"
-          border="1px"
-          borderColor="gray.200"
-          // mt={2}
         >
-          <Text fontSize="xl" fontWeight="bold">
-            Medication Categories
-            <span style={{
-              fontSize: '18px',
-              // fontWeight: 'normal',
-              color: 'gray',
-            }}
+
+          <Box
+            h={120}
+            w="250px"
+            p={3}
+            border="1px"
+            borderColor="gray.200"
+            rounded="lg"
+            bgColor="white"
+            mt={2}
+          >
+            <Text
+              fontSize="2xl"
+              fontWeight="semibold"
+              mt={2}
             >
-              {' '}
-              (
-              {subRowData?.length}
-              )
+              {subRowData?.length?.toLocaleString()}
 
-            </span>
-          </Text>
-          <HStack>
-            <Button leftIcon={<FaPrint />}>Print Report</Button>
+            </Text>
+            <Text
+              fontSize="lg"
+              color="gray.500"
+              mt={2}
+            >
+              Medication Purchases
 
-            <Button leftIcon={<FaFileDownload />}>Download</Button>
+            </Text>
+          </Box>
+          <Box
+            h={120}
+            w="250px"
+            p={3}
+            border="1px"
+            borderColor="gray.200"
+            rounded="lg"
+            bgColor="white"
+            mt={2}
+          >
+            <Text
+              fontSize="2xl"
+              fontWeight="semibold"
+              mt={2}
+            >
+              {outOfStock?.length?.toLocaleString()}
 
-          </HStack>
+            </Text>
+            <Text
+              fontSize="lg"
+              color="gray.500"
+              mt={2}
+            >
+              Out of Stock
+
+            </Text>
+          </Box>
+          <HStack />
         </HStack>
         <VStack
           w="100%"
