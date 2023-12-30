@@ -9,9 +9,11 @@ import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
 import {
-  Consultation, HospitalDetail, PaymentDetail, PersonalDetail,
+  HospitalDetail, PersonalDetail,
 } from '../components/PatientForm';
 import { useAddPatientMutation } from '../api/patients.api';
+import Consultation from '../components/PatientForm/Consultation';
+import PaymentDetail from '../components/PatientForm/PaymentDetail';
 
 const AddPatient = () => {
   const [first_name, setFirstName] = useState('');
@@ -27,8 +29,8 @@ const AddPatient = () => {
   const steps = [
     { title: 'Personal', description: 'Personal Information' },
     { title: 'Next of Kin', description: 'Next of Kin Details' },
-    { title: 'Consultation', description: 'Consultation Details' },
     { title: 'Payment', description: 'Payment Details' },
+    { title: 'Consultation', description: 'Consultation Details' },
   ];
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -120,10 +122,9 @@ const AddPatient = () => {
           setNHIFNo={setNHIFNo}
         />
         )}
+        {activeStep === 3 && <PaymentDetail />}
 
-        {activeStep === 3 && <Consultation />}
-
-        {activeStep === 4 && <PaymentDetail />}
+        {activeStep === 4 && <Consultation />}
 
         {/* payment info */}
 

@@ -7,7 +7,6 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
-import WardPricesTable from '../components/tables/WardPricesTable';
 // import { getWardPrices } from '../_reducers/wardSlice';
 
 const columns = [
@@ -114,7 +113,7 @@ const WardPrice = () => {
           p={3}
           h="89%"
         >
-          <WardPricesTable data={subrowData} columns={columns} />
+          {/* <WardPricesTable data={subrowData} columns={columns} /> */}
         </Box>
       </Box>
     </VStack>

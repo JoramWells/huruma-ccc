@@ -6,10 +6,12 @@ import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
+import { graphqlSync } from 'graphql';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
@@ -75,7 +77,7 @@ const Patients = () => {
   // const { data } = useSelector((state) => state.patients);
   // console.log(data);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
@@ -118,11 +120,17 @@ const Patients = () => {
     [navigate],
   );
 
-  const subrowData = data
+  const subRowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
         }));
+
+  const filteredData = subRowData?.filter((item) => {
+    const itemDate = moment(item.appointment_date);
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    return itemDate.isSame(todayDate, 'day');
+  });
 
   return (
     <VStack
@@ -160,7 +168,7 @@ const Patients = () => {
             >
               {' '}
               (
-              {subrowData?.length}
+              {filteredData?.length}
               )
 
             </span>
@@ -172,14 +180,24 @@ const Patients = () => {
 
           </HStack>
         </HStack>
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={subrowData} columns={columnsx} />
-        </Box>
+        {filteredData?.length === 0 ? (
+          <VStack p={5}>
+
+            <FaBoxOpen size="120" color="gray" />
+            <Text fontSize="xl" fontWeight="semibold" color="gray.500">No Patients Today</Text>
+
+          </VStack>
+        )
+          : (
+            <Box
+              w="100%"
+              bgColor="white"
+              p={3}
+              h="89%"
+            >
+              <DataTable2 data={filteredData} columns={columns} />
+            </Box>
+          )}
       </Box>
     </VStack>
   );

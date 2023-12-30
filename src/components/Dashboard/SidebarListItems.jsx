@@ -3,7 +3,7 @@ import {
   FaCar,
   FaChild,
   FaFileInvoiceDollar,
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaPills,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaNotesMedical, FaPills,
   FaProcedures,
   FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
@@ -79,7 +79,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/Charges'
+        selected={pathname === '/appointments'
           || pathname.includes('/appointment-checklist')
           || pathname.includes('/appointment-diagnosis')
           || pathname.includes('/appointment-detail')}
@@ -148,6 +148,13 @@ const SidebarListItems = () => {
         icon={<FaChild size={20} />}
       />
 
+      <SidebarItemButton
+        selected={pathname === '/medication'}
+        onClick={() => navigate('/medication')}
+        text="medication"
+        icon={<FaNotesMedical size={20} />}
+      />
+
       <SidebarItemLink
         selected={pathname === '/nursing-station'}
         onClick={onToggle}
@@ -155,7 +162,7 @@ const SidebarListItems = () => {
         link="/nursing-station"
         itemList={[
           { id: nanoid(), title: 'Dialysis Package', link: '/ward-prices' },
-          { id: nanoid(), title: 'Patient Queue', link: '/ward-prices' },
+          { id: nanoid(), title: 'Patient Queue', link: '/patients' },
           { id: nanoid(), title: 'Pharmacy Requests', link: '/pharmeuticals' },
           { id: nanoid(), title: 'Procedure Reports', link: '/pharmeuticals' },
           { id: nanoid(), title: 'Triaged Patients', link: '/pharmaceutical-price-list' },

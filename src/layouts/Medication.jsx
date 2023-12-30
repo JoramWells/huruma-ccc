@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
@@ -11,7 +12,7 @@ import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetAppointmentsQuery } from '../api/appointments.api';
+import { useGetAllMedicationQuery } from '../api/medication.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -24,8 +25,8 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const Appointments = () => {
-  const { data } = useGetAppointmentsQuery();
+const Medication = () => {
+  const { data } = useGetAllMedicationQuery();
 
   const navigate = useNavigate();
 
@@ -49,26 +50,8 @@ const Appointments = () => {
 
       // },
       {
-        header: 'Full Name',
-        accessorKey: 'patient',
-        cell: (props) => (
-          <Box
-            _hover={{
-              cursor: 'pointer',
-            }}
-            onClick={() => navigate(`/appointment-detail/${props.row.original.appointment_id}`)}
-
-          >
-            <UserNameAvatar
-              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
-            />
-          </Box>
-        ),
-
-      },
-      {
-        header: 'Doctor ID',
-        accessorKey: 'doctor_id',
+        header: 'Medication Name',
+        accessorKey: 'medication_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
 
@@ -171,7 +154,7 @@ const Appointments = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Appointments
+            Medication
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -205,4 +188,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default Medication;

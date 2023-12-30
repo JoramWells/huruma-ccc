@@ -25,7 +25,7 @@ const Corporate = () => {
   const [mobileNo, setMobileNo] = useState('');
   const [payment_type_id, setPaymentTypeId] = useState('');
   const [insurance_membership_number, setInsuranceMemberShipNo] = useState('');
-  const [classification, setClassification] = useState({ value: '', label: '' });
+  const [insuranceAccount, setInsuranceAccount] = useState({ value: '', label: '' });
   const [status, setStatus] = useState({ value: 'Active', label: 'Active' });
 
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Corporate = () => {
   const inputValues = {
     supplierName,
     mobileNo,
-    classification: classification.value,
+    classification: insuranceAccount.value,
     status: status.value,
   };
 
@@ -87,8 +87,8 @@ const Corporate = () => {
         <Select
           styles={customStyles}
           options={insuranceOptions}
-          value={classification}
-          onChange={(e) => setClassification(e)}
+          value={insuranceAccount}
+          onChange={(e) => setInsuranceAccount(e)}
         />
 
       </FormControl>
@@ -111,8 +111,8 @@ const Corporate = () => {
         <Select
           styles={customStyles}
           options={statusOptions}
-          value={classification}
-          onChange={(e) => setClassification(e)}
+          value={insuranceAccount}
+          onChange={(e) => setInsuranceAccount(e)}
         />
 
       </FormControl>
