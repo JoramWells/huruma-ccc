@@ -25,7 +25,7 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const Medication = () => {
+const MedicationCategory = () => {
   const { data } = useGetAllMedicationQuery();
 
   const navigate = useNavigate();
@@ -97,17 +97,17 @@ const Medication = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="55px"
       w="full"
-      bgColor="gray.50"
+      bgColor="gray.500"
       p={3}
       h="95vh"
       position="relative"
     >
-      <Box bgColor="white" w="full">
+      <VStack w="full">
         <BreadCrumbNav link="/add-suppliers" />
-        <HStack w="full" p={3}>
-          <Button onClick={() => navigate('/medication-category')}>Categories</Button>
+        <HStack w="full" mt={2} mb={2}>
+          <Button>Categories</Button>
           <Button>Groups</Button>
           <Button>Packaging</Button>
         </HStack>
@@ -142,17 +142,19 @@ const Medication = () => {
 
           </HStack>
         </HStack>
-        <Box
+        <VStack
           w="100%"
           bgColor="white"
           p={3}
           h="89%"
+          border="1px"
+          mt={2}
         >
           <DataTable2 data={filteredData} columns={columns} />
-        </Box>
-      </Box>
+        </VStack>
+      </VStack>
     </VStack>
   );
 };
 
-export default Medication;
+export default MedicationCategory;

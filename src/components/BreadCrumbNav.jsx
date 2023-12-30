@@ -30,12 +30,12 @@ const BreadCrumbNav = ({ link }) => {
   return (
     <HStack alignItems="center" justifyContent="center" w="full">
       <HStack
-        mt={8}
-        w="98%"
+        w="100%"
         bgColor="gray.50"
-        h={12}
-        p={2}
+        h={14}
+        p={3}
         justifyContent="space-between"
+        rounded="lg"
       >
         <Breadcrumb separator={(
           <FaChevronRight
