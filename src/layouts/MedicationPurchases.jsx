@@ -8,7 +8,6 @@ import {
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
-import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
@@ -29,7 +28,7 @@ const breadCrumbData = [
   },
 ];
 
-const MedicationCategory = () => {
+const MedicationPurchases = () => {
   const { data } = useGetAllMedicationCategoryQuery();
 
   const navigate = useNavigate();
@@ -129,4 +128,4 @@ const MedicationCategory = () => {
   );
 };
 
-export default MedicationCategory;
+export default MedicationPurchases;

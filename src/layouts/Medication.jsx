@@ -93,11 +93,9 @@ const Medication = () => {
     return itemDate.isSame(todayDate, 'day');
   });
 
-  console.log(subRowData);
-
   return (
     <VStack
-      mt={5}
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -110,6 +108,7 @@ const Medication = () => {
           <Button onClick={() => navigate('/medication-category')}>Categories</Button>
           <Button>Groups</Button>
           <Button>Packaging</Button>
+          <Button>Stock Take</Button>
         </HStack>
 
         <HStack

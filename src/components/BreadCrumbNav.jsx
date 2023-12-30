@@ -1,41 +1,25 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-unused-vars */
 import {
-  Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack,
+  Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, HStack, IconButton,
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
-import { FaChevronRight, FaPlus } from 'react-icons/fa';
+import { FaChevronRight, FaHome, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const breadCrumbData = [
-  {
-    id: nanoid(),
-    title: 'Home',
-    link: '/',
-  },
-  {
-    id: nanoid(),
-    title: 'Stores',
-    link: '/stores',
-  },
-  {
-    id: nanoid(),
-    title: 'Pharmaceuticals',
-    link: '/pharmaceuticals',
-  },
-];
-
-const BreadCrumbNav = ({ link }) => {
+const BreadCrumbNav = ({ link, breadCrumbData }) => {
   const navigate = useNavigate();
   return (
     <HStack alignItems="center" justifyContent="center" w="full">
       <HStack
         w="100%"
-        bgColor="gray.50"
+        bgColor="white"
         h={14}
         p={3}
         justifyContent="space-between"
         rounded="lg"
+        boxShadow="sm"
       >
         <Breadcrumb separator={(
           <FaChevronRight
@@ -44,10 +28,16 @@ const BreadCrumbNav = ({ link }) => {
           />
               )}
         >
+          <BreadcrumbItem>
+            <IconButton onClick={() => navigate('/')}>
+              <FaHome />
+            </IconButton>
+          </BreadcrumbItem>
           {breadCrumbData.map((item) => (
             <BreadcrumbItem
               key={item.id}
               onClick={() => navigate(item.link)}
+              isCurrentPage={item.isCurrentPage}
             >
               <BreadcrumbLink fontSize="md">{item.title}</BreadcrumbLink>
             </BreadcrumbItem>
@@ -73,8 +63,22 @@ export default BreadCrumbNav;
 
 BreadCrumbNav.propTypes = {
   link: PropTypes.string,
+  breadCrumbData: PropTypes.array,
 };
 
 BreadCrumbNav.defaultProps = {
   link: '/add-pharmaceuticals',
+  breadCrumbData: [
+    {
+      id: nanoid(),
+      title: 'Stores',
+      link: '/stores',
+    },
+    {
+      id: nanoid(),
+      title: 'Pharmaceuticals',
+      link: '/pharmaceuticals',
+      isCurrentPage: true,
+    },
+  ],
 };

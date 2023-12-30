@@ -34,7 +34,7 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
         columnFilters={columnFilters}
         searchQueryColumn={searchQueryColumn}
       />
-      <TableContainer h="700px" overflowY="auto">
+      <TableContainer h="700px" overflowY="auto" w="98%">
         <Table>
           {table.getHeaderGroups()
             .map((headerGroup) => (

@@ -76,6 +76,7 @@ import Charges from './layouts/Charges';
 import ChargesDetail from './layouts/ChargesDetail';
 import Medication from './layouts/Medication';
 import MedicationCategory from './layouts/MedicationCategory';
+import MedicationPurchases from './layouts/MedicationPurchases';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -131,6 +132,7 @@ function App() {
 
             <Route path="/medication" element={<Medication />} />
             <Route path="/medication-category" element={<MedicationCategory />} />
+            <Route path="/medication-purchases" element={<MedicationPurchases />} />
 
             <Route path="/patients" element={<Patients />} />
             <Route path="/patient-queue" element={<PatientQueue />} />
