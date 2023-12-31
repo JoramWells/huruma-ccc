@@ -109,7 +109,7 @@ const Medication = () => {
           <Button>Groups</Button>
           <Button>Packaging</Button>
           <Button onClick={() => navigate('/medication-purchases')}>Purchases</Button>
-          <Button>Stock Take</Button>
+          <Button onClick={() => navigate('/medication-stock-take')}>Stock Take</Button>
         </HStack>
 
         <HStack

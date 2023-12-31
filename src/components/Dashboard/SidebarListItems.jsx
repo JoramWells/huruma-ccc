@@ -149,7 +149,10 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemButton
-        selected={pathname === '/medication' || pathname.includes('medication-category') || pathname.includes('medication-purchases')}
+        selected={pathname === '/medication'
+        || pathname.includes('medication-category')
+        || pathname.includes('medication-purchases')
+          || pathname.includes('medication-stock-take')}
         onClick={() => navigate('/medication')}
         text="medication"
         icon={<FaNotesMedical size={20} />}
