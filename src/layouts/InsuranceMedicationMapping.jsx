@@ -6,25 +6,27 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetInsurancesQuery } from '../api/insurance.api';
+import { useGetAllInsuranceMedicationMappingQuery } from '../api/insuranceMedicationMapping.api';
 
 const breadCrumbData = [
   {
     id: nanoid(),
     title: 'Insurances',
     link: '/admin-insurances',
+  },
+  {
+    id: nanoid(),
+    title: 'Medical Mapping',
+    link: '/',
     isCurrentPage: true,
-
   },
 ];
 
-const Insurance = () => {
-  const { data } = useGetInsurancesQuery();
-  const navigate = useNavigate();
+const InsuranceMedicationMapping = () => {
+  const { data } = useGetAllInsuranceMedicationMappingQuery();
 
   const subrowData = data
         && data.map((item) => ({
@@ -36,26 +38,22 @@ const Insurance = () => {
     () => [
       {
         header: 'Insurance Name',
-        accessorKey: 'insurance_name',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        accessorKey: 'insurance_detail',
+        cell: (props) => <Text>{props.getValue()?.insurance_name}</Text>,
 
       },
       {
-        header: 'Payment % Out Patient',
-        accessorKey: 'payment_percentage_out_patient',
+        header: 'Medication',
+        accessorKey: 'medication',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
 
       },
       {
-        header: 'Payment % In Patient',
-        accessorKey: 'payment_percentage_in_patient',
+        header: 'Visible',
+        accessorKey: 'visible',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
-      },
-      {
-        header: 'Action',
-        cell: () => <Button>more</Button>,
       },
     ],
 
@@ -73,29 +71,16 @@ const Insurance = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-insurance" breadCrumbData={breadCrumbData} />
-        <VStack
-          w="100%"
-          // justifyContent="flex-start"q
-          alignItems="flex-start"
-          bgColor="white"
-          p={3}
-          rounded="lg"
-          mt={2}
-        >
-          <Text
-            fontWeight="semibold"
-            fontSize="lg"
-            color="gray.500"
-          >
-            Insurance Mappings
-
+        <HStack w="full" mt={4} mb={2}>
+          <Text fontWeight="semibold" fontSize="xl" ml={2} color="gray.700">
+            Medication Mappings
+            {' '}
+            (
+            {subrowData?.length.toLocaleString()}
+            )
           </Text>
-          <HStack>
-            <Button onClick={() => navigate('/insurance-medication-mapping')}>Medication</Button>
-            <Button onClick={() => navigate('/insurance-service-cost-mapping')}>Service Cost</Button>
-            <Button>Services</Button>
-          </HStack>
-        </VStack>
+        </HStack>
+
         <Box
           w="100%"
           bgColor="white"
@@ -109,4 +94,4 @@ const Insurance = () => {
   );
 };
 
-export default Insurance;
+export default InsuranceMedicationMapping;

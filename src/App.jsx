@@ -78,6 +78,8 @@ import Medication from './layouts/Medication';
 import MedicationCategory from './layouts/MedicationCategory';
 import MedicationPurchases from './layouts/MedicationPurchases';
 import MedicationStockTake from './layouts/MedicationStockTake';
+import InsuranceMedicationMapping from './layouts/InsuranceMedicationMapping';
+import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -135,6 +137,8 @@ function App() {
             <Route path="/medication-category" element={<MedicationCategory />} />
             <Route path="/medication-purchases" element={<MedicationPurchases />} />
             <Route path="/medication-stock-take" element={<MedicationStockTake />} />
+            <Route path="/insurance-medication-mapping" element={<InsuranceMedicationMapping />} />
+            <Route path="/insurance-service-cost-mapping" element={<InsuranceServiceCostMapping />} />
 
             <Route path="/patients" element={<Patients />} />
             <Route path="/patient-queue" element={<PatientQueue />} />

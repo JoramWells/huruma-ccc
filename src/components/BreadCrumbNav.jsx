@@ -39,7 +39,16 @@ const BreadCrumbNav = ({ link, breadCrumbData }) => {
               onClick={() => navigate(item.link)}
               isCurrentPage={item.isCurrentPage}
             >
-              <BreadcrumbLink fontSize="md">{item.title}</BreadcrumbLink>
+              <BreadcrumbLink
+                fontSize="md"
+                color={item.isCurrentPage && 'blue.500'}
+                bgColor={item.isCurrentPage && 'blue.50'}
+                p={2}
+                rounded="lg"
+              >
+                {item.title}
+
+              </BreadcrumbLink>
             </BreadcrumbItem>
           ))}
 

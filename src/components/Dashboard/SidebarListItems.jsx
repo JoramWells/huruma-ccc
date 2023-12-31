@@ -35,6 +35,7 @@ const SidebarListItems = () => {
         || pathname.includes('administration')
           || pathname.includes('admin')
           || pathname.includes('user-detail')
+          || pathname.includes('insurance')
         || pathname.includes('add-service')}
         onClick={onToggle}
         text="Administration"
