@@ -7,6 +7,7 @@ import {
   HStack, IconButton, Input, Modal, ModalBody, ModalCloseButton,
   ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, VStack, useDisclosure,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { FaBoxOpen, FaExternalLinkAlt, FaPlus } from 'react-icons/fa';
 import Select from 'react-select';
 
@@ -45,11 +46,24 @@ const referralOptions = [
   { value: '1', label: 'REFERRAL FROM OTHER HEALTH FACILITY' },
 ];
 
+const consultationCategoryOptions = [
+  { value: '1', label: 'DENTAL' },
+  { value: '2', label: 'DIALYSIS' },
+  { value: '3', label: 'DOCTORS REVIEW' },
+  { value: '4', label: 'NORMAL' },
+  { value: '5', label: 'NUTRITION' },
+  { value: '6', label: 'OPTICAL' },
+  { value: '7', label: 'PHYSIOTHERAPY' },
+];
+
 const clinicOptions = [
   { value: '1', label: 'MAIN BRANCH' },
 ];
 
 const AppointmentCard = ({ data }) => {
+  const [appointment, setAppointment] = useState({
+    appointmentCategory: '', consultationType: '', referral: '', consultationCategory: '', clinic: '',
+  });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -144,20 +158,60 @@ const AppointmentCard = ({ data }) => {
           <ModalBody>
             <VStack spacing={8}>
               <FormControl>
-                <FormLabel>Select Appointment Category</FormLabel>
-                <Select options={appointmentCategoryOptions} />
+                <FormLabel>Appointment Category</FormLabel>
+                <Select
+                  options={appointmentCategoryOptions}
+                  onChange={(value) => {
+                    setAppointment(
+                      { ...appointment, appointmentCategory: value },
+                    );
+                  }}
+                />
               </FormControl>
               <FormControl>
-                <FormLabel>Select Consultation Type</FormLabel>
-                <Select options={consultationTypeOptions} />
+                <FormLabel>Consultation Type</FormLabel>
+                <Select
+                  options={consultationTypeOptions}
+                  onChange={(value) => {
+                    setAppointment(
+                      { ...appointment, consultationType: value },
+                    );
+                  }}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Consultation Category</FormLabel>
+                <Select
+                  options={consultationCategoryOptions}
+                  onChange={(value) => {
+                    setAppointment(
+                      { ...appointment, consultationCategory: value },
+                    );
+                  }}
+
+                />
               </FormControl>
               <FormControl>
                 <FormLabel>Is Referral?</FormLabel>
-                <Select options={referralOptions} />
+                <Select
+                  options={referralOptions}
+                  onChange={(value) => {
+                    setAppointment(
+                      { ...appointment, referral: value },
+                    );
+                  }}
+                />
               </FormControl>
               <FormControl>
-                <FormLabel>Select Clinic</FormLabel>
-                <Select options={clinicOptions} />
+                <FormLabel>Clinic</FormLabel>
+                <Select
+                  options={clinicOptions}
+                  onChange={(value) => {
+                    setAppointment(
+                      { ...appointment, clinic: value },
+                    );
+                  }}
+                />
               </FormControl>
             </VStack>
           </ModalBody>

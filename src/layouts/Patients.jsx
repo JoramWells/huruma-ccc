@@ -134,7 +134,7 @@ const Patients = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="60px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -144,7 +144,12 @@ const Patients = () => {
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient" />
 
-        <HStack w="full" p={2} flexWrap="wrap">
+        <HStack
+          w="full"
+          p={2}
+          flexWrap="wrap"
+          mt={2}
+        >
           {outPatientList.map((item) => (
             <Button key={item.id}>{item.text}</Button>
           ))}

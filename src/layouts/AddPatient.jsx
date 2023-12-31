@@ -24,13 +24,13 @@ const AddPatient = () => {
   const [residence, setResidence] = useState('');
   const [ID, setID] = useState('');
   const [nhif_no, setNHIFNo] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState(0);
   const [activeStep, setActiveStep] = useState(1);
 
   const steps = [
     { title: 'Personal', description: 'Personal Information' },
     { title: 'Next of Kin', description: 'Next of Kin Details' },
     { title: 'Payment', description: 'Payment Details' },
-    { title: 'Consultation', description: 'Consultation Details' },
   ];
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,6 +57,7 @@ const AddPatient = () => {
     residence,
     ID,
     nhif_no,
+    charges: 350,
   };
 
   const [addPatient, { isLoading }] = useAddPatientMutation();
@@ -123,8 +124,6 @@ const AddPatient = () => {
         />
         )}
         {activeStep === 3 && <PaymentDetail />}
-
-        {activeStep === 4 && <Consultation />}
 
         {/* payment info */}
 

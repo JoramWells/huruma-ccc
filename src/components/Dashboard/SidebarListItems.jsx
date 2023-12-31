@@ -103,9 +103,9 @@ const SidebarListItems = () => {
         text="Charges"
         link="/charges"
         itemList={[
-          { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
-          { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
-          { id: nanoid(), title: 'Patient Queue', link: '/patient-queue' },
+          { id: nanoid(), title: 'Bill Transport', link: '/bill-transport' },
+          { id: nanoid(), title: 'Bill Services', link: '/bill-services' },
+          { id: nanoid(), title: 'Confirm Patient Charges', link: '/patient-charges' },
         ]}
         icon={<FaCalendarTimes size={20} />}
       />

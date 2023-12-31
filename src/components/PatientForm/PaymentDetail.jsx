@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FormControl, FormLabel, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -16,7 +17,7 @@ const customStyles = {
   }),
 };
 
-const PaymentDetail = () => {
+const PaymentDetail = ({ paymentAmount }) => {
   const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
   const options = [
     { value: '1', label: 'CASH' },

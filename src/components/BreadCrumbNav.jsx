@@ -8,7 +8,7 @@ import { FaChevronRight, FaHome, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const BreadCrumbNav = ({ link, breadCrumbData }) => {
+const BreadCrumbNav = ({ link, breadCrumbData, addBtn }) => {
   const navigate = useNavigate();
   return (
     <HStack alignItems="center" justifyContent="center" w="full">
@@ -53,6 +53,7 @@ const BreadCrumbNav = ({ link, breadCrumbData }) => {
           ))}
 
         </Breadcrumb>
+        {addBtn && (
         <Button
           colorScheme="green"
           size="md"
@@ -63,6 +64,7 @@ const BreadCrumbNav = ({ link, breadCrumbData }) => {
           NEW
 
         </Button>
+        )}
       </HStack>
     </HStack>
   );
@@ -73,10 +75,12 @@ export default BreadCrumbNav;
 BreadCrumbNav.propTypes = {
   link: PropTypes.string,
   breadCrumbData: PropTypes.array,
+  addBtn: PropTypes.bool,
 };
 
 BreadCrumbNav.defaultProps = {
   link: '/add-pharmaceuticals',
+  addBtn: true,
   breadCrumbData: [
     {
       id: nanoid(),

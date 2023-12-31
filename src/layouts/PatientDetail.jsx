@@ -4,119 +4,124 @@
 import {
   Avatar, Box, Divider, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import {
+  useLocation, useNavigate, useParams, useSearchParams,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import {
   FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaEdit, FaFileInvoice, FaUser,
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
+import PropTypes from 'prop-types';
 import Step2 from '../components/PatientProfile/Step2';
 import AppointmentCard from '../components/PatientProfile/AppointmentCard';
 import { useGetPatientQuery } from '../api/patients.api';
 import PaymentCard from '../components/PatientProfile/PaymentCard';
 import Medical from '../components/PatientProfile/Medical';
 import EditDeletePatientModal from '../components/PatientProfile/EditDeletePatientModal';
+import BreadCrumbNav from '../components/BreadCrumbNav';
 
-const PatientCard = ({ text, icon, onClick }) => {
+const PatientCard = ({
+  text, icon, onClick, selected,
+}) => {
   const [step, setStep] = useState(0);
   return (
-    <VStack
-      w="full"
-      onClick={onClick}
 
+    <HStack
+      onClick={onClick}
+      w="full"
+      justifyContent="flex-start"
+      bgColor={selected ? 'blue.50' : 'whitesmoke'}
+      // border={selected && '1px'}
+      // borderColor="blue.100"
+      p={4}
+      rounded="lg"
+      transition="all 1s ease"
+      _hover={{
+        cursor: 'pointer',
+        // colorScheme: 'blue',
+        color: 'blue.500',
+        bgColor: 'blue.50',
+      }}
+      color={selected ? 'blue.500' : 'blue.700'}
     >
-      <HStack
-        w="full"
-        justifyContent="flex-start"
-        bgColor="whitesmoke"
-        p={4}
-        rounded="lg"
-        transition="all 1s ease"
-        _hover={{
-          cursor: 'pointer',
-          // colorScheme: 'blue',
-          color: 'blue.500',
-          bgColor: 'blue.50',
-        }}
-        color="blue.800"
-      >
-        {icon}
-        <Text>
-          {text}
-        </Text>
-      </HStack>
-    </VStack>
+      {icon}
+      <Text>
+        {text}
+      </Text>
+    </HStack>
   );
+};
+
+PatientCard.propTypes = {
+  selected: PropTypes.bool,
+};
+
+PatientCard.defaultProps = {
+  selected: false,
 };
 
 const profileData = [
   {
-    id: nanoid(),
+    id: '0',
     text: 'Medical History',
     icon: <FaChartLine />,
   },
   {
-    id: nanoid(),
+    id: '1',
     text: 'Admissions',
     icon: <FaAddressBook />,
   },
   {
-    id: nanoid(),
+    id: '2',
     text: 'Appointments',
     icon: <FaCalendar />,
   },
   {
-    id: nanoid(),
+    id: '3',
     text: 'Invoices',
     icon: <FaFileInvoice />,
   },
   {
-    id: nanoid(),
+    id: '4',
     text: 'Payments',
     icon: <FaCreditCard />,
   },
 ];
 
-const HorizontalStack = ({ title, text }) => (
-  <HStack
-    w="full"
-    _hover={{
-      cursor: 'pointer',
-      bgColor: 'gray.50',
-      border: '1px',
-      rounded: 'lg',
-      borderColor: 'gray.100',
-    }}
-    p={4}
-    justifyContent="space-between"
-  >
-    <Text
-      color="gray.500"
-      fontSize="xl"
-    >
-      {title}
-
-    </Text>
-    <Text
-      fontSize="xl"
-      fontWeight="semibold"
-    >
-      {text}
-    </Text>
-  </HStack>
-);
-
 const PatientDetail = () => {
   const [sideItem, setSideItem] = useState(0);
   const { id } = useParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const stepSearch = searchParams.get('step');
   const dispatch = useDispatch();
 
   const { data, isLoading } = useGetPatientQuery(id);
 
+  const breadCrumbData = [
+    {
+      id: nanoid(),
+      title: 'Patients',
+      link: '/patients',
+    },
+    {
+      id: nanoid(),
+      title: `${data.first_name} ${data.last_name}`,
+      link: '/',
+      isCurrentPage: true,
+    },
+  ];
+
   const handleSetSideItem = useCallback((step) => {
     setSideItem(step);
-  }, [setSideItem]);
+    navigate({
+      pathname,
+      search: `?step=${step}`,
+    });
+  }, [setSideItem, navigate, pathname]);
 
   // const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
 
@@ -130,6 +135,7 @@ const PatientDetail = () => {
       // justifyContent="center"
       p={3}
     >
+      <BreadCrumbNav addBtn={false} breadCrumbData={breadCrumbData} />
       {isLoading ? <Text>loading...</Text> : (
         <HStack
           w="full"
@@ -173,6 +179,7 @@ const PatientDetail = () => {
                   icon={item.icon}
                   text={item.text}
                   onClick={() => handleSetSideItem(idx)}
+                  selected={stepSearch === item.id}
                 />
               ))}
               <EditDeletePatientModal
