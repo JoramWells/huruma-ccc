@@ -59,7 +59,7 @@ const outPatientList = [
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      // size="sm"
+      size="sm"
       name={fullName}
       color="white"
     />
@@ -92,23 +92,32 @@ const PatientQueue = () => {
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'cell_phone',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Appointment Time',
+        accessorKey: 'appointment_date',
+        cell: (props) => (
+          <VStack alignItems="flex-start">
+            <Text>{moment(props.getValue()).format('LL')}</Text>
+            {/* <Text>{moment(props.row.original.appointment_time).format('hh:mm:ss')}</Text> */}
+          </VStack>
+        ),
 
       },
       {
-        header: 'Gender',
+        header: 'PAYMENT DETAILS',
         accessorKey: 'patient_gender',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
 
       },
       {
-        header: 'Patient Type',
+        header: 'Vital Signs',
         accessorKey: 'patient_type',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
+      },
+      {
+        header: 'Action',
+        cell: (props) => <Button onClick={() => navigate(`/doctor/${props.row.original.patient_id}`)}>See Doctor</Button>,
       },
     ],
 

@@ -152,7 +152,7 @@ const Appointments = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}

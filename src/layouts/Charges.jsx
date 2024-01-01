@@ -88,7 +88,7 @@ const Charges = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -107,7 +107,7 @@ const Charges = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Appointments
+            Credit Payments
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',

@@ -78,7 +78,7 @@ const Admission = () => {
 
   return (
     <VStack
-      mt="45px"
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}

@@ -29,13 +29,13 @@ const AddAdmission = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.suppliers);
-  const classificationSupplierData = useSelector((state) => state.supplierClassification.data);
+  // const { loading } = useSelector((state) => state.suppliers);
+  // const classificationSupplierData = useSelector((state) => state.supplierClassification.data);
 
-  const classificationSupplierOptions = classificationSupplierData
-  && classificationSupplierData.map((item) => (
-    { value: item.classificationName, label: item.classificationName }
-  ));
+  // const classificationSupplierOptions = classificationSupplierData
+  // && classificationSupplierData.map((item) => (
+  //   { value: item.classificationName, label: item.classificationName }
+  // ));
 
   const inputValues = {
     supplierName,
@@ -48,9 +48,9 @@ const AddAdmission = () => {
     { value: 'In Active', label: 'In Active' },
   ];
 
-  useEffect(() => {
-    dispatch(getAllSupplierClassification());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllSupplierClassification());
+  // }, []);
 
   return (
     <VStack
@@ -100,7 +100,7 @@ const AddAdmission = () => {
 
           </HStack>
           <Select
-            options={classificationSupplierOptions}
+            // options={classificationSupplierOptions}
             value={classification}
             onChange={(e) => setClassification(e)}
           />
@@ -132,7 +132,7 @@ const AddAdmission = () => {
 
           </HStack>
           <Select
-            options={classificationSupplierOptions}
+            // options={classificationSupplierOptions}
             value={classification}
             onChange={(e) => setClassification(e)}
           />
@@ -155,7 +155,7 @@ const AddAdmission = () => {
 
           </HStack>
           <Select
-            options={classificationSupplierOptions}
+            // options={classificationSupplierOptions}
             value={classification}
             onChange={(e) => setClassification(e)}
           />
@@ -179,7 +179,8 @@ const AddAdmission = () => {
             colorScheme="blue"
             onClick={() => dispatch(addSuppliers(inputValues))}
           >
-            {loading ? 'loading...' : 'Save'}
+            {/* {loading ? 'loading...' : 'Save'} */}
+            Save
           </Button>
         </HStack>
       </VStack>

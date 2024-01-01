@@ -80,6 +80,7 @@ import MedicationPurchases from './layouts/MedicationPurchases';
 import MedicationStockTake from './layouts/MedicationStockTake';
 import InsuranceMedicationMapping from './layouts/InsuranceMedicationMapping';
 import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
+import Doctor from './layouts/Doctor';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -129,6 +130,8 @@ function App() {
 
             <Route path="/diseases" element={<Disease />} />
             <Route path="/disease-ministry" element={<DiseaseMinistry />} />
+
+            <Route path="/doctor/:id" element={<Doctor />} />
 
             <Route path="/admin-insurances" element={<Insurance />} />
             <Route path="/add-insurance" element={<AddInsurance />} />
