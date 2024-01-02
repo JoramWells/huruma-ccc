@@ -2,6 +2,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
 import {
+  Avatar,
   Box,
   Button, FormControl, FormLabel, HStack,
   Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack,
@@ -11,9 +12,11 @@ import {
 } from 'react-router-dom';
 
 import { nanoid } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
 import { useGetPatientQuery } from '../api/patients.api';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import TableSelectRow from '../components/tables/TableSelectRow';
+import UserNameAvatar from '../components/UserNameAvatar';
 
 const Doctor = () => {
   const { id } = useParams();
@@ -34,8 +37,7 @@ const Doctor = () => {
     },
   ];
 
-  // const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
-
+  console.log(data);
   return (
     <VStack
       h="100vh"
@@ -47,26 +49,44 @@ const Doctor = () => {
       p={3}
     >
       <BreadCrumbNav addBtn={false} breadCrumbData={breadCrumbData} />
-      {isLoading ? <Text>loading...</Text> : (
-        <HStack
-          w="full"
-          alignItems="flex-start"
-        >
 
-          <Button>Allergies</Button>
-        </HStack>
-      )}
       <Box w="full">
 
+        <HStack p={4}>
+          <Avatar
+            name={`${data?.first_name} ${data?.last_name}`}
+            size="xl"
+          />
+          <VStack
+            justifyContent="flex-start"
+            alignItems="flex-start"
+            mt={5}
+            mb={5}
+          >
+            <Text fontSize="2xl" fontWeight="semibold">
+              {data?.first_name}
+              {' '}
+              {data?.middle_name}
+              {' '}
+              {data?.last_name}
+            </Text>
+            <Text fontSize="lg" color="gray.500">
+              {moment().diff(data?.dob, 'years')}
+              {' '}
+              years
+            </Text>
+          </VStack>
+
+        </HStack>
         <Tabs isFitted>
-          <TabList>
-            <Tab>Allergies</Tab>
-            <Tab>Diagnosis</Tab>
-            <Tab>Radiology</Tab>
-            <Tab>Vital Signs</Tab>
-            <Tab>Procedures</Tab>
-            <Tab>Lab Requests</Tab>
-            <Tab>Pharmacy Requests</Tab>
+          <TabList color="gray.500">
+            <Tab fontWeight="semibold">Allergies</Tab>
+            <Tab fontWeight="semibold">Diagnosis</Tab>
+            <Tab fontWeight="semibold">Radiology</Tab>
+            <Tab fontWeight="semibold">Vital Signs</Tab>
+            <Tab fontWeight="semibold">Procedures</Tab>
+            <Tab fontWeight="semibold">Lab Requests</Tab>
+            <Tab fontWeight="semibold">Pharmacy Requests</Tab>
           </TabList>
 
           <TabPanels>

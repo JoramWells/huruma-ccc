@@ -3,12 +3,15 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
+import {
+  FaAudible,
+  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
+} from 'react-icons/fa';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
@@ -97,7 +100,7 @@ const PatientQueue = () => {
         cell: (props) => (
           <VStack alignItems="flex-start">
             <Text>{moment(props.getValue()).format('LL')}</Text>
-            {/* <Text>{moment(props.row.original.appointment_time).format('hh:mm:ss')}</Text> */}
+            <Text color="gray.500">{moment(props.row.original.appointment_time, 'HH:mm').format('hh:mm A')}</Text>
           </VStack>
         ),
 
@@ -106,18 +109,40 @@ const PatientQueue = () => {
         header: 'PAYMENT DETAILS',
         accessorKey: 'patient_gender',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
+        cell: (props) => <Text>b</Text>,
 
       },
       {
         header: 'Vital Signs',
-        accessorKey: 'patient_type',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        // accessorKey: 'tem',
+        cell: (props) => (
+          <Box>
+            {!props.row.original.temperature
+              ? (
+                <Button
+                  variant="ghost"
+                  colorScheme="orange"
+                  size="sm"
+                  onClick={() => navigate(`/add-vitals/${props.row.original.patient_id}`)}
+                >
+                  NOT RECORDED
+                </Button>
+              ) : <Button size="sm" colorScheme="green" variant="ghost">RECORDED</Button>}
+          </Box>
+        ),
 
       },
       {
         header: 'Action',
-        cell: (props) => <Button onClick={() => navigate(`/doctor/${props.row.original.patient_id}`)}>See Doctor</Button>,
+        cell: (props) => (
+          <HStack justifyContent="flex-start" alignItems="flex-start">
+            {!props.row.original.consultation_type
+              && <IconButton><FaHandshake /></IconButton>}
+            <IconButton onClick={() => navigate(`/doctor/${props.row.original.patient_id}`)}>
+              <FaUserNurse />
+            </IconButton>
+          </HStack>
+        ),
       },
     ],
 

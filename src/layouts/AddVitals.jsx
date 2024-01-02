@@ -12,39 +12,35 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAddAppointmentMutation } from '../api/appointments.api';
 
 const AddVitals = () => {
-  const [temperature, setTemperature] = useState('');
-  const [pulse_rate, setPulseRate] = useState('');
-  const [respiratory_rate, setRespiratoryRate] = useState('');
-  const [systolic, setSystolic] = useState('');
-  const [diastolic, setDiastolic] = useState('');
-  const [weight, setWeight] = useState('');
-  const [height, setHeight] = useState('');
-  const [bmi, setBMI] = useState('');
-  const [sp02, setSPO2] = useState('');
+  const [vitalValues, setVitalValues] = useState({
+    temperature: '',
+    pulse_rate: '',
+    respiratory_rate: '',
+    systolic: '',
+    diastolic: '',
+    weight: '',
+    height: '',
+    bmi: '',
+    sp02: '',
+  });
 
   const navigate = useNavigate();
 
   const [addAppointment, { isLoading, error }] = useAddAppointmentMutation();
 
   const [searcParams] = useSearchParams();
-  const patientId = searcParams.get('patient_id');
+  // const patientId = searcParams.get('patient_id');
+
+  const { id: patientId } = useParams();
 
   const inputValues = {
     patientId,
-    temperature,
-    pulse_rate,
-    respiratory_rate,
-    systolic,
-    diastolic,
-    weight,
-    height,
-    bmi,
-    sp02,
+    ...vitalValues,
   };
 
   return (
@@ -73,15 +69,14 @@ const AddVitals = () => {
             Add Vital Signs
           </Text>
         </HStack>
-        {patientId}
         {/* sub item */}
         <FormControl mt={5}>
           <FormLabel fontSize="lg">Temperature (°C)</FormLabel>
           <Input
             size="lg"
             placeholder="Enter Temperature"
-            value={temperature}
-            onChange={(e) => setTemperature(e.target.value)}
+            // value={temperature}
+            onChange={(e) => setVitalValues({ ...vitalValues, temperature: e.target.value })}
           />
         </FormControl>
 
@@ -91,8 +86,8 @@ const AddVitals = () => {
           <Input
             size="lg"
             placeholder="Enter Pulse Rate"
-            value={pulse_rate}
-            onChange={(e) => setPulseRate(e.target.value)}
+            // value={pulse_rate}
+            onChange={(e) => setVitalValues({ ...vitalValues, pulse_rate: e.target.value })}
           />
         </FormControl>
 
@@ -101,8 +96,8 @@ const AddVitals = () => {
           <Input
             size="lg"
             placeholder="Enter Respiratory Rate"
-            value={respiratory_rate}
-            onChange={(e) => setRespiratoryRate(e.target.value)}
+            // value={respiratory_rate}
+            onChange={(e) => setVitalValues({ ...vitalValues, respiratory_rate: e.target.value })}
           />
         </FormControl>
 
@@ -112,8 +107,8 @@ const AddVitals = () => {
             <Input
               size="lg"
               placeholder="Enter Systolic Rate"
-              value={systolic}
-              onChange={(e) => setSystolic(e.target.value)}
+              // value={systolic}
+              onChange={(e) => setVitalValues({ ...vitalValues, systolic: e.target.value })}
             />
           </FormControl>
           <FormControl mt={5}>
@@ -122,8 +117,8 @@ const AddVitals = () => {
             <Input
               size="lg"
               placeholder="Enter Diastolic value"
-              value={diastolic}
-              onChange={(e) => setDiastolic(e.target.value)}
+              // value={diastolic}
+              onChange={(e) => setVitalValues({ ...vitalValues, diastolic: e.target.value })}
             />
           </FormControl>
 
@@ -135,8 +130,8 @@ const AddVitals = () => {
             <Input
               size="lg"
               placeholder="Enter Weight"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
+              // value={weight}
+              onChange={(e) => setVitalValues({ ...vitalValues, weight: e.target.value })}
             />
           </FormControl>
           <FormControl mt={5}>
@@ -145,8 +140,8 @@ const AddVitals = () => {
             <Input
               size="lg"
               placeholder="Enter Height"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              // value={height}
+              onChange={(e) => setVitalValues({ ...vitalValues, height: e.target.value })}
             />
           </FormControl>
         </HStack>
@@ -157,8 +152,8 @@ const AddVitals = () => {
           <Input
             size="lg"
             placeholder="Enter BMI"
-            value={bmi}
-            onChange={(e) => setBMI(e.target.value)}
+            // value={bmi}
+            onChange={(e) => setVitalValues({ ...vitalValues, bmi: e.target.value })}
           />
         </FormControl>
         <FormControl mt={5}>
@@ -167,8 +162,8 @@ const AddVitals = () => {
           <Input
             size="lg"
             placeholder="Enter SP02"
-            value={sp02}
-            onChange={(e) => setSPO2(e.target.value)}
+            // value={sp02}
+            onChange={(e) => setVitalValues({ ...vitalValues, sp02: e.target.value })}
           />
         </FormControl>
 
