@@ -91,9 +91,9 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
           </Tbody>
         </Table>
         <HStack
-          justifyContent="flex-start"
+          justifyContent="space-between"
           // bgColor="gray.50"
-          w="100px"
+          w="full"
           mt={2}
           p={2}
           rounded="lg"
@@ -103,19 +103,21 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
           borderColor="gray.200"
           boxShadow="lg"
         >
-          <Text>
-            Page
-            {' '}
-            {table.getState().pagination.pageIndex + 1}
-          </Text>
-          <Text>
-            of
-            {' '}
-            {table.getPageCount()}
-
-          </Text>
           <HStack>
-            {/* <Button
+            <Text>
+              Page
+              {' '}
+              {table.getState().pagination.pageIndex + 1}
+            </Text>
+            <Text>
+              of
+              {' '}
+              {table.getPageCount()}
+
+            </Text>
+          </HStack>
+          <HStack>
+            <Button
               onClick={() => table.previousPage()}
               isDisabled={!table.getCanPreviousPage()}
             >
@@ -123,12 +125,12 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
 
             </Button>
             <Button
-              onClick={table.nextPage()}
+              onClick={() => table.nextPage()}
               isDisabled={!table.getCanNextPage()}
             >
               Next
 
-            </Button> */}
+            </Button>
 
           </HStack>
         </HStack>

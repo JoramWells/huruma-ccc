@@ -106,6 +106,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Bill Transport', link: '/bill-transport' },
           { id: nanoid(), title: 'Bill Services', link: '/bill-services' },
           { id: nanoid(), title: 'Confirm Patient Charges', link: '/patient-charges' },
+          { id: nanoid(), title: 'Personal Account Charges', link: '/personal-account-charges' },
         ]}
         icon={<FaCalendarTimes size={20} />}
       />

@@ -81,6 +81,8 @@ import MedicationStockTake from './layouts/MedicationStockTake';
 import InsuranceMedicationMapping from './layouts/InsuranceMedicationMapping';
 import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
 import Doctor from './layouts/Doctor';
+import PersonalAccountCharges from './layouts/PersonalAccountCharges';
+import PersonalAccountChargeDetail from './layouts/PersonalAccountChargeDetail';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -174,6 +176,9 @@ function App() {
             <Route path="/add-physio-item-dispense" element={<AddDispensePhysioItem />} />
 
             <Route path="/admin-departments" element={<Departments />} />
+
+            <Route path="/personal-account-charges" element={<PersonalAccountCharges />} />
+            <Route path="/personal-account-charge-detail/:id" element={<PersonalAccountChargeDetail />} />
 
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/appointment-detail/:id" element={<AppointmentDetail />} />
