@@ -91,8 +91,6 @@ const PersonalAccountChargeDetail = () => {
     });
   }, [setSideItem, navigate, pathname]);
 
-  console.log(data);
-
   return (
     <VStack
       h="100vh"

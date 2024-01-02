@@ -5,13 +5,29 @@ import {
 } from '@chakra-ui/react';
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetUsersQuery } from '../api/users.api';
 import UserNameAvatar from '../components/UserNameAvatar';
 
+const breadCrumbData = [
+  {
+    id: nanoid(),
+    title: 'Administration',
+    link: '/administration',
+  },
+  {
+    id: nanoid(),
+    title: 'Users',
+    link: '/users',
+    isCurrentPage: true,
+  },
+];
+
 const Users = () => {
   const { data } = useGetUsersQuery();
+  console.log(data);
 
   const columns = useMemo(
     () => [
@@ -37,8 +53,8 @@ const Users = () => {
       },
       {
         header: 'User Type',
-        accessorKey: 'user_type_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        accessorKey: 'user_type',
+        cell: (props) => <Text>{props.getValue()?.user_type_desc}</Text>,
       },
     ],
 
@@ -53,7 +69,7 @@ const Users = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -61,7 +77,7 @@ const Users = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/admin-add-user" />
+        <BreadCrumbNav link="/admin-add-user" breadCrumbData={breadCrumbData} />
         <HStack
           w="100%"
           justifyContent="space-between"

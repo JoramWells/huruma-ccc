@@ -17,6 +17,7 @@ import { useGetPatientQuery } from '../api/patients.api';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import TableSelectRow from '../components/tables/TableSelectRow';
 import UserNameAvatar from '../components/UserNameAvatar';
+import VitalSigns from '../components/VitalSigns';
 
 const Doctor = () => {
   const { id } = useParams();
@@ -110,7 +111,7 @@ const Doctor = () => {
               <p>three!</p>
             </TabPanel>
             <TabPanel>
-              <p>Vitals</p>
+              <VitalSigns />
             </TabPanel>
             <TabPanel>
               <HStack w="full" p={2}>

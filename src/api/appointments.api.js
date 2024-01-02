@@ -16,7 +16,29 @@ export const appointmentApi = createApi({
         body: newWard,
       }),
     }),
+    getAppointment: builder.query({
+      query: (id) => `detail/${id}`,
+    }),
+    updateAppointment: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `edit/${id}`,
+        method: 'PUT',
+        body: patch,
+      }),
+    }),
+    deleteAppointment: builder.mutation({
+      query(id) {
+        return {
+          url: `delete/${id}`,
+          method: 'DELETE',
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAppointmentsQuery, useAddAppointmentMutation } = appointmentApi;
+export const {
+  useGetAppointmentsQuery, useAddAppointmentMutation,
+  useGetAppointmentQuery, useUpdateAppointmentMutation,
+  useDeleteAppointmentMutation,
+} = appointmentApi;
