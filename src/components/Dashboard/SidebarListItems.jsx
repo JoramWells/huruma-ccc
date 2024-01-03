@@ -127,10 +127,16 @@ const SidebarListItems = () => {
         icon={<FaHospitalAlt size={20} />}
       />
 
-      <SidebarItemButton
-        selected={pathname === '/labs'}
-        onClick={() => navigate('/labs')}
-        text="lab"
+      <SidebarItemLink
+        selected={pathname === '/lab'}
+        onClick={onToggle}
+        text="Lab"
+        link="/lab"
+        itemList={[
+          { id: nanoid(), title: 'Lab Requests (In-Patient)', link: '/lab-requests-in' },
+          { id: nanoid(), title: 'Lab Requests (Out-Patient)', link: '/lab-requests-in' },
+          { id: nanoid(), title: 'Internal Patient Lab Visits', link: '/all-reports' },
+        ]}
         icon={<FaTools size={20} />}
       />
 
@@ -193,10 +199,16 @@ const SidebarListItems = () => {
         icon={<FaFileInvoiceDollar size={20} />}
       />
 
-      <SidebarItemButton
-        selected={pathname === '/patients' || pathname.includes('/patient-detail') || pathname.includes('/add-patient')}
-        onClick={() => navigate('/patients')}
-        text="patients"
+      <SidebarItemLink
+        selected={pathname === '/patients' || pathname.includes('/patient-detail')}
+        onClick={onToggle}
+        text="Patients"
+        link="/patients"
+        itemList={[
+          { id: nanoid(), title: 'Admit Patient', link: '/admit-patient' },
+          { id: nanoid(), title: 'Out-Patient', link: '/out-patient' || pathname.includes('/add-patient') },
+          { id: nanoid(), title: 'Reports', link: '/all-reports' },
+        ]}
         icon={<FaHospitalAlt size={20} />}
       />
 

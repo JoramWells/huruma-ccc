@@ -20,18 +20,18 @@ const ProcedureGroups = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.privileges);
-  const subrowData = data
-        && data.map((item) => ({
-          ...item,
-          subRows: [],
-        }));
+  // const { data } = useSelector((state) => state.privileges);
+  // const subrowData = data
+  //       && data.map((item) => ({
+  //         ...item,
+  //         subRows: [],
+  //       }));
 
-  useEffect(() => {
-    dispatch(getAllPrivileges());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllPrivileges());
+  // }, []);
   return (
-    <VStack mt={10} w="full">
+    <VStack mt="65px" w="full">
 
       <BreadCrumbNav link="/add-procedure-group" />
       <HStack
@@ -41,7 +41,7 @@ const ProcedureGroups = () => {
         p={3}
       />
       <Box w="50%" border="1px" borderColor="gray.100" rounded="lg">
-        <PrivilegeTable data={subrowData} columns={columns} />
+        {/* <PrivilegeTable data={subrowData} columns={columns} /> */}
       </Box>
     </VStack>
   );

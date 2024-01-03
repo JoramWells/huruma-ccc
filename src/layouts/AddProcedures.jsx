@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
@@ -22,13 +22,13 @@ const AddProcedures = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading } = useSelector((state) => state.procedures);
-  const classificationSupplierData = useSelector((state) => state.procedureGroup.data);
+  // const { loading } = useSelector((state) => state.procedures);
+  // const classificationSupplierData = useSelector((state) => state.procedureGroup.data);
 
-  const classificationSupplierOptions = classificationSupplierData
-  && classificationSupplierData.map((item) => (
-    { value: item.procedureGroupName, label: item.procedureGroupName }
-  ));
+  // const classificationSupplierOptions = classificationSupplierData
+  // && classificationSupplierData.map((item) => (
+  //   { value: item.procedureGroupName, label: item.procedureGroupName }
+  // ));
 
   const inputValues = {
     procedureName,
@@ -75,6 +75,29 @@ const AddProcedures = () => {
         {/* select Department */}
         <FormControl>
           <HStack w="full" alignItems="center" justifyContent="space-between">
+            <FormLabel fontSize="medium">Select Procedure Category</FormLabel>
+            <Tag
+              onClick={() => navigate('/add-procedure-group')}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              NEW
+
+            </Tag>
+
+          </HStack>
+          <Select
+            // options={classificationSupplierOptions}
+            value={procedureGroup}
+            onChange={(e) => setProcedureGroup(e)}
+          />
+
+        </FormControl>
+
+        {/* select procedure group */}
+        <FormControl>
+          <HStack w="full" alignItems="center" justifyContent="space-between">
             <FormLabel fontSize="medium">Select Procedure Group</FormLabel>
             <Tag
               onClick={() => navigate('/add-procedure-group')}
@@ -88,7 +111,30 @@ const AddProcedures = () => {
 
           </HStack>
           <Select
-            options={classificationSupplierOptions}
+            // options={classificationSupplierOptions}
+            value={procedureGroup}
+            onChange={(e) => setProcedureGroup(e)}
+          />
+
+        </FormControl>
+
+        {/* select procedure group */}
+        <FormControl>
+          <HStack w="full" alignItems="center" justifyContent="space-between">
+            <FormLabel fontSize="medium">Select Hospital</FormLabel>
+            <Tag
+              onClick={() => navigate('/add-procedure-group')}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              NEW
+
+            </Tag>
+
+          </HStack>
+          <Select
+            // options={classificationSupplierOptions}
             value={procedureGroup}
             onChange={(e) => setProcedureGroup(e)}
           />
@@ -101,7 +147,7 @@ const AddProcedures = () => {
             colorScheme="blue"
             onClick={() => dispatch(addProcedures(inputValues))}
           >
-            {loading ? 'loading...' : 'Save'}
+            Save
           </Button>
         </HStack>
       </VStack>

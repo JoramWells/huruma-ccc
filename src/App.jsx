@@ -199,7 +199,7 @@ function App() {
 
             <Route path="/procedures" element={<Procedures />} />
             <Route path="/procedure-items" element={<ProceduresItems />} />
-            <Route path="/add-procedures" element={<AddProcedures />} />
+            <Route path="/add-procedure-details" element={<AddProcedures />} />
             <Route path="/procedure-groups" element={<ProcedureGroups />} />
             <Route path="/add-procedure-group" element={<AddProcedureGroup />} />
 

@@ -23,36 +23,36 @@ const Procedures = () => {
   const columns = useMemo(
     () => [
       {
-        header: 'Procedure Name',
+        header: 'Name',
         accessorKey: 'procedure_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Procedure Cost',
+        header: 'Cost',
         accessorKey: 'procedure_cost',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Procedure Cost(Corporate)',
+        header: 'Cost(Corporate)',
         accessorKey: 'procedure_cost_corporate',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
       {
-        header: 'Procedure Cost (Foreigner)',
+        header: 'Cost (Foreigner)',
         accessorKey: 'procedure_cost_foreigner',
         enableSorting: false,
-        cell: (props) => <Text whiteSpace="nowrap">{props.getValue()}</Text>,
+        cell: (props) => <Text whiteSpace="nowrap">{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
       {
-        header: 'Procedure Cost(Insurance)',
+        header: 'Cost(Insurance)',
         accessorKey: 'procedure_cost_insurance',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
     ],
@@ -68,7 +68,7 @@ const Procedures = () => {
 
   return (
     <VStack
-      mt={5}
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -76,7 +76,7 @@ const Procedures = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-procedures" />
+        <BreadCrumbNav link="/add-procedure-details" />
         <HStack p={3} w="full">
           <Button
             rounded="full"
