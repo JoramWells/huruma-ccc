@@ -1,62 +1,63 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
+  Avatar,
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { useGetDiseasesQuery } from '../api/disease.api';
+import { useGetPatientsQuery } from '../api/patients.api';
+import { useGetAllConsultationTypesQuery } from '../api/consultationType.api';
 
-const Disease = () => {
+const ConsultationTypes = () => {
   const navigate = useNavigate();
 
   const {
-    data, isLoading,
-  } = useGetDiseasesQuery();
-
-  // const { data } = useSelector((state) => state.admission);
+    data, error, isLoading, isFetching, isSuccess,
+  } = useGetAllConsultationTypesQuery();
 
   const columns = useMemo(
     () => [
       {
-        header: 'Disease Name',
-        accessorKey: 'disease_name',
+        header: 'Consultation.',
+        accessorKey: 'consultation_type_description',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Ministry Disease',
-        accessorKey: 'ministry_disease_id',
+        header: 'Non-Corporate Cost',
+        accessorKey: 'non_corporate_cost',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
       {
-        header: 'ICD ten Code',
-        accessorKey: 'disease_icd_ten_code',
-        enableSorting: false,
+        header: 'Corporate Cost',
+        accessorKey: 'corporate_cost',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
     ],
 
-    [navigate],
+    [],
   );
 
   const subRowData = data
-    && data.map((item) => ({
-      ...item,
-      subRows: [],
-    }));
-
-  if (isLoading) return <div>loading..</div>;
+        && data.map((item) => ({
+          ...item,
+          subRows: [],
+        }));
 
   return (
     <VStack
-      mt="65px"
+      mt="60px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -64,7 +65,7 @@ const Disease = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-admission" />
+        <BreadCrumbNav link="/add-patient" />
 
         <HStack
           w="100%"
@@ -75,7 +76,7 @@ const Disease = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Diseases
+            Consultation Type
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -84,7 +85,7 @@ const Disease = () => {
             >
               {' '}
               (
-              {subRowData?.length.toLocaleString()}
+              {subRowData?.length}
               )
 
             </span>
@@ -96,21 +97,27 @@ const Disease = () => {
 
           </HStack>
         </HStack>
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2
-            searchQueryColumn="pay_status"
-            data={subRowData}
-            columns={columns}
-          />
-        </Box>
+        {subRowData?.length === 0 ? (
+          <VStack p={5}>
+
+            <FaBoxOpen size="120" color="gray" />
+            <Text fontSize="xl" fontWeight="semibold" color="gray.500">No Patients Today</Text>
+
+          </VStack>
+        )
+          : (
+            <Box
+              w="100%"
+              bgColor="white"
+              p={3}
+              h="89%"
+            >
+              <DataTable2 data={subRowData} columns={columns} />
+            </Box>
+          )}
       </Box>
     </VStack>
   );
 };
 
-export default Disease;
+export default ConsultationTypes;

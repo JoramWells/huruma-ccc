@@ -23,6 +23,8 @@ import { medicationStockTakeApi } from './api/medicationStockTake.api';
 import { insuranceMedicationMappingApi } from './api/insuranceMedicationMapping.api';
 import { insuranceServiceCostMappingApi } from './api/insuranceServiceCostMapping.api';
 import { personalAccountChargeApi } from './api/personalAccountCharges.api';
+import { accountingSupplierApi } from './api/accountingSuppliers.api';
+import { accountingItemApi } from './api/accountingSuppliers.api copy';
 
 export const store = configureStore({
   reducer: {
@@ -50,6 +52,8 @@ export const store = configureStore({
     [insuranceMedicationMappingApi.reducerPath]: insuranceMedicationMappingApi.reducer,
     [insuranceServiceCostMappingApi.reducerPath]: insuranceServiceCostMappingApi.reducer,
     [personalAccountChargeApi.reducerPath]: personalAccountChargeApi.reducer,
+    [accountingSupplierApi.reducerPath]: accountingSupplierApi.reducer,
+    [accountingItemApi.reducerPath]: accountingItemApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -76,5 +80,7 @@ export const store = configureStore({
     .concat(insuranceMedicationMappingApi.middleware)
     .concat(insuranceServiceCostMappingApi.middleware)
     .concat(personalAccountChargeApi.middleware)
+    .concat(accountingItemApi.middleware)
+    .concat(accountingSupplierApi.middleware)
   ,
 });

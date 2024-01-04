@@ -3,7 +3,7 @@ import {
   FaCar,
   FaChild,
   FaFileInvoiceDollar,
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaNotesMedical, FaPills,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaNotesMedical, FaPills,
   FaProcedures,
   FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
@@ -31,6 +31,20 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
+        selected={pathname === '/accounts'
+          || pathname.includes('accounting-suppliers')
+          || pathname.includes('accounting-items')}
+        onClick={onToggle}
+        text="Accounts"
+        link="/accounts"
+        itemList={[
+          { id: nanoid(), title: 'Items', link: '/accounting-items' },
+          { id: nanoid(), title: 'Suppliers', link: '/accounting-suppliers' },
+        ]}
+        icon={<FaMoneyCheck size={20} />}
+      />
+
+      <SidebarItemLink
         selected={pathname === '/administration'
         || pathname.includes('administration')
           || pathname.includes('admin')
@@ -41,12 +55,13 @@ const SidebarListItems = () => {
         text="Administration"
         link="/administration"
         itemList={[
+          { id: nanoid(), title: 'Consultation Types', link: 'consultation-types' },
           { id: nanoid(), title: 'Departments', link: '/admin-departments' },
           { id: nanoid(), title: 'Diseases', link: '/diseases' },
-          { id: nanoid(), title: 'Ministry Diseases', link: '/disease-ministry' },
           { id: nanoid(), title: 'Drugs', link: '/admin-drugs' },
           { id: nanoid(), title: 'Hospital Branch', link: '/general-store' },
           { id: nanoid(), title: 'Insurances', link: '/admin-insurances' },
+          { id: nanoid(), title: 'Ministry Diseases', link: '/disease-ministry' },
           { id: nanoid(), title: 'Privileges', link: '/admin-privileges' },
           { id: nanoid(), title: 'Services', link: '/admin-services' },
           { id: nanoid(), title: 'User Type', link: '/admin-user-type' },

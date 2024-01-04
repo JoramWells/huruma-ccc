@@ -34,8 +34,16 @@ const InsuranceServiceCostMapping = () => {
           subRows: [],
         }));
 
+  console.log(data);
+
   const columns = useMemo(
     () => [
+      {
+        header: 'Insurance Name',
+        accessorKey: 'insurance_detail',
+        cell: (props) => <Text>{props.getValue()?.insurance_name}</Text>,
+
+      },
       {
         header: 'Service Type',
         accessorKey: 'service_type',

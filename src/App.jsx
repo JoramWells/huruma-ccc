@@ -83,6 +83,9 @@ import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
 import Doctor from './layouts/Doctor';
 import PersonalAccountCharges from './layouts/PersonalAccountCharges';
 import PersonalAccountChargeDetail from './layouts/PersonalAccountChargeDetail';
+import ConsultationTypes from './layouts/ConsultationTypes';
+import AccountingSuppliers from './layouts/AccountingSuppliers';
+import AccountingItem from './layouts/AccountingItem';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -125,6 +128,10 @@ function App() {
             <Route path="/admin-drugs" element={<Drugs />} />
             <Route path="/dispense-drugs" element={<DispenseDrugs />} />
             <Route path="/add-dispense-drugs" element={<AddDispenseDrugs />} />
+
+            <Route path="/accounting-suppliers" element={<AccountingSuppliers />} />
+            <Route path="/accounting-items" element={<AccountingItem />} />
+
             <Route path="/bed-allocation" element={<DoctorAdmissionBedAllocation />} />
 
             <Route path="/charges" element={<Charges />} />
@@ -137,6 +144,8 @@ function App() {
 
             <Route path="/admin-insurances" element={<Insurance />} />
             <Route path="/add-insurance" element={<AddInsurance />} />
+
+            <Route path="/consultation-types" element={<ConsultationTypes />} />
 
             <Route path="/medication" element={<Medication />} />
             <Route path="/medication-category" element={<MedicationCategory />} />

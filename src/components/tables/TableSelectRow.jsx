@@ -174,7 +174,7 @@ const TableSelectRow = () => {
       <div>
         <ul>
           {tableInstance.getSelectedRowModel()
-            .flatRows.map((el) => <li key={el.id}>{JSON.stringify(el.original)}</li>)}
+            .flatRows.map((el) => <li key={el.id}>{el.original.procedure_name}</li>)}
         </ul>
       </div>
       <HStack
