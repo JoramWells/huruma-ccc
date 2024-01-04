@@ -6,53 +6,15 @@ import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaEye, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
-
-const outPatientList = [
-
-  {
-    id: nanoid(),
-    text: 'ANC',
-  },
-  {
-    id: nanoid(),
-    text: 'Cervical Screening',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Health Information',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Weight Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Height Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'PNC',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'SGBV',
-  },
-];
+import { useGetAppointmentsQuery } from '../api/appointments.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -70,7 +32,7 @@ const PatientVisits = () => {
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetPatientsQuery();
+  } = useGetAppointmentsQuery();
 
   // const { data } = useSelector((state) => state.patients);
   // console.log(data);
@@ -79,11 +41,11 @@ const PatientVisits = () => {
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'last_name',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
-              fullName={`${props.row.original.first_name} ${props.row.original.last_name}`}
+              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
             />
           </Box>
         ),
@@ -91,34 +53,45 @@ const PatientVisits = () => {
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'cell_phone',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Appointment Time',
+        accessorKey: 'appointment_date',
+        cell: (props) => (
+          <VStack alignItems="flex-start">
+            <Text>{moment(props.getValue()).format('LL')}</Text>
+            <Text color="gray.500">{moment(props.row.original.appointment_time, 'HH:mm').format('hh:mm A')}</Text>
+          </VStack>
+        ),
 
       },
       {
-        header: 'Gender',
+        header: 'Diagnosis',
         accessorKey: 'patient_gender',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
+        // cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
 
       },
       {
-        header: 'Patient Type',
-        accessorKey: 'patient_type',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Prescription',
+        // accessorKey: 'patient_type',
+        cell: (props) => <Button leftIcon={<FaEye />}>View</Button>,
 
       },
     ],
 
-    [],
+    [navigate],
   );
 
-  const subrowData = data
+  const subRowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
         }));
+
+  const filteredData = subRowData?.filter((item) => {
+    const itemDate = moment(item.appointment_date);
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    return itemDate.isSame(todayDate, 'day');
+  });
 
   return (
     <VStack
@@ -150,7 +123,7 @@ const PatientVisits = () => {
             >
               {' '}
               (
-              {subrowData?.length}
+              {filteredData?.length}
               )
 
             </span>
@@ -168,7 +141,7 @@ const PatientVisits = () => {
           p={3}
           h="89%"
         >
-          <DataTable2 data={subrowData} columns={columnsx} />
+          <DataTable2 data={filteredData} columns={columnsx} />
         </Box>
       </Box>
     </VStack>

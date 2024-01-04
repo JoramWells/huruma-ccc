@@ -109,7 +109,7 @@ const PatientDetail = () => {
     },
     {
       id: nanoid(),
-      title: `${data.first_name} ${data.last_name}`,
+      title: `${data?.first_name} ${data?.last_name}`,
       link: '/',
       isCurrentPage: true,
     },
@@ -153,7 +153,7 @@ const PatientDetail = () => {
             // mt={8}
           >
             <Avatar
-              name={`${data.first_name} ${data.last_name}`}
+              name={`${data?.first_name} ${data?.last_name}`}
               size="xl"
               color="white"
             />

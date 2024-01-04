@@ -85,7 +85,7 @@ const Patients = () => {
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
-              fullName={`${props.row.original.first_name} ${props.row.original.last_name}`}
+              fullName={`${props.row.original?.first_name} ${props.row.original?.last_name}`}
             />
           </Box>
         ),

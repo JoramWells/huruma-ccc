@@ -143,7 +143,7 @@ const WalkInPatientQueue = () => {
       },
     ],
 
-    [],
+    [navigate],
   );
 
   const subRowData = data
