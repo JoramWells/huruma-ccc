@@ -16,7 +16,7 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
 import { useGetAllAccountingSuppliersQuery } from '../api/accountingSuppliers.api';
-import { useGetAllAccountingItemsQuery } from '../api/accountingSuppliers.api copy';
+import { useGetAllAccountingItemsQuery } from '../api/accountingItem.api';
 
 const AccountingItem = () => {
   const navigate = useNavigate();

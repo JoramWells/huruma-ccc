@@ -86,6 +86,10 @@ import PersonalAccountChargeDetail from './layouts/PersonalAccountChargeDetail';
 import ConsultationTypes from './layouts/ConsultationTypes';
 import AccountingSuppliers from './layouts/AccountingSuppliers';
 import AccountingItem from './layouts/AccountingItem';
+import PatientQueueNursingStation from './layouts/PatientQueueNursingStation';
+import PatientsTriaged from './layouts/PatientsTriaged';
+import AddAllergies from './layouts/AddAllergies';
+import WalkInPatientQueue from './layouts/WalkInPatientQueue';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -205,6 +209,11 @@ function App() {
             <Route path="/department-detail/:id" element={<DepartmentDetail />} />
 
             <Route path="/nursing-station" element={<NursingStation />} />
+            <Route path="/nursing-station-patient-queue" element={<PatientQueueNursingStation />} />
+            <Route path="/triaged-patients" element={<PatientsTriaged />} />
+            <Route path="/walkin-patient-queue" element={<WalkInPatientQueue />} />
+
+            <Route path="/add-allergies/:id" element={<AddAllergies />} />
 
             <Route path="/procedures" element={<Procedures />} />
             <Route path="/procedure-items" element={<ProceduresItems />} />

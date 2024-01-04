@@ -24,7 +24,7 @@ import { insuranceMedicationMappingApi } from './api/insuranceMedicationMapping.
 import { insuranceServiceCostMappingApi } from './api/insuranceServiceCostMapping.api';
 import { personalAccountChargeApi } from './api/personalAccountCharges.api';
 import { accountingSupplierApi } from './api/accountingSuppliers.api';
-import { accountingItemApi } from './api/accountingSuppliers.api copy';
+import { accountingItemApi } from './api/accountingItem.api';
 
 export const store = configureStore({
   reducer: {

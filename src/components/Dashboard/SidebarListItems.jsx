@@ -182,16 +182,16 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/nursing-station'}
+        selected={pathname === '/nursing-station' || pathname.includes('triaged-patients')}
         onClick={onToggle}
         text="Nursing Station"
         link="/nursing-station"
         itemList={[
           { id: nanoid(), title: 'Dialysis Package', link: '/ward-prices' },
-          { id: nanoid(), title: 'Patient Queue', link: '/patients' },
+          { id: nanoid(), title: 'Patient Queue', link: '/nursing-station-patient-queue' },
           { id: nanoid(), title: 'Pharmacy Requests', link: '/pharmeuticals' },
           { id: nanoid(), title: 'Procedure Reports', link: '/pharmeuticals' },
-          { id: nanoid(), title: 'Triaged Patients', link: '/pharmaceutical-price-list' },
+          { id: nanoid(), title: 'Triaged Patients', link: '/triaged-patients' },
           { id: nanoid(), title: 'Vital Signs & Allergies', link: '/services-price-list' },
 
         ]}
@@ -229,7 +229,7 @@ const SidebarListItems = () => {
 
       <SidebarItemLink
         selected={
-          pathname === '/pharmacy'
+          pathname === '/pharmacy' || pathname.includes('walkin-patient-queue')
 }
         onClick={onToggle}
         text="Pharmacy"
@@ -237,7 +237,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Over Counter Request', link: '/services-price-list' },
           { id: nanoid(), title: 'OTC Patient Queue', link: '/pharmaceutical-price-list' },
-          { id: nanoid(), title: 'Walk-In Patient Queue', link: '/pharmeuticals' },
+          { id: nanoid(), title: 'Walk-In Patient Queue', link: '/walkin-patient-queue' },
           { id: nanoid(), title: 'Pharmacy Request', link: '/ward-prices' },
           { id: nanoid(), title: 'Dispense Drugs', link: '/dispense-drugs' },
 
@@ -260,7 +260,9 @@ const SidebarListItems = () => {
 
       {/* price lists */}
       <SidebarItemLink
-        selected={pathname === '/price-lists' || pathname.includes('services-price-list') || pathname.includes('pharmaceutical-price-list')}
+        selected={pathname === '/price-lists'
+        || pathname.includes('services-price-list')
+        || pathname.includes('pharmaceutical-price-list')}
         onClick={onToggle}
         text="Price Lists"
         link="/price-lists"
