@@ -73,7 +73,14 @@ const PatientVisits = () => {
       {
         header: 'Prescription',
         // accessorKey: 'patient_type',
-        cell: (props) => <Button leftIcon={<FaEye />}>View</Button>,
+        cell: (props) => (
+          <Button
+            leftIcon={<FaEye />}
+            onClick={() => navigate(`/patient-prescription/${props.row.original.patient_id}`)}
+          >
+            View
+          </Button>
+        ),
 
       },
     ],

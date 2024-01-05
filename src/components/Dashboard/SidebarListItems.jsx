@@ -100,6 +100,7 @@ const SidebarListItems = () => {
           || pathname.includes('/appointment-diagnosis')
           || pathname.includes('/patient-queue')
           || pathname.includes('/patient-visits')
+          || pathname.includes('/patient-prescription')
           || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"
