@@ -101,6 +101,8 @@ const SidebarListItems = () => {
           || pathname.includes('/patient-queue')
           || pathname.includes('/patient-visits')
           || pathname.includes('/patient-prescription')
+          || pathname.includes('/add-prescription')
+          || pathname.includes('/patient-departmental-status')
           || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"
@@ -108,6 +110,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Appointment Checklist', link: '/appointment-checklist' },
           { id: nanoid(), title: 'Appointment Diagnosis', link: '/appointment-diagnosis' },
+          { id: nanoid(), title: 'Patient Departmental Status', link: '/patient-departmental-status' },
           { id: nanoid(), title: 'Patient Queue', link: '/patient-queue' },
           { id: nanoid(), title: 'Patient Visits', link: '/patient-visits' },
         ]}

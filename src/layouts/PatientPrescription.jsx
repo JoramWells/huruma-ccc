@@ -86,7 +86,7 @@ const PatientPrescription = () => {
     >
       <BreadCrumbNav
         breadCrumbData={breadCrumbData}
-        link="/add-prescription"
+        link={`/add-prescription/${id}`}
       />
 
       <HStack
