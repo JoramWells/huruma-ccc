@@ -2,7 +2,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
 import {
-  Avatar, HStack, Text, VStack,
+  Avatar, Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -104,58 +104,44 @@ const MaternityProfileDetail = () => {
       // justifyContent="center"
       p={3}
     >
-      {isLoading ? <Text>loading...</Text> : (
-        <HStack
-          p={3}
-          w="full"
-          alignItems="flex-start"
-        >
-          <VStack
-            w="md"
-            bgColor="white"
-            rounded="xl"
-            p={5}
-            spacing={6}
-            border="1px"
-            borderColor="gray.200"
-            // boxShadow="md"
-            // mt={8}
-          >
-            <Avatar
-              name={data.name_of_client}
-              size="2xl"
-              color="white"
-            />
-            <VStack spacing={2}>
-              <Text
-                textTransform="capitalize"
-                fontWeight="bold"
-              >
-                {data?.name_of_client}
+      <Text>{data?.name_of_client}</Text>
 
-              </Text>
-              <Text color="gray.500">{data?.anc_number}</Text>
-              <Text>
-                {data?.telephone}
-              </Text>
-            </VStack>
-            <VStack w="full" spacing={4}>
-              {profileData.map((item, idx) => (
-                <PatientCard
-                  key={item.id}
-                  icon={item.icon}
-                  text={item.text}
-                  onClick={() => handleSetSideItem(idx)}
-                />
-              ))}
-            </VStack>
-          </VStack>
-          {sideItem === 0 && <Step1 />}
-          {sideItem === 1 && <Step2 />}
-          {sideItem === 2 && <AppointmentCard />}
+      <Box w="full" bgColor="white">
+        <Tabs isFitted>
+          <TabList>
+            <Tab>Allergies</Tab>
+            <Tab>Antenatal</Tab>
+            <Tab>Clinical Notes</Tab>
+            <Tab>Delivery</Tab>
+            <Tab>Deworming</Tab>
+            <Tab>Impairments</Tab>
+            <Tab>Immunizations</Tab>
+            <Tab>Infant Feeding</Tab>
+            <Tab>Lab Req.</Tab>
+            <Tab>Patient Notes</Tab>
+            <Tab>Physical exam.</Tab>
+            <Tab>Post Natal</Tab>
+            <Tab>Procedures</Tab>
+            <Tab>Preventive Services</Tab>
+            <Tab>Radiology Req.</Tab>
+            <Tab>Vitamin A Capsules</Tab>
+            <Tab>Visits</Tab>
 
-        </HStack>
-      )}
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <p>one!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>two!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>three!</p>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
 
     </VStack>
   );

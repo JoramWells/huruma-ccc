@@ -10,10 +10,10 @@ export const creditPaymentApi = createApi({
       query: () => 'fetchAll',
     }),
     addCreditPayment: builder.mutation({
-      query: (newUser) => ({
+      query: (newCredit) => ({
         url: 'add',
         method: 'POST',
-        body: newUser,
+        body: newCredit,
       }),
     }),
     getCreditPayment: builder.query({

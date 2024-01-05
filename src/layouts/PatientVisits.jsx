@@ -76,9 +76,12 @@ const PatientVisits = () => {
         cell: (props) => (
           <Button
             leftIcon={<FaEye />}
-            onClick={() => navigate(`/patient-prescription/${props.row.original.patient_id}`)}
+            onClick={() => navigate({
+              pathname: `/patient-prescription/${props.row.original.patient_id}`,
+              search: `?appointment_id=${props.row.original.appointment_id}`,
+            })}
           >
-            View
+            View Prescription
           </Button>
         ),
 

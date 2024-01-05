@@ -14,19 +14,22 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
+import moment from 'moment/moment';
 import { addSuppliers } from '../_reducers/supplierSlice';
 import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
 import { useGetAllMedicationQuery } from '../api/medication.api';
 import { useGetAllMedicationCategoryQuery } from '../api/medicationCategory.api';
 import { selectStyles } from '../utils/styles';
+import { useAddCreditPaymentMutation } from '../api/creditPayment.api';
 
 const AddPrescription = () => {
+  const { id } = useParams();
   const [medicationCategory, setMedicationCategory] = useState({ value: '', label: '' });
   const [mobileNo, setMobileNo] = useState('');
-  const [classification, setClassification] = useState({ value: '', label: '' });
+  const [medication, setMedication] = useState({ value: '', label: '' });
   const [prescription, setPrescription] = useState(
     { value: '1', label: '(QID) FOUR TIMES A DAY' },
   );
@@ -55,14 +58,18 @@ const AddPrescription = () => {
     {
       value: item.medication_id,
       label: item.medication_name,
+      price: item.price,
     }
   ));
 
   const inputValues = {
-    medicationCategory,
-    mobileNo,
-    classification: classification.value,
-    prescription: prescription.value,
+    appointment_id: id,
+    amount: medication.price,
+    service_desc: medication.label,
+    date_of_invoice: moment(new Date()).format('MM-DD-YYYY'),
+    time_of_invoice: moment(new Date()).format('hh:mm:ss'),
+    status: 0,
+    quantity: 1,
   };
 
   const prescriptionOptions = [
@@ -75,6 +82,8 @@ const AddPrescription = () => {
     { value: '7', label: 'TID' },
     { value: '8', label: 'TWO TIMES A DAY' },
   ];
+
+  const [addCreditPayment, { isLoading }] = useAddCreditPaymentMutation();
 
   return (
     <VStack
@@ -174,9 +183,9 @@ const AddPrescription = () => {
           </HStack>
           <Select
             options={medicationOptions}
-            value={classification}
+            value={medication}
             styles={selectStyles}
-            onChange={(e) => setClassification(e)}
+            onChange={(e) => setMedication(e)}
           />
 
         </FormControl>
@@ -197,10 +206,9 @@ const AddPrescription = () => {
           <Button
             size="lg"
             colorScheme="blue"
-            onClick={() => dispatch(addSuppliers(inputValues))}
+            onClick={() => addCreditPayment(inputValues)}
           >
-            {/* {loading ? 'loading...' : 'Save'} */}
-            Save
+            {isLoading ? 'loading...' : 'Save'}
           </Button>
         </HStack>
       </VStack>

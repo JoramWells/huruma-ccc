@@ -62,8 +62,6 @@ const LabTestsSummarySubSection = () => {
       subRows: [],
     }));
 
-  console.log(data);
-
   return (
     <VStack
       mt="65px"

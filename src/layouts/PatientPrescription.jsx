@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
@@ -17,6 +18,7 @@ import PropTypes from 'prop-types';
 import { useGetPatientQuery } from '../api/patients.api';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
+import { useGetAppointmentQuery } from '../api/appointments.api';
 
 const PatientPrescription = () => {
   const [sideItem, setSideItem] = useState(0);
@@ -24,10 +26,10 @@ const PatientPrescription = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const stepSearch = searchParams.get('step');
+  const appointment_id = searchParams.get('appointment_id');
   const dispatch = useDispatch();
 
-  const { data, isLoading } = useGetPatientQuery(id);
+  const { data, isLoading } = useGetAppointmentQuery(appointment_id);
 
   const columns = useMemo(
     () => [
@@ -68,11 +70,18 @@ const PatientPrescription = () => {
     },
     {
       id: nanoid(),
-      title: `${data?.first_name} ${data?.last_name}`,
+      title: 'Patients Visits',
+      link: '/patient-visits',
+    },
+    {
+      id: nanoid(),
+      title: `${data?.patient?.first_name} ${data?.patient?.middle_name}`,
       link: '/',
       isCurrentPage: true,
     },
   ];
+
+  console.log(data);
 
   return (
     <VStack
@@ -86,7 +95,7 @@ const PatientPrescription = () => {
     >
       <BreadCrumbNav
         breadCrumbData={breadCrumbData}
-        link={`/add-prescription/${id}`}
+        link={`/add-prescription/${appointment_id}`}
       />
 
       <HStack
@@ -98,13 +107,13 @@ const PatientPrescription = () => {
       >
         <Avatar
           size="xl"
-          name={`${data?.first_name} ${data?.last_name}`}
+          name={`${data?.patient?.first_name} ${data?.patient?.middle_name}`}
         />
         <Text
           fontSize="2xl"
           fontWeight="semibold"
         >
-          {`${data?.first_name} ${data?.last_name}`}
+          {`${data?.patient?.first_name} ${data?.patient?.middle_name}`}
         </Text>
       </HStack>
       <DataTable2 columns={columns} />
