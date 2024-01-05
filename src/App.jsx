@@ -94,6 +94,7 @@ import PatientVisits from './layouts/PatientVisits';
 import PatientPrescription from './layouts/PatientPrescription';
 import AddPrescription from './layouts/AddPrescription';
 import PatientDepartmentalStatus from './layouts/PatientDepartmentalStatus';
+import LabTestsSummarySubSection from './layouts/LabTestsSummarySubSection';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -177,6 +178,8 @@ function App() {
 
             <Route path="/admission" element={<Admission />} />
             <Route path="/add-admission" element={<AddAdmission />} />
+
+            <Route path="/lab-tests-summary-sub-section" element={<LabTestsSummarySubSection />} />
 
             <Route path="/admission-type" element={<AdmissionType />} />
             <Route path="/admission-detail" element={<AdmissionDetail />} />

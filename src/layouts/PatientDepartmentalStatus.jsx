@@ -3,7 +3,8 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, IconButton, Text, VStack,
+  Badge,
+  Box, Button, HStack, IconButton, Tag, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
@@ -19,50 +20,10 @@ import DataTable2 from '../components/tables/DataTable';
 import { useGetPatientsQuery } from '../api/patients.api';
 import { useGetAppointmentsQuery } from '../api/appointments.api';
 
-const outPatientList = [
-
-  {
-    id: nanoid(),
-    text: 'ANC',
-  },
-  {
-    id: nanoid(),
-    text: 'Cervical Screening',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Health Information',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Weight Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Height Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'PNC',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'SGBV',
-  },
-];
-
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      size="sm"
+      // size="sm"
       name={fullName}
       color="white"
     />
@@ -97,7 +58,12 @@ const PatientDepartmentalStatus = () => {
       {
         header: 'Nursing Station',
         // accessorKey: 'appointment_date',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Box h="100%">
+            {!props.row.original.temperature ? <Tag colorScheme="red" size="xl" p={2}>VITALS YET TO BE RECORDED</Tag>
+              : <Text>VITALS RECORDED</Text>}
+          </Box>
+        ),
 
       },
       {
