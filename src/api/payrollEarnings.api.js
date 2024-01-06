@@ -1,32 +1,32 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const payrollDeductionsApi = createApi({
-  reducerPath: 'payrollDeductionsApi',
+export const payrollEarningsApi = createApi({
+  reducerPath: 'payrollEarningsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/payroll-deductions',
+    baseUrl: 'http://localhost:5000/payroll-earnings',
   }),
   endpoints: (builder) => ({
-    getAllPayrollDeductions: builder.query({
+    getAllPayrollEarnings: builder.query({
       query: () => 'fetchAll',
     }),
-    addPayrollDeductions: builder.mutation({
+    addPayrollEarning: builder.mutation({
       query: (newUser) => ({
         url: 'add',
         method: 'POST',
         body: newUser,
       }),
     }),
-    getPayrollDeduction: builder.query({
+    getPayrollEarning: builder.query({
       query: (id) => `detail/${id}`,
     }),
-    updatePayrollDeduction: builder.mutation({
+    updatePayrollEarning: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
         method: 'PUT',
         body: patch,
       }),
     }),
-    deletePayrollDeduction: builder.mutation({
+    deletePayrollEarning: builder.mutation({
       query(id) {
         return {
           url: `delete${id}`,
@@ -38,6 +38,6 @@ export const payrollDeductionsApi = createApi({
 });
 
 export const {
-  useGetAllPayrollDeductionsQuery, useAddPayrollDeductionsMutation, useGetPayrollDeductionQuery,
-  useUpdatePayrollDeductionMutation, useDeletePayrollDeductionMutation,
-} = payrollDeductionsApi;
+  useGetAllPayrollEarningsQuery, useAddPayrollEarningMutation, useGetPayrollEarningQuery,
+  useUpdatePayrollEarningMutation, useDeletePayrollEarningMutation,
+} = payrollEarningsApi;

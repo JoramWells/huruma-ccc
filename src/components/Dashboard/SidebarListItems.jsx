@@ -248,7 +248,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Overtime Type', link: '/all-reports' },
           { id: nanoid(), title: 'Loan Type', link: '/all-reports' },
           { id: nanoid(), title: 'Benefit Type', link: '/all-reports' },
-          { id: nanoid(), title: 'Register Earning', link: '/all-reports' },
+          { id: nanoid(), title: 'Register Earning', link: '/payroll-earnings' },
           { id: nanoid(), title: 'Tax Deduction', link: '/payroll-deductions' },
           { id: nanoid(), title: 'Job Title', link: '/all-reports' },
           { id: nanoid(), title: 'Register Bank', link: '/all-reports' },

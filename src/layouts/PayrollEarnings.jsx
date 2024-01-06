@@ -13,19 +13,20 @@ import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetAllPayrollDeductionsQuery } from '../api/payrollDeductions.api';
+import { useGetAllPayrollEarningsQuery } from '../api/payrollEarnings.api';
 
-const PayrollDeductions = () => {
+const PayrollEarnings = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollDeductionsQuery();
+  } = useGetAllPayrollEarningsQuery();
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Deduction Name',
-        accessorKey: 'deduction_description',
+        header: 'Earning Description',
+        accessorKey: 'earning_description',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -68,7 +69,7 @@ const PayrollDeductions = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Payroll Deductions
+            Payroll Earning
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -127,4 +128,4 @@ const PayrollDeductions = () => {
   );
 };
 
-export default PayrollDeductions;
+export default PayrollEarnings;
