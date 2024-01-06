@@ -37,7 +37,7 @@ const PayrollBankDetails = ({
     <VStack spacing={8}>
 
       <FormControl isRequired>
-        <FormLabel>Employee Category</FormLabel>
+        <FormLabel>Select Bank</FormLabel>
         <Select
           options={genderOptions}
           styles={customStyles}
@@ -47,13 +47,19 @@ const PayrollBankDetails = ({
       </FormControl>
 
       <FormControl isRequired>
-        <FormLabel>Active Status</FormLabel>
-        <Select
-          options={genderOptions}
-          styles={customStyles}
-          onChange={(genderValue) => setGender(genderValue.value)}
+        <FormLabel>Bank Branch</FormLabel>
+        <Input
+          size="lg"
+          // placeholder="Enter phone number"
         />
+      </FormControl>
 
+      <FormControl isRequired>
+        <FormLabel>Bank Account Number</FormLabel>
+        <Input
+          size="lg"
+        // placeholder="Enter phone number"
+        />
       </FormControl>
 
     </VStack>

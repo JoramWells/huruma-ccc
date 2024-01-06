@@ -201,7 +201,40 @@ PayrollContacts.defaultProps = {
 };
 
 // hospital details
+const AssociatedUserAccount = ({ nhif_no, setNHIFNo }) => {
+  const data = [];
+  const options = [
+    { value: 'SINGLE', label: 'SINGLE' },
+    { value: 'MARRIED', label: 'MARRIED' },
+  ];
+  return (
+    <VStack
+      bgColor="white"
+      spacing={8}
+    >
+      <FormControl>
+        <FormLabel>Select User Account</FormLabel>
+        <Select options={options} styles={customStyles} />
+
+      </FormControl>
+    </VStack>
+  );
+};
+
+AssociatedUserAccount.propTypes = {
+  nhif_no: PropTypes.string,
+  setNHIFNo: PropTypes.func,
+
+};
+
+AssociatedUserAccount.defaultProps = {
+  nhif_no: '',
+  setNHIFNo: () => { },
+
+};
+
+// hospital details
 
 export {
-  PersonalDetail, PayrollContacts,
+  PersonalDetail, PayrollContacts, AssociatedUserAccount,
 };

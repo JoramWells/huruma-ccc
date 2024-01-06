@@ -9,8 +9,9 @@ import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
 import { useAddPatientMutation } from '../api/patients.api';
-import { PayrollContacts, PersonalDetail } from '../components/PayrollForms/Payroll';
+import { AssociatedUserAccount, PayrollContacts, PersonalDetail } from '../components/PayrollForms/Payroll';
 import PayrollHumanResource from '../components/PayrollForms/PayrollHumanResource';
+import PayrollBankDetails from '../components/PayrollForms/PayrollBankDetails';
 
 const AddEmployeePayrollRecords = () => {
   const [first_name, setFirstName] = useState('');
@@ -28,6 +29,8 @@ const AddEmployeePayrollRecords = () => {
     { title: 'Personal', description: 'Personal Information' },
     { title: 'Contacts', description: 'Payroll Employee Contacts' },
     { title: 'Human Resource', description: 'Human Resource Details' },
+    { title: 'Bank Details', description: 'Employee Bank Details' },
+    { title: 'Other Account', description: 'Associated User Account' },
   ];
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,7 +67,7 @@ const AddEmployeePayrollRecords = () => {
       <Stepper
         index={activeStep}
         mb={2}
-        w="65%"
+        w="85%"
         mt={5}
         rounded="lg"
         bgColor="white"
@@ -121,6 +124,8 @@ const AddEmployeePayrollRecords = () => {
         />
         )}
         {activeStep === 3 && <PayrollHumanResource />}
+        {activeStep === 4 && <PayrollBankDetails />}
+        {activeStep === 5 && <AssociatedUserAccount />}
 
         {/* payment info */}
 
@@ -132,7 +137,7 @@ const AddEmployeePayrollRecords = () => {
             Back
 
           </Button>
-          {activeStep === 4 ? (
+          {activeStep === 5 ? (
             <Button
               onClick={() => addPatient(inputValues)}
             >

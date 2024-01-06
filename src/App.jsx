@@ -2,6 +2,7 @@
 import { Suspense, lazy } from 'react';
 import {
   ChakraProvider,
+  extendTheme,
   theme,
 } from '@chakra-ui/react';
 import {
@@ -126,8 +127,18 @@ const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges')
 const Wards = lazy(() => import('./layouts/Wards'));
 
 function App() {
+  const extendedTheme = extendTheme({
+    ...theme,
+    styles: {
+      global: {
+        body: {
+          bg: 'gray.50',
+        },
+      },
+    },
+  });
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={extendedTheme}>
       {/* <Routes>
         <Route path="/add-item-type" element={<AddItemType />} />
       </Routes> */}

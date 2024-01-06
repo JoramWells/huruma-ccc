@@ -30,6 +30,7 @@ import { userPrivilegesApi } from './api/userPrivileges.api';
 import { payrollDeductionsApi } from './api/payrollDeductions.api';
 import { payrollEarningsApi } from './api/payrollEarnings.api';
 import { payrollEmployeeRecordsApi } from './api/payrollEmployeeRecords.api';
+import { payrollEmployeeCategoryApi } from './api/payrollEmployeeCategory.api';
 
 export const store = configureStore({
   reducer: {
@@ -64,6 +65,7 @@ export const store = configureStore({
     [payrollDeductionsApi.reducerPath]: payrollDeductionsApi.reducer,
     [payrollEarningsApi.reducerPath]: payrollEarningsApi.reducer,
     [payrollEmployeeRecordsApi.reducerPath]: payrollEmployeeRecordsApi.reducer,
+    [payrollEmployeeCategoryApi.reducerPath]: payrollEmployeeCategoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -97,5 +99,6 @@ export const store = configureStore({
     .concat(payrollDeductionsApi.middleware)
     .concat(payrollEarningsApi.middleware)
     .concat(payrollEmployeeRecordsApi.middleware)
+    .concat(payrollEmployeeCategoryApi.middleware)
   ,
 });
