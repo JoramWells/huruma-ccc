@@ -1,98 +1,93 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
 import {
-  Avatar, Box, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
+  Avatar, Box, Button, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useCallback, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
 import {
-  FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaFileInvoice, FaUser,
+  FaPlus,
 } from 'react-icons/fa';
-import { nanoid } from '@reduxjs/toolkit';
-import Step1 from '../components/PatientProfile/Medical';
-import Step2 from '../components/PatientProfile/Step2';
+import PropTypes from 'prop-types';
 import { useGetMaternityProfileQuery } from '../api/maternity.api';
-import AppointmentCard from '../components/PatientProfile/AppointmentCard';
+import DataTable2 from '../components/tables/DataTable';
 
-const PatientCard = ({ text, icon, onClick }) => {
+const CustomButton = ({ text, link }) => {
   const [step, setStep] = useState(0);
   return (
-    <VStack
-      w="full"
-      onClick={onClick}
-
-    >
-      <HStack
-        w="full"
-        justifyContent="flex-start"
-        bgColor="whitesmoke"
-        p={4}
-        rounded="lg"
-        _hover={{
-          cursor: 'pointer',
-          // colorScheme: 'blue',
-          color: 'blue.500',
-          bgColor: 'blue.50',
-        }}
-        color="blue.800"
+    <HStack w="full" justifyContent="flex-end">
+      <Box
+        border="4px"
+        padding={1}
+        rounded="full"
+        borderColor="blue.500"
       >
-        {icon}
-        <Text>
-          {text}
-        </Text>
-      </HStack>
-    </VStack>
+        <Button
+          colorScheme="blue"
+          rounded="full"
+          leftIcon={<FaPlus />}
+        >
+          <Link to={link}>{text}</Link>
+
+        </Button>
+
+      </Box>
+    </HStack>
   );
 };
 
-const profileData = [
-  {
-    id: nanoid(),
-    text: 'Medical History',
-    icon: <FaChartLine />,
-  },
-  {
-    id: nanoid(),
-    text: 'Admissions',
-    icon: <FaAddressBook />,
-  },
-  {
-    id: nanoid(),
-    text: 'Appointments',
-    icon: <FaCalendar />,
-  },
-  {
-    id: nanoid(),
-    text: 'Invoices',
-    icon: <FaFileInvoice />,
-  },
-  {
-    id: nanoid(),
-    text: 'Payments',
-    icon: <FaCreditCard />,
-  },
-  {
-    id: nanoid(),
-    text: 'View Profile',
-    icon: <FaUser />,
-  },
-];
+CustomButton.propTypes = {
+  text: PropTypes.string,
+  link: PropTypes.string,
+};
+
+CustomButton.defaultProps = {
+  text: '',
+  link: '/maternity-profile',
+};
 
 const MaternityProfileDetail = () => {
-  const [sideItem, setSideItem] = useState(0);
   const { id } = useParams();
   // const { data, loading } = useSelector((state) => state.patients);
   const { data, isLoading } = useGetMaternityProfileQuery(id);
-  const dispatch = useDispatch();
 
-  const handleSetSideItem = useCallback((step) => {
-    setSideItem(step);
-  }, [setSideItem]);
+  const columns = useMemo(
+    () => [
+      {
+        header: 'Age',
+        accessorKey: 'medication_name',
+        cell: (props) => <Text>{props.getValue().substring(0, 30)}</Text>,
+        width: 50,
 
-  // const date = `${data.day_of_birth}/${data.month_of_birth}/${data.dob}`;
-  console.log(data);
+      },
+
+      {
+        header: 'Drug',
+        accessorKey: 'medication_category',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()?.category_name}</Text>,
+
+      },
+      {
+        header: 'Dosage',
+        accessorKey: 'price',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+
+      {
+        header: 'Date',
+        accessorKey: 'price_corporate',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+        size: 200,
+
+      },
+    ],
+
+    [],
+  );
 
   return (
     <VStack
@@ -109,35 +104,38 @@ const MaternityProfileDetail = () => {
       <Box w="full" bgColor="white">
         <Tabs isFitted>
           <TabList>
-            <Tab>Allergies</Tab>
-            <Tab>Antenatal</Tab>
+            {/* <Tab>Allergies</Tab>
+            <Tab>Antenatal</Tab> */}
             <Tab>Clinical Notes</Tab>
             <Tab>Delivery</Tab>
             <Tab>Deworming</Tab>
             <Tab>Impairments</Tab>
             <Tab>Immunizations</Tab>
             <Tab>Infant Feeding</Tab>
-            <Tab>Lab Req.</Tab>
+            {/* <Tab>Lab Req.</Tab> */}
             <Tab>Patient Notes</Tab>
             <Tab>Physical exam.</Tab>
             <Tab>Post Natal</Tab>
-            <Tab>Procedures</Tab>
+            {/* <Tab>Procedures</Tab> */}
             <Tab>Preventive Services</Tab>
-            <Tab>Radiology Req.</Tab>
+            {/* <Tab>Radiology Req.</Tab> */}
             <Tab>Vitamin A Capsules</Tab>
             <Tab>Visits</Tab>
+            {/* <Tab>Vital Signs</Tab> */}
 
           </TabList>
 
           <TabPanels>
             <TabPanel>
-              <p>one!</p>
+              <CustomButton text="New Clinical Notes" />
             </TabPanel>
             <TabPanel>
-              <p>two!</p>
+              <CustomButton text="New Delivery Details" link={`/add-maternity-delivery-details/${id}`} />
+
             </TabPanel>
             <TabPanel>
-              <p>three!</p>
+              <CustomButton text="Deworming Detail" link={`/add-maternity-deworming-details/${id}`} />
+              <DataTable2 columns={columns} />
             </TabPanel>
           </TabPanels>
         </Tabs>

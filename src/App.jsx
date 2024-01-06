@@ -95,6 +95,8 @@ import PatientPrescription from './layouts/PatientPrescription';
 import AddPrescription from './layouts/AddPrescription';
 import PatientDepartmentalStatus from './layouts/PatientDepartmentalStatus';
 import LabTestsSummarySubSection from './layouts/LabTestsSummarySubSection';
+import AddMaternityDeliveryDetails from './layouts/AddMaternityDeliveryDetails';
+import AddMaternityDewormingDetail from './layouts/AddMaternityDewormingDetail';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -267,6 +269,8 @@ function App() {
             <Route path="/maternity-antenatal-profile" element={<MaternityAntenatalProfile />} />
             <Route path="/maternity-profile" element={<MaternityProfile />} />
             <Route path="/add-maternity-profile" element={<AddMaternityProfile />} />
+            <Route path="/add-maternity-delivery-details/:id" element={<AddMaternityDeliveryDetails />} />
+            <Route path="/add-maternity-deworming-details/:id" element={<AddMaternityDewormingDetail />} />
 
             <Route path="/add-service" element={<AddService />} />
             <Route path="/admin-services" element={<Services />} />

@@ -168,6 +168,8 @@ const SidebarListItems = () => {
           || pathname.includes('/maternity-antenatal-profile')
           || pathname.includes('/add-maternity-antenatal-profile')
           || pathname.includes('/add-maternity-profile')
+          || pathname.includes('/add-maternity-delivery-details')
+          || pathname.includes('/add-maternity-deworming-details')
         || pathname.includes('/maternity-profile')}
         onClick={onToggle}
         text="Maternity"

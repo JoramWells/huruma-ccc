@@ -56,6 +56,18 @@ const Users = () => {
         accessorKey: 'user_type',
         cell: (props) => <Text>{props.getValue()?.user_type_desc}</Text>,
       },
+      {
+        header: 'Action',
+        // accessorKey: 'user_type',
+        cell: () => (
+          <VStack alignItems="flex-start">
+            <Button>Privileges</Button>
+            <Button>Purchase Orders Clearance Privileges</Button>
+            <Button>Requisitions Clearance Privileges</Button>
+            <Button>Change Assigned Branch</Button>
+          </VStack>
+        ),
+      },
     ],
 
     [],

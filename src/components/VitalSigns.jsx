@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import {
   Table,
   Thead,
@@ -15,8 +16,9 @@ import { useGetAppointmentQuery } from '../api/appointments.api';
 
 /* eslint-disable no-unused-vars */
 const VitalSigns = () => {
-  const { id } = useParams();
-  const { data } = useGetAppointmentQuery(id);
+  const [searchParams] = useSearchParams();
+  const appointment_id = searchParams.get('appointment_id');
+  const { data } = useGetAppointmentQuery(appointment_id);
 
   return (
     <VStack w="full" alignItems="flex-start">

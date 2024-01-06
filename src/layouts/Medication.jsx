@@ -14,17 +14,6 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetAllMedicationQuery } from '../api/medication.api';
 
-const UserNameAvatar = ({ fullName }) => (
-  <HStack>
-    <Avatar
-      // size="sm"
-      name={fullName}
-      color="white"
-    />
-    <Text>{fullName}</Text>
-  </HStack>
-);
-
 const Medication = () => {
   const { data } = useGetAllMedicationQuery();
 

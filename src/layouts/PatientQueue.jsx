@@ -138,7 +138,11 @@ const PatientQueue = () => {
           <HStack justifyContent="flex-start" alignItems="flex-start">
             {!props.row.original.consultation_type
               && <IconButton><FaHandshake /></IconButton>}
-            <IconButton onClick={() => navigate(`/doctor/${props.row.original.patient_id}`)}>
+            <IconButton onClick={() => navigate({
+              pathname: `/doctor/${props.row.original.patient_id}`,
+              search: `?appointment_id=${props.row.original.appointment_id}`,
+            })}
+            >
               <FaUserNurse />
             </IconButton>
           </HStack>
