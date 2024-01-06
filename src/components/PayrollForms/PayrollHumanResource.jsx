@@ -6,6 +6,8 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import { useGetPayrollEmployeeCategoriesQuery } from '../../api/payrollEmployeeCategory.api';
+import { useGetAllPayrollPayTypesQuery } from '../../api/payrollPayType.api';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -23,9 +25,9 @@ const PayrollHumanResource = ({
   setLastName, middle_name, setMiddleName, dob, setDOB,
   gender, setGender, ID, setID, residence, setResidence,
 }) => {
-  const options = [
-    { value: 'SINGLE', label: 'SINGLE' },
-    { value: 'MARRIED', label: 'MARRIED' },
+  const activeStatusOptions = [
+    { value: 1, label: 'ACTIVE' },
+    { value: 2, label: 'INACTIVE' },
   ];
 
   const genderOptions = [
@@ -33,13 +35,25 @@ const PayrollHumanResource = ({
     { value: 'FEMALE', label: 'FEMALE' },
   ];
 
+  // category data
+  const { data: employeeCategoryData } = useGetPayrollEmployeeCategoriesQuery();
+  const employeeCategoryOptions = employeeCategoryData?.map((item) => ({
+    value: item.employee_category_id, label: item.employee_category_description,
+  }));
+
+  // pay type
+  const { data: payTypeData } = useGetAllPayrollPayTypesQuery();
+  const payTypeOptions = payTypeData?.map((item) => ({
+    value: item.pay_type_id, label: item.pay_type_description,
+  }));
+
   return (
     <VStack spacing={8}>
 
       <FormControl isRequired>
         <FormLabel>Employee Category</FormLabel>
         <Select
-          options={genderOptions}
+          options={employeeCategoryOptions}
           styles={customStyles}
           onChange={(genderValue) => setGender(genderValue.value)}
         />
@@ -49,7 +63,7 @@ const PayrollHumanResource = ({
       <FormControl isRequired>
         <FormLabel>Active Status</FormLabel>
         <Select
-          options={genderOptions}
+          options={activeStatusOptions}
           styles={customStyles}
           onChange={(genderValue) => setGender(genderValue.value)}
         />
@@ -70,7 +84,7 @@ const PayrollHumanResource = ({
         <FormControl isRequired>
           <FormLabel>Select Pay Type</FormLabel>
           <Select
-            options={genderOptions}
+            options={payTypeOptions}
             styles={customStyles}
             onChange={(genderValue) => setGender(genderValue.value)}
           />

@@ -262,18 +262,18 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/payroll-transactions' || pathname.includes('/payroll-dedutions')
-          || pathname.includes('/payroll-earnngs')}
+        selected={pathname === '/payroll-transactions' || pathname.includes('/payroll-employee-loan-details')
+          || pathname.includes('/payroll-employee-benefits')}
         onClick={onToggle}
         text="Payroll Transactions"
         link="/payroll"
         itemList={[
-          { id: nanoid(), title: 'Payroll', link: '/payroll' },
-          { id: nanoid(), title: 'Employee Loans', link: '/out-patient' || pathname.includes('/add-patient') },
+          { id: nanoid(), title: 'Payroll', link: '/payroll-details' },
+          { id: nanoid(), title: 'Employee Loans', link: '/payroll-employee-loan-details' || pathname.includes('/add-patient') },
           { id: nanoid(), title: 'Regular Time Details', link: '/all-reports' },
           { id: nanoid(), title: 'Overtime', link: '/all-reports' },
           { id: nanoid(), title: 'Tardiness', link: '/all-reports' },
-          { id: nanoid(), title: 'Employee Benefit', link: '/payroll-earnings' },
+          { id: nanoid(), title: 'Employee Benefits', link: '/payroll-employee-benefits' },
           { id: nanoid(), title: 'Employee Monthly deduction', link: '/payroll-deductions' },
           { id: nanoid(), title: 'Employee Earning', link: '/all-reports' },
           { id: nanoid(), title: 'Register Bank', link: '/all-reports' },

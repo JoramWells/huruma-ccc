@@ -5,8 +5,6 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
 
 const customStyles = {
   control: (provided, state) => ({

@@ -102,6 +102,7 @@ import PayrollDeductions from './layouts/PayrollDeductions';
 import PayrollEarnings from './layouts/PayrollEarnings';
 import PayrollEmployeeRecords from './layouts/PayrollEmployeeRecords';
 import AddEmployeeRecords from './layouts/AddEmployeePayrollRecords';
+import PayrollEmployeeLoanDetails from './layouts/PayrollEmployeeLoanDetails';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -285,6 +286,7 @@ function App() {
             <Route path="/payroll-earnings" element={<PayrollEarnings />} />
             <Route path="/payroll-employee-records" element={<PayrollEmployeeRecords />} />
             <Route path="/add-payroll-employee-records" element={<AddEmployeeRecords />} />
+            <Route path="/payroll-employee-loan-details" element={<PayrollEmployeeLoanDetails />} />
 
             <Route path="/maternity-antenatal-profile" element={<MaternityAntenatalProfile />} />
             <Route path="/maternity-profile" element={<MaternityProfile />} />
