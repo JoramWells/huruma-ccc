@@ -77,7 +77,7 @@ const PayrollEmployeeRecords = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-patient" />
+        <BreadCrumbNav link="/add-payroll-employee-records" />
 
         <HStack
           w="100%"
