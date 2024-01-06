@@ -238,19 +238,44 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/payroll' || pathname.includes('/payroll-deductions')}
+        selected={pathname === '/payroll'
+          || pathname.includes('/payroll-deductions')
+        || pathname.includes('/payroll-employee-records')
+          || pathname.includes('/payroll-earnings')}
         onClick={onToggle}
-        text="Register Payroll"
+        text="Payroll Items"
         link="/payroll"
         itemList={[
+          { id: nanoid(), title: 'Benefit Type', link: '/all-reports' },
           { id: nanoid(), title: 'Employee Category', link: '/admit-patient' },
+          { id: nanoid(), title: 'Employees', link: '/payroll-employee-records' },
           { id: nanoid(), title: 'Tax Status', link: '/out-patient' || pathname.includes('/add-patient') },
           { id: nanoid(), title: 'Overtime Type', link: '/all-reports' },
           { id: nanoid(), title: 'Loan Type', link: '/all-reports' },
-          { id: nanoid(), title: 'Benefit Type', link: '/all-reports' },
           { id: nanoid(), title: 'Register Earning', link: '/payroll-earnings' },
           { id: nanoid(), title: 'Tax Deduction', link: '/payroll-deductions' },
           { id: nanoid(), title: 'Job Title', link: '/all-reports' },
+          { id: nanoid(), title: 'Register Bank', link: '/all-reports' },
+          { id: nanoid(), title: 'Provident Fund Bracket', link: '/all-reports' },
+        ]}
+        icon={<FaHospitalAlt size={20} />}
+      />
+
+      <SidebarItemLink
+        selected={pathname === '/payroll-transactions' || pathname.includes('/payroll-dedutions')
+          || pathname.includes('/payroll-earnngs')}
+        onClick={onToggle}
+        text="Payroll Transactions"
+        link="/payroll"
+        itemList={[
+          { id: nanoid(), title: 'Payroll', link: '/payroll' },
+          { id: nanoid(), title: 'Employee Loans', link: '/out-patient' || pathname.includes('/add-patient') },
+          { id: nanoid(), title: 'Regular Time Details', link: '/all-reports' },
+          { id: nanoid(), title: 'Overtime', link: '/all-reports' },
+          { id: nanoid(), title: 'Tardiness', link: '/all-reports' },
+          { id: nanoid(), title: 'Employee Benefit', link: '/payroll-earnings' },
+          { id: nanoid(), title: 'Employee Monthly deduction', link: '/payroll-deductions' },
+          { id: nanoid(), title: 'Employee Earning', link: '/all-reports' },
           { id: nanoid(), title: 'Register Bank', link: '/all-reports' },
           { id: nanoid(), title: 'Provident Fund Bracket', link: '/all-reports' },
         ]}

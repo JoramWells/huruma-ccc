@@ -29,6 +29,7 @@ import { labTestsSummarySubSectionApi } from './api/labTestsSummarySubSection.ap
 import { userPrivilegesApi } from './api/userPrivileges.api';
 import { payrollDeductionsApi } from './api/payrollDeductions.api';
 import { payrollEarningsApi } from './api/payrollEarnings.api';
+import { payrollEmployeeRecordsApi } from './api/payrollEmployeeRecords.api';
 
 export const store = configureStore({
   reducer: {
@@ -62,6 +63,7 @@ export const store = configureStore({
     [userPrivilegesApi.reducerPath]: userPrivilegesApi.reducer,
     [payrollDeductionsApi.reducerPath]: payrollDeductionsApi.reducer,
     [payrollEarningsApi.reducerPath]: payrollEarningsApi.reducer,
+    [payrollEmployeeRecordsApi.reducerPath]: payrollEmployeeRecordsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -94,5 +96,6 @@ export const store = configureStore({
     .concat(userPrivilegesApi.middleware)
     .concat(payrollDeductionsApi.middleware)
     .concat(payrollEarningsApi.middleware)
+    .concat(payrollEmployeeRecordsApi.middleware)
   ,
 });
