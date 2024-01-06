@@ -8,12 +8,14 @@ import {
 import { useParams } from 'react-router-dom';
 
 import { useGetUserQuery } from '../api/users.api';
+import { useGetUserPrivilegesQuery } from '../api/userPrivileges.api';
 
 const UserDetail = () => {
   const { id } = useParams();
 
   const { data } = useGetUserQuery(id);
-  console.log(data);
+  const { data: privilegeData } = useGetUserPrivilegesQuery(id);
+  console.log(privilegeData);
 
   return (
     <VStack

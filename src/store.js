@@ -26,6 +26,8 @@ import { personalAccountChargeApi } from './api/personalAccountCharges.api';
 import { accountingSupplierApi } from './api/accountingSuppliers.api';
 import { accountingItemApi } from './api/accountingItem.api';
 import { labTestsSummarySubSectionApi } from './api/labTestsSummarySubSection.api';
+import { userPrivilegesApi } from './api/userPrivileges.api';
+import { payrollDeductionsApi } from './api/payrollDeductions.api';
 
 export const store = configureStore({
   reducer: {
@@ -56,6 +58,8 @@ export const store = configureStore({
     [accountingSupplierApi.reducerPath]: accountingSupplierApi.reducer,
     [accountingItemApi.reducerPath]: accountingItemApi.reducer,
     [labTestsSummarySubSectionApi.reducerPath]: labTestsSummarySubSectionApi.reducer,
+    [userPrivilegesApi.reducerPath]: userPrivilegesApi.reducer,
+    [payrollDeductionsApi.reducerPath]: payrollDeductionsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -85,5 +89,7 @@ export const store = configureStore({
     .concat(accountingItemApi.middleware)
     .concat(accountingSupplierApi.middleware)
     .concat(labTestsSummarySubSectionApi.middleware)
+    .concat(userPrivilegesApi.middleware)
+    .concat(payrollDeductionsApi.middleware)
   ,
 });

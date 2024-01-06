@@ -238,6 +238,26 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
+        selected={pathname === '/payroll' || pathname.includes('/payroll-deductions')}
+        onClick={onToggle}
+        text="Register Payroll"
+        link="/payroll"
+        itemList={[
+          { id: nanoid(), title: 'Employee Category', link: '/admit-patient' },
+          { id: nanoid(), title: 'Tax Status', link: '/out-patient' || pathname.includes('/add-patient') },
+          { id: nanoid(), title: 'Overtime Type', link: '/all-reports' },
+          { id: nanoid(), title: 'Loan Type', link: '/all-reports' },
+          { id: nanoid(), title: 'Benefit Type', link: '/all-reports' },
+          { id: nanoid(), title: 'Register Earning', link: '/all-reports' },
+          { id: nanoid(), title: 'Tax Deduction', link: '/payroll-deductions' },
+          { id: nanoid(), title: 'Job Title', link: '/all-reports' },
+          { id: nanoid(), title: 'Register Bank', link: '/all-reports' },
+          { id: nanoid(), title: 'Provident Fund Bracket', link: '/all-reports' },
+        ]}
+        icon={<FaHospitalAlt size={20} />}
+      />
+
+      <SidebarItemLink
         selected={
           pathname === '/pharmacy' || pathname.includes('walkin-patient-queue')
 }
