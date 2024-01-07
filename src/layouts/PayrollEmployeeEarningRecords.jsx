@@ -14,40 +14,46 @@ import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
 import { useGetAllPayrollEmployeeRecordsQuery } from '../api/payrollEmployeeRecords.api';
 import UserNameAvatar from '../components/UserNameAvatar';
-import { useGetAllPayrollEmployeeBenefitsQuery } from '../api/payrollEmployeeBenefitsFile.api';
 
-const PayrollEmployeeBenefitsFile = () => {
+const PayrollEmployeeEarningRecords = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollEmployeeBenefitsQuery();
+  } = useGetAllPayrollEmployeeRecordsQuery();
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
         header: 'Employee',
-        accessorKey: 'payroll_employee_record',
+        accessorKey: 'full_name',
         cell: (props) => (
           <UserNameAvatar
-            fullName={props.getValue()?.full_name}
+            fullName={props.getValue()}
             link={`payroll-employee-records-details/${props.row.original.employee_id}`}
           />
         ),
 
       },
       {
-        header: 'Benefit',
+        header: 'Earning Description',
         accessorKey: 'payroll_job_title',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
 
       },
       {
-        header: 'Amount',
-        accessorKey: 'amount',
+        header: 'Department',
+        accessorKey: 'department_id',
         enableSorting: false,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'Job Number',
+        accessorKey: 'job_number',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
     ],
@@ -60,8 +66,6 @@ const PayrollEmployeeBenefitsFile = () => {
           ...item,
           subRows: [],
         }));
-
-  console.log(data);
 
   return (
     <VStack
@@ -84,7 +88,7 @@ const PayrollEmployeeBenefitsFile = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Employee  Benefits
+            Employee Records
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -135,10 +139,7 @@ const PayrollEmployeeBenefitsFile = () => {
               p={3}
               h="89%"
             >
-              <DataTable2
-                columns={columns}
-                data={subRowData}
-              />
+              <DataTable2 data={subRowData} columns={columnsx} />
             </Box>
           )}
       </Box>
@@ -146,4 +147,4 @@ const PayrollEmployeeBenefitsFile = () => {
   );
 };
 
-export default PayrollEmployeeBenefitsFile;
+export default PayrollEmployeeEarningRecords;

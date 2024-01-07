@@ -104,6 +104,7 @@ import PayrollEmployeeRecords from './layouts/PayrollEmployeeRecords';
 import AddEmployeeRecords from './layouts/AddEmployeePayrollRecords';
 import PayrollEmployeeLoanDetails from './layouts/PayrollEmployeeLoanDetails';
 import PayrollEmployeeBenefitsFile from './layouts/PayrollEmployeeBenefitsFile';
+import PayrollEmployeeEarningRecords from './layouts/PayrollEmployeeEarningRecords';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -284,7 +285,8 @@ function App() {
             <Route path="/stores" element={<Stores />} />
 
             <Route path="/payroll-deductions" element={<PayrollDeductions />} />
-            <Route path="/payroll-earnings" element={<PayrollEarnings />} />
+            <Route path="/payroll-employee-earnings" element={<PayrollEarnings />} />
+            <Route path="/payroll-employee-earning-records" element={<PayrollEmployeeEarningRecords />} />
             <Route path="/payroll-employee-records" element={<PayrollEmployeeRecords />} />
             <Route path="/add-payroll-employee-records" element={<AddEmployeeRecords />} />
             <Route path="/payroll-employee-loan-details" element={<PayrollEmployeeLoanDetails />} />

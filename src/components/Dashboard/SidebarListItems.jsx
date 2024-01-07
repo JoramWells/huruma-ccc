@@ -252,7 +252,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Tax Status', link: '/out-patient' || pathname.includes('/add-patient') },
           { id: nanoid(), title: 'Overtime Type', link: '/all-reports' },
           { id: nanoid(), title: 'Loan Type', link: '/all-reports' },
-          { id: nanoid(), title: 'Register Earning', link: '/payroll-earnings' },
+          { id: nanoid(), title: 'Register Earning', link: '/payroll-employee-earnings' },
           { id: nanoid(), title: 'Tax Deduction', link: '/payroll-deductions' },
           { id: nanoid(), title: 'Job Title', link: '/all-reports' },
           { id: nanoid(), title: 'Register Bank', link: '/all-reports' },
@@ -275,7 +275,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Tardiness', link: '/all-reports' },
           { id: nanoid(), title: 'Employee Benefits', link: '/payroll-employee-benefits' },
           { id: nanoid(), title: 'Employee Monthly deduction', link: '/payroll-deductions' },
-          { id: nanoid(), title: 'Employee Earning', link: '/all-reports' },
+          { id: nanoid(), title: 'Employee Earning', link: '/payroll-employee-earning-records' },
           { id: nanoid(), title: 'Register Bank', link: '/all-reports' },
           { id: nanoid(), title: 'Provident Fund Bracket', link: '/all-reports' },
         ]}

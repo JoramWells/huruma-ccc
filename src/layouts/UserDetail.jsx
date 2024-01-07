@@ -15,7 +15,7 @@ const UserDetail = () => {
 
   const { data } = useGetUserQuery(id);
   const { data: privilegeData } = useGetUserPrivilegesQuery(id);
-  console.log(privilegeData);
+  console.log(privilegeData, 'dtx');
 
   return (
     <VStack
