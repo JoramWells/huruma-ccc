@@ -29,5 +29,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'no-param-reassign': 0,
     'no-return-assign': 0,
+    'no-console': 0,
+    'react-hooks/exhaustive-deps': 0,
   },
 };
