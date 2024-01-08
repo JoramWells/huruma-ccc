@@ -36,6 +36,29 @@ const PersonalDetail = ({
   return (
     <VStack spacing={8}>
       <HStack w="full">
+        <FormControl>
+          <FormLabel>Out-Patient File Number</FormLabel>
+          <Input
+            size="lg"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>Old Reference Number</FormLabel>
+          <Input
+            size="lg"
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel>In-Patient File Number</FormLabel>
+          <Input
+            size="lg"
+          />
+        </FormControl>
+      </HStack>
+      <HStack w="full">
+
         <FormControl isRequired>
 
           <FormLabel mt={1}>First Name</FormLabel>
@@ -168,28 +191,29 @@ PersonalDetail.defaultProps = {
 // hospital details
 const HospitalDetail = ({ nhif_no, setNHIFNo }) => {
   const data = [];
+  const genderOptions = [
+    { value: 'MALE', label: 'MALE' },
+    { value: 'FEMALE', label: 'FEMALE' },
+  ];
   return (
     <VStack
       bgColor="white"
       spacing={8}
     >
+      <FormControl>
+        <FormLabel>Next of Kin</FormLabel>
+        <Select styles={customStyles} options={genderOptions} />
+      </FormControl>
       <HStack w="full">
         <FormControl>
-          <FormLabel>Out-Patient File Number</FormLabel>
+          <FormLabel>First Name</FormLabel>
           <Input
             size="lg"
           />
         </FormControl>
 
         <FormControl>
-          <FormLabel>Old Reference Number</FormLabel>
-          <Input
-            size="lg"
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>In-Patient File Number</FormLabel>
+          <FormLabel>Second Name</FormLabel>
           <Input
             size="lg"
           />
@@ -197,7 +221,7 @@ const HospitalDetail = ({ nhif_no, setNHIFNo }) => {
       </HStack>
 
       <FormControl>
-        <FormLabel>NHIF Number</FormLabel>
+        <FormLabel>Next of Kin Number</FormLabel>
         <Input
           size="lg"
           placeholder="Enter Occupation"
