@@ -10,7 +10,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
 import {
   HospitalDetail, PersonalDetail,
-} from '../../components/PatientForm';
+} from '../components/PatientForm';
 import { useAddPatientMutation } from '../../api/patients.api';
 import PaymentDetail from '../components/PaymentDetail';
 
