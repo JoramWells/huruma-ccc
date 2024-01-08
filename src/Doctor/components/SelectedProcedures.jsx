@@ -6,9 +6,18 @@ import {
 import moment from 'moment/moment';
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
+import { useAddPersonalAccountChargeMutation } from '../api/personalAccountCharges.api';
 
 const SelectedProcedures = ({ tableInstance }) => {
   const [data, setData] = useState([]);
+  const [addPersonalAccountCharge] = useAddPersonalAccountChargeMutation();
+
+  const inputValues = {
+    services: JSON.stringify(data),
+    date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
+    time_of_charge: moment(new Date()).format('hh:mm:ss'),
+
+  };
 
   const handleData = useCallback(() => {
     tableInstance.getSelectedRowModel()
@@ -18,7 +27,13 @@ const SelectedProcedures = ({ tableInstance }) => {
           procedure_name: el.original.procedure_name,
           procedure_cost: el.original.procedure_cost,
         }]));
-  }, [tableInstance]);
+
+    // send to backend
+    return addPersonalAccountCharge(inputValues);
+  }, [tableInstance, addPersonalAccountCharge]);
+
+  console.log(data);
+
   return (
     <VStack
       w="1/2"

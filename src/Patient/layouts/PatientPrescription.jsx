@@ -15,10 +15,10 @@ import { useDispatch } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
-import { useGetPatientQuery } from '../api/patients.api';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAppointmentQuery } from '../api/appointments.api';
+import { useGetPatientQuery } from '../../api/patients.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAppointmentQuery } from '../../api/appointments.api';
 
 const PatientPrescription = () => {
   const [sideItem, setSideItem] = useState(0);

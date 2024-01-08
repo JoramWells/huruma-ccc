@@ -3,23 +3,66 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaEye, FaFileDownload, FaPrint } from 'react-icons/fa';
+import {
+  FaAudible,
+  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
+} from 'react-icons/fa';
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetPatientsQuery } from '../api/patients.api';
-import { useGetAppointmentsQuery } from '../api/appointments.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetPatientsQuery } from '../../api/patients.api';
+import { useGetAppointmentsQuery } from '../../api/appointments.api';
+
+const outPatientList = [
+
+  {
+    id: nanoid(),
+    text: 'ANC',
+  },
+  {
+    id: nanoid(),
+    text: 'Cervical Screening',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Health Information',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Weight Gaps',
+  },
+  {
+    id: nanoid(),
+    text: 'Child Height Gaps',
+  },
+  {
+    id: nanoid(),
+    text: 'FP',
+  },
+  {
+    id: nanoid(),
+    text: 'PNC',
+  },
+  {
+    id: nanoid(),
+    text: 'FP',
+  },
+  {
+    id: nanoid(),
+    text: 'SGBV',
+  },
+];
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      // size="sm"
+      size="sm"
       name={fullName}
       color="white"
     />
@@ -27,7 +70,7 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const PatientVisits = () => {
+const PatientsTriaged = () => {
   const navigate = useNavigate();
 
   const {
@@ -35,7 +78,6 @@ const PatientVisits = () => {
   } = useGetAppointmentsQuery();
 
   // const { data } = useSelector((state) => state.patients);
-  // console.log(data);
 
   const columnsx = useMemo(
     () => [
@@ -64,27 +106,35 @@ const PatientVisits = () => {
 
       },
       {
-        header: 'Diagnosis',
+        header: 'PAYMENT DETAILS',
         accessorKey: 'patient_gender',
         enableSorting: false,
-        // cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
+        cell: (props) => <Text>b</Text>,
 
       },
       {
-        header: 'Prescription',
-        // accessorKey: 'patient_type',
+        header: 'Vital Signs',
+        // accessorKey: 'tem',
         cell: (props) => (
-          <Button
-            leftIcon={<FaEye />}
-            onClick={() => navigate({
-              pathname: `/patient-prescription/${props.row.original.patient_id}`,
-              search: `?appointment_id=${props.row.original.appointment_id}`,
-            })}
-          >
-            View Prescription
-          </Button>
+          <Box>
+            {!props.row.original.temperature
+              ? (
+                <Button
+                  variant="ghost"
+                  colorScheme="orange"
+                  size="sm"
+                  onClick={() => navigate(`/add-vitals/${props.row.original.patient_id}`)}
+                >
+                  NOT RECORDED
+                </Button>
+              ) : <Button size="sm" colorScheme="green" variant="ghost">RECORDED</Button>}
+          </Box>
         ),
 
+      },
+      {
+        header: 'Action',
+        cell: (props) => (<Button onClick={() => navigate(`/add-allergies/${props.row.original.patient_id}`)}>Record Allergies</Button>),
       },
     ],
 
@@ -96,7 +146,6 @@ const PatientVisits = () => {
           ...item,
           subRows: [],
         }));
-
   const filteredData = subRowData?.filter((item) => {
     const itemDate = moment(item.appointment_date);
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
@@ -124,7 +173,7 @@ const PatientVisits = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Patients
+            Triaged Patients
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -145,17 +194,42 @@ const PatientVisits = () => {
 
           </HStack>
         </HStack>
-        <Box
-          w="100%"
-          bgColor="white"
-          p={3}
-          h="89%"
-        >
-          <DataTable2 data={filteredData} columns={columnsx} />
-        </Box>
+        {filteredData?.length === 0 ? (
+          <VStack
+            p={2}
+            h="75vh"
+            alignItems="center"
+            justifyContent="center"
+          >
+
+            <FaBoxOpen
+              size={120}
+              color="gray"
+            />
+            <Text
+              fontSize="xl"
+              fontWeight="semibold"
+              color="gray.500"
+            >
+              No Patients Recorded
+
+            </Text>
+
+          </VStack>
+        )
+          : (
+            <Box
+              w="100%"
+              bgColor="white"
+              p={3}
+              h="89%"
+            >
+              <DataTable2 data={filteredData} columns={columnsx} />
+            </Box>
+          )}
       </Box>
     </VStack>
   );
 };
 
-export default PatientVisits;
+export default PatientsTriaged;

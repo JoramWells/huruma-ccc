@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
-import React, { useCallback, useState } from 'react';
+import {
+  useCallback, useState, useRef, useEffect, useMemo,
+} from 'react';
 import {
   useReactTable,
   flexRender,
@@ -21,9 +23,9 @@ import { useGetProceduresQuery } from '../api/procedureDetails.api';
 import SelectedProcedures from './SelectedProcedures';
 
 function IndeterminateCheckbox({ indeterminate, ...rest }) {
-  const ref = React.useRef(null);
+  const ref = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeof indeterminate === 'boolean') {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }
@@ -71,13 +73,13 @@ const columnDefWithCheckBox = [
 ];
 
 const TableSelectRow = () => {
-  const finalColumnDef = React.useMemo(() => columnDefWithCheckBox, []);
+  const finalColumnDef = useMemo(() => columnDefWithCheckBox, []);
 
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [columnFilters, setColumFilters] = React.useState([]);
+  const [rowSelection, setRowSelection] = useState({});
+  const [columnFilters, setColumFilters] = useState([]);
 
   const { data: procedureData, isLoading } = useGetProceduresQuery();
-  const finalData = React.useMemo(() => procedureData, [procedureData]);
+  const finalData = useMemo(() => procedureData, [procedureData]);
 
   const tableInstance = useReactTable({
     columns: finalColumnDef,

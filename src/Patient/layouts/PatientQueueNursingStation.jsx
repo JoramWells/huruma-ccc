@@ -14,10 +14,10 @@ import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetPatientsQuery } from '../api/patients.api';
-import { useGetAppointmentsQuery } from '../api/appointments.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetPatientsQuery } from '../../api/patients.api';
+import { useGetAppointmentsQuery } from '../../api/appointments.api';
 
 const outPatientList = [
 
@@ -70,7 +70,7 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const PatientQueue = () => {
+const PatientQueueNursingStation = () => {
   const navigate = useNavigate();
 
   const {
@@ -138,11 +138,7 @@ const PatientQueue = () => {
           <HStack justifyContent="flex-start" alignItems="flex-start">
             {!props.row.original.consultation_type
               && <IconButton><FaHandshake /></IconButton>}
-            <IconButton onClick={() => navigate({
-              pathname: `/doctor/${props.row.original.patient_id}`,
-              search: `?appointment_id=${props.row.original.appointment_id}`,
-            })}
-            >
+            <IconButton onClick={() => navigate(`/doctor/${props.row.original.patient_id}`)}>
               <FaUserNurse />
             </IconButton>
           </HStack>
@@ -150,7 +146,7 @@ const PatientQueue = () => {
       },
     ],
 
-    [navigate],
+    [],
   );
 
   const subRowData = data
@@ -244,4 +240,4 @@ const PatientQueue = () => {
   );
 };
 
-export default PatientQueue;
+export default PatientQueueNursingStation;

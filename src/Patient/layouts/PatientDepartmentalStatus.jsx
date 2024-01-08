@@ -13,12 +13,10 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetPatientsQuery } from '../api/patients.api';
-import { useGetAppointmentsQuery } from '../api/appointments.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAppointmentsQuery } from '../../api/appointments.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>

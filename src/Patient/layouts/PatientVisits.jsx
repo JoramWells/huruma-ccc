@@ -6,55 +6,15 @@ import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaEye, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import { graphqlSync } from 'graphql';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetPatientsQuery } from '../api/patients.api';
-
-const outPatientList = [
-
-  {
-    id: nanoid(),
-    text: 'ANC',
-  },
-  {
-    id: nanoid(),
-    text: 'Cervical Screening',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Health Information',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Weight Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Height Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'PNC',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'SGBV',
-  },
-];
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetPatientsQuery } from '../../api/patients.api';
+import { useGetAppointmentsQuery } from '../../api/appointments.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -67,25 +27,25 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const Patients = () => {
+const PatientVisits = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetPatientsQuery();
+  } = useGetAppointmentsQuery();
 
   // const { data } = useSelector((state) => state.patients);
   // console.log(data);
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'last_name',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
-              fullName={`${props.row.original?.first_name} ${props.row.original?.last_name}`}
+              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
             />
           </Box>
         ),
@@ -93,27 +53,38 @@ const Patients = () => {
 
       },
       {
-        header: 'Mobile No.',
-        accessorKey: 'cell_phone',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Appointment Time',
+        accessorKey: 'appointment_date',
+        cell: (props) => (
+          <VStack alignItems="flex-start">
+            <Text>{moment(props.getValue()).format('LL')}</Text>
+            <Text color="gray.500">{moment(props.row.original.appointment_time, 'HH:mm').format('hh:mm A')}</Text>
+          </VStack>
+        ),
 
       },
       {
-        header: 'Gender',
+        header: 'Diagnosis',
         accessorKey: 'patient_gender',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
+        // cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
 
       },
       {
-        header: 'Patient Type',
-        accessorKey: 'patient_type',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Prescription',
+        // accessorKey: 'patient_type',
+        cell: (props) => (
+          <Button
+            leftIcon={<FaEye />}
+            onClick={() => navigate({
+              pathname: `/patient-prescription/${props.row.original.patient_id}`,
+              search: `?appointment_id=${props.row.original.appointment_id}`,
+            })}
+          >
+            View Prescription
+          </Button>
+        ),
 
-      },
-      {
-        header: 'Action',
-        cell: () => <Button>more</Button>,
       },
     ],
 
@@ -134,7 +105,7 @@ const Patients = () => {
 
   return (
     <VStack
-      mt="60px"
+      mt="55px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -143,17 +114,6 @@ const Patients = () => {
     >
       <Box bgColor="white" w="full">
         <BreadCrumbNav link="/add-patient" />
-
-        <HStack
-          w="full"
-          p={2}
-          flexWrap="wrap"
-          mt={2}
-        >
-          {outPatientList.map((item) => (
-            <Button key={item.id}>{item.text}</Button>
-          ))}
-        </HStack>
 
         <HStack
           w="100%"
@@ -185,27 +145,17 @@ const Patients = () => {
 
           </HStack>
         </HStack>
-        {filteredData?.length === 0 ? (
-          <VStack p={5}>
-
-            <FaBoxOpen size="120" color="gray" />
-            <Text fontSize="xl" fontWeight="semibold" color="gray.500">No Patients Today</Text>
-
-          </VStack>
-        )
-          : (
-            <Box
-              w="100%"
-              bgColor="white"
-              p={3}
-              h="89%"
-            >
-              <DataTable2 data={filteredData} columns={columns} />
-            </Box>
-          )}
+        <Box
+          w="100%"
+          bgColor="white"
+          p={3}
+          h="89%"
+        >
+          <DataTable2 data={filteredData} columns={columnsx} />
+        </Box>
       </Box>
     </VStack>
   );
 };
 
-export default Patients;
+export default PatientVisits;
