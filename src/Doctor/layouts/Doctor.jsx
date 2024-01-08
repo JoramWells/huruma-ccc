@@ -13,11 +13,10 @@ import {
 
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import { useGetPatientQuery } from '../api/patients.api';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import TableSelectRow from '../components/tables/TableSelectRow';
-import UserNameAvatar from '../components/UserNameAvatar';
-import VitalSigns from '../components/VitalSigns';
+import { useGetPatientQuery } from '../../api/patients.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import TableSelectRow from '../components/TableSelectRow';
+import VitalSigns from '../../components/VitalSigns';
 
 const Doctor = () => {
   const { id } = useParams();
@@ -38,7 +37,6 @@ const Doctor = () => {
     },
   ];
 
-  console.log(data);
   return (
     <VStack
       h="100vh"
@@ -113,10 +111,19 @@ const Doctor = () => {
             <TabPanel>
               <VitalSigns />
             </TabPanel>
-            <TabPanel>
-              <HStack w="full" p={2}>
-                <Text fontSize="xl" fontWeight="semibold">Procedures</Text>
+            <TabPanel bgColor="white">
+              <HStack w="100%" p={2} justifyContent="space-between">
 
+                <HStack w="1/2" flex={1}>
+                  <Text fontSize="xl" fontWeight="semibold">Procedures</Text>
+
+                </HStack>
+                <HStack w="md" flex={1} justifyContent="space-between">
+                  <Text fontSize="xl" fontWeight="semibold">Selected Procedures</Text>
+                  <Text>
+                    View More
+                  </Text>
+                </HStack>
               </HStack>
               <TableSelectRow />
             </TabPanel>

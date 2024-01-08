@@ -81,7 +81,6 @@ import MedicationPurchases from './layouts/MedicationPurchases';
 import MedicationStockTake from './layouts/MedicationStockTake';
 import InsuranceMedicationMapping from './layouts/InsuranceMedicationMapping';
 import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
-import Doctor from './layouts/Doctor';
 import PersonalAccountCharges from './layouts/PersonalAccountCharges';
 import PersonalAccountChargeDetail from './layouts/PersonalAccountChargeDetail';
 import ConsultationTypes from './layouts/ConsultationTypes';
@@ -105,6 +104,7 @@ import AddEmployeeRecords from './layouts/AddEmployeePayrollRecords';
 import PayrollEmployeeLoanDetails from './layouts/PayrollEmployeeLoanDetails';
 import PayrollEmployeeBenefitsFile from './layouts/PayrollEmployeeBenefitsFile';
 import PayrollEmployeeEarningRecords from './layouts/PayrollEmployeeEarningRecords';
+import Doctor from './Doctor/layouts/Doctor';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));

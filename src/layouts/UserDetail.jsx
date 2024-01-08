@@ -3,6 +3,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
 import {
+  Box,
   HStack,
   Text, VStack,
 } from '@chakra-ui/react';
@@ -11,35 +12,12 @@ import { useParams } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useGetUserQuery } from '../api/users.api';
 import { useGetUserPrivilegesQuery } from '../api/userPrivileges.api';
-import UserNameAvatar from '../components/UserNameAvatar';
-import TableSelectRow from '../components/tables/TableSelectRow';
 import UserPrivilegeTable from '../components/tables/UserPrivilegeTable.jsx';
 
 const UserDetail = () => {
   const { id } = useParams();
-
   const { data } = useGetUserQuery(id);
-  const { data: privilegeData } = useGetUserPrivilegesQuery(id);
-
-  const columns = useMemo(
-    () => [
-      {
-        header: 'Mobile No.',
-        accessorKey: 'cell_phone',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Gender',
-        accessorKey: 'patient_gender',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue() === '1' ? 'MALE' : 'FEMALE'}</Text>,
-
-      },
-    ],
-
-    [],
-  );
+  console.log(data);
 
   return (
     <VStack
@@ -51,6 +29,17 @@ const UserDetail = () => {
       // justifyContent="center"
       p={3}
     >
+      <Box
+        w="full"
+        bgColor="orange.50"
+        borderLeft="2px"
+        borderColor="orange.500"
+        h={200}
+      >
+        <Text>
+          User Privileges
+        </Text>
+      </Box>
       <HStack
         w="full"
         justifyContent="center"
