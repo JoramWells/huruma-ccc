@@ -5,8 +5,6 @@ import {
 } from '@chakra-ui/react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -21,12 +19,13 @@ const customStyles = {
 
 const PersonalDetail = ({
   first_name, setFirstName, last_name,
-  setLastName, middle_name, setMiddleName, dob, setDOB,
-  gender, setGender, ID, setID, residence, setResidence,
+  setLastName, middle_name, setMiddleName, dob, setDOB, email,
+  patient_gender,
+  setPatientGender, id_number, setIDNumber, residence, setResidence, setEmail,
 }) => {
-  const options = [
-    { value: 'SINGLE', label: 'SINGLE' },
-    { value: 'MARRIED', label: 'MARRIED' },
+  const residenceOptions = [
+    { value: '1', label: 'Nanyuki' },
+    { value: '2', label: 'Nairobi' },
   ];
 
   const genderOptions = [
@@ -66,6 +65,7 @@ const PersonalDetail = ({
           <Input
             size="lg"
             placeholder="Enter Last Name"
+            value={last_name}
             onChange={(e) => setLastName(e.target.value)}
           />
 
@@ -89,7 +89,7 @@ const PersonalDetail = ({
         <Select
           options={genderOptions}
           styles={customStyles}
-          onChange={(genderValue) => setGender(genderValue.value)}
+          onChange={(genderValue) => setPatientGender(genderValue.value)}
         />
 
       </FormControl>
@@ -99,6 +99,8 @@ const PersonalDetail = ({
         <Input
           size="lg"
           placeholder="Enter phone number"
+          value={id_number}
+          onChange={(e) => setIDNumber(e.target.value)}
         />
       </FormControl>
       <FormControl isRequired>
@@ -106,11 +108,17 @@ const PersonalDetail = ({
         <Input
           size="lg"
           placeholder="Enter Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Select Residence</FormLabel>
-        <Select options={options} styles={customStyles} />
+        <Select
+          options={residenceOptions}
+          styles={customStyles}
+          onChange={(e) => setResidence(e.value)}
+        />
 
       </FormControl>
     </VStack>
@@ -121,36 +129,40 @@ PersonalDetail.propTypes = {
   first_name: PropTypes.string,
   middle_name: PropTypes.string,
   last_name: PropTypes.string,
+  email: PropTypes.string,
   dob: PropTypes.string,
-  gender: PropTypes.string,
+  patient_gender: PropTypes.string,
   residence: PropTypes.string,
-  ID: PropTypes.string,
+  id_number: PropTypes.string,
 
   setFirstName: PropTypes.func,
   setMiddleName: PropTypes.func,
   setLastName: PropTypes.func,
   setDOB: PropTypes.func,
-  setGender: PropTypes.func,
+  setPatientGender: PropTypes.func,
   setResidence: PropTypes.func,
-  setID: PropTypes.func,
+  setIDNumber: PropTypes.func,
+  setEmail: PropTypes.func,
 };
 
 PersonalDetail.defaultProps = {
   first_name: '',
   middle_name: '',
   last_name: '',
+  email: '',
   dob: '',
-  gender: '',
+  patient_gender: '',
   residence: '',
-  ID: '',
+  id_number: '',
 
   setFirstName: () => { },
   setMiddleName: () => { },
   setLastName: () => { },
   setDOB: () => { },
-  setGender: () => { },
+  setPatientGender: () => { },
   setResidence: () => { },
-  setID: () => { },
+  setIDNumber: () => { },
+  setEmail: () => { },
 };
 
 // hospital details

@@ -12,7 +12,6 @@ import {
   HospitalDetail, PersonalDetail,
 } from '../components/PatientForm';
 import { useAddPatientMutation } from '../api/patients.api';
-import Consultation from '../components/PatientForm/Consultation';
 import PaymentDetail from '../components/PatientForm/PaymentDetail';
 
 const AddPatient = () => {
@@ -20,11 +19,11 @@ const AddPatient = () => {
   const [middle_name, setMiddleName] = useState('');
   const [last_name, setLastName] = useState('');
   const [dob, setDOB] = useState('');
-  const [gender, setGender] = useState('');
+  const [patient_gender, setGender] = useState('');
   const [residence, setResidence] = useState('');
-  const [ID, setID] = useState('');
+  const [id_number, setID] = useState('');
   const [nhif_no, setNHIFNo] = useState('');
-  const [paymentAmount, setPaymentAmount] = useState(0);
+  const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(1);
 
   const steps = [
@@ -53,11 +52,12 @@ const AddPatient = () => {
     middle_name,
     last_name,
     dob,
-    gender,
+    patient_gender,
     residence,
-    ID,
+    id_number,
     nhif_no,
     charges: 350,
+    email,
   };
 
   const [addPatient, { isLoading }] = useAddPatientMutation();
@@ -104,17 +104,19 @@ const AddPatient = () => {
           first_name={first_name}
           middle_name={middle_name}
           last_name={last_name}
+          email={email}
           dob={dob}
-          gender={gender}
+          patient_gender={patient_gender}
           residence={residence}
-          ID={ID}
+          id_number={id_number}
           setFirstName={setFirstName}
           setMiddleName={setMiddleName}
           setLastName={setLastName}
+          setEmail={setEmail}
           setDOB={setDOB}
-          setGender={setGender}
+          setPatientGender={setGender}
           setResidence={setResidence}
-          setID={setID}
+          setIDNumber={setID}
         />
         )}
         {activeStep === 2 && (

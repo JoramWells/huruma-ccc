@@ -12,7 +12,9 @@ import { useMemo, useState } from 'react';
 import { FaSort } from 'react-icons/fa';
 import TableSearchInput from '../TableSearchInput';
 
-const DataTable2 = ({ data, columns, searchQueryColumn }) => {
+const DataTable2 = ({
+  data, columns, searchQueryColumn, isTableHeight, hasPagination, hasSearch,
+}) => {
   const [columnFilters, setColumnFilters] = useState([]);
 
   const table = useReactTable({
@@ -29,12 +31,14 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
   });
   return (
     <>
+      {hasSearch && (
       <TableSearchInput
         setColumFilters={setColumnFilters}
         columnFilters={columnFilters}
         searchQueryColumn={searchQueryColumn}
       />
-      <TableContainer h="700px" overflowY="auto" w="98%">
+      )}
+      <TableContainer h={isTableHeight && '700px'} overflowY="auto" w="98%" mt={0}>
         <Table>
           {table.getHeaderGroups()
             .map((headerGroup) => (
@@ -90,6 +94,9 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
             ))}
           </Tbody>
         </Table>
+
+        {/* enable/disable pagination */}
+        {hasPagination && (
         <HStack
           justifyContent="space-between"
           // bgColor="gray.50"
@@ -134,6 +141,7 @@ const DataTable2 = ({ data, columns, searchQueryColumn }) => {
 
           </HStack>
         </HStack>
+        )}
 
       </TableContainer>
     </>
@@ -146,10 +154,16 @@ DataTable2.propTypes = {
   data: PropTypes.array,
   columns: PropTypes.array,
   searchQueryColumn: PropTypes.string,
+  isTableHeight: PropTypes.bool,
+  hasPagination: PropTypes.bool,
+  hasSearch: PropTypes.bool,
 };
 
 DataTable2.defaultProps = {
   data: [],
   columns: [],
   searchQueryColumn: 'first_name',
+  isTableHeight: true,
+  hasPagination: true,
+  hasSearch: true,
 };

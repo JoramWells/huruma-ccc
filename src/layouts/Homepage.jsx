@@ -4,6 +4,7 @@ import {
 import { nanoid } from '@reduxjs/toolkit';
 import { FaBookMedical } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import RecentAppointmentsCard from '../components/Dashboard/RecentAppointmentsCard';
 
 const data = [
   {
@@ -45,38 +46,44 @@ const Homepage = () => {
           Overview
 
         </Text>
-        <HStack w="full" justifyContent="space-between" spacing={8}>
-          {data.map((item) => (
-            <Box
-              rounded="3xl"
-              // boxShadow="lg"
-              p={3}
-              key={item.id}
-              border="1px"
-              flex={1}
-              height="200px"
-              borderColor="gray.200"
-              onClick={() => navigate('/pharmaceuticals')}
-              _hover={{
-                cursor: 'pointer',
-                boxShadow: 'sm',
-              }}
-              bgColor="white"
-            >
-              <IconButton rounded="full" size="lg">
-                <FaBookMedical size={25} color="gray" />
-              </IconButton>
-              <Box ml={10}>
-                <Text fontSize="3xl" fontWeight="bold">
-                  {item.quantity}
-                </Text>
-                <Text fontSize="xl" color="gray.500">
-                  {item.text}
-                </Text>
+        <HStack w="full" alignItems="flex-start" justifyContent="space-between" spacing={4}>
+          <HStack w="70%" justifyContent="space-between" spacing={4}>
+            {data.map((item) => (
+              <Box
+                rounded="3xl"
+                // boxShadow="lg"
+                p={3}
+                key={item.id}
+                border="1px"
+                flex={1}
+                height="150px"
+                borderColor="gray.200"
+                onClick={() => navigate('/pharmaceuticals')}
+                _hover={{
+                  cursor: 'pointer',
+                  boxShadow: 'sm',
+                }}
+                bgColor="white"
+              >
+                <IconButton rounded="full" size="lg">
+                  <FaBookMedical size={25} color="gray" />
+                </IconButton>
+                <Box ml={10}>
+                  <Text fontSize="3xl" fontWeight="bold">
+                    {item.quantity}
+                  </Text>
+                  <Text fontSize="xl" color="gray.500">
+                    {item.text}
+                  </Text>
 
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
+          </HStack>
+
+          {/* get all recent patients */}
+
+          <RecentAppointmentsCard />
         </HStack>
       </VStack>
     </VStack>
