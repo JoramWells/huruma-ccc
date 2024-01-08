@@ -5,7 +5,6 @@ import {
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate, useParams } from 'react-router-dom';
-import RecordVitals from './MedicalModals';
 
 const carouselData = [
   {

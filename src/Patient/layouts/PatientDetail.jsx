@@ -14,13 +14,13 @@ import {
 } from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
-import Step2 from '../../components/PatientProfile/Step2';
-import AppointmentCard from '../../components/PatientProfile/AppointmentCard';
+import Step2 from '../components/Step2';
 import { useGetPatientQuery } from '../../api/patients.api';
-import PaymentCard from '../../components/PatientProfile/PaymentCard';
-import Medical from '../../components/PatientProfile/Medical';
-import EditDeletePatientModal from '../../components/PatientProfile/EditDeletePatientModal';
+import PaymentCard from '../components/PaymentCard';
+import Medical from '../components/Medical';
+import EditDeletePatientModal from '../components/EditDeletePatientModal';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
+import AppointmentCard from '../components/AppointmentCard';
 
 const PatientCard = ({
   text, icon, onClick, selected,
