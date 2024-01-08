@@ -3,8 +3,7 @@
 import { FormControl, FormLabel, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import Select from 'react-select';
-import Corporate from '../PaymentOptions/Cooporate';
-import Cash from '../PaymentOptions/Cash';
+import Corporate from './Cooporate';
 
 const customStyles = {
   control: (provided, state) => ({

@@ -10,9 +10,9 @@ import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
 import {
   HospitalDetail, PersonalDetail,
-} from '../components/PatientForm';
-import { useAddPatientMutation } from '../api/patients.api';
-import PaymentDetail from '../components/PatientForm/PaymentDetail';
+} from '../../components/PatientForm';
+import { useAddPatientMutation } from '../../api/patients.api';
+import PaymentDetail from '../components/PaymentDetail';
 
 const AddPatient = () => {
   const [first_name, setFirstName] = useState('');

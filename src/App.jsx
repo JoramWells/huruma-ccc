@@ -106,6 +106,7 @@ import PatientVisits from './Patient/layouts/PatientVisits';
 import PatientQueueNursingStation from './Patient/layouts/PatientQueueNursingStation';
 import PatientDepartmentalStatus from './Patient/layouts/PatientDepartmentalStatus';
 import PatientPrescription from './Patient/layouts/PatientPrescription';
+import AddPatient from './Patient/layouts/AddPatient';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
@@ -116,7 +117,6 @@ const Disease = lazy(() => import('./layouts/Disease'));
 const AddMaternityProfile = lazy(() => import('./layouts/AddMaternityProfile'));
 const UserDetail = lazy(() => import('./layouts/UserDetail'));
 const MaternityProfileDetail = lazy(() => import('./layouts/MaternityProfileDetail'));
-const AddPatient = lazy(() => import('./layouts/AddPatient'));
 const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
 const MaternityProfile = lazy(() => import('./layouts/MaternityProfile'));
