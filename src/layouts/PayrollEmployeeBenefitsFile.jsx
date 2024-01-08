@@ -61,8 +61,6 @@ const PayrollEmployeeBenefitsFile = () => {
           subRows: [],
         }));
 
-  console.log(data);
-
   return (
     <VStack
       mt="55px"

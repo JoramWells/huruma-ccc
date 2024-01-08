@@ -150,7 +150,7 @@ const PatientQueue = () => {
       },
     ],
 
-    [],
+    [navigate],
   );
 
   const subRowData = data
