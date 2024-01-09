@@ -10,78 +10,30 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPayrollEmployeeRecordsQuery } from '../api/payrollEmployeeRecords.api';
-import UserNameAvatar from '../components/UserNameAvatar';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPayrollDeductionsQuery } from '../../api/payrollDeductions.api';
 
-const PayrollEmployeeLoanDetails = () => {
+const PayrollDeductions = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollEmployeeRecordsQuery();
+  } = useGetAllPayrollDeductionsQuery();
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
-        header: 'Employee',
-        accessorKey: 'full_name',
-        cell: (props) => (
-          <UserNameAvatar
-            fullName={props.getValue()}
-            link={`payroll-employee-records-details/${props.row.original.employee_id}`}
-          />
-        ),
-
-      },
-      {
-        header: 'Loan Desc.',
-        accessorKey: 'payroll_job_title',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
-
-      },
-      {
-        header: 'Amount',
-        accessorKey: 'department_id',
-        enableSorting: false,
+        header: 'Deduction Name',
+        accessorKey: 'deduction_description',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Monthly Installment',
-        accessorKey: 'job_number',
+        header: 'Taxable State',
+        accessorKey: 'payroll_taxable_state',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Monthly Interest Rate',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Interest Formula',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Deduction Start Date',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Loan Type',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.taxable_state_description}</Text>,
 
       },
     ],
@@ -105,7 +57,7 @@ const PayrollEmployeeLoanDetails = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-payroll-employee-records" />
+        <BreadCrumbNav link="/add-patient" />
 
         <HStack
           w="100%"
@@ -116,7 +68,7 @@ const PayrollEmployeeLoanDetails = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Employee Records
+            Payroll Deductions
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -167,7 +119,7 @@ const PayrollEmployeeLoanDetails = () => {
               p={3}
               h="89%"
             >
-              <DataTable2 columns={columns} />
+              <DataTable2 data={subRowData} columns={columnsx} />
             </Box>
           )}
       </Box>
@@ -175,4 +127,4 @@ const PayrollEmployeeLoanDetails = () => {
   );
 };
 
-export default PayrollEmployeeLoanDetails;
+export default PayrollDeductions;

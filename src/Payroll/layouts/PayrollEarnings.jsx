@@ -10,44 +10,31 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPayrollEmployeeRecordsQuery } from '../api/payrollEmployeeRecords.api';
-import UserNameAvatar from '../components/UserNameAvatar';
-import { useGetAllPayrollEmployeeBenefitsQuery } from '../api/payrollEmployeeBenefitsFile.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPayrollDeductionsQuery } from '../../api/payrollDeductions.api';
+import { useGetAllPayrollEarningsQuery } from '../../api/payrollEarnings.api';
 
-const PayrollEmployeeBenefitsFile = () => {
+const PayrollEarnings = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollEmployeeBenefitsQuery();
+  } = useGetAllPayrollEarningsQuery();
 
-  const columns = useMemo(
+  const columnsx = useMemo(
     () => [
       {
-        header: 'Employee',
-        accessorKey: 'payroll_employee_record',
-        cell: (props) => (
-          <UserNameAvatar
-            fullName={props.getValue()?.full_name}
-            link={`payroll-employee-records-details/${props.row.original.employee_id}`}
-          />
-        ),
+        header: 'Earning Description',
+        accessorKey: 'earning_description',
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Benefit',
-        accessorKey: 'payroll_job_title',
+        header: 'Taxable State',
+        accessorKey: 'payroll_taxable_state',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
-
-      },
-      {
-        header: 'Amount',
-        accessorKey: 'amount',
-        enableSorting: false,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.taxable_state_description}</Text>,
 
       },
     ],
@@ -71,7 +58,7 @@ const PayrollEmployeeBenefitsFile = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-payroll-employee-records" />
+        <BreadCrumbNav link="/add-patient" />
 
         <HStack
           w="100%"
@@ -82,7 +69,7 @@ const PayrollEmployeeBenefitsFile = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Employee  Benefits
+            Payroll Earning
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -133,10 +120,7 @@ const PayrollEmployeeBenefitsFile = () => {
               p={3}
               h="89%"
             >
-              <DataTable2
-                columns={columns}
-                data={subRowData}
-              />
+              <DataTable2 data={subRowData} columns={columnsx} />
             </Box>
           )}
       </Box>
@@ -144,4 +128,4 @@ const PayrollEmployeeBenefitsFile = () => {
   );
 };
 
-export default PayrollEmployeeBenefitsFile;
+export default PayrollEarnings;

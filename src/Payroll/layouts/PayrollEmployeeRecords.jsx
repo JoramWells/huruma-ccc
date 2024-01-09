@@ -10,30 +10,50 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPayrollDeductionsQuery } from '../api/payrollDeductions.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPayrollEmployeeRecordsQuery } from '../../api/payrollEmployeeRecords.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
 
-const PayrollDeductions = () => {
+const PayrollEmployeeRecords = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollDeductionsQuery();
+  } = useGetAllPayrollEmployeeRecordsQuery();
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Deduction Name',
-        accessorKey: 'deduction_description',
+        header: 'Full Name',
+        accessorKey: 'full_name',
+        cell: (props) => (
+          <UserNameAvatar
+            fullName={props.getValue()}
+            link={`payroll-employee-records-details/${props.row.original.employee_id}`}
+          />
+        ),
+
+      },
+      {
+        header: 'Job Title',
+        accessorKey: 'payroll_job_title',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
+
+      },
+      {
+        header: 'Department',
+        accessorKey: 'department_id',
+        enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Taxable State',
-        accessorKey: 'payroll_taxable_state',
+        header: 'Job Number',
+        accessorKey: 'job_number',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()?.taxable_state_description}</Text>,
+        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
     ],
@@ -57,7 +77,7 @@ const PayrollDeductions = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-patient" />
+        <BreadCrumbNav link="/add-payroll-employee-records" />
 
         <HStack
           w="100%"
@@ -68,7 +88,7 @@ const PayrollDeductions = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Payroll Deductions
+            Employee Records
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -127,4 +147,4 @@ const PayrollDeductions = () => {
   );
 };
 
-export default PayrollDeductions;
+export default PayrollEmployeeRecords;

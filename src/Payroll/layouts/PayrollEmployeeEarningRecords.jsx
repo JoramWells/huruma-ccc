@@ -10,12 +10,12 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPayrollEmployeeRecordsQuery } from '../api/payrollEmployeeRecords.api';
-import UserNameAvatar from '../components/UserNameAvatar';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPayrollEmployeeRecordsQuery } from '../../api/payrollEmployeeRecords.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
 
-const PayrollEmployeeRecords = () => {
+const PayrollEmployeeEarningRecords = () => {
   const navigate = useNavigate();
 
   const {
@@ -25,7 +25,7 @@ const PayrollEmployeeRecords = () => {
   const columnsx = useMemo(
     () => [
       {
-        header: 'Full Name',
+        header: 'Employee',
         accessorKey: 'full_name',
         cell: (props) => (
           <UserNameAvatar
@@ -36,7 +36,7 @@ const PayrollEmployeeRecords = () => {
 
       },
       {
-        header: 'Job Title',
+        header: 'Earning Description',
         accessorKey: 'payroll_job_title',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
@@ -147,4 +147,4 @@ const PayrollEmployeeRecords = () => {
   );
 };
 
-export default PayrollEmployeeRecords;
+export default PayrollEmployeeEarningRecords;

@@ -10,50 +10,44 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPayrollEmployeeRecordsQuery } from '../api/payrollEmployeeRecords.api';
-import UserNameAvatar from '../components/UserNameAvatar';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPayrollEmployeeRecordsQuery } from '../../api/payrollEmployeeRecords.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
+import { useGetAllPayrollEmployeeBenefitsQuery } from '../../api/payrollEmployeeBenefitsFile.api';
 
-const PayrollEmployeeEarningRecords = () => {
+const PayrollEmployeeBenefitsFile = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPayrollEmployeeRecordsQuery();
+  } = useGetAllPayrollEmployeeBenefitsQuery();
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Employee',
-        accessorKey: 'full_name',
+        accessorKey: 'payroll_employee_record',
         cell: (props) => (
           <UserNameAvatar
-            fullName={props.getValue()}
+            fullName={props.getValue()?.full_name}
             link={`payroll-employee-records-details/${props.row.original.employee_id}`}
           />
         ),
 
       },
       {
-        header: 'Earning Description',
+        header: 'Benefit',
         accessorKey: 'payroll_job_title',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
 
       },
       {
-        header: 'Department',
-        accessorKey: 'department_id',
+        header: 'Amount',
+        accessorKey: 'amount',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Job Number',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
     ],
@@ -88,7 +82,7 @@ const PayrollEmployeeEarningRecords = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Employee Records
+            Employee  Benefits
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -139,7 +133,10 @@ const PayrollEmployeeEarningRecords = () => {
               p={3}
               h="89%"
             >
-              <DataTable2 data={subRowData} columns={columnsx} />
+              <DataTable2
+                columns={columns}
+                data={subRowData}
+              />
             </Box>
           )}
       </Box>
@@ -147,4 +144,4 @@ const PayrollEmployeeEarningRecords = () => {
   );
 };
 
-export default PayrollEmployeeEarningRecords;
+export default PayrollEmployeeBenefitsFile;
