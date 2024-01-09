@@ -8,9 +8,9 @@ import {
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetInsurancesQuery } from '../api/insurance.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetInsurancesQuery } from '../../api/insurance.api';
 
 const breadCrumbData = [
   {

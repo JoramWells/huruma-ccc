@@ -17,8 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { addSuppliers } from '../_reducers/supplierSlice';
-import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
+import { addSuppliers } from '../../_reducers/supplierSlice';
+import { getAllSupplierClassification } from '../../_reducers/supplierClassificationSlice';
 
 const AddAdmission = () => {
   const [supplierName, setSupplierName] = useState('');

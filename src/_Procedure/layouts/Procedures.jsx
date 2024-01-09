@@ -1,47 +1,58 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import {
   Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetProcedureItemsQuery } from '../api/procedureItem.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { getAllRadiologyRequests } from '../../_reducers/radiologySlice';
+import { useGetProceduresQuery } from '../../api/procedureDetails.api';
 
-const ProceduresItems = () => {
+const Procedures = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useGetProcedureItemsQuery();
+  const { data } = useGetProceduresQuery();
 
   const columns = useMemo(
     () => [
       {
-        header: 'Item Description',
-        accessorKey: 'procedure_item_description',
+        header: 'Name',
+        accessorKey: 'procedure_name',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Normal Values',
-        accessorKey: 'normal_values',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Cost',
+        accessorKey: 'procedure_cost',
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
         size: 200,
 
       },
       {
-        header: 'Show Normal Values',
-        accessorKey: 'show_normal_values',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        header: 'Cost(Corporate)',
+        accessorKey: 'procedure_cost_corporate',
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
       {
-        header: 'Show Flag',
-        accessorKey: 'show_flag',
+        header: 'Cost (Foreigner)',
+        accessorKey: 'procedure_cost_foreigner',
         enableSorting: false,
-        cell: (props) => <Text whiteSpace="nowrap">{props.getValue()}</Text>,
+        cell: (props) => <Text whiteSpace="nowrap">{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
+
+      },
+      {
+        header: 'Cost(Insurance)',
+        accessorKey: 'procedure_cost_insurance',
+        enableSorting: false,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
 
       },
     ],
@@ -57,7 +68,7 @@ const ProceduresItems = () => {
 
   return (
     <VStack
-      mt="55px"
+      mt="65px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -65,7 +76,7 @@ const ProceduresItems = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-procedures" />
+        <BreadCrumbNav link="/add-procedure-details" />
         <HStack p={3} w="full">
           <Button
             rounded="full"
@@ -120,4 +131,4 @@ const ProceduresItems = () => {
   );
 };
 
-export default ProceduresItems;
+export default Procedures;

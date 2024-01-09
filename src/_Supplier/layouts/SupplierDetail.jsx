@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
-import { deleteSupplier, getAllSuppliers, getSupplierDetail } from '../_reducers/supplierSlice';
-import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
+import { deleteSupplier, getAllSuppliers, getSupplierDetail } from '../../_reducers/supplierSlice';
+import { getAllSupplierClassification } from '../../_reducers/supplierClassificationSlice';
 
 const SupplierDetail = () => {
   const { id } = useParams();

@@ -13,7 +13,7 @@ import { FaArrowLeft, FaPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addItemType } from '../_reducers/itemTypeSlice';
+import { addItemType } from '../../_reducers/itemTypeSlice';
 
 const AddAdmissionCategory = () => {
   const [itemTypeName, setItemType] = useState('');

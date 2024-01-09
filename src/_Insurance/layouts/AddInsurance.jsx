@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addInsurance } from '../_reducers/insuranceSlice';
+import { addInsurance } from '../../_reducers/insuranceSlice';
 
 const AddInsurance = () => {
   const [insuranceName, setInsuranceName] = useState('');

@@ -7,9 +7,9 @@ import {
 // import axios from "axios"
 import { useMemo } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllInsuranceServiceCostMappingQuery } from '../api/insuranceServiceCostMapping.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllInsuranceMedicationMappingQuery } from '../../api/insuranceMedicationMapping.api';
 
 const breadCrumbData = [
   {
@@ -19,22 +19,20 @@ const breadCrumbData = [
   },
   {
     id: nanoid(),
-    title: 'Medication Service Cost',
+    title: 'Medical Mapping',
     link: '/',
     isCurrentPage: true,
   },
 ];
 
-const InsuranceServiceCostMapping = () => {
-  const { data } = useGetAllInsuranceServiceCostMappingQuery();
+const InsuranceMedicationMapping = () => {
+  const { data } = useGetAllInsuranceMedicationMappingQuery();
 
   const subrowData = data
         && data.map((item) => ({
           ...item,
           subRows: [],
         }));
-
-  console.log(data);
 
   const columns = useMemo(
     () => [
@@ -45,21 +43,15 @@ const InsuranceServiceCostMapping = () => {
 
       },
       {
-        header: 'Service Type',
-        accessorKey: 'service_type',
-        cell: (props) => <Text>{props.getValue()?.service_type_description}</Text>,
-
-      },
-      {
-        header: 'Cost (KSH)',
-        accessorKey: 'cost',
+        header: 'Medication',
+        accessorKey: 'medication',
         enableSorting: false,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10).toLocaleString()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
 
       },
       {
-        header: 'Copay',
-        accessorKey: 'copay_amount',
+        header: 'Visible',
+        accessorKey: 'visible',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
@@ -81,7 +73,7 @@ const InsuranceServiceCostMapping = () => {
         <BreadCrumbNav link="/add-insurance" breadCrumbData={breadCrumbData} />
         <HStack w="full" mt={4} mb={2}>
           <Text fontWeight="semibold" fontSize="xl" ml={2} color="gray.700">
-            Medication Service Cost Mappings
+            Medication Mappings
             {' '}
             (
             {subrowData?.length.toLocaleString()}
@@ -102,4 +94,4 @@ const InsuranceServiceCostMapping = () => {
   );
 };
 
-export default InsuranceServiceCostMapping;
+export default InsuranceMedicationMapping;

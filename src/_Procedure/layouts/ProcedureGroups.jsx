@@ -5,9 +5,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import PrivilegeTable from '../components/tables/PrivilegeTable';
-import { getAllPrivileges } from '../_reducers/privilegeSlice';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import PrivilegeTable from '../../components/tables/PrivilegeTable';
+import { getAllPrivileges } from '../../_reducers/privilegeSlice';
 
 const columns = [
   {

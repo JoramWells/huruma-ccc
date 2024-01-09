@@ -9,11 +9,11 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { getAllSuppliers } from '../_reducers/supplierSlice';
-import SupplierStatusCell from '../components/SupplierStatusCell';
-import { useGetSupplierQuery } from '../api/suppliers.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { getAllSuppliers } from '../../_reducers/supplierSlice';
+import SupplierStatusCell from '../../components/SupplierStatusCell';
+import { useGetSupplierQuery } from '../../api/suppliers.api';
 
 const Suppliers = () => {
   const dispatch = useDispatch();

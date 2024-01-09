@@ -13,8 +13,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { addProcedures } from '../_reducers/procedureSlice';
-import { getAllProcedureGroups } from '../_reducers/procedureGroupSlice';
+import { addProcedures } from '../../_reducers/procedureSlice';
+import { getAllProcedureGroups } from '../../_reducers/procedureGroupSlice';
 
 const AddProcedures = () => {
   const [procedureName, setProcedureName] = useState('');
