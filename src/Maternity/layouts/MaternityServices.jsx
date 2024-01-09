@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { getAllMaternityServices } from '../_reducers/admMartenityServicesSlice';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { getAllMaternityServices } from '../../_reducers/admMartenityServicesSlice';
 
 const MaternityServices = () => {
   const dispatch = useDispatch();

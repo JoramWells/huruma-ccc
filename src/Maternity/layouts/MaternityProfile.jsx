@@ -6,10 +6,10 @@ import {
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetMaternityProfilesQuery } from '../api/maternity.api';
-import UserNameAvatar from '../components/UserNameAvatar';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetMaternityProfilesQuery } from '../../api/maternity.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
 
 const MaternityProfile = () => {
   const { data } = useGetMaternityProfilesQuery();

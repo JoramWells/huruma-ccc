@@ -11,8 +11,8 @@ import {
   FaPlus,
 } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { useGetMaternityProfileQuery } from '../api/maternity.api';
-import DataTable2 from '../components/tables/DataTable';
+import { useGetMaternityProfileQuery } from '../../api/maternity.api';
+import DataTable2 from '../../components/tables/DataTable';
 
 const CustomButton = ({ text, link }) => {
   const [step, setStep] = useState(0);
