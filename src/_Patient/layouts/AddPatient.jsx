@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
 import {
-  HospitalDetail, PersonalDetail,
+  NextOfKin, PersonalDetail,
 } from '../components/PatientForm';
 import { useAddPatientMutation } from '../../api/patients.api';
 import PaymentDetail from '../components/PaymentDetail';
@@ -25,6 +25,9 @@ const AddPatient = () => {
   const [nhif_no, setNHIFNo] = useState('');
   const [email, setEmail] = useState('');
   const [activeStep, setActiveStep] = useState(1);
+  const [next_of_kin, setNextOfKin] = useState('');
+  const [next_of_kin_name, setNextOfKinName] = useState('');
+  const [next_of_kin_cell_phone, setNextOfKinCellphone] = useState('');
 
   const steps = [
     { title: 'Personal', description: 'Personal Information' },
@@ -58,6 +61,9 @@ const AddPatient = () => {
     nhif_no,
     charges: 350,
     email,
+    next_of_kin,
+    next_of_kin_name,
+    next_of_kin_cell_phone,
   };
 
   const [addPatient, { isLoading }] = useAddPatientMutation();
@@ -109,6 +115,7 @@ const AddPatient = () => {
           patient_gender={patient_gender}
           residence={residence}
           id_number={id_number}
+          nhif_no={nhif_no}
           setFirstName={setFirstName}
           setMiddleName={setMiddleName}
           setLastName={setLastName}
@@ -117,12 +124,17 @@ const AddPatient = () => {
           setPatientGender={setGender}
           setResidence={setResidence}
           setIDNumber={setID}
+          setNHIFNo={setNHIFNo}
         />
         )}
         {activeStep === 2 && (
-        <HospitalDetail
-          nhif_no={nhif_no}
-          setNHIFNo={setNHIFNo}
+        <NextOfKin
+          next_of_kin={next_of_kin}
+          next_of_kin_name={next_of_kin_name}
+          next_of_kin_cell_phone={next_of_kin_cell_phone}
+          setNextOfKin={setNextOfKin}
+          setNextOfKinName={setNextOfKinName}
+          setNextOfKinCellphone={setNextOfKinCellphone}
         />
         )}
         {activeStep === 3 && <PaymentDetail />}

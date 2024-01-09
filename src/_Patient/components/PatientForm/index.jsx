@@ -20,8 +20,8 @@ const customStyles = {
 const PersonalDetail = ({
   first_name, setFirstName, last_name,
   setLastName, middle_name, setMiddleName, dob, setDOB, email,
-  patient_gender,
-  setPatientGender, id_number, setIDNumber, residence, setResidence, setEmail,
+  patient_gender, nhif_no,
+  setPatientGender, id_number, setIDNumber, residence, setResidence, setEmail, setNHIFNo,
 }) => {
   const residenceOptions = [
     { value: '1', label: 'Nanyuki' },
@@ -144,6 +144,14 @@ const PersonalDetail = ({
         />
 
       </FormControl>
+      <FormControl isRequired>
+        <FormLabel>NHIF Number</FormLabel>
+        <Input
+          size="lg"
+          value={nhif_no}
+          onChange={(e) => setNHIFNo(e.target.value)}
+        />
+      </FormControl>
     </VStack>
   );
 };
@@ -157,6 +165,8 @@ PersonalDetail.propTypes = {
   patient_gender: PropTypes.string,
   residence: PropTypes.string,
   id_number: PropTypes.string,
+  nhif_no: PropTypes.string,
+  setNHIFNo: PropTypes.func,
 
   setFirstName: PropTypes.func,
   setMiddleName: PropTypes.func,
@@ -177,6 +187,8 @@ PersonalDetail.defaultProps = {
   patient_gender: '',
   residence: '',
   id_number: '',
+  nhif_no: '',
+  setNHIFNo: () => { },
 
   setFirstName: () => { },
   setMiddleName: () => { },
@@ -189,11 +201,21 @@ PersonalDetail.defaultProps = {
 };
 
 // hospital details
-const HospitalDetail = ({ nhif_no, setNHIFNo }) => {
-  const data = [];
-  const genderOptions = [
-    { value: 'MALE', label: 'MALE' },
-    { value: 'FEMALE', label: 'FEMALE' },
+const NextOfKin = ({
+  next_of_kin, next_of_kin_name, next_of_kin_cell_phone,
+  setNextOfKin, setNextOfKinName, setNextOfKinCellphone,
+}) => {
+  const nextOfKinOPtions = [
+    { value: 1, label: 'BROTHER' },
+    { value: 2, label: 'DAUGHTER' },
+    { value: 3, label: 'FATHER' },
+    { value: 4, label: 'FRIEND' },
+    { value: 5, label: 'GUARDIAN' },
+    { value: 6, label: 'MOTHER' },
+    { value: 7, label: 'SELF' },
+    { value: 8, label: 'SISTER' },
+    { value: 9, label: 'SON' },
+    { value: 10, label: 'SPOUSE' },
   ];
   return (
     <VStack
@@ -202,51 +224,55 @@ const HospitalDetail = ({ nhif_no, setNHIFNo }) => {
     >
       <FormControl>
         <FormLabel>Next of Kin</FormLabel>
-        <Select styles={customStyles} options={genderOptions} />
+        <Select
+          styles={customStyles}
+          options={nextOfKinOPtions}
+          onChange={(kin) => setNextOfKin(kin)}
+        />
       </FormControl>
-      <HStack w="full">
-        <FormControl>
-          <FormLabel>First Name</FormLabel>
-          <Input
-            size="lg"
-          />
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>Second Name</FormLabel>
-          <Input
-            size="lg"
-          />
-        </FormControl>
-      </HStack>
+      <FormControl>
+        <FormLabel>Next of Kin Full Name</FormLabel>
+        <Input
+          size="lg"
+          onChange={(e) => setNextOfKinName(e.target.value)}
+          value={next_of_kin_name}
+        />
+      </FormControl>
 
       <FormControl>
         <FormLabel>Next of Kin Number</FormLabel>
         <Input
           size="lg"
-          placeholder="Enter Occupation"
-          onChange={(e) => setNHIFNo(e.target.value)}
-          value={nhif_no}
+          onChange={(e) => setNextOfKinCellphone(e.target.value)}
+          value={next_of_kin_cell_phone}
         />
       </FormControl>
     </VStack>
   );
 };
 
-HospitalDetail.propTypes = {
-  nhif_no: PropTypes.string,
-  setNHIFNo: PropTypes.func,
+NextOfKin.propTypes = {
+  next_of_kin: PropTypes.string,
+  next_of_kin_name: PropTypes.string,
+  next_of_kin_cell_phone: PropTypes.string,
+  setNextOfKin: PropTypes.func,
+  setNextOfKinName: PropTypes.func,
+  setNextOfKinCellphone: PropTypes.func,
 
 };
 
-HospitalDetail.defaultProps = {
-  nhif_no: '',
-  setNHIFNo: () => { },
+NextOfKin.defaultProps = {
+  next_of_kin: '',
+  next_of_kin_name: '',
+  next_of_kin_cell_phone: '',
+  setNextOfKin: () => { },
+  setNextOfKinName: () => { },
+  setNextOfKinCellphone: () => { },
 
 };
 
 // hospital details
 
 export {
-  PersonalDetail, HospitalDetail,
+  PersonalDetail, NextOfKin,
 };
