@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FormControl, FormLabel, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Select from 'react-select';
 import Corporate from './Cooporate';
+import { useGetAllAccountTypesQuery } from '../../api/accountType.api';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -16,13 +17,18 @@ const customStyles = {
   }),
 };
 
-const PaymentDetail = ({ paymentAmount }) => {
-  const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
-  const options = [
-    { value: '1', label: 'CASH' },
-    { value: '2', label: 'CORPORATE' },
-    { value: '3', label: 'FOREIGNER' },
-  ];
+const PaymentDetail = ({ accountType, setAccountType }) => {
+  // const [accountType, setAccountType] = useState({ value: '', label: '' });
+  // const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
+
+  const { data } = useGetAllAccountTypesQuery();
+
+  // const datax = useCallback(()=>{},)
+
+  const accountTypeOptions = data?.map((item) => ({
+    value: item.account_type_id, label: item.account_type_description,
+  }));
+
   return (
     <VStack
       bgColor="white"
@@ -31,11 +37,11 @@ const PaymentDetail = ({ paymentAmount }) => {
       <FormControl>
         <FormLabel>Select Payment Type</FormLabel>
         <Select
-          options={options}
+          options={accountTypeOptions}
           styles={customStyles}
-          onChange={(value) => setPaymentOption(value)}
+          onChange={(type) => setAccountType(type.value)}
         />
-        {paymentOption.value === '2' && <Corporate />}
+        {accountType === '1' && <Corporate />}
 
       </FormControl>
 

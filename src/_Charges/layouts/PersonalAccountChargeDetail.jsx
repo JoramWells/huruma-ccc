@@ -9,14 +9,11 @@ import {
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useCallback, useState } from 'react';
-import {
-  FaAddressBook, FaCalendar, FaChartLine, FaCreditCard, FaFileInvoice,
-} from 'react-icons/fa';
 import { nanoid } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
 
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import { useGetPersonalAccountChargeQuery } from '../api/personalAccountCharges.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import { useGetPersonalAccountChargeQuery } from '../../api/personalAccountCharges.api';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -90,6 +87,7 @@ const PersonalAccountChargeDetail = () => {
       search: `?step=${step}`,
     });
   }, [setSideItem, navigate, pathname]);
+  console.log(data);
 
   return (
     <VStack

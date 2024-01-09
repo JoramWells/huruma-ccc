@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
@@ -5,17 +6,19 @@ import {
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
 import PropTypes from 'prop-types';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useAddPersonalAccountChargeMutation } from '../api/personalAccountCharges.api';
 
 const SelectedProcedures = ({ tableInstance }) => {
   const [data, setData] = useState([]);
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const appointmentID = searchParams.get('appointment_id');
   const [addPersonalAccountCharge] = useAddPersonalAccountChargeMutation();
 
   const inputValues = {
     services: JSON.stringify(data),
-    date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
-    time_of_charge: moment(new Date()).format('hh:mm:ss'),
 
   };
 
@@ -24,15 +27,28 @@ const SelectedProcedures = ({ tableInstance }) => {
       .flatRows.forEach((el) => setData((prev) => [
         ...prev,
         {
-          procedure_name: el.original.procedure_name,
-          procedure_cost: el.original.procedure_cost,
+          service_desc: el.original.procedure_name,
+          amount: el.original.procedure_cost,
+          date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
+          time_of_charge: moment(new Date()).format('hh:mm:ss'),
+          status: 1,
+          patient_id: id,
+          hospital_id: 18,
+          quantity: 1,
+          appointment_id: appointmentID,
         }]));
 
     // send to backend
-    return addPersonalAccountCharge(inputValues);
-  }, [tableInstance, addPersonalAccountCharge]);
+  }, [tableInstance]);
 
-  console.log(data);
+  useEffect(() => {
+    if (data.length !== 0) {
+      addPersonalAccountCharge(inputValues);
+      setData([]);
+    }
+  }, [addPersonalAccountCharge, inputValues]);
+
+  console.log(data, inputValues);
 
   return (
     <VStack

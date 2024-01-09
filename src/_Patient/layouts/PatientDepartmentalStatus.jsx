@@ -58,7 +58,21 @@ const PatientDepartmentalStatus = () => {
         // accessorKey: 'appointment_date',
         cell: (props) => (
           <Box h="100%">
-            {!props.row.original.temperature ? <Tag colorScheme="red" size="xl" p={2}>VITALS YET TO BE RECORDED</Tag>
+            {!props.row.original.temperature ? (
+              <Tag
+                bgColor="red.50"
+                color="red.300"
+                fontWeight="bold"
+                rounded="lg"
+                border="1px"
+                borderColor="red.200"
+                p={2}
+              >
+                <Link to="/">
+                  VITALS YET TO BE RECORDED
+                </Link>
+              </Tag>
+            )
               : <Text>VITALS RECORDED</Text>}
           </Box>
         ),

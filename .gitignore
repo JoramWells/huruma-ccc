@@ -6,6 +6,8 @@
 .pnp.js
 package-lock.json
 /src/.vscode
+/src/.eslintrc.js
+/src/.eslintignore
 
 # testing
 /coverage

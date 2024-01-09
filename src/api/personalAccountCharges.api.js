@@ -19,6 +19,11 @@ export const personalAccountChargeApi = createApi({
     getPersonalAccountCharge: builder.query({
       query: (id) => `detail/${id}`,
     }),
+
+    // get personal account charge base on user-id
+    getUserPersonalAccountDetail: builder.query({
+      query: (id) => `/user-personal-account-detail/${id}`,
+    }),
     updatePersonalAccountCharge: builder.mutation({
       query: ({ id, ...patch }) => ({
         url: `update${id}`,
@@ -39,6 +44,6 @@ export const personalAccountChargeApi = createApi({
 
 export const {
   useGetAllPersonalAccountChargesQuery, useAddPersonalAccountChargeMutation,
-  useGetPersonalAccountChargeQuery,
+  useGetPersonalAccountChargeQuery, useGetUserPersonalAccountDetailQuery,
   useUpdatePersonalAccountChargeMutation, useDeletePersonalAccountChargeMutation,
 } = personalAccountChargeApi;

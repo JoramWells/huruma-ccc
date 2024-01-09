@@ -28,6 +28,7 @@ const AddPatient = () => {
   const [next_of_kin, setNextOfKin] = useState('');
   const [next_of_kin_name, setNextOfKinName] = useState('');
   const [next_of_kin_cell_phone, setNextOfKinCellphone] = useState('');
+  const [account_type_id, setAccountTypeID] = useState('');
 
   const steps = [
     { title: 'Personal', description: 'Personal Information' },
@@ -64,6 +65,7 @@ const AddPatient = () => {
     next_of_kin,
     next_of_kin_name,
     next_of_kin_cell_phone,
+    account_type_id,
   };
 
   const [addPatient, { isLoading }] = useAddPatientMutation();
@@ -137,7 +139,12 @@ const AddPatient = () => {
           setNextOfKinCellphone={setNextOfKinCellphone}
         />
         )}
-        {activeStep === 3 && <PaymentDetail />}
+        {activeStep === 3 && (
+        <PaymentDetail
+          accountType={account_type_id}
+          setAccountType={setAccountTypeID}
+        />
+        )}
 
         {/* payment info */}
 

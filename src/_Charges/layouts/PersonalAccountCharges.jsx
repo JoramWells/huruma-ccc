@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
@@ -11,11 +12,10 @@ import {
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAllPersonalAccountChargesQuery } from '../api/personalAccountCharges.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAllPersonalAccountChargesQuery } from '../../api/personalAccountCharges.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -35,17 +35,19 @@ const PersonalAccountCharges = () => {
     data, error, isLoading, isFetching, isSuccess,
   } = useGetAllPersonalAccountChargesQuery();
 
+  console.log(data, 'hy');
+
   // const { data } = useSelector((state) => state.patients);
 
   const columnsx = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient_full_name_pac',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/personal-account-charge-detail/${props.row.original.personal_account_charge_id}`)}>
             <UserNameAvatar
-              fullName={props.getValue()}
+              fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
             />
           </Box>
         ),
@@ -58,23 +60,23 @@ const PersonalAccountCharges = () => {
         cell: (props) => (
           <VStack alignItems="flex-start">
             <Text>{moment(props.getValue()).format('LL')}</Text>
-            <Text color="gray.500">{moment(props.row.original.time_of_charge, 'HH:mm').format('hh:mm A')}</Text>
+            <Text color="gray.500">{moment(props.row.original.time_of_charge, 'HH:mm:ss').format('hh:mm A')}</Text>
           </VStack>
         ),
 
       },
       {
         header: 'Charge Amount',
-        accessorKey: 'total_charge_amount',
+        accessorKey: 'amount',
         enableSorting: true,
-        cell: (props) => <Text>{props.getValue().toLocaleString()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
 
       },
       {
         header: 'Amount Paid',
-        accessorKey: 'total_amount_paid',
+        accessorKey: 'amount',
         enableSorting: true,
-        cell: (props) => <Text>{props.getValue().toLocaleString()}</Text>,
+        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
 
       },
       {

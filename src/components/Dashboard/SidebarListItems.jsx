@@ -120,6 +120,8 @@ const SidebarListItems = () => {
         selected={pathname === '/charges'
           || pathname.includes('/charges-checklist')
           || pathname.includes('/charges-diagnosis')
+          || pathname.includes('/personal-account-charge-detail')
+          || pathname.includes('/personal-account-charges')
           || pathname.includes('/charges-detail')}
         onClick={onToggle}
         text="Charges"
@@ -225,7 +227,7 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/patients' || pathname.includes('/patient-detail')}
+        selected={pathname === '/patients' || pathname.includes('/patient-detail') || pathname.includes('/add-patient')}
         onClick={onToggle}
         text="Patients"
         link="/patients"

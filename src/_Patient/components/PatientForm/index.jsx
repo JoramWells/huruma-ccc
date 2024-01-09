@@ -227,7 +227,7 @@ const NextOfKin = ({
         <Select
           styles={customStyles}
           options={nextOfKinOPtions}
-          onChange={(kin) => setNextOfKin(kin)}
+          onChange={(kin) => setNextOfKin(kin.value)}
         />
       </FormControl>
       <FormControl>
