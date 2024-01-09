@@ -5,10 +5,10 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import PersonalInfo from '../components/MaternitySteps/PersonalInfo';
-import ScreeningInfo from '../components/MaternitySteps/ScreeningInfo';
-import NextOfKin from '../components/MaternitySteps/NextOfKin';
-import MedicalSurgicalInfo from '../components/MaternitySteps/MedicalSurgicalInfo';
+import PersonalInfo from '../../components/MaternitySteps/PersonalInfo';
+import ScreeningInfo from '../../components/MaternitySteps/ScreeningInfo';
+import NextOfKin from '../../components/MaternitySteps/NextOfKin';
+import MedicalSurgicalInfo from '../../components/MaternitySteps/MedicalSurgicalInfo';
 
 const AddMaternityProfile = () => {
   const [activeStep, setActiveStep] = useState(1);

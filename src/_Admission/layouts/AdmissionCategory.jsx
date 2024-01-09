@@ -9,44 +9,23 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { fetchAllAdmission } from '../_reducers/admissionSlice';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { fetchAllAdmissionCategory } from '../../_reducers/admissionCategorySlice';
 
-const Admission = () => {
+const AdmissionCategory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data } = useSelector((state) => state.admission);
+  const { data } = useSelector((state) => state.admissionCategory);
 
   const columnsx = useMemo(
     () => [
       {
-        header: 'Appointment ID',
-        accessorKey: 'appointment_id',
-        cell: (props) => <Box onClick={() => navigate(`/admission-detail/${props.row.original.admission_id}`)}>
-          <Text>{props.getValue()}</Text>
-        </Box>,
-
-      },
-      {
-        header: 'Admission ID',
-        accessorKey: 'admission_id',
+        header: 'Category Description',
+        accessorKey: 'admission_category_description',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
-
-      },
-      {
-        header: 'Patient ID',
-        accessorKey: 'patient_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Admission Date',
-        accessorKey: 'admission_date',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
     ],
@@ -64,7 +43,7 @@ const Admission = () => {
   // },[dispatch])
 
   useEffect(() => {
-    dispatch(fetchAllAdmission());
+    dispatch(fetchAllAdmissionCategory());
   }, [dispatch]);
 
   return (
@@ -77,7 +56,7 @@ const Admission = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-suppliers" />
+        <BreadCrumbNav link="/add-admission-category" />
 
         <HStack
           w="100%"
@@ -88,7 +67,7 @@ const Admission = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Admissions
+            Admissions Category
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -122,4 +101,4 @@ const Admission = () => {
   );
 };
 
-export default Admission;
+export default AdmissionCategory;

@@ -8,9 +8,9 @@ import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetAdmissionsQuery } from '../api/admissions.api';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetAdmissionsQuery } from '../../api/admissions.api';
 
 const Admission = () => {
   const navigate = useNavigate();

@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import moment from 'moment/moment';
-import { deleteAdmission, getAdmissionDetail } from '../_reducers/admissionSlice';
-import { getAdmissionType } from '../_reducers/admissionTypeSlice';
-import { useFetchApi } from '../hooks/useFecthApi';
+import { deleteAdmission, getAdmissionDetail } from '../../_reducers/admissionSlice';
+import { getAdmissionType } from '../../_reducers/admissionTypeSlice';
+import { useFetchApi } from '../../hooks/useFecthApi';
 
 const HorizontalStack = ({ title, text }) => (
   <HStack

@@ -13,7 +13,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { addDepartment } from '../_reducers/departmentSlice';
+import { addDepartment } from '../../_reducers/departmentSlice';
 
 const AddMaternityDeliveryDetails = () => {
   const [departmentName, setDepartmentName] = useState('');
