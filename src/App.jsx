@@ -119,7 +119,7 @@ const UserDetail = lazy(() => import('./layouts/UserDetail'));
 const MaternityProfileDetail = lazy(() => import('./layouts/MaternityProfileDetail'));
 const AddAdmission = lazy(() => import('./layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./layouts/MaternityAntenatalProfile'));
-const MaternityProfile = lazy(() => import('./layouts/MaternityProfile'));
+const MaternityProfile = lazy(() => import('./Maternity/MaternityProfile'));
 const AppointmentDetail = lazy(() => import('./layouts/AppointmentDetail'));
 const Appointments = lazy(() => import('./layouts/Appointments'));
 // const Admission = lazy(() => import('./layouts/Admission'));
