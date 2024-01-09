@@ -75,10 +75,9 @@ import ProceduresItems from './layouts/ProceduresItems';
 import DiseaseMinistry from './layouts/DiseaseMinistry';
 import Charges from './layouts/Charges';
 import ChargesDetail from './layouts/ChargesDetail';
-import Medication from './layouts/Medication';
-import MedicationCategory from './layouts/MedicationCategory';
-import MedicationPurchases from './layouts/MedicationPurchases';
-import MedicationStockTake from './layouts/MedicationStockTake';
+import MedicationCategory from './Medication/MedicationCategory';
+import MedicationPurchases from './Medication/MedicationPurchases';
+import MedicationStockTake from './Medication/MedicationStockTake';
 import InsuranceMedicationMapping from './layouts/InsuranceMedicationMapping';
 import InsuranceServiceCostMapping from './layouts/InsuranceServiceCostMapping';
 import PersonalAccountCharges from './layouts/PersonalAccountCharges';
@@ -107,6 +106,7 @@ import PatientQueueNursingStation from './Patient/layouts/PatientQueueNursingSta
 import PatientDepartmentalStatus from './Patient/layouts/PatientDepartmentalStatus';
 import PatientPrescription from './Patient/layouts/PatientPrescription';
 import AddPatient from './Patient/layouts/AddPatient';
+import Medication from './Medication/Medication';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./layouts/Admission'));
