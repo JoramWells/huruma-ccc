@@ -10,7 +10,7 @@ import {
 import {
   FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
 } from 'react-icons/fa';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
@@ -90,16 +90,12 @@ const PersonalAccountCharges = () => {
     [navigate],
   );
 
-  const subRowData = data
-        && data.map((item) => ({
-          ...item,
-          subRows: [],
-        }));
-  const filteredData = subRowData?.filter((item) => {
-    const itemDate = moment(item.appointment_date);
+  const filterByDate = useCallback(() => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    return itemDate.isSame(todayDate, 'day');
-  });
+    return data?.filter((item) => moment(item.date_of_charge).isSame(todayDate, 'day'));
+  }, [data]);
+
+  const filteredData = filterByDate();
 
   return (
     <VStack

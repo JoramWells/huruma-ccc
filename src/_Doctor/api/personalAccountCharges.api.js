@@ -29,7 +29,7 @@ export const personalAccountChargeApi = createApi({
     deletePersonalAccountCharge: builder.mutation({
       query(id) {
         return {
-          url: `delete${id}`,
+          url: `delete/${id}`,
           method: 'DELETE',
         };
       },

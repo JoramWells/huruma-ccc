@@ -2,88 +2,31 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
 import {
-  useCallback, useState, useRef, useEffect, useMemo,
+  useState, useMemo,
 } from 'react';
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
-  createColumnHelper,
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table';
-import moment from 'moment/moment';
 import {
-  Box,
   Button,
   HStack,
   Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr, VStack,
 } from '@chakra-ui/react';
-import { useGetProceduresQuery } from '../api/procedureDetails.api';
 import SelectedProcedures from './SelectedProcedures';
 
-function IndeterminateCheckbox({ indeterminate, ...rest }) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (typeof indeterminate === 'boolean') {
-      ref.current.indeterminate = !rest.checked && indeterminate;
-    }
-  }, [ref, indeterminate, rest.checked]);
-
-  return <input type="checkbox" ref={ref} {...rest} />;
-}
-
-const columnHelper = createColumnHelper();
-
-const columnDefWithCheckBox = [
-  {
-    id: 'select',
-    header: ({ table }) => (
-      <IndeterminateCheckbox
-        {...{
-          checked: table.getIsAllRowsSelected(),
-          indeterminate: table.getIsSomeRowsSelected(),
-          onChange: table.getToggleAllRowsSelectedHandler(),
-        }}
-      />
-    ),
-    cell: ({ row }) => (
-      <IndeterminateCheckbox
-        {...{
-          checked: row.getIsSelected(),
-          disabled: !row.getCanSelect(),
-          indeterminate: row.getIsSomeSelected(),
-          onChange: row.getToggleSelectedHandler(),
-        }}
-      />
-    ),
-  },
-  columnHelper.accessor('procedure_id', {
-    header: '#Id',
-  }),
-  {
-    accessorFn: (row) => `${row?.procedure_name}`,
-    header: 'Procedure Name',
-  },
-  {
-    accessorKey: 'procedure_cost',
-    header: 'Procedure Cost',
-  },
-];
-
-const TableSelectRow = () => {
-  const finalColumnDef = useMemo(() => columnDefWithCheckBox, []);
+const TableSelectRow = ({ data, column }) => {
+  const finalColumnDef = useMemo(() => column, [column]);
 
   const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumFilters] = useState([]);
 
-  const { data: procedureData, isLoading } = useGetProceduresQuery();
-  const finalData = useMemo(() => procedureData, [procedureData]);
-
   const tableInstance = useReactTable({
     columns: finalColumnDef,
-    data: finalData || [],
+    data: data || [],
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -103,10 +46,6 @@ const TableSelectRow = () => {
   );
   const procedureName = columnFilters.find((f) => f.id === 'procedure_name')?.value || '';
 
-  // const tableData = tableInstance.getSelectedRowModel()
-  //   .flatRows.map((el) => setData(el.original.procedure_name));
-
-  //   console.log("test", tableInstance.getHeaderGroups());
   return (
     <VStack
       w="full"
@@ -149,41 +88,43 @@ const TableSelectRow = () => {
           flex={1}
 
         >
-          {isLoading ? <Text>Fetching data..</Text>
-            : (
-              <Table>
-                <Thead>
-                  {tableInstance.getHeaderGroups().map((headerEl) => (
-                    <Tr key={headerEl.id}>
-                      {headerEl.headers.map((columnEl) => (
-                        <Th fontSize="lg" key={columnEl.id} colSpan={columnEl.colSpan}>
-                          {columnEl.isPlaceholder
-                            ? null
-                            : flexRender(
-                              columnEl.column.columnDef.header,
-                              columnEl.getContext(),
-                            )}
-                        </Th>
-                      ))}
-                    </Tr>
+
+          <Table>
+            <Thead>
+              {tableInstance.getHeaderGroups().map((headerEl) => (
+                <Tr key={headerEl.id}>
+                  {headerEl.headers.map((columnEl) => (
+                    <Th
+                      fontSize="16px"
+                      key={columnEl.id}
+                      colSpan={columnEl.colSpan}
+                    >
+                      {columnEl.isPlaceholder
+                        ? null
+                        : flexRender(
+                          columnEl.column.columnDef.header,
+                          columnEl.getContext(),
+                        )}
+                    </Th>
                   ))}
-                </Thead>
-                <Tbody>
-                  {tableInstance.getRowModel().rows.map((rowEl) => (
-                    <Tr key={rowEl.id}>
-                      {rowEl.getVisibleCells().map((cellEl) => (
-                        <Td key={cellEl.id}>
-                          {flexRender(
-                            cellEl.column.columnDef.cell,
-                            cellEl.getContext(),
-                          )}
-                        </Td>
-                      ))}
-                    </Tr>
+                </Tr>
+              ))}
+            </Thead>
+            <Tbody>
+              {tableInstance.getRowModel().rows.map((rowEl) => (
+                <Tr key={rowEl.id}>
+                  {rowEl.getVisibleCells().map((cellEl) => (
+                    <Td key={cellEl.id} fontSize="sm">
+                      {flexRender(
+                        cellEl.column.columnDef.cell,
+                        cellEl.getContext(),
+                      )}
+                    </Td>
                   ))}
-                </Tbody>
-              </Table>
-            )}
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
           <HStack
             justifyContent="space-between"
             // bgColor="gray.50"

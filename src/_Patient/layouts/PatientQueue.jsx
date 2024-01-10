@@ -8,56 +8,14 @@ import {
 // import axios from "axios"
 import {
   FaAudible,
-  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
+  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
 } from 'react-icons/fa';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetPatientsQuery } from '../../api/patients.api';
 import { useGetAppointmentsQuery } from '../../api/appointments.api';
-
-const outPatientList = [
-
-  {
-    id: nanoid(),
-    text: 'ANC',
-  },
-  {
-    id: nanoid(),
-    text: 'Cervical Screening',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Health Information',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Weight Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'Child Height Gaps',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'PNC',
-  },
-  {
-    id: nanoid(),
-    text: 'FP',
-  },
-  {
-    id: nanoid(),
-    text: 'SGBV',
-  },
-];
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -158,11 +116,13 @@ const PatientQueue = () => {
           ...item,
           subRows: [],
         }));
-  const filteredData = subRowData?.filter((item) => {
-    const itemDate = moment(item.appointment_date);
+
+  const filterByDate = useCallback(() => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    return itemDate.isSame(todayDate, 'day');
-  });
+    return data?.filter((item) => moment(item.appointment_date).isSame(todayDate, 'day'));
+  }, [data]);
+
+  const filteredData = filterByDate();
 
   return (
     <VStack

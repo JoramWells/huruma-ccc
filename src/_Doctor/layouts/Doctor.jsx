@@ -17,6 +17,7 @@ import { useGetPatientQuery } from '../../api/patients.api';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TableSelectRow from '../components/TableSelectRow';
 import VitalSigns from '../../components/VitalSigns';
+import ProceduresTab from '../components/ProceduresTab';
 
 const Doctor = () => {
   const { id } = useParams();
@@ -112,20 +113,9 @@ const Doctor = () => {
               <VitalSigns />
             </TabPanel>
             <TabPanel bgColor="white">
-              <HStack w="100%" p={2} justifyContent="space-between">
 
-                <HStack w="1/2" flex={1}>
-                  <Text fontSize="xl" fontWeight="semibold">Procedures</Text>
-
-                </HStack>
-                <HStack w="md" flex={1} justifyContent="space-between">
-                  <Text fontSize="xl" fontWeight="semibold">Selected Procedures</Text>
-                  <Text>
-                    View More
-                  </Text>
-                </HStack>
-              </HStack>
-              <TableSelectRow />
+              <ProceduresTab />
+              {/*  */}
             </TabPanel>
             <TabPanel>
               <p>three!</p>

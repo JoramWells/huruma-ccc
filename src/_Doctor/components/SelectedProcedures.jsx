@@ -2,20 +2,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, CloseButton, HStack, IconButton, Spinner, Tag, Text, VStack,
 } from '@chakra-ui/react';
 import moment from 'moment/moment';
-import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useAddPersonalAccountChargeMutation } from '../api/personalAccountCharges.api';
+import { useAddPersonalAccountChargeMutation, useDeletePersonalAccountChargeMutation } from '../api/personalAccountCharges.api';
+import { useGetUserPersonalAccountDetailQuery } from '../../api/personalAccountCharges.api';
 
 const SelectedProcedures = ({ tableInstance }) => {
   const [data, setData] = useState([]);
   const { id } = useParams();
   const [searchParams] = useSearchParams();
+  const { data: personalData } = useGetUserPersonalAccountDetailQuery(id);
   const appointmentID = searchParams.get('appointment_id');
-  const [addPersonalAccountCharge] = useAddPersonalAccountChargeMutation();
+  const [addPersonalAccountCharge,
+    { isLoading, data: personalAccountSaveData }] = useAddPersonalAccountChargeMutation();
+
+  const [deletePersonalAccountCharge,
+    { isLoading: deleteLoading }] = useDeletePersonalAccountChargeMutation();
 
   const inputValues = {
     services: JSON.stringify(data),
@@ -41,6 +46,9 @@ const SelectedProcedures = ({ tableInstance }) => {
     // send to backend
   }, [tableInstance]);
 
+  console.log(tableInstance.getSelectedRowModel()
+    .flatRows.length);
+
   useEffect(() => {
     if (data.length !== 0) {
       addPersonalAccountCharge(inputValues);
@@ -48,60 +56,105 @@ const SelectedProcedures = ({ tableInstance }) => {
     }
   }, [addPersonalAccountCharge, inputValues]);
 
-  console.log(data, inputValues);
+  console.log(personalData);
 
   return (
     <VStack
       w="1/2"
       flex={1}
-          // alignItems="flex-start"
-      h="500px"
-          // overflowY="auto"
-      bgColor="gray.50"
-      p={5}
+      alignItems="flex-start"
+      // bgColor="gray.50"
       rounded="xl"
+      position="relative"
     >
 
-      {tableInstance.getSelectedRowModel()
-        .flatRows.map((el) => (
+      <VStack
+        h="500px"
+        overflowY="auto"
+        w="lg"
+        // flex={1}
+        spacing={4}
+        alignItems="flex-start"
+        pr={2}
+
+      >
+        {personalData?.map((el) => (
           <Box
-                      // border="1px"
+            border="1px"
             p={5}
-                      // borderColor="gray.200"
+            borderColor="gray.200"
             rounded="xl"
-            h="150px"
-            w="75%"
+            h="160px"
+            w="100%"
             bgColor="white"
-                      // boxShadow="md"
+            boxShadow="lg"
             position="relative"
           >
-            <Text
-              color="blue.500"
-            >
-              {(el.original.procedure_name)}
-
-            </Text>
-            <Text fontSize="xl">
-              KSH
-              {' '}
-              {(parseInt(el.original.procedure_cost, 10).toLocaleString())}
-            </Text>
-            <Text color="gray.500" fontSize="md">Qty: 1</Text>
             <HStack
               w="full"
-              justifyContent="flex-end"
-              p={2}
-              position="absolute"
-              bottom={0}
-              right={0}
+              justifyContent="space-between"
             >
-              <Text fontSize="sm" color="gray.500">{moment(new Date()).format('LL')}</Text>
+              <Text
+                color="gray.600"
+                fontWeight="bold"
+              >
+                {(el.service_desc)}
+
+              </Text>
+              {!deleteLoading
+                ? (
+                  <CloseButton
+                    color="gray"
+                    onClick={() => deletePersonalAccountCharge(el.personal_account_charge_id)}
+                  />
+                )
+                : <Spinner />}
             </HStack>
+            <VStack
+              alignItems="flex-start"
+              w="full"
+              mt={2}
+            >
+
+              <HStack>
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                >
+                  KSH
+                  {' '}
+                  {(parseInt(el.amount, 10).toLocaleString())}
+                </Text>
+                <Tag
+                  colorScheme="blue"
+                  rounded="full"
+                  fontWeight="bold"
+                >
+                  CASH
+
+                </Tag>
+              </HStack>
+              <Text color="gray.500" fontSize="md">Qty: 1</Text>
+            </VStack>
           </Box>
         ))}
+      </VStack>
 
-      <Button onClick={() => handleData()}>
-        save
+      <Button
+        onClick={() => handleData()}
+        w="lg"
+        size="lg"
+        mt={4}
+        bgColor="blue.600"
+        color="white"
+        isDisabled={tableInstance
+          .getSelectedRowModel().flatRows.length === 0}
+        _hover={{
+          bgColor: 'blue.600',
+        }}
+      >
+        {isLoading ? 'Loading...'
+          : 'Save'}
       </Button>
     </VStack>
   );
