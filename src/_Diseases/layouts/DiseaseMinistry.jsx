@@ -6,9 +6,9 @@ import {
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetDiseaseMinistriesQuery } from '../api/diseaseMinistry.api copy';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetDiseaseMinistriesQuery } from '../../api/diseaseMinistry.api copy';
 
 const DiseaseMinistry = () => {
   const {

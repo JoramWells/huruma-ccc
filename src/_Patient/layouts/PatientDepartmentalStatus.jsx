@@ -61,16 +61,14 @@ const PatientDepartmentalStatus = () => {
             {!props.row.original.temperature ? (
               <Tag
                 bgColor="red.50"
-                color="red.300"
+                color="red.400"
                 fontWeight="bold"
-                rounded="lg"
-                border="1px"
-                borderColor="red.200"
+                rounded="md"
+                // border="1px"
+                // borderColor="red.200"
                 p={2}
               >
-                <Link to="/">
-                  VITALS YET TO BE RECORDED
-                </Link>
+                VITALS YET TO BE RECORDED
               </Tag>
             )
               : <Text>VITALS RECORDED</Text>}
@@ -82,7 +80,19 @@ const PatientDepartmentalStatus = () => {
         header: 'Doctor Room',
         // accessorKey: 'patient_gender',
         // enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Tag
+            bgColor="red.50"
+            color="red.400"
+            fontWeight="bold"
+            rounded="lg"
+            // border="1px"
+            // borderColor="red.200"
+            p={2}
+          >
+            YET TO BE SEE
+          </Tag>
+        ),
 
       },
       {
