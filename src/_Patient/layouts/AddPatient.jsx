@@ -1,29 +1,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import {
-  Box, Button, HStack, Step, StepDescription, StepIcon,
-  StepIndicator, StepNumber,
-  StepSeparator, StepStatus, StepTitle, Stepper, VStack,
+  Box, Button, HStack, VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
 import { useSearchParams } from 'react-router-dom';
-import {
-  NextOfKin, PersonalDetail,
-} from '../components/PatientForm';
+
 import { useAddPatientMutation } from '../../api/patients.api';
 import PaymentDetail from '../components/PaymentDetail';
+import StepperNav from '../components/Nav/StepperNav';
+import PersonalDetail from '../components/PersonalDetail';
+import NextOfKin from '../components/PatientForm/NextOfKin';
 
 const AddPatient = () => {
-  const [first_name, setFirstName] = useState('');
-  const [middle_name, setMiddleName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [dob, setDOB] = useState('');
-  const [patient_gender, setGender] = useState('');
-  const [residence, setResidence] = useState('');
-  const [id_number, setID] = useState('');
-  const [nhif_no, setNHIFNo] = useState('');
-  const [email, setEmail] = useState('');
+  const [personalData, setPersonalData] = useState({});
+  const [nextOfKinData, setNextOfKinData] = useState({});
+
   const [activeStep, setActiveStep] = useState(1);
   const [next_of_kin, setNextOfKin] = useState('');
   const [next_of_kin_name, setNextOfKinName] = useState('');
@@ -51,55 +43,31 @@ const AddPatient = () => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
+  // DATA STRUCTURE
+  // personalData={
+  //   patient_gender:{value:'MALE', label:'MALE'}
+  // residence:{value:1, label:'Nanyuki}
+  // }
+
+  personalData.patient_gender = personalData.patient_gender?.value;
+  personalData.residence = personalData.residence?.value;
+
+  nextOfKinData.next_of_kin = nextOfKinData.next_of_kin?.value;
+
   const inputValues = {
-    first_name,
-    middle_name,
-    last_name,
-    dob,
-    patient_gender,
-    residence,
-    id_number,
-    nhif_no,
     charges: 350,
-    email,
-    next_of_kin,
-    next_of_kin_name,
-    next_of_kin_cell_phone,
-    account_type_id,
+    ...personalData,
+    ...nextOfKinData,
   };
 
   const [addPatient, { isLoading }] = useAddPatientMutation();
+  console.log(inputValues);
 
   return (
     <VStack w="full" h="100vh" bgColor="gray.50" mt="55px">
-      <Stepper
-        index={activeStep}
-        mb={2}
-        w="65%"
-        mt={5}
-        rounded="lg"
-        bgColor="white"
-        p={4}
-        border="1px"
-        borderColor="gray.200"
-      >
-        {steps.map((step) => (
-          <Step key={nanoid()}>
-            <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
-            </StepIndicator>
-            <Box flexShrink={0}>
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
-            </Box>
-            <StepSeparator />
-          </Step>
-        ))}
-      </Stepper>
+
+      {/* stepper navigation */}
+      <StepperNav activeStep={activeStep} steps={steps} />
 
       <Box
         w="50%"
@@ -107,64 +75,35 @@ const AddPatient = () => {
         rounded="lg"
         bgColor="white"
       >
+
+        {/* PERSONAL DETAILS */}
         {activeStep === 1 && (
         <PersonalDetail
-          first_name={first_name}
-          middle_name={middle_name}
-          last_name={last_name}
-          email={email}
-          dob={dob}
-          patient_gender={patient_gender}
-          residence={residence}
-          id_number={id_number}
-          nhif_no={nhif_no}
-          setFirstName={setFirstName}
-          setMiddleName={setMiddleName}
-          setLastName={setLastName}
-          setEmail={setEmail}
-          setDOB={setDOB}
-          setPatientGender={setGender}
-          setResidence={setResidence}
-          setIDNumber={setID}
-          setNHIFNo={setNHIFNo}
+          handleNext={handleNext}
+          setPersonalData={setPersonalData}
+          activeStep={activeStep}
         />
         )}
+
+        {/* NEXT OF KIN */}
         {activeStep === 2 && (
         <NextOfKin
-          next_of_kin={next_of_kin}
-          next_of_kin_name={next_of_kin_name}
-          next_of_kin_cell_phone={next_of_kin_cell_phone}
-          setNextOfKin={setNextOfKin}
-          setNextOfKinName={setNextOfKinName}
-          setNextOfKinCellphone={setNextOfKinCellphone}
+          handleNext={handleNext}
+          setNextOfKinData={setNextOfKinData}
         />
         )}
+
+        {/* payment detail */}
         {activeStep === 3 && (
         <PaymentDetail
           accountType={account_type_id}
           setAccountType={setAccountTypeID}
+          inputValues={inputValues}
         />
         )}
 
         {/* payment info */}
 
-        <HStack mt={5} w="full" justifyContent="flex-end">
-          <Button
-            onClick={() => handleBack()}
-            isDisabled={activeStep === 1}
-          >
-            Back
-
-          </Button>
-          {activeStep === 4 ? (
-            <Button
-              onClick={() => addPatient(inputValues)}
-            >
-              {isLoading ? 'loading' : 'Complete'}
-            </Button>
-          )
-            : <Button onClick={() => handleNext()}>Next</Button>}
-        </HStack>
       </Box>
     </VStack>
   );

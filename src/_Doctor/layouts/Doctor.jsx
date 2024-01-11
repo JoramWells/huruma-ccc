@@ -18,6 +18,7 @@ import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TableSelectRow from '../components/TableSelectRow';
 import VitalSigns from '../../components/VitalSigns';
 import ProceduresTab from '../components/ProceduresTab';
+import DiagnosisTab from '../components/DiagnosisTab';
 
 const Doctor = () => {
   const { id } = useParams();
@@ -52,7 +53,10 @@ const Doctor = () => {
 
       <Box w="full">
 
-        <HStack p={4}>
+        <HStack
+          p={4}
+          bgColor="white"
+        >
           <Avatar
             name={`${data?.first_name} ${data?.last_name}`}
             size="xl"
@@ -78,7 +82,7 @@ const Doctor = () => {
           </VStack>
 
         </HStack>
-        <Tabs isFitted>
+        <Tabs isFitted bgColor="white">
           <TabList color="gray.500">
             <Tab fontWeight="semibold">Allergies</Tab>
             <Tab fontWeight="semibold">Diagnosis</Tab>
@@ -103,8 +107,10 @@ const Doctor = () => {
 
               </HStack>
             </TabPanel>
+
+            {/* diagnosis */}
             <TabPanel>
-              <Text>Diagnosis</Text>
+              <DiagnosisTab />
             </TabPanel>
             <TabPanel>
               <p>three!</p>

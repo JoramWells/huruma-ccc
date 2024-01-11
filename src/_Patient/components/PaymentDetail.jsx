@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { FormControl, FormLabel, VStack } from '@chakra-ui/react';
+import {
+  Button, FormControl, FormLabel, HStack, VStack,
+} from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
 import Select from 'react-select';
 import Corporate from './Cooporate';
 import { useGetAllAccountTypesQuery } from '../../api/accountType.api';
+import { useAddPatientMutation } from '../../api/patients.api';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -17,9 +20,11 @@ const customStyles = {
   }),
 };
 
-const PaymentDetail = ({ accountType, setAccountType }) => {
+const PaymentDetail = ({ accountType, setAccountType, inputValues }) => {
   // const [accountType, setAccountType] = useState({ value: '', label: '' });
   // const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
+
+  const [addPatient] = useAddPatientMutation();
 
   const { data } = useGetAllAccountTypesQuery();
 
@@ -44,6 +49,15 @@ const PaymentDetail = ({ accountType, setAccountType }) => {
         {accountType === '1' && <Corporate />}
 
       </FormControl>
+
+      <HStack w="full" justifyContent="flex-end">
+        <Button
+          colorScheme="green"
+          onClick={() => addPatient(inputValues)}
+        >
+          Complete
+        </Button>
+      </HStack>
 
     </VStack>
   );
