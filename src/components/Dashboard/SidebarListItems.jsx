@@ -152,13 +152,13 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/lab'}
+        selected={pathname === '/lab' || pathname.includes('/internal-lab-request')}
         onClick={onToggle}
         text="Lab"
         link="/lab"
         itemList={[
           { id: nanoid(), title: 'Lab Requests (In-Patient)', link: '/lab-requests-in' },
-          { id: nanoid(), title: 'Lab Requests (Out-Patient)', link: '/lab-requests-in' },
+          { id: nanoid(), title: 'Lab Requests (Out-Patient)', link: '/internal-lab-request' },
           { id: nanoid(), title: 'Internal Patient Lab Visits', link: '/all-reports' },
           { id: nanoid(), title: 'Test Summary', link: '/lab-tests-summary-sub-section' },
         ]}

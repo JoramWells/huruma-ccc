@@ -109,6 +109,8 @@ import PersonalAccountChargeDetail from './_Charges/layouts/PersonalAccountCharg
 import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
+import InternalLabRequest from './_Lab/layouts/InternalLabRequest';
+import InternalLabRequestDetail from './_Lab/layouts/InternalLabRequestDetail';
 
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
 const Admission = lazy(() => import('./_Admission/layouts/Admission'));
@@ -214,6 +216,9 @@ function App() {
 
             <Route path="/requisitions" element={<Requisitions />} />
             <Route path="/add-requisitions" element={<AddRequisitions />} />
+
+            <Route path="/internal-lab-request" element={<InternalLabRequest />} />
+            <Route path="/internal-lab-request-detail/:id" element={<InternalLabRequestDetail />} />
 
             <Route path="/physiotherapy" element={<Physiotherapy />} />
             <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />

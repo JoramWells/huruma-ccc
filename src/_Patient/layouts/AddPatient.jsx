@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import {
-  Box, Button, HStack, VStack,
+  Box, VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -17,9 +17,6 @@ const AddPatient = () => {
   const [nextOfKinData, setNextOfKinData] = useState({});
 
   const [activeStep, setActiveStep] = useState(1);
-  const [next_of_kin, setNextOfKin] = useState('');
-  const [next_of_kin_name, setNextOfKinName] = useState('');
-  const [next_of_kin_cell_phone, setNextOfKinCellphone] = useState('');
   const [account_type_id, setAccountTypeID] = useState('');
 
   const steps = [

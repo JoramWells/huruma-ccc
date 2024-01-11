@@ -36,6 +36,7 @@ import { payrollEmployeeBenefitsApi } from './api/payrollEmployeeBenefitsFile.ap
 import { userPrivilegeDetailsApi } from './api/userPrivilegeDetail.api';
 import { accountTypeApi } from './api/accountType.api';
 import { serviceTypeApi } from './api/serviceType.api';
+import { internalLabRequestsApi } from './api/internalLabRequests.api';
 
 export const store = configureStore({
   reducer: {
@@ -76,6 +77,7 @@ export const store = configureStore({
     [userPrivilegeDetailsApi.reducerPath]: userPrivilegeDetailsApi.reducer,
     [accountTypeApi.reducerPath]: accountTypeApi.reducer,
     [serviceTypeApi.reducerPath]: serviceTypeApi.reducer,
+    [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -115,5 +117,6 @@ export const store = configureStore({
     .concat(userPrivilegeDetailsApi.middleware)
     .concat(accountTypeApi.middleware)
     .concat(serviceTypeApi.middleware)
+    .concat(internalLabRequestsApi.middleware)
   ,
 });
