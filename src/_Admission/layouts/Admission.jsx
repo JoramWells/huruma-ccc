@@ -1,16 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, HStack, Text, VStack, Tag,
+  Box, Button, HStack, Text, VStack, Tag, Menu, MenuButton, MenuList, MenuItem, IconButton, Avatar,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaEllipsisH, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAdmissionsQuery } from '../../api/admissions.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
 
 const Admission = () => {
   const navigate = useNavigate();
@@ -27,12 +29,20 @@ const Admission = () => {
         header: 'Patient Name',
         accessorKey: 'patient_detail',
         cell: (props) => (
-          <Box onClick={() => navigate(`/admission-detail/${props.row.original.admission_id}`)}>
+          <HStack>
+            <Avatar
+              rounded="xl"
+              fontWeight="bold"
+              color="gray.700"
+              size="sm"
+              name={props.getValue() ? `${props.getValue()?.first_name
+              } ${props.getValue()?.middle_name}` : '0'}
+            />
             <Text>
               {props.getValue() ? `${props.getValue()?.first_name
               } ${props.getValue()?.middle_name}` : '0'}
             </Text>
-          </Box>
+          </HStack>
         ),
 
       },
@@ -44,7 +54,7 @@ const Admission = () => {
 
       },
       {
-        header: 'Payment Status',
+        header: 'Payment Details',
         accessorKey: 'pay_status',
         enableSorting: false,
         cell: (props) => (
@@ -53,19 +63,74 @@ const Admission = () => {
               <Tag
                 colorScheme="green"
                 variant="subtle"
-                rounded="full"
+                rounded="xl"
                 border="1px"
               >
                 PAID
               </Tag>
-            ) : <Tag rounded="full" colorScheme="red" variant="subtle">NOT PAID</Tag>}
+            ) : (
+              <Tag
+                rounded="md"
+                colorScheme="red"
+                variant="subtle"
+              >
+                NOT PAID
+              </Tag>
+            )}
           </Box>
         ),
 
       },
+      {
+        header: 'Bed Number',
+        accessorKey: 'ward_bed',
+        enableSorting: false,
+        cell: (props) => (
+          <VStack
+            bgColor="blue.500"
+            color="white"
+            rounded="xl"
+            fontWeight="extrabold"
+            h={10}
+            w={10}
+            justifyContent="center"
+          >
+            <Text>{props.getValue()?.bed_number}</Text>
+          </VStack>
+        ),
+
+      },
+      {
+        header: 'Action',
+        cell: () => (
+          <Menu size="lg">
+            <MenuButton
+              colorScheme="gray"
+              variant="ghost"
+              color="gray"
+              pr={3}
+              as={IconButton}
+              rightIcon={<FaEllipsisH />}
+            />
+            <MenuList
+              boxShadow="lg"
+            >
+              <MenuItem
+                onClick={() => navigate('/admission-profile')}
+              >
+                Admission Profile
+
+              </MenuItem>
+              <MenuItem>Interim Inpatient Bill</MenuItem>
+              <MenuItem>Discharge Patient</MenuItem>
+              <MenuItem>Transfer/Admit</MenuItem>
+            </MenuList>
+          </Menu>
+        ),
+      },
     ],
 
-    [navigate],
+    [],
   );
 
   const subRowData = data
@@ -74,7 +139,7 @@ const Admission = () => {
       subRows: [],
     }));
 
-  if (isLoading) return <div>loading..</div>;
+  // if (isLoading) return <div>loading..</div>;
 
   return (
     <VStack

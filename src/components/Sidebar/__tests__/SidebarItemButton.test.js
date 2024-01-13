@@ -1,7 +1,8 @@
 import { FaUser } from "react-icons/fa"
 import SidebarItemButton from "../SidebarItemButton"
-import {render} from '@testing-library/react'
+import {fireEvent, render} from '@testing-library/react'
 import { ChakraProvider, theme } from "@chakra-ui/react"
+import '@testing-library/jest-dom'
 
 describe('SidebarItemButton', () => {
 
@@ -27,6 +28,14 @@ describe('SidebarItemButton', () => {
         )
 
         expect(getByText(text)).toBeInTheDocument()
+    })
+
+    it('fires onClick handler when clicked',()=>{
+        const onClickMock = jest.fn()
+        const {getByRole} = render(<SidebarItemButton onClick={onClickMock}/>)
+        fireEvent.click(getByRole('button'))
+        expect(onClickMock).toHaveBeenCalled()
+
     })
 
 })

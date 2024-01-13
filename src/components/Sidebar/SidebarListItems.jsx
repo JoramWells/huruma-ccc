@@ -5,7 +5,7 @@ import {
   FaFileInvoiceDollar,
   FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaPills,
   FaProcedures,
-  FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
+  FaRadiation, FaRegMoneyBillAlt,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
 } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -69,29 +69,6 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaUser size={20} />}
-      />
-
-      <SidebarItemLink
-        selected={pathname === '/admission'
-        || pathname.includes('/bed-allocation')
-        || pathname.includes('/miscellaneous-charges')
-        || pathname.includes('/bed-billing')
-        || pathname.includes('/admission-detail')
-          || pathname.includes('/admission-category')
-          || pathname.includes('/add-admission-category')
-          || pathname.includes('/add-admission')
-          || pathname.includes('/admission-type')}
-        onClick={onToggle}
-        text="Admission"
-        link="/admission"
-        itemList={[
-          { id: nanoid(), title: 'Bed Allocation', link: '/bed-allocation' },
-          { id: nanoid(), title: 'Bed Billing', link: '/bed-billing' },
-          { id: nanoid(), title: 'Category', link: '/admission-category' },
-          { id: nanoid(), title: 'Miscellaneous Charges', link: '/miscellaneous-charges' },
-          { id: nanoid(), title: 'Type', link: '/admission-type' },
-        ]}
-        icon={<FaRegAddressBook size={20} />}
       />
 
       <SidebarItemLink
@@ -221,12 +198,13 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/patients' || pathname.includes('/patient-detail') || pathname.includes('/add-patient')}
+        selected={pathname === '/patients' || pathname.includes('/patient-detail') || pathname.includes('/add-patient')
+          || pathname.includes('/admission')}
         onClick={onToggle}
         text="Patients"
         link="/patients"
         itemList={[
-          { id: nanoid(), title: 'Admit Patient', link: '/admit-patient' },
+          { id: nanoid(), title: 'Admitted Patients', link: '/admission' },
           { id: nanoid(), title: 'Out-Patient', link: '/out-patient' || pathname.includes('/add-patient') },
           { id: nanoid(), title: 'Reports', link: '/all-reports' },
         ]}

@@ -1,4 +1,4 @@
-import { HStack, Text } from '@chakra-ui/react';
+import { Button, HStack, Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { FaUser } from 'react-icons/fa';
 
@@ -14,6 +14,9 @@ const SidebarItemButton = ({
       bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
       boxShadow={selected && 'sm'}
       rounded="sm"
+      as={Button}
+      w="full"
+      variant="ghost"
       // boxShadow="lg"
       p={2}
       mt={3}
