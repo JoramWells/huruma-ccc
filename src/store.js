@@ -37,6 +37,8 @@ import { userPrivilegeDetailsApi } from './api/userPrivilegeDetail.api';
 import { accountTypeApi } from './api/accountType.api';
 import { serviceTypeApi } from './api/serviceType.api';
 import { internalLabRequestsApi } from './api/internalLabRequests.api';
+import { aLabApi } from './_Lab/api/alab.api';
+import { internalPharmacyRequestApi } from './_Pharmacy/api/internalPharmacyRequest.api';
 
 export const store = configureStore({
   reducer: {
@@ -78,6 +80,8 @@ export const store = configureStore({
     [accountTypeApi.reducerPath]: accountTypeApi.reducer,
     [serviceTypeApi.reducerPath]: serviceTypeApi.reducer,
     [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
+    [aLabApi.reducerPath]: aLabApi.reducer,
+    [internalPharmacyRequestApi.reducerPath]: internalPharmacyRequestApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -118,5 +122,7 @@ export const store = configureStore({
     .concat(accountTypeApi.middleware)
     .concat(serviceTypeApi.middleware)
     .concat(internalLabRequestsApi.middleware)
+    .concat(aLabApi.middleware)
+    .concat(internalPharmacyRequestApi.middleware)
   ,
 });

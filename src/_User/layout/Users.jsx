@@ -6,10 +6,10 @@ import {
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import DataTable2 from '../components/tables/DataTable';
-import { useGetUsersQuery } from '../api/users.api';
-import UserNameAvatar from '../components/UserNameAvatar';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import DataTable2 from '../../components/tables/DataTable';
+import { useGetUsersQuery } from '../../api/users.api';
+import UserNameAvatar from '../../components/UserNameAvatar';
 
 const breadCrumbData = [
   {

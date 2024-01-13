@@ -51,7 +51,7 @@ SidebarItemButton.propTypes = {
 SidebarItemButton.defaultProps = {
   icon: <FaUser />,
   selected: false,
-  text: '',
+  text: 'Dashboard',
   onClick: () => {},
 };
 

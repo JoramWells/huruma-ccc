@@ -2,8 +2,8 @@
 /* eslint-disable react/require-default-props */
 import { Box, Flex, VStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import Sidebar from './Sidebar';
 import MainNav from '../Navbar/MainNav';
+import Sidebar from '../Sidebar';
 
 function Index({ children, display }) {
   return (

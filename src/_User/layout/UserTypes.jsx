@@ -2,10 +2,10 @@ import {
   Box, HStack, VStack,
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
-import BreadCrumbNav from '../components/BreadCrumbNav';
-import HeaderAction from '../components/HeaderAction';
-import { useGetUserTypesQuery } from '../api/userType.api';
-import DataTable2 from '../components/tables/DataTable';
+import BreadCrumbNav from '../../components/BreadCrumbNav';
+import HeaderAction from '../../components/HeaderAction';
+import { useGetUserTypesQuery } from '../../api/userType.api';
+import DataTable2 from '../../components/tables/DataTable';
 
 const breadCrumbData = [
   {

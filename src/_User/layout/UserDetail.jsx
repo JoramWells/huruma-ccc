@@ -10,9 +10,8 @@ import {
 import { useParams } from 'react-router-dom';
 
 import { useMemo } from 'react';
-import { useGetUserQuery } from '../api/users.api';
-import { useGetUserPrivilegesQuery } from '../api/userPrivileges.api';
-import UserPrivilegeTable from '../components/tables/UserPrivilegeTable.jsx';
+import { useGetUserQuery } from '../../api/users.api';
+import UserPrivilegeTable from '../components/UserPrivilegeTable';
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -45,6 +44,7 @@ const UserDetail = () => {
         justifyContent="center"
         bgColor="white"
         spacing={8}
+        alignItems="flex-start"
       >
         <VStack
           borderRight="1px"

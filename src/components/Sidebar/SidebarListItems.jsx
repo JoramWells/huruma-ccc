@@ -3,7 +3,7 @@ import {
   FaCar,
   FaChild,
   FaFileInvoiceDollar,
-  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaNotesMedical, FaPills,
+  FaHome, FaHospitalAlt, FaListOl, FaMoneyBill, FaMoneyCheck, FaPills,
   FaProcedures,
   FaRadiation, FaRegAddressBook, FaRegMoneyBillAlt,
   FaStore, FaToolbox, FaTools, FaTrain, FaUser, FaUserNurse,
@@ -152,7 +152,9 @@ const SidebarListItems = () => {
       />
 
       <SidebarItemLink
-        selected={pathname === '/lab' || pathname.includes('/internal-lab-request')}
+        selected={pathname === '/lab' || pathname.includes('/internal-lab-request')
+          || pathname.includes('/lab-templates')
+          || pathname.includes('/add-lab-test')}
         onClick={onToggle}
         text="Lab"
         link="/lab"
@@ -161,6 +163,8 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Lab Requests (Out-Patient)', link: '/internal-lab-request' },
           { id: nanoid(), title: 'Internal Patient Lab Visits', link: '/all-reports' },
           { id: nanoid(), title: 'Test Summary', link: '/lab-tests-summary-sub-section' },
+          { id: nanoid(), title: 'Lab Test Prices', link: '/lab-test-prices' },
+          { id: nanoid(), title: 'Lab Templates', link: '/lab-templates' },
         ]}
         icon={<FaTools size={20} />}
       />
@@ -181,16 +185,6 @@ const SidebarListItems = () => {
 
         ]}
         icon={<FaChild size={20} />}
-      />
-
-      <SidebarItemButton
-        selected={pathname === '/medication'
-        || pathname.includes('medication-category')
-        || pathname.includes('medication-purchases')
-          || pathname.includes('medication-stock-take')}
-        onClick={() => navigate('/medication')}
-        text="medication"
-        icon={<FaNotesMedical size={20} />}
       />
 
       <SidebarItemLink
@@ -287,6 +281,8 @@ const SidebarListItems = () => {
       <SidebarItemLink
         selected={
           pathname === '/pharmacy' || pathname.includes('walkin-patient-queue')
+          || pathname.includes('pharmacy-request')
+          || pathname.includes('medication')
 }
         onClick={onToggle}
         text="Pharmacy"
@@ -295,8 +291,9 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Over Counter Request', link: '/services-price-list' },
           { id: nanoid(), title: 'OTC Patient Queue', link: '/pharmaceutical-price-list' },
           { id: nanoid(), title: 'Walk-In Patient Queue', link: '/walkin-patient-queue' },
-          { id: nanoid(), title: 'Pharmacy Request', link: '/ward-prices' },
+          { id: nanoid(), title: 'Pharmacy Request', link: '/pharmacy-request' },
           { id: nanoid(), title: 'Dispense Drugs', link: '/dispense-drugs' },
+          { id: nanoid(), title: 'Medicine Stock Take', link: '/medication' },
 
         ]}
         icon={<FaPills size={20} />}

@@ -1,11 +1,10 @@
 /* eslint-disable linebreak-style */
 import {
-  Box, Divider,
+  Box,
 } from '@chakra-ui/react';
-
 import SidebarListItems from './SidebarListItems';
 
-function Sidebar() {
+function index() {
   return (
     <Box
       w={{ base: '100%', sm: '270px' }}
@@ -21,11 +20,10 @@ function Sidebar() {
       // p={1}
     >
 
-      <Divider />
       <SidebarListItems />
 
     </Box>
   );
 }
 
-export default Sidebar;
+export default index;

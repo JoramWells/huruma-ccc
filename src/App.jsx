@@ -2,6 +2,9 @@
 import { Suspense, lazy } from 'react';
 import {
   ChakraProvider,
+  Spinner,
+  Text,
+  VStack,
   extendTheme,
   theme,
 } from '@chakra-ui/react';
@@ -27,7 +30,7 @@ import DepartmentDetail from './layouts/DepartmentDetail';
 import Pharmaceuticals from './layouts/Pharmaceuticals';
 import AddPharmaceuticals from './layouts/AddPharceuticals';
 import WardPrice from './layouts/WardPrices';
-import Users from './layouts/Users';
+import Users from './_User/layout/Users';
 import AddUser from './layouts/AddUser';
 import Privileges from './layouts/Privileges';
 import GroupPrivileges from './layouts/GroupPrivileges';
@@ -40,7 +43,7 @@ import DispensesPhysioTherapy from './layouts/DispensesPhysioTherapy';
 import AddDispensePhysioItem from './layouts/AddDispensePhysioItem';
 import Insurance from './_Insurance/layouts/Insurances';
 import AddInsurance from './_Insurance/layouts/AddInsurance';
-import UserTypes from './layouts/UserTypes';
+import UserTypes from './_User/layout/UserTypes';
 import AddUserType from './layouts/AddUserType';
 import DispenseDrugs from './layouts/DispenseDrugs';
 import AddDispenseDrugs from './layouts/AddDispenseDrugs';
@@ -86,7 +89,7 @@ import AccountingItem from './layouts/AccountingItem';
 import AddAllergies from './layouts/AddAllergies';
 import WalkInPatientQueue from './layouts/WalkInPatientQueue';
 import AddPrescription from './layouts/AddPrescription';
-import LabTestsSummarySubSection from './layouts/LabTestsSummarySubSection';
+import LabTestsSummarySubSection from './_Lab/layouts/LabTestsSummarySubSection';
 import AddMaternityDeliveryDetails from './_Maternity/layouts/AddMaternityDeliveryDetails';
 import AddMaternityDewormingDetail from './_Maternity/layouts/AddMaternityDewormingDetail';
 import PayrollDeductions from './_Payroll/layouts/PayrollDeductions';
@@ -97,7 +100,6 @@ import PayrollEmployeeLoanDetails from './_Payroll/layouts/PayrollEmployeeLoanDe
 import PayrollEmployeeBenefitsFile from './_Payroll/layouts/PayrollEmployeeBenefitsFile';
 import PayrollEmployeeEarningRecords from './_Payroll/layouts/PayrollEmployeeEarningRecords';
 import Doctor from './_Doctor/layouts/Doctor';
-import Patients from './_Patient/layouts/Patients';
 import PatientsTriaged from './_Patient/layouts/PatientsTriaged';
 import PatientVisits from './_Patient/layouts/PatientVisits';
 import PatientQueueNursingStation from './_Patient/layouts/PatientQueueNursingStation';
@@ -109,29 +111,36 @@ import PersonalAccountChargeDetail from './_Charges/layouts/PersonalAccountCharg
 import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
-import InternalLabRequest from './_Lab/layouts/InternalLabRequest';
-import InternalLabRequestDetail from './_Lab/layouts/InternalLabRequestDetail';
 
+const Patients = lazy(() => import('./_Patient/layouts/Patients'));
+const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
+
+const InternalLabRequest = lazy(() => import('./_Lab/layouts/InternalLabRequest'));
+const InternalLabRequestDetail = lazy(() => import('./_Lab/layouts/InternalLabRequestDetail'));
+const LabTemplates = lazy(() => import('./_Lab/layouts/LabTemplates'));
+const PharmacyRequest = lazy(() => import('./_Pharmacy/layouts/PharmacyRequest'));
+
+const AddLabTest = lazy(() => import('./_Lab/layouts/AddLabTest'));
 const AddVitals = lazy(() => import('./layouts/AddVitals'));
+const AppointmentDetail = lazy(() => import('./_Appointment/layouts/AppointmentDetail'));
 const Admission = lazy(() => import('./_Admission/layouts/Admission'));
 const AdmissionCategory = lazy(() => import('./_Admission/layouts/AdmissionCategory'));
 const AdmissionDetail = lazy(() => import('./_Admission/layouts/AdmissionDetail'));
 const AddWard = lazy(() => import('./layouts/AddWard'));
 // const Disease = lazy(() => import('./layouts/Disease'));
 const AddMaternityProfile = lazy(() => import('./_Maternity/layouts/AddMaternityProfile'));
-const UserDetail = lazy(() => import('./layouts/UserDetail'));
 const MaternityProfileDetail = lazy(() => import('./_Maternity/layouts/MaternityProfileDetail'));
 const AddAdmission = lazy(() => import('./_Admission/layouts/AddAdmission'));
 const MaternityAntenatalProfile = lazy(() => import('./_Maternity/layouts/MaternityAntenatalProfile'));
 const MaternityProfile = lazy(() => import('./_Maternity/layouts/MaternityProfile'));
-const AppointmentDetail = lazy(() => import('./_Appointment/layouts/AppointmentDetail'));
-const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
 // const Admission = lazy(() => import('./layouts/Admission'));
 const MaternityServices = lazy(() => import('./_Maternity/layouts/MaternityServices'));
 const Homepage = lazy(() => import('./layouts/Homepage'));
 const PatientDetail = lazy(() => import('./_Patient/layouts/PatientDetail'));
 const MiscellaneousCharges = lazy(() => import('./layouts/MiscellaneousCharges'));
 const Wards = lazy(() => import('./layouts/Wards'));
+
+const UserDetail = lazy(() => import('./_User/layout/UserDetail'));
 
 function App() {
   const extendedTheme = extendTheme({
@@ -153,7 +162,25 @@ function App() {
         display={false}
       >
 
-        <Suspense fallback={<div>loading..</div>}>
+        <Suspense fallback={(
+          <VStack
+            w="full"
+            h="100vh"
+            alignItems="center"
+            justifyContent="center"
+            bgColor="gray.50"
+          >
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+            <Text color="gray.500">Please wait...</Text>
+          </VStack>
+)}
+        >
           <Routes>
             <Route path="/" element={<Homepage />} />
 
@@ -198,12 +225,16 @@ function App() {
             <Route path="/maternity" element={<MaternityServices />} />
             <Route path="/maternity-profile-detail/:id" element={<MaternityProfileDetail />} />
 
+            <Route path="/pharmacy-request" element={<PharmacyRequest />} />
+
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 
             <Route path="/admission" element={<Admission />} />
             <Route path="/add-admission" element={<AddAdmission />} />
 
             <Route path="/lab-tests-summary-sub-section" element={<LabTestsSummarySubSection />} />
+            <Route path="/lab-templates" element={<LabTemplates />} />
+            <Route path="/add-lab-test" element={<AddLabTest />} />
 
             <Route path="/admission-type" element={<AdmissionType />} />
             <Route path="/admission-detail" element={<AdmissionDetail />} />
