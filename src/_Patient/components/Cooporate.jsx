@@ -1,35 +1,36 @@
-/* eslint-disable camelcase */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import {
-  Box,
-  Button,
-  Checkbox,
-  CloseButton,
   FormControl,
   FormLabel,
   HStack,
   Input,
-  Stack,
   Tag,
-  Text,
   VStack,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import { useGetInsurancesQuery } from '../../api/insurance.api';
 
-const Corporate = () => {
-  const [supplierName, setSupplierName] = useState('');
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    minHeight: '45px',
+    height: '45px',
+  }),
+  input: (provided) => ({
+    ...provided,
+  }),
+};
+
+const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
   const [mobileNo, setMobileNo] = useState('');
-  const [payment_type_id, setPaymentTypeId] = useState('');
   const [insurance_membership_number, setInsuranceMemberShipNo] = useState('');
-  const [insuranceAccount, setInsuranceAccount] = useState({ value: '', label: '' });
-  const [status, setStatus] = useState({ value: 'Active', label: 'Active' });
+  // const [insuranceAccount, setInsuranceAccount] = useState({ value: '', label: '' });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const { data } = useGetInsurancesQuery();
 
@@ -38,27 +39,9 @@ const Corporate = () => {
             { value: item.insurance_id, label: item.insurance_name }
           ));
 
-  const inputValues = {
-    supplierName,
-    mobileNo,
-    classification: insuranceAccount.value,
-    status: status.value,
-  };
-
   const statusOptions = [{ value: 'Active', label: 'Active' },
     { value: 'In Active', label: 'In Active' },
   ];
-
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      minHeight: '45px',
-      height: '45px',
-    }),
-    input: (provided) => ({
-      ...provided,
-    }),
-  };
 
   return (
 

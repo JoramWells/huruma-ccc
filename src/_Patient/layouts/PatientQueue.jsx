@@ -65,9 +65,9 @@ const PatientQueue = () => {
       },
       {
         header: 'PAYMENT DETAILS',
-        accessorKey: 'patient_gender',
+        accessorKey: 'insurance_detail',
         enableSorting: false,
-        cell: (props) => <Text>b</Text>,
+        cell: (props) => <Text>{props.getValue()?.insurance_name}</Text>,
 
       },
       {
@@ -111,11 +111,11 @@ const PatientQueue = () => {
     [navigate],
   );
 
-  const subRowData = data
-        && data.map((item) => ({
-          ...item,
-          subRows: [],
-        }));
+  // const subRowData = data
+  //       && data.map((item) => ({
+  //         ...item,
+  //         subRows: [],
+  //       }));
 
   const filterByDate = useCallback(() => {
     const todayDate = moment(new Date()).format('YYYY-MM-DD');
@@ -123,6 +123,8 @@ const PatientQueue = () => {
   }, [data]);
 
   const filteredData = filterByDate();
+
+  console.log(filteredData);
 
   return (
     <VStack

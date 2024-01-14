@@ -127,7 +127,7 @@ const Appointments = () => {
       },
 
       {
-        header: 'Action(See Patient)',
+        header: 'Action',
         accessorKey: 'doctor_id',
         cell: (props) => <Text>{props.getValue()}</Text>,
         size: 200,
@@ -160,7 +160,7 @@ const Appointments = () => {
       position="relative"
     >
       <Box bgColor="white" w="full">
-        <BreadCrumbNav link="/add-suppliers" />
+        <BreadCrumbNav link="/add-patient" />
 
         <HStack
           w="100%"

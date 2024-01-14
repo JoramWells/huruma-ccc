@@ -88,7 +88,7 @@ const PersonalDetail = ({
             </HStack>
             <HStack w="full">
 
-              <FormControl isRequired>
+              <FormControl>
 
                 <FormLabel mt={1}>First Name</FormLabel>
                 <Input
@@ -101,7 +101,7 @@ const PersonalDetail = ({
 
               </FormControl>
 
-              <FormControl isRequired>
+              <FormControl>
 
                 <FormLabel mt={1}>Middle Name</FormLabel>
                 <Input
@@ -113,7 +113,7 @@ const PersonalDetail = ({
                 />
 
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
 
                 <FormLabel mt={1}>Last Name</FormLabel>
                 <Input
@@ -128,7 +128,7 @@ const PersonalDetail = ({
             </HStack>
 
             {/* category */}
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>DOB</FormLabel>
               <Input
                 name="dob"
@@ -140,7 +140,7 @@ const PersonalDetail = ({
             </FormControl>
 
             {/* item code */}
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>Select Gender</FormLabel>
               <Select
                 name="patient_gender"
@@ -152,7 +152,7 @@ const PersonalDetail = ({
 
             </FormControl>
 
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>ID/Passport Number</FormLabel>
               <Input
                 name="id_number"
@@ -162,7 +162,7 @@ const PersonalDetail = ({
                 onChange={handleChange}
               />
             </FormControl>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>Email Address</FormLabel>
               <Input
                 type="email"
@@ -173,7 +173,7 @@ const PersonalDetail = ({
                 onChange={handleChange}
               />
             </FormControl>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>Select Residence</FormLabel>
               <Select
                 name="residence"
@@ -184,7 +184,7 @@ const PersonalDetail = ({
               />
 
             </FormControl>
-            <FormControl isRequired>
+            <FormControl>
               <FormLabel>NHIF Number</FormLabel>
               <Input
                 size="lg"

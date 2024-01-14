@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import {
   ChakraProvider,
   Spinner,
@@ -9,7 +9,7 @@ import {
   theme,
 } from '@chakra-ui/react';
 import {
-  Route, Routes,
+  Route, Routes, useLocation,
 } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard';
@@ -87,7 +87,6 @@ import ConsultationTypes from './layouts/ConsultationTypes';
 import AccountingSuppliers from './layouts/AccountingSuppliers';
 import AccountingItem from './layouts/AccountingItem';
 import AddAllergies from './layouts/AddAllergies';
-import WalkInPatientQueue from './layouts/WalkInPatientQueue';
 import AddPrescription from './layouts/AddPrescription';
 import LabTestsSummarySubSection from './_Lab/layouts/LabTestsSummarySubSection';
 import AddMaternityDeliveryDetails from './_Maternity/layouts/AddMaternityDeliveryDetails';
@@ -111,6 +110,7 @@ import PersonalAccountChargeDetail from './_Charges/layouts/PersonalAccountCharg
 import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
+import WalkInPatientQueue from './_Patient/layouts/WalkInPatientQueue';
 
 const Patients = lazy(() => import('./_Patient/layouts/Patients'));
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
@@ -153,6 +153,13 @@ function App() {
       },
     },
   });
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <ChakraProvider theme={extendedTheme}>
       {/* <Routes>
