@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllMedicationCategoryQuery } from '../../api/medicationCategory.api';
+import { useGetAllMedicationCategoryQuery } from '../api/medicationCategory.api';
 
 const breadCrumbData = [
   {

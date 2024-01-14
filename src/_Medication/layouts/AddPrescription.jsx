@@ -18,12 +18,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import moment from 'moment/moment';
-import { addSuppliers } from '../_reducers/supplierSlice';
-import { getAllSupplierClassification } from '../_reducers/supplierClassificationSlice';
+import { addSuppliers } from '../../_reducers/supplierSlice';
+import { getAllSupplierClassification } from '../../_reducers/supplierClassificationSlice';
 import { useGetAllMedicationQuery } from '../api/medication.api';
 import { useGetAllMedicationCategoryQuery } from '../api/medicationCategory.api';
-import { selectStyles } from '../utils/styles';
-import { useAddCreditPaymentMutation } from '../api/creditPayment.api';
+import { selectStyles } from '../../utils/styles';
+import { useAddCreditPaymentMutation } from '../../api/creditPayment.api';
 
 const AddPrescription = () => {
   const { id } = useParams();

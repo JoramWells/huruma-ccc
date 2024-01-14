@@ -8,6 +8,7 @@ import {
   Tab, TabList, TabPanel, TabPanels, Tabs, Text, Textarea, VStack,
 } from '@chakra-ui/react';
 import {
+  useNavigate,
   useParams,
 } from 'react-router-dom';
 
@@ -19,11 +20,13 @@ import TableSelectRow from '../components/TableSelectRow';
 import VitalSigns from '../../components/VitalSigns';
 import ProceduresTab from '../components/ProceduresTab';
 import DiagnosisTab from '../components/DiagnosisTab';
+import PharmacyTab from '../components/PharmacyTab';
 
 const Doctor = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useGetPatientQuery(id);
+  const navigate = useNavigate();
 
   const breadCrumbData = [
     {
@@ -125,6 +128,37 @@ const Doctor = () => {
             </TabPanel>
             <TabPanel>
               <p>three!</p>
+            </TabPanel>
+            <TabPanel>
+
+              <HStack
+                w="full"
+                justifyContent="flex-end"
+              >
+                <Box
+                  bgColor="blue.500"
+                  p={1}
+                  rounded="full"
+                >
+                  <Button
+                    bgColor="blue.500"
+                    color="white"
+                    border="2px"
+                    borderColor="white"
+                    _hover={{
+                      bgColor: 'blue.500',
+                    }}
+                    rounded="full"
+                    onClick={() => navigate(`/add-pharmacy-request/${id}`)}
+                  >
+                    New Request
+
+                  </Button>
+                </Box>
+              </HStack>
+
+              {/* pharmacy */}
+              <PharmacyTab />
             </TabPanel>
           </TabPanels>
         </Tabs>

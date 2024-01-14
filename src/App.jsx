@@ -87,7 +87,6 @@ import ConsultationTypes from './layouts/ConsultationTypes';
 import AccountingSuppliers from './layouts/AccountingSuppliers';
 import AccountingItem from './layouts/AccountingItem';
 import AddAllergies from './layouts/AddAllergies';
-import AddPrescription from './layouts/AddPrescription';
 import LabTestsSummarySubSection from './_Lab/layouts/LabTestsSummarySubSection';
 import AddMaternityDeliveryDetails from './_Maternity/layouts/AddMaternityDeliveryDetails';
 import AddMaternityDewormingDetail from './_Maternity/layouts/AddMaternityDewormingDetail';
@@ -111,6 +110,8 @@ import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
 import WalkInPatientQueue from './_Patient/layouts/WalkInPatientQueue';
+import AddPharmacyRequest from './_Pharmacy/layouts/AddPharmacyRequest';
+import AddPrescription from './_Medication/layouts/AddPrescription';
 
 const Patients = lazy(() => import('./_Patient/layouts/Patients'));
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
@@ -233,6 +234,7 @@ function App() {
             <Route path="/maternity-profile-detail/:id" element={<MaternityProfileDetail />} />
 
             <Route path="/pharmacy-request" element={<PharmacyRequest />} />
+            <Route path="/add-pharmacy-request/:id" element={<AddPharmacyRequest />} />
 
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 

@@ -13,7 +13,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllMedicationPurchasesQuery } from '../../api/medicationPurchases.api';
+import { useGetAllMedicationPurchasesQuery } from '../api/medicationPurchases.api';
 
 const breadCrumbData = [
   {

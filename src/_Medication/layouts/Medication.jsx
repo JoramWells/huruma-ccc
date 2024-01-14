@@ -12,7 +12,7 @@ import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllMedicationQuery } from '../../api/medication.api';
+import { useGetAllMedicationQuery } from '../api/medication.api';
 
 const Medication = () => {
   const { data } = useGetAllMedicationQuery();
