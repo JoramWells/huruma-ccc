@@ -109,9 +109,11 @@ import PersonalAccountChargeDetail from './_Charges/layouts/PersonalAccountCharg
 import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
-import WalkInPatientQueue from './_Patient/layouts/WalkInPatientQueue';
+import WalkInPatientQueue from './_Pharmacy/layouts/WalkInPatientQueue';
 import AddPharmacyRequest from './_Pharmacy/layouts/AddPharmacyRequest';
 import AddPrescription from './_Medication/layouts/AddPrescription';
+import PharmacyDrugsRequested from './_Pharmacy/layouts/PharmacyDrugsRequested';
+import OTCPatientQueue from './_Pharmacy/layouts/OTCPatientQueue';
 
 const Patients = lazy(() => import('./_Patient/layouts/Patients'));
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
@@ -235,6 +237,8 @@ function App() {
 
             <Route path="/pharmacy-request" element={<PharmacyRequest />} />
             <Route path="/add-pharmacy-request/:id" element={<AddPharmacyRequest />} />
+            <Route path="/pharmacy-drugs-requested/:id" element={<PharmacyDrugsRequested />} />
+            <Route path="/otc-patient-queue" element={<OTCPatientQueue />} />
 
             {/* <Route path="/admission" element={<DoctorAdmission />} /> */}
 

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import { HStack, Text } from '@chakra-ui/react';
 import { useGetProceduresQuery } from '../api/procedureDetails.api';
 import TableSelectRow from './TableSelectRow';
@@ -46,7 +46,6 @@ const column = [
 
 const ProceduresTab = () => {
   const { data } = useGetProceduresQuery();
-  const finalData = useMemo(() => data, [data]);
   return (
     <>
       <HStack w="100%" p={2} justifyContent="space-between">
@@ -76,7 +75,7 @@ const ProceduresTab = () => {
         </HStack>
       </HStack>
       <TableSelectRow
-        data={finalData}
+        data={data}
         column={column}
       />
     </>

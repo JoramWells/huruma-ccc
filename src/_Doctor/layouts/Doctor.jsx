@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
@@ -10,6 +11,7 @@ import {
 import {
   useNavigate,
   useParams,
+  useSearchParams,
 } from 'react-router-dom';
 
 import { nanoid } from '@reduxjs/toolkit';
@@ -17,16 +19,23 @@ import moment from 'moment/moment';
 import { useGetPatientQuery } from '../../api/patients.api';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TableSelectRow from '../components/TableSelectRow';
-import VitalSigns from '../../components/VitalSigns';
+import VitalSigns from '../components/VitalSigns';
 import ProceduresTab from '../components/ProceduresTab';
 import DiagnosisTab from '../components/DiagnosisTab';
 import PharmacyTab from '../components/PharmacyTab';
+import { useGetAppointmentQuery } from '../../api/appointments.api';
+import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
 
 const Doctor = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
 
-  const { data, isLoading } = useGetPatientQuery(id);
+  const { data, isLoading } = useGetAppointmentQuery(id);
   const navigate = useNavigate();
+
+  const patient_id = searchParams.get('patient_id');
+  const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
+  console.log(data, 'df');
 
   const breadCrumbData = [
     {
@@ -61,7 +70,7 @@ const Doctor = () => {
           bgColor="white"
         >
           <Avatar
-            name={`${data?.first_name} ${data?.last_name}`}
+            name={`${data?.patient?.first_name} ${data?.patient?.last_name}`}
             size="xl"
           />
           <VStack
@@ -71,14 +80,14 @@ const Doctor = () => {
             mb={5}
           >
             <Text fontSize="2xl" fontWeight="semibold">
-              {data?.first_name}
+              {data?.patient?.first_name}
               {' '}
-              {data?.middle_name}
+              {data?.patient?.middle_name}
               {' '}
-              {data?.last_name}
+              {data?.patient?.last_name}
             </Text>
             <Text fontSize="lg" color="gray.500">
-              {moment().diff(data?.dob, 'years')}
+              {moment().diff(data?.patient?.dob, 'years')}
               {' '}
               years
             </Text>
@@ -119,7 +128,7 @@ const Doctor = () => {
               <p>three!</p>
             </TabPanel>
             <TabPanel>
-              <VitalSigns />
+              <VitalSigns data={data} />
             </TabPanel>
             <TabPanel bgColor="white">
 
@@ -149,7 +158,10 @@ const Doctor = () => {
                       bgColor: 'blue.500',
                     }}
                     rounded="full"
-                    onClick={() => navigate(`/add-pharmacy-request/${id}`)}
+                    onClick={() => navigate({
+                      pathname: `/add-pharmacy-request/${id}`,
+                      search: `?patient_id=${data?.patient_id}`,
+                    })}
                   >
                     New Request
 
@@ -157,8 +169,27 @@ const Doctor = () => {
                 </Box>
               </HStack>
 
+              <VStack
+                justifyContent="center"
+                alignItems="center"
+
+              >
+                {pharmacyRequestData?.map((item) => (
+
+                  <HStack
+                    border="1px"
+                    borderColor="gray.200"
+                    rounded="xl"
+                    w="xl"
+                    key={nanoid()}
+                  >
+                    <Text>Asprin</Text>
+                  </HStack>
+                ))}
+
+              </VStack>
+
               {/* pharmacy */}
-              <PharmacyTab />
             </TabPanel>
           </TabPanels>
         </Tabs>

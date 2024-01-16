@@ -261,13 +261,15 @@ const SidebarListItems = () => {
           pathname === '/pharmacy' || pathname.includes('walkin-patient-queue')
           || pathname.includes('pharmacy-request')
           || pathname.includes('medication')
+          || pathname.includes('pharmacy-drugs-requested')
+          || pathname.includes('otc-patient-queue')
 }
         onClick={onToggle}
         text="Pharmacy"
         link="/pharmacy"
         itemList={[
           { id: nanoid(), title: 'Over Counter Request', link: '/services-price-list' },
-          { id: nanoid(), title: 'OTC Patient Queue', link: '/pharmaceutical-price-list' },
+          { id: nanoid(), title: 'OTC Patient Queue', link: '/otc-patient-queue' },
           { id: nanoid(), title: 'Walk-In Patient Queue', link: '/walkin-patient-queue' },
           { id: nanoid(), title: 'Pharmacy Request', link: '/pharmacy-request' },
           { id: nanoid(), title: 'Dispense Drugs', link: '/dispense-drugs' },

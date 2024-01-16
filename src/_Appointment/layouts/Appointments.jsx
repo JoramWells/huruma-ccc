@@ -2,10 +2,10 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, Tag, Text, VStack,
+  Box, Button, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Tag, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaFileDownload, FaPrint } from 'react-icons/fa';
+import { FaEllipsisH, FaFileDownload, FaPrint } from 'react-icons/fa';
 import { useMemo } from 'react';
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
@@ -129,7 +129,20 @@ const Appointments = () => {
       {
         header: 'Action',
         accessorKey: 'doctor_id',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: () => (
+          <Menu>
+            <MenuButton as={IconButton} rightIcon={<FaEllipsisH />}>
+              Actions
+            </MenuButton>
+            <MenuList>
+              <MenuItem>Download</MenuItem>
+              <MenuItem>Create a Copy</MenuItem>
+              <MenuItem>Mark as Draft</MenuItem>
+              <MenuItem>Delete</MenuItem>
+              <MenuItem>Attend a Workshop</MenuItem>
+            </MenuList>
+          </Menu>
+        ),
         size: 200,
 
       },

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 
 import {
@@ -9,9 +10,12 @@ import {
 import Select from 'react-select';
 import { useCallback, useEffect, useState } from 'react';
 import { FaExclamationTriangle } from 'react-icons/fa';
+import { useParams, useSearchParams } from 'react-router-dom';
+import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import { useGetAllMedicationQuery } from '../../_Medication/api/medication.api';
 import { useGetAllMedicationCategoryQuery } from '../../_Medication/api/medicationCategory.api';
+import { useAddInternalPharmacyRequestMutation } from '../api/internalPharmacyRequest.api';
 
 const selectStyles = {
   control: (provided, state) => ({
@@ -27,20 +31,49 @@ const selectStyles = {
 };
 
 const AddPharmacyRequest = () => {
+  const { id } = useParams();
   const { data } = useGetAllMedicationQuery();
-  const [medication, setMedication] = useState('');
-  const [category, setCategory] = useState(medication?.category);
+  const [medication, setMedication] = useState({
+    value: '',
+    label: '',
+    category: '',
+    cost: 0,
+  });
+  const [category, setCategory] = useState('');
+  const [measuringUnit, setMeasuringUnit] = useState('');
   const [cost, setCost] = useState(medication?.cost);
-  const [quantity, setQuantity] = useState(medication?.quantity);
+  const [quantity, setQuantity] = useState(0);
+  const [prescriptionQuantity, setPrescriptionQuantity] = useState(0);
+  const [prescription, setPrescription] = useState(0);
+  const [instructions, setInstructions] = useState('');
+  const [noOfDays, setNoOfDays] = useState('');
 
   const { data: medicationCategoryData } = useGetAllMedicationCategoryQuery();
+  const [addInternalPharmacyRequest, { isLoading }] = useAddInternalPharmacyRequestMutation();
+
+  const medicationCategoryCallback = useCallback(() => medicationCategoryData?.map((item) => ({
+    value: item.category_id,
+    label: item.category_name,
+  })), [medicationCategoryData]);
 
   const medicationCallback = useCallback(() => data?.map((item) => ({
     value: item.medication_id,
     label: item.medication_name,
-    category: item.medication_category?.category_name,
+    category: item.medication_category?.category_name || '',
     cost: item.price,
+    medicationPackaging: item?.medication_packaging_type?.package_description,
   })), [data]);
+
+  const prescriptionOptions = [
+    { value: 1, label: '(QID) FOUR TIMES A DAY' },
+    { value: 2, label: 'BID (TWICE A DAY)' },
+    { value: 3, label: 'OD' },
+    { value: 4, label: 'PRN' },
+    { value: 5, label: 'STAT' },
+    { value: 6, label: 'TDS' },
+    { value: 7, label: 'TID' },
+    { value: 8, label: 'TWO TIMES A DAY' },
+  ];
 
   const toast = useToast();
   const displayToast = useCallback(() => (
@@ -54,16 +87,50 @@ const AddPharmacyRequest = () => {
     })
   ), [toast]);
 
-  const medicationOptions = medicationCallback();
+  let medicationOptions = medicationCallback();
+  const filteredMedicationOptions = useCallback(() => medicationOptions?.filter(
+    (item) => item.category.toLowerCase()
+      .includes(category.label?.toLowerCase()),
+  ), [category, medicationOptions]);
+
+  const categoryOptions = medicationCategoryCallback();
+  medicationOptions = filteredMedicationOptions();
+
+  const [searchParams] = useSearchParams();
+  const patient_id = searchParams.get('patient_id');
+
+  const inputValues = {
+    appointment_id: id,
+    patient_id,
+    doctor_id: 712,
+    medication_id: medication?.value,
+    delivery_status: 1,
+    cost: medication?.cost,
+    quantity: prescriptionQuantity,
+    hospital_id: 18,
+    pay_status: 1,
+    prescription_term: prescription?.label,
+    user_id: 709,
+    batch_no: 1,
+    date_of_request: moment(new Date()).format('MM-DD-YYYY'),
+    time_of_request: moment(new Date()).format('hh:mm:ss'),
+    discharge_drug: 'NO',
+    number_of_days: noOfDays,
+    hospital_store_id: 1,
+    date_dispensed: moment(new Date()).format('MM-DD-YYYY'),
+    time_dispensed: moment(new Date()).format('hh:mm:ss'),
+    is_exclusion: 'NO',
+  };
+
   useEffect(() => {
     setCategory(medication?.category);
+    setMeasuringUnit(medication?.medicationPackaging);
     setCost(medication?.cost);
     if (!quantity) {
       displayToast();
     }
   }, [displayToast, medication, quantity]);
 
-  console.log(category);
   return (
     <VStack
       h="100vh"
@@ -77,32 +144,39 @@ const AddPharmacyRequest = () => {
         AddPharmacyRequest
       </Text>
       <HStack
-        w="full"
+        w="90%"
         spacing={4}
         alignItems="flex-start"
+        justifyContent="center"
         bgColor="white"
+        boxShadow="lg"
+        rounded="2xl"
       >
         <VStack
-          w="lg"
+          w="45%"
           bgColor="white"
           spacing={6}
-          p={4}
-          rounded="xl"
-          boxShadow="lg"
+          p={2}
+          rounded="md"
+          // boxShadow="md"
+          // borderTop="8px"
+          // borderTopColor="gray.600"
         >
           <HStack
             w="full"
-            justifyContent="flex-end"
+            // justifyContent="flex-end"
+            // bgColor="gray.50"
           >
             <Text
               fontSize="xl"
-              color="gray.700"
-              // fontWeight="bold"
+              color="gray.600"
+              fontWeight="bold"
             >
               Medication Details
 
             </Text>
           </HStack>
+          {/* <Divider /> */}
           {/*  */}
           <FormControl>
             <FormLabel
@@ -112,16 +186,10 @@ const AddPharmacyRequest = () => {
               Select Medication Category
 
             </FormLabel>
-            <Input
-              size="lg"
-              value={category}
-              type="text"
-              onChange={(e) => setCategory(e.target.value)}
-              border={0}
-              bgColor="gray.50"
-              fontSize="md"
-              fontWeight="bold"
-              color="gray.600"
+            <Select
+              styles={selectStyles}
+              options={categoryOptions}
+              onChange={(val) => setCategory(val)}
             />
           </FormControl>
 
@@ -143,12 +211,38 @@ const AddPharmacyRequest = () => {
 
           {/*  */}
           <FormControl>
+            <FormLabel
+              fontWeight="bold"
+              color="gray.500"
+            >
+              Measuring Unit
+
+            </FormLabel>
+            <Input
+              size="lg"
+              value={measuringUnit}
+              onChange={(e) => setMeasuringUnit(e)}
+              bgColor="gray.50"
+              border={0}
+              fontSize="md"
+              fontWeight="bold"
+              color="gray.700"
+            />
+          </FormControl>
+
+          {/*  */}
+          <FormControl>
             <FormLabel color="gray.500">Price (KSH)</FormLabel>
             <Input
               size="lg"
               type="number"
               value={cost}
               onChange={(e) => setCost(e.target.value)}
+              bgColor="gray.50"
+              border={0}
+              fontSize="md"
+              fontWeight="bold"
+              color="gray.700"
             />
           </FormControl>
 
@@ -156,7 +250,7 @@ const AddPharmacyRequest = () => {
           <FormControl>
             <HStack
               alignContent="center"
-              color={quantity ? 'gray.500' : 'red.500'}
+              color={quantity ? 'gray.500' : 'red.400'}
             >
               <FaExclamationTriangle />
               <FormLabel mt={2}>
@@ -170,38 +264,33 @@ const AddPharmacyRequest = () => {
               type="text"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
+              bgColor="gray.50"
+              border={0}
+              fontSize="md"
+              fontWeight="bold"
+              color="gray.700"
+
             />
           </FormControl>
-
-          <HStack
-            w="full"
-            justifyContent="flex-end"
-          >
-            <Button
-              colorScheme="blue"
-              variant="outline"
-            >
-              Save Changes
-
-            </Button>
-          </HStack>
 
         </VStack>
 
         {/*  */}
         <VStack
-          w="lg"
+          w="45%"
           bgColor="white"
           spacing={6}
-          border="1px"
-          borderColor="gray.200"
-          p={4}
-          rounded="xl"
-        //   boxShadow="lg"
+          // border="1px"
+          // borderColor="blue.200"
+          p={2}
+          rounded="md"
+          // borderTop="8px"
+          // borderTopColor="blue.500"
+          // boxShadow="md"
         >
           <HStack
             w="full"
-            justifyContent="flex-end"
+            // justifyContent="flex-end"
           >
             <Text
               fontSize="xl"
@@ -212,21 +301,26 @@ const AddPharmacyRequest = () => {
 
             </Text>
           </HStack>
-          <FormControl>
-            <FormLabel>Select Measuring Unit</FormLabel>
-            <Select styles={selectStyles} />
-          </FormControl>
 
           {/*  */}
           <FormControl>
             <FormLabel>Select Prescription</FormLabel>
-            <Select styles={selectStyles} />
+            <Select
+              styles={selectStyles}
+              options={prescriptionOptions}
+              onChange={(val) => setPrescription(val)}
+
+            />
           </FormControl>
 
           {/*  */}
           <FormControl>
             <FormLabel>Number of Days</FormLabel>
-            <Input size="lg" />
+            <Input
+              size="lg"
+              value={noOfDays}
+              onChange={(e) => setNoOfDays(e.target.value)}
+            />
           </FormControl>
 
           {/*  */}
@@ -238,28 +332,21 @@ const AddPharmacyRequest = () => {
           {/*  */}
           <FormControl>
             <FormLabel>Quantity</FormLabel>
-            <Input size="lg" />
+            <Input
+              size="lg"
+              value={prescriptionQuantity}
+              onChange={(e) => setPrescriptionQuantity(e.target.value)}
+            />
           </FormControl>
           <HStack w="full" justifyContent="flex-end">
             <Button
               bgColor="blue.500"
               color="white"
+              onClick={() => addInternalPharmacyRequest(inputValues)}
             >
-              Save
+              {isLoading ? 'loading...' : 'Save'}
 
             </Button>
-          </HStack>
-        </VStack>
-        <VStack w="lg">
-          <HStack
-            bgColor="white"
-            w="full"
-            p={4}
-            border="1px"
-            borderColor="gray.200"
-            rounded="xl"
-          >
-            <Text>Recent</Text>
           </HStack>
         </VStack>
       </HStack>

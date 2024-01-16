@@ -3,12 +3,12 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, IconButton, Text, VStack,
+  Box, Button, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
   FaAudible,
-  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
+  FaBoxOpen, FaEllipsisV, FaFileDownload, FaHandshake, FaPrint, FaSpeakerDeck, FaUserNurse,
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -135,10 +135,19 @@ const WalkInPatientQueue = () => {
       {
         header: 'Requests',
         cell: (props) => (
-          <VStack justifyContent="flex-start" alignItems="flex-start">
-            <Button size="sm">Pharmacy Request</Button>
-            <Button size="sm">Departmental Drugs</Button>
-          </VStack>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              rightIcon={<FaEllipsisV />}
+              pr={3}
+              color="gray.500"
+              bgColor={0}
+            />
+            <MenuList>
+              <MenuItem>Pharmacy Request</MenuItem>
+              <MenuItem>Department Drugs Request</MenuItem>
+            </MenuList>
+          </Menu>
         ),
       },
     ],

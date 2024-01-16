@@ -1,21 +1,21 @@
-/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, IconButton, Text, VStack,
+  Box, Button, HStack, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import {
-  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
-} from 'react-icons/fa';
-import { useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FaBoxOpen, FaFileDownload, FaPrint } from 'react-icons/fa';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
+import { graphqlSync } from 'graphql';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAllPersonalAccountChargesQuery } from '../../api/personalAccountCharges.api';
+import { useGetPatientsQuery } from '../../api/patients.api';
+import { useGetAllInternalPharmacyRequestsQuery } from '../api/internalPharmacyRequest.api';
 
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
@@ -28,22 +28,23 @@ const UserNameAvatar = ({ fullName }) => (
   </HStack>
 );
 
-const PersonalAccountCharges = () => {
+const OTCPatientQueue = () => {
   const navigate = useNavigate();
 
   const {
     data, error, isLoading, isFetching, isSuccess,
-  } = useGetAllPersonalAccountChargesQuery();
+  } = useGetAllInternalPharmacyRequestsQuery();
 
   // const { data } = useSelector((state) => state.patients);
+  console.log(data);
 
-  const columnsx = useMemo(
+  const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
         accessorKey: 'patient',
         cell: (props) => (
-          <Box onClick={() => navigate(`/personal-account-charge-detail/${props.row.original.personal_account_charge_id}`)}>
+          <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
               fullName={`${props.getValue()?.first_name} ${props.getValue()?.middle_name}`}
             />
@@ -53,51 +54,43 @@ const PersonalAccountCharges = () => {
 
       },
       {
-        header: 'Date',
-        accessorKey: 'date_of_charge',
-        cell: (props) => (
-          <VStack alignItems="flex-start">
-            <Text>{moment(props.getValue()).format('LL')}</Text>
-            <Text color="gray.500">{moment(props.row.original.time_of_charge, 'HH:mm:ss').format('hh:mm A')}</Text>
-          </VStack>
+        header: 'DOB',
+        cell: (props) => (<Text>{moment(props.row.original.patient?.dob).format('LL')}</Text>
         ),
 
       },
       {
-        header: 'Charge Amount',
-        enableSorting: true,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
+        header: 'PAYMENT DETAILS',
+        accessorKey: 'medication',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
 
       },
       {
-        header: 'Amount Paid',
-        accessorKey: 'amount',
-        enableSorting: true,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
-
-      },
-      {
-        header: 'Balance',
-        enableSorting: true,
-        cell: (props) => <Text>0</Text>,
-
+        header: 'Action',
+        cell: (props) => <Button onClick={() => navigate(`/pharmacy-drugs-requested/${props.row.original.patient.patient_id}`)}>Drugs Requested</Button>,
       },
     ],
 
     [navigate],
   );
 
-  const filterByDate = useCallback(() => {
-    const todayDate = moment(new Date()).format('YYYY-MM-DD');
-    return data?.filter((item) => moment(item.date_of_charge).isSame(todayDate, 'day'));
-  }, [data]);
+  const subRowData = data
+        && data.map((item) => ({
+          ...item,
+          subRows: [],
+        }));
 
-  const filteredData = filterByDate();
-  console.log(filteredData, 'hy');
+  const filteredData = subRowData?.filter((item) => {
+    const itemDate = moment(item.appointment_date);
+    const todayDate = moment(new Date()).format('YYYY-MM-DD');
+    return itemDate.isSame(todayDate, 'day');
+  });
+  console.log(data);
 
   return (
     <VStack
-      mt="55px"
+      mt="60px"
       w="full"
       bgColor="gray.50"
       p={3}
@@ -116,7 +109,7 @@ const PersonalAccountCharges = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Patients Charges
+            Over the Counter Patients Queue
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -125,7 +118,7 @@ const PersonalAccountCharges = () => {
             >
               {' '}
               (
-              {filteredData?.length.toLocaleString()}
+              {filteredData?.length}
               )
 
             </span>
@@ -138,25 +131,10 @@ const PersonalAccountCharges = () => {
           </HStack>
         </HStack>
         {filteredData?.length === 0 ? (
-          <VStack
-            p={2}
-            h="75vh"
-            alignItems="center"
-            justifyContent="center"
-          >
+          <VStack p={5}>
 
-            <FaBoxOpen
-              size={120}
-              color="gray"
-            />
-            <Text
-              fontSize="xl"
-              fontWeight="semibold"
-              color="gray.500"
-            >
-              No Patients Recorded
-
-            </Text>
+            <FaBoxOpen size="120" color="gray" />
+            <Text fontSize="xl" fontWeight="semibold" color="gray.500">No Patients Today</Text>
 
           </VStack>
         )
@@ -167,7 +145,7 @@ const PersonalAccountCharges = () => {
               p={3}
               h="89%"
             >
-              <DataTable2 data={filteredData} columns={columnsx} />
+              <DataTable2 data={filteredData} columns={columns} />
             </Box>
           )}
       </Box>
@@ -175,4 +153,4 @@ const PersonalAccountCharges = () => {
   );
 };
 
-export default PersonalAccountCharges;
+export default OTCPatientQueue;

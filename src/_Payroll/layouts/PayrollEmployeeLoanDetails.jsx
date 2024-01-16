@@ -2,11 +2,11 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Box, Button, HStack, Text, VStack,
+  Box, Button, HStack, IconButton, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaFileDownload, FaPrint,
+  FaBoxOpen, FaEllipsisH, FaFileDownload, FaPrint,
 } from 'react-icons/fa';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +21,7 @@ const PayrollEmployeeLoanDetails = () => {
   const {
     data, error, isLoading, isFetching, isSuccess,
   } = useGetAllPayrollEmployeeRecordsQuery();
+  console.log(data);
 
   const columns = useMemo(
     () => [
@@ -36,52 +37,34 @@ const PayrollEmployeeLoanDetails = () => {
 
       },
       {
-        header: 'Loan Desc.',
+        header: 'Phone No.',
+        accessorKey: 'cellphone',
+        enableSorting: false,
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
+      },
+      {
+        header: 'JOB TITLE',
         accessorKey: 'payroll_job_title',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()?.job_title_description}</Text>,
 
       },
       {
-        header: 'Amount',
-        accessorKey: 'department_id',
+        header: 'Bank Branch',
+        accessorKey: 'bank_branch',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Monthly Installment',
-        accessorKey: 'job_number',
+        header: 'Action',
         enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Monthly Interest Rate',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Interest Formula',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Deduction Start Date',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Loan Type',
-        accessorKey: 'job_number',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <IconButton>
+            <FaEllipsisH />
+          </IconButton>
+        ),
 
       },
     ],
@@ -116,7 +99,7 @@ const PayrollEmployeeLoanDetails = () => {
           mt={2}
         >
           <Text fontSize="xl" fontWeight="bold">
-            Employee Records
+            Employee Loan Records
             <span style={{
               fontSize: '18px',
               // fontWeight: 'normal',
@@ -167,7 +150,7 @@ const PayrollEmployeeLoanDetails = () => {
               p={3}
               h="89%"
             >
-              <DataTable2 columns={columns} />
+              <DataTable2 columns={columns} data={subRowData} />
             </Box>
           )}
       </Box>

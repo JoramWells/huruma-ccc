@@ -35,8 +35,6 @@ const PatientQueue = () => {
     data, error, isLoading, isFetching, isSuccess,
   } = useGetAppointmentsQuery();
 
-  // const { data } = useSelector((state) => state.patients);
-
   const columnsx = useMemo(
     () => [
       {
@@ -97,8 +95,8 @@ const PatientQueue = () => {
             {!props.row.original.consultation_type
               && <IconButton><FaHandshake /></IconButton>}
             <IconButton onClick={() => navigate({
-              pathname: `/doctor/${props.row.original.patient_id}`,
-              search: `?appointment_id=${props.row.original.appointment_id}`,
+              pathname: `/doctor/${props.row.original.appointment_id}`,
+              search: `?patient_id=${props.row.original.patient_id}`,
             })}
             >
               <FaUserNurse />

@@ -15,7 +15,7 @@ const SelectedProcedures = ({ tableInstance }) => {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const { data: personalData } = useGetUserPersonalAccountDetailQuery(id);
-  const appointmentID = searchParams.get('appointment_id');
+  const patientID = searchParams.get('patient_id');
   const [addPersonalAccountCharge,
     { isLoading, data: personalAccountSaveData }] = useAddPersonalAccountChargeMutation();
 
@@ -37,10 +37,10 @@ const SelectedProcedures = ({ tableInstance }) => {
           date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
           time_of_charge: moment(new Date()).format('hh:mm:ss'),
           status: 1,
-          patient_id: id,
+          patient_id: patientID,
           hospital_id: 18,
           quantity: 1,
-          appointment_id: appointmentID,
+          appointment_id: id,
         }]));
 
     // send to backend

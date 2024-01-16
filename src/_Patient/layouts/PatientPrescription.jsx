@@ -19,6 +19,7 @@ import { useGetPatientQuery } from '../../api/patients.api';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAppointmentQuery } from '../../api/appointments.api';
+import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
 
 const PatientPrescription = () => {
   const [sideItem, setSideItem] = useState(0);
@@ -30,32 +31,30 @@ const PatientPrescription = () => {
   const dispatch = useDispatch();
 
   const { data, isLoading } = useGetAppointmentQuery(appointment_id);
+  const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(id);
+  console.log(pharmacyRequestData);
 
   const columns = useMemo(
     () => [
       {
-        header: 'Medication Category',
-        accessorKey: 'cell_phone',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
         header: 'Medication Name',
-        accessorKey: 'patient_gender',
+        accessorKey: 'medication',
         enableSorting: false,
         // eslint-disable-next-line react/prop-types
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
 
       },
       {
         header: 'Prescription Term',
-        accessorKey: 'patient_type',
+        accessorKey: 'prescription_term',
         cell: (props) => <Text>{props.getValue()}</Text>,
 
       },
       {
-        header: 'Action',
-        cell: () => <Button>Add Prescription</Button>,
+        header: 'Quantity',
+        accessorKey: 'quantity',
+        cell: (props) => <Text>{props.getValue()}</Text>,
+
       },
     ],
 
@@ -116,7 +115,7 @@ const PatientPrescription = () => {
           {`${data?.patient?.first_name} ${data?.patient?.middle_name}`}
         </Text>
       </HStack>
-      <DataTable2 columns={columns} />
+      <DataTable2 columns={columns} data={pharmacyRequestData} hasSearch={false} />
 
     </VStack>
   );

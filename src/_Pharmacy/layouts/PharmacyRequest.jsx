@@ -36,13 +36,13 @@ const PharmacyRequest = () => {
   } = useGetAllInternalPharmacyRequestsQuery();
 
   // const { data } = useSelector((state) => state.patients);
-  // console.log(data);
+  console.log(data);
 
   const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient_detail',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
@@ -54,42 +54,21 @@ const PharmacyRequest = () => {
 
       },
       {
-        header: 'Date Requested',
-        accessorKey: 'date_of_request',
-        cell: (props) => (
-          <VStack
-            alignItems="flex-start"
-            spacing={1}
-          >
-            <Text>{moment(props.getValue()).format('LL')}</Text>
-            <Text color="gray.500">{moment(props.row.original.time_of_request, 'hh:mm:ss').format('hh:mm a')}</Text>
-          </VStack>
+        header: 'DOB',
+        cell: (props) => (<Text>{moment(props.row.original.patient?.dob).format('LL')}</Text>
         ),
 
       },
       {
-        header: 'Medication',
+        header: 'PAYMENT DETAILS',
         accessorKey: 'medication',
         enableSorting: false,
         cell: (props) => <Text>{props.getValue()?.medication_name}</Text>,
 
       },
       {
-        header: 'No. of Days',
-        accessorKey: 'number_of_days',
-        enableSorting: false,
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
-        header: 'Cost',
-        accessorKey: 'cost',
-        cell: (props) => <Text>{props.getValue()}</Text>,
-
-      },
-      {
         header: 'Action',
-        cell: () => <Button>more</Button>,
+        cell: (props) => <Button onClick={() => navigate(`/pharmacy-drugs-requested/${props.row.original.patient.patient_id}`)}>Drugs Requested</Button>,
       },
     ],
 
