@@ -94,12 +94,14 @@ const PatientQueue = () => {
           <HStack justifyContent="flex-start" alignItems="flex-start">
             <Button
               variant="outline"
-              color="gray.500"
+              color="gray.700"
+              borderColor="gray.700"
               size="sm"
               onClick={() => navigate({
                 pathname: `/doctor/${props.row.original.appointment_id}`,
                 search: `?patient_id=${props.row.original.patient_id}`,
               })}
+              textTransform="uppercase"
             >
               See Patient
             </Button>

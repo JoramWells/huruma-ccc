@@ -1,28 +1,19 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/prop-types */
 import {
-  Avatar,
   Box, Button, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, Tag, Text, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
-import { FaEllipsisH, FaFileDownload, FaPrint } from 'react-icons/fa';
+import {
+  FaEllipsisV, FaFileDownload, FaPrint,
+} from 'react-icons/fa';
 import { useMemo } from 'react';
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
 import { useGetAppointmentsQuery } from '../../api/appointments.api';
-
-const UserNameAvatar = ({ fullName }) => (
-  <HStack>
-    <Avatar
-      // size="sm"
-      name={fullName}
-      color="white"
-    />
-    <Text>{fullName}</Text>
-  </HStack>
-);
+import UserNameAvatar from '../../components/UserNameAvatar';
 
 const Appointments = () => {
   const { data } = useGetAppointmentsQuery();
@@ -131,9 +122,14 @@ const Appointments = () => {
         accessorKey: 'doctor_id',
         cell: () => (
           <Menu>
-            <MenuButton as={IconButton} rightIcon={<FaEllipsisH />}>
-              Actions
-            </MenuButton>
+            <MenuButton
+              as={IconButton}
+              pr={3}
+              rightIcon={<FaEllipsisV />}
+              bgColor="transparent"
+              color="gray"
+
+            />
             <MenuList>
               <MenuItem>Download</MenuItem>
               <MenuItem>Create a Copy</MenuItem>

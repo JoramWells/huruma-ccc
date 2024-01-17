@@ -55,15 +55,12 @@ import ItemCategory from './layouts/ItemCategory';
 import AddItemCategory from './layouts/AddItemCategory';
 import Radiology from './layouts/Radiology';
 import NursingStation from './layouts/NursingStation';
-import Procedures from './_Procedure/layouts/Procedures';
 import Suppliers from './_Supplier/layouts/Suppliers';
 import AddSuppliers from './layouts/AddSuppliers';
 import SupplierClassification from './_Supplier/layouts/SupplierClassification';
 import AddSupplierClassification from './layouts/AddSupplierClassification';
 import SupplierClassificationDetail from './_Supplier/layouts/SupplierClassificationDetail';
-import ProcedureGroups from './_Procedure/layouts/ProcedureGroups';
-import AddProcedureGroup from './_Procedure/layouts/AddProcedureGroup';
-import AddProcedures from './_Procedure/layouts/AddProcedures';
+
 import SupplierDetail from './_Supplier/layouts/SupplierDetail';
 // import DoctorAdmission from './layouts/DoctorAdmission';
 import DoctorAdmissionBedAllocation from './layouts/DoctorAdmissionBedAllocation';
@@ -73,14 +70,10 @@ import AdmissionBedAllocation from './_Admission/layouts/AdmissionBedAllocation'
 import HospitalStores from './layouts/HospitalStores';
 import WardType from './layouts/WardType';
 import AddWardType from './layouts/AddWardType';
-import PatientQueue from './_Patient/layouts/PatientQueue';
 import ProceduresItems from './_Procedure/layouts/ProceduresItems';
 // import DiseaseMinistry from './layouts/DiseaseMinistry';
 import Charges from './layouts/Charges';
 import ChargesDetail from './layouts/ChargesDetail';
-import MedicationCategory from './_Medication/layouts/MedicationCategory';
-import MedicationPurchases from './_Medication/layouts/MedicationPurchases';
-import MedicationStockTake from './_Medication/layouts/MedicationStockTake';
 import InsuranceMedicationMapping from './_Insurance/layouts/InsuranceMedicationMapping';
 import InsuranceServiceCostMapping from './_Insurance/layouts/InsuranceServiceCostMapping';
 import ConsultationTypes from './layouts/ConsultationTypes';
@@ -97,27 +90,49 @@ import AddEmployeeRecords from './layouts/AddEmployeePayrollRecords';
 import PayrollEmployeeLoanDetails from './_Payroll/layouts/PayrollEmployeeLoanDetails';
 import PayrollEmployeeBenefitsFile from './_Payroll/layouts/PayrollEmployeeBenefitsFile';
 import PayrollEmployeeEarningRecords from './_Payroll/layouts/PayrollEmployeeEarningRecords';
-import Doctor from './_Doctor/layouts/Doctor';
-import PatientsTriaged from './_Patient/layouts/PatientsTriaged';
-import PatientVisits from './_Patient/layouts/PatientVisits';
-import PatientQueueNursingStation from './_Patient/layouts/PatientQueueNursingStation';
-import PatientDepartmentalStatus from './_Patient/layouts/PatientDepartmentalStatus';
-import PatientPrescription from './_Patient/layouts/PatientPrescription';
-import AddPatient from './_Patient/layouts/AddPatient';
 import Medication from './_Medication/layouts/Medication';
-import PersonalAccountChargeDetail from './_Charges/layouts/PersonalAccountChargeDetail';
-import PersonalAccountCharges from './_Charges/layouts/PersonalAccountCharges';
 import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
-import WalkInPatientQueue from './_Pharmacy/layouts/WalkInPatientQueue';
-import AddPharmacyRequest from './_Pharmacy/layouts/AddPharmacyRequest';
 import AddPrescription from './_Medication/layouts/AddPrescription';
-import PharmacyDrugsRequested from './_Pharmacy/layouts/PharmacyDrugsRequested';
-import OTCPatientQueue from './_Pharmacy/layouts/OTCPatientQueue';
+import PatientReport from './_Patient/layouts/PatientReport';
 
+// Medication
+const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
+const MedicationPurchases = lazy(() => import('./_Medication/layouts/MedicationPurchases'));
+const MedicationStockTake = lazy(() => import('./_Medication/layouts/MedicationStockTake'));
+
+// Charges
+const PersonalAccountCharges = lazy(() => import('./_Charges/layouts/PersonalAccountCharges'));
+const PersonalAccountChargeDetail = lazy(() => import('./_Charges/layouts/PersonalAccountChargeDetail'));
+
+// Procedures
+const AddProcedureGroup = lazy(() => import('./_Procedure/layouts/AddProcedureGroup'));
+const AddProcedures = lazy(() => import('./_Procedure/layouts/AddProcedures'));
+const Procedures = lazy(() => import('./_Procedure/layouts/Procedures'));
+const ProcedureGroups = lazy(() => import('./_Procedure/layouts/ProcedureGroups'));
+
+// Doctor
+const Doctor = lazy(() => import('./_Doctor/layouts/Doctor'));
+
+// Patient
+const AddPatient = lazy(() => import('./_Patient/layouts/AddPatient'));
+const PatientPrescription = lazy(() => import('./_Patient/layouts/PatientPrescription'));
 const Patients = lazy(() => import('./_Patient/layouts/Patients'));
+const PatientVisits = lazy(() => import('./_Patient/layouts/PatientVisits'));
+const PatientQueueNursingStation = lazy(() => import('./_Patient/layouts/PatientQueueNursingStation'));
+const PatientDepartmentalStatus = lazy(() => import('./_Patient/layouts/PatientDepartmentalStatus'));
+const PatientsTriaged = lazy(() => import('./_Patient/layouts/PatientsTriaged'));
+const PatientQueue = lazy(() => import('./_Patient/layouts/PatientQueue'));
+
+// Pharmacy
+const AddPharmacyRequest = lazy(() => import('./_Pharmacy/layouts/AddPharmacyRequest'));
+const OTCPatientQueue = lazy(() => import('./_Pharmacy/layouts/OTCPatientQueue'));
+const WalkInPatientQueue = lazy(() => import('./_Pharmacy/layouts/WalkInPatientQueue'));
+const PharmacyDrugsRequested = lazy(() => import('./_Pharmacy/layouts/PharmacyDrugsRequested'));
+
 const Appointments = lazy(() => import('./_Appointment/layouts/Appointments'));
 
+// Lab
 const InternalLabRequest = lazy(() => import('./_Lab/layouts/InternalLabRequest'));
 const InternalLabRequestDetail = lazy(() => import('./_Lab/layouts/InternalLabRequestDetail'));
 const LabTemplates = lazy(() => import('./_Lab/layouts/LabTemplates'));
@@ -187,7 +202,7 @@ function App() {
               color="blue.500"
               size="xl"
             />
-            <Text color="gray.500">Please wait...</Text>
+            <Text color="blue.500">Please wait...</Text>
           </VStack>
 )}
         >
@@ -224,13 +239,17 @@ function App() {
             <Route path="/insurance-medication-mapping" element={<InsuranceMedicationMapping />} />
             <Route path="/insurance-service-cost-mapping" element={<InsuranceServiceCostMapping />} />
 
+            {/* patient */}
+
             <Route path="/patients" element={<Patients />} />
             <Route path="/patient-queue" element={<PatientQueue />} />
             <Route path="/patient-departmental-status" element={<PatientDepartmentalStatus />} />
             <Route path="/add-patient" element={<AddPatient />} />
             <Route path="/patient-prescription/:id" element={<PatientPrescription />} />
             <Route path="/patient-detail/:id" element={<PatientDetail />} />
+            <Route path="/patient-detail/:id" element={<PatientDetail />} />
             <Route path="/add-prescription/:id" element={<AddPrescription />} />
+            <Route path="/patient-reports" element={<PatientReport />} />
 
             <Route path="/maternity" element={<MaternityServices />} />
             <Route path="/maternity-profile-detail/:id" element={<MaternityProfileDetail />} />

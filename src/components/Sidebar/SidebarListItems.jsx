@@ -80,6 +80,7 @@ const SidebarListItems = () => {
           || pathname.includes('/patient-prescription')
           || pathname.includes('/add-prescription')
           || pathname.includes('/patient-departmental-status')
+          || pathname.includes('/patient-reports')
           || pathname.includes('/appointment-detail')}
         onClick={onToggle}
         text="Appointments"
@@ -90,6 +91,7 @@ const SidebarListItems = () => {
           { id: nanoid(), title: 'Patient Departmental Status', link: '/patient-departmental-status' },
           { id: nanoid(), title: 'Patient Queue', link: '/patient-queue' },
           { id: nanoid(), title: 'Patient Visits', link: '/patient-visits' },
+          { id: nanoid(), title: 'Patient Reports', link: '/patient-reports' },
         ]}
         icon={<FaCalendarTimes size={20} />}
       />
@@ -206,7 +208,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Admitted Patients', link: '/admission' },
           { id: nanoid(), title: 'Out-Patient', link: '/out-patient' || pathname.includes('/add-patient') },
-          { id: nanoid(), title: 'Reports', link: '/all-reports' },
+          { id: nanoid(), title: 'Patient Reports', link: '/patient-reports' },
         ]}
         icon={<FaHospitalAlt size={20} />}
       />

@@ -23,9 +23,10 @@ const SidebarItemLink = ({
       <>
         <HStack
           justifyContent="space-between"
-          fontWeight={selected && 'bold'}
+          fontWeight="bold"
           color={selected ? 'white' : 'gray.400'}
           bgGradient={selected && 'linear(to-r, blue.600, blue.900)'}
+          textTransform="uppercase"
           p={2}
           mt={3}
           _hover={{
@@ -41,7 +42,7 @@ const SidebarItemLink = ({
         >
           <HStack>
             {icon}
-            <Link to={link} style={{ fontSize: '16px' }}>
+            <Link to={link} style={{ fontSize: '14px' }}>
               {text}
             </Link>
           </HStack>
