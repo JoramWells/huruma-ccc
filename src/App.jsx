@@ -95,6 +95,7 @@ import Disease from './_Diseases/layouts/Disease';
 import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
 import AddPrescription from './_Medication/layouts/AddPrescription';
 import PatientReport from './_Patient/layouts/PatientReport';
+import AddPatientProcedure from './_Procedure/layouts/AddPatientProcedure';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -250,6 +251,7 @@ function App() {
             <Route path="/patient-detail/:id" element={<PatientDetail />} />
             <Route path="/add-prescription/:id" element={<AddPrescription />} />
             <Route path="/patient-reports" element={<PatientReport />} />
+            <Route path="/add-patient-procedure/:id" element={<AddPatientProcedure />} />
 
             <Route path="/maternity" element={<MaternityServices />} />
             <Route path="/maternity-profile-detail/:id" element={<MaternityProfileDetail />} />

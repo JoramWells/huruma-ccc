@@ -210,6 +210,31 @@ const Doctor = () => {
             </TabPanel>
             <TabPanel bgColor="white">
 
+              {/* Procedure Header */}
+              <HStack
+                w="full"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+
+                <Text
+                  fontSize="xl"
+                  color="gray.700"
+                >
+                  Patient Procedures
+
+                </Text>
+                <Button
+                  colorScheme="blue"
+                  leftIcon={<FaPlus />}
+                  variant="outline"
+                  onClick={() => navigate(`/add-patient-procedure/${id}`)}
+                >
+                  Add New
+
+                </Button>
+              </HStack>
+
               <ProceduresTab />
               {/*  */}
             </TabPanel>
