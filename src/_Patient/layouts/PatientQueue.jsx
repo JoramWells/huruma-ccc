@@ -76,7 +76,7 @@ const PatientQueue = () => {
             {!props.row.original.temperature
               ? (
                 <Button
-                  variant="ghost"
+                  variant="outline"
                   colorScheme="orange"
                   size="sm"
                   onClick={() => navigate(`/add-vitals/${props.row.original.patient_id}`)}
@@ -92,15 +92,17 @@ const PatientQueue = () => {
         header: 'Action',
         cell: (props) => (
           <HStack justifyContent="flex-start" alignItems="flex-start">
-            {!props.row.original.consultation_type
-              && <IconButton><FaHandshake /></IconButton>}
-            <IconButton onClick={() => navigate({
-              pathname: `/doctor/${props.row.original.appointment_id}`,
-              search: `?patient_id=${props.row.original.patient_id}`,
-            })}
+            <Button
+              variant="outline"
+              color="gray.500"
+              size="sm"
+              onClick={() => navigate({
+                pathname: `/doctor/${props.row.original.appointment_id}`,
+                search: `?patient_id=${props.row.original.patient_id}`,
+              })}
             >
-              <FaUserNurse />
-            </IconButton>
+              See Patient
+            </Button>
           </HStack>
         ),
       },

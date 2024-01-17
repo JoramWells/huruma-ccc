@@ -91,8 +91,8 @@ SidebarItemLink.propTypes = {
 SidebarItemLink.defaultProps = {
   icon: <FaUser />,
   selected: false,
-  text: '',
-  link: '/items',
+  text: 'dashboard',
+  link: '/',
   itemList: [],
 };
 

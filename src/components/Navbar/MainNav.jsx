@@ -20,8 +20,8 @@ const MainNav = () => (
     justifyContent="space-between"
     borderBottom="1px"
     borderColor="gray.200"
-    // boxShadow="lg"
-    // bgColor="blue.900"
+  // boxShadow="lg"
+  // bgColor="blue.900"
   >
     <Text
       fontSize="3xl"
@@ -31,31 +31,33 @@ const MainNav = () => (
       Mother Angela
     </Text>
 
-    <IconButton>
-      <FaBell />
+    <HStack>
+      <IconButton>
+        <FaBell />
 
-    </IconButton>
+      </IconButton>
 
-    <Menu>
-      <MenuButton>
-        <Box
-          p={2}
-          backgroundColor="gray"
-          rounded="full"
-          _focus={{
-            backgroundColor: 'teal',
-          }}
-        >
-          <FaUser />
-        </Box>
-      </MenuButton>
-      <MenuList>
-        <MenuItem>
-          <Link to="/login">Login</Link>
-        </MenuItem>
-        <MenuItem>Logout</MenuItem>
-      </MenuList>
-    </Menu>
+      <Menu>
+        <MenuButton>
+          <Box
+            p={2}
+            backgroundColor="gray"
+            rounded="full"
+            _focus={{
+              backgroundColor: 'teal',
+            }}
+          >
+            <FaUser />
+          </Box>
+        </MenuButton>
+        <MenuList>
+          <MenuItem>
+            <Link to="/login">Login</Link>
+          </MenuItem>
+          <MenuItem>Logout</MenuItem>
+        </MenuList>
+      </Menu>
+    </HStack>
 
   </HStack>
 );
