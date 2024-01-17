@@ -21,6 +21,7 @@ import {
 
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
+import { FaPlus } from 'react-icons/fa';
 import { useGetPatientQuery } from '../../api/patients.api';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import TableSelectRow from '../components/TableSelectRow';
@@ -30,6 +31,7 @@ import DiagnosisTab from '../components/DiagnosisTab';
 import PharmacyTab from '../components/PharmacyTab';
 import { useGetAppointmentQuery } from '../../api/appointments.api';
 import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
+import PharmacyRequestsCard from '../components/PharmacyRequestsCard';
 
 const tabList = [
   { id: nanoid(), text: 'Allergies' },
@@ -126,6 +128,7 @@ const Doctor = () => {
                 rounded="full"
                 bgColor="gray.50"
                 m={1}
+                fontSize="sm"
                 _selected={{
                   // bgGradient: 'linear(to-r,blue.500, blue.400)',
                   // color: 'white',
@@ -217,31 +220,34 @@ const Doctor = () => {
 
               <HStack
                 w="full"
-                justifyContent="flex-end"
+                justifyContent="space-between"
+                alignItems="center"
+                color="gray.700"
               >
-                <Box
-                  bgColor="blue.500"
-                  p={1}
-                  rounded="full"
+                <Text
+                  fontSize="xl"
                 >
-                  <Button
-                    bgColor="blue.500"
-                    color="white"
-                    border="2px"
-                    borderColor="white"
-                    _hover={{
-                      bgColor: 'blue.500',
-                    }}
-                    rounded="full"
-                    onClick={() => navigate({
-                      pathname: `/add-pharmacy-request/${id}`,
-                      search: `?patient_id=${data?.patient_id}`,
-                    })}
-                  >
-                    New Request
+                  Pharmacy Requests
+                </Text>
 
-                  </Button>
-                </Box>
+                <Button
+                  colorScheme="blue"
+                  color="white"
+                  border="2px"
+                  borderColor="white"
+                  _hover={{
+                    bgColor: 'blue.500',
+                  }}
+                  leftIcon={<FaPlus />}
+                  rounded="lg"
+                  onClick={() => navigate({
+                    pathname: `/add-pharmacy-request/${id}`,
+                    search: `?patient_id=${data?.patient_id}`,
+                  })}
+                >
+                  Add New
+
+                </Button>
               </HStack>
 
               <VStack
@@ -264,152 +270,10 @@ const Doctor = () => {
                       </Text>
                     </HStack>
                     {pharmacyRequestData?.map((item) => (
-                      <HStack
-                        border="1px"
-                        borderColor="gray.200"
-                        rounded="xl"
-                        w="2xl"
-                        key={nanoid()}
-                        p={3}
-                      >
-                        <VStack alignItems="flex-start" w="full">
-                          <Accordion
-                            allowToggle
-                            w="100%"
-                          >
-                            <AccordionItem
-                              border={0}
-                            >
-                              <AccordionButton justifyContent="space-between">
-                                <Text
-                                  fontWeight="bold"
-                                  color="gray.600"
-                                >
-                                  {item.medication?.medication_name}
-
-                                </Text>
-                                <AccordionIcon />
-                              </AccordionButton>
-
-                              <AccordionPanel>
-                                <HStack
-                                  w="full"
-                                  justifyContent="space-between"
-                                >
-                                  <Text color="gray.500">Quantity</Text>
-                                  <Text>{item.quantity}</Text>
-
-                                </HStack>
-
-                                {/* term */}
-                                <HStack
-                                  w="full"
-                                  justifyContent="space-between"
-                                  mt={1}
-                                >
-                                  <Text color="gray.500">Prescription Term</Text>
-                                  <Text>{item.prescription_term}</Text>
-
-                                </HStack>
-
-                                {/* days */}
-                                <HStack
-                                  w="full"
-                                  justifyContent="space-between"
-                                  mt={1}
-                                >
-                                  <Text color="gray.500">No. of days</Text>
-                                  <Text>{item.number_of_days}</Text>
-
-                                </HStack>
-                              </AccordionPanel>
-                            </AccordionItem>
-
-                          </Accordion>
-                          <VStack
-                            alignItems="flex-start"
-                            pl={4}
-                            w="full"
-                            pr={4}
-                          >
-
-                            <HStack
-                              w="full"
-                              justifyContent="space-between"
-                            >
-                              <Text
-                                color="gray.500"
-                                fontWeight="bold"
-                              >
-                                Cost
-                                {' '}
-                              </Text>
-                              <Text
-                                fontSize="lg"
-                                fontWeight="bold"
-                                color="gray.600"
-                              >
-                                KSH
-                                {' '}
-                                {item.cost}
-                                {' '}
-                                /=
-
-                              </Text>
-                            </HStack>
-
-                            <HStack
-                              w="full"
-                              justifyContent="space-between"
-                            >
-                              <Text
-                                color="gray.500"
-                                fontWeight="bold"
-                              >
-                                Discharged
-                                {' '}
-                              </Text>
-                              {item.discharge_drug === 'YES'
-                                ? (
-                                  <Tag
-                                    colorScheme="green"
-                                  >
-                                    YES
-                                  </Tag>
-                                ) : (
-                                  <Tag
-                                    colorScheme="red"
-                                  >
-                                    NO
-                                  </Tag>
-                                )}
-                            </HStack>
-
-                            <HStack w="full" justifyContent="space-between">
-                              <Text
-                                color="gray.500"
-                                fontWeight="bold"
-                              >
-                                Paid
-                              </Text>
-
-                              {item.pay_status === 1 ? (
-                                <Tag
-                                  colorScheme="green"
-                                >
-                                  PAID
-                                </Tag>
-                              ) : (
-                                <Tag
-                                  colorScheme="red"
-                                >
-                                  UNPAID
-                                </Tag>
-                              )}
-                            </HStack>
-                          </VStack>
-                        </VStack>
-                      </HStack>
+                      <PharmacyRequestsCard
+                        item={item}
+                        key={item.id}
+                      />
                     ))}
                   </>
                 )

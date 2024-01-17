@@ -90,7 +90,7 @@ const PatientDepartmentalStatus = () => {
             // borderColor="red.200"
             p={2}
           >
-            YET TO BE SEE
+            YET TO BE SEEN
           </Tag>
         ),
 
@@ -108,9 +108,21 @@ const PatientDepartmentalStatus = () => {
 
       },
       {
-        header: 'Pharmacy',
+        header: 'Pharmacy Request',
         // accessorKey: 'appointment_date',
-        cell: (props) => <Text>{props.getValue()}</Text>,
+        cell: (props) => (
+          <Tag
+            bgColor="red.50"
+            color="red.400"
+            fontWeight="bold"
+            rounded="lg"
+          // border="1px"
+          // borderColor="red.200"
+            p={2}
+          >
+            PENDING
+          </Tag>
+        ),
 
       },
     ],

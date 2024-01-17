@@ -56,6 +56,7 @@ const DataTable2 = ({
                     key={header.id}
                     w={header.getSize()}
                     position="relative"
+                    whiteSpace="break-spaces"
                   >
                     <HStack>
                       <Text fontSize="medium">
