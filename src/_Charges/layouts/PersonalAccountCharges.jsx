@@ -4,11 +4,11 @@
 /* eslint-disable react/prop-types */
 import {
   Avatar,
-  Box, Button, HStack, IconButton, Text, VStack,
+  Box, Button, HStack, IconButton, Text, Tooltip, VStack,
 } from '@chakra-ui/react';
 // import axios from "axios"
 import {
-  FaBoxOpen, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
+  FaBoxOpen, FaEllipsisV, FaFileDownload, FaHandshake, FaPrint, FaUserNurse,
 } from 'react-icons/fa';
 import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -56,17 +56,20 @@ const PersonalAccountCharges = () => {
         header: 'Date',
         accessorKey: 'date_of_charge',
         cell: (props) => (
-          <VStack alignItems="flex-start">
-            <Text>{moment(props.getValue()).format('LL')}</Text>
-            <Text color="gray.500">{moment(props.row.original.time_of_charge, 'HH:mm:ss').format('hh:mm A')}</Text>
-          </VStack>
+          <Text>{moment(props.getValue()).format('LL')}</Text>
         ),
 
       },
       {
-        header: 'Charge Amount',
+        header: 'Transactions',
+        accessorKey: 'patient_count',
         enableSorting: true,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
+        cell: (props) => (
+          <Text>
+            {props.getValue() ? parseInt(props.getValue(), 10)?.toLocaleString()
+              : parseInt(props.row.original.amount, 10)?.toLocaleString()}
+          </Text>
+        ),
 
       },
       {
@@ -82,6 +85,24 @@ const PersonalAccountCharges = () => {
         cell: (props) => <Text>0</Text>,
 
       },
+      {
+        header: 'Action',
+        cell: (props) => (
+          <Tooltip
+            label="View More"
+            hasArrow
+            rounded="full"
+          >
+            <IconButton
+              color="gray.500"
+              onClick={() => { navigate(`/personal-account-charge-detail/${props.row.original.patient_id}`); }}
+            >
+              <FaEllipsisV />
+            </IconButton>
+          </Tooltip>
+        ),
+
+      },
     ],
 
     [navigate],
@@ -93,7 +114,6 @@ const PersonalAccountCharges = () => {
   }, [data]);
 
   const filteredData = filterByDate();
-  console.log(filteredData, 'hy');
 
   return (
     <VStack

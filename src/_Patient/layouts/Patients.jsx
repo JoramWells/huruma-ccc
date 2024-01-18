@@ -59,7 +59,7 @@ const outPatientList = [
 const UserNameAvatar = ({ fullName }) => (
   <HStack>
     <Avatar
-      // size="sm"
+      size="sm"
       name={fullName}
       color="white"
     />
@@ -163,10 +163,10 @@ const Patients = () => {
           rounded="lg"
           mt={2}
         >
-          <Text fontSize="xl" fontWeight="bold">
+          <Text fontSize="14px" fontWeight="bold">
             Patients
             <span style={{
-              fontSize: '18px',
+              // fontSize: '14px',
               // fontWeight: 'normal',
               color: 'gray',
             }}

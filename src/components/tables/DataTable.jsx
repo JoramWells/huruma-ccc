@@ -59,7 +59,7 @@ const DataTable2 = ({
                     whiteSpace="break-spaces"
                   >
                     <HStack>
-                      <Text fontSize="medium">
+                      <Text fontSize="14px">
                         {header.column.columnDef.header}
                       </Text>
                       {header.column.getCanSort() && (
@@ -88,7 +88,10 @@ const DataTable2 = ({
             {table.getRowModel().rows.map((row) => (
               <Tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <Td key={cell.id}>
+                  <Td
+                    key={cell.id}
+                    fontSize="14px"
+                  >
                     {
                       flexRender(
                         cell.column.columnDef.cell,
@@ -113,11 +116,12 @@ const DataTable2 = ({
           rounded="lg"
           fontWeight="semibold"
           color="gray.600"
-          border="1px"
-          borderColor="gray.200"
-          boxShadow="lg"
+          // border="1px"
+          // borderColor="gray.200"
+          // boxShadow="lg"
+          bgColor="gray.50"
         >
-          <HStack>
+          <HStack fontSize="12px">
             <Text>
               Page
               {' '}

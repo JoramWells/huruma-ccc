@@ -96,6 +96,7 @@ import DiseaseMinistry from './_Diseases/layouts/DiseaseMinistry';
 import AddPrescription from './_Medication/layouts/AddPrescription';
 import PatientReport from './_Patient/layouts/PatientReport';
 import AddPatientProcedure from './_Procedure/layouts/AddPatientProcedure';
+import AddLabRequest from './_Lab/layouts/AddLabRequest';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -266,9 +267,13 @@ function App() {
             <Route path="/admission" element={<Admission />} />
             <Route path="/add-admission" element={<AddAdmission />} />
 
+            {/* lab */}
             <Route path="/lab-tests-summary-sub-section" element={<LabTestsSummarySubSection />} />
             <Route path="/lab-templates" element={<LabTemplates />} />
             <Route path="/add-lab-test" element={<AddLabTest />} />
+            <Route path="/add-lab-request/:id" element={<AddLabRequest />} />
+            <Route path="/internal-lab-request" element={<InternalLabRequest />} />
+            <Route path="/internal-lab-request-detail/:id" element={<InternalLabRequestDetail />} />
 
             <Route path="/admission-type" element={<AdmissionType />} />
             <Route path="/admission-detail" element={<AdmissionDetail />} />
@@ -281,9 +286,6 @@ function App() {
 
             <Route path="/requisitions" element={<Requisitions />} />
             <Route path="/add-requisitions" element={<AddRequisitions />} />
-
-            <Route path="/internal-lab-request" element={<InternalLabRequest />} />
-            <Route path="/internal-lab-request-detail/:id" element={<InternalLabRequestDetail />} />
 
             <Route path="/physiotherapy" element={<Physiotherapy />} />
             <Route path="add-physiotherapy" element={<AddPhysiotherapyItems />} />

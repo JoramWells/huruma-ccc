@@ -13,7 +13,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import PropTypes from 'prop-types';
 
 import BreadCrumbNav from '../../components/BreadCrumbNav';
-import { useGetPersonalAccountChargeQuery } from '../../api/personalAccountCharges.api';
+import { useGetUserPersonalAccountDetailQuery } from '../../api/personalAccountCharges.api';
 
 const PatientCard = ({
   text, icon, onClick, selected,
@@ -64,7 +64,7 @@ const PersonalAccountChargeDetail = () => {
   const stepSearch = searchParams.get('step');
   const dispatch = useDispatch();
 
-  const { data, isLoading } = useGetPersonalAccountChargeQuery(id);
+  const { data, isLoading } = useGetUserPersonalAccountDetailQuery(id);
 
   const breadCrumbData = [
     {
@@ -87,7 +87,7 @@ const PersonalAccountChargeDetail = () => {
       search: `?step=${step}`,
     });
   }, [setSideItem, navigate, pathname]);
-  console.log(data);
+  console.log(data, 'dtx');
 
   return (
     <VStack

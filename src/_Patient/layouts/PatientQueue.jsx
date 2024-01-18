@@ -148,10 +148,13 @@ const PatientQueue = () => {
           rounded="lg"
           mt={2}
         >
-          <Text fontSize="xl" fontWeight="bold">
+          <Text
+            // fontSize="xl"
+            fontWeight="bold"
+          >
             Patients
             <span style={{
-              fontSize: '18px',
+              // fontSize: '18px',
               // fontWeight: 'normal',
               color: 'gray',
             }}

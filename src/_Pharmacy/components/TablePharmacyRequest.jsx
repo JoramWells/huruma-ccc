@@ -63,7 +63,7 @@ const TablePharmacyRequest = ({ data, column }) => {
             <Tr key={headerEl.id}>
               {headerEl.headers.map((columnEl) => (
                 <Th
-                  fontSize="16px"
+                  fontSize="14px"
                   key={columnEl.id}
                   colSpan={columnEl.colSpan}
                   whiteSpace="normal"
@@ -83,7 +83,10 @@ const TablePharmacyRequest = ({ data, column }) => {
           {tableInstance.getRowModel().rows.map((rowEl) => (
             <Tr key={rowEl.id}>
               {rowEl.getVisibleCells().map((cellEl) => (
-                <Td key={cellEl.id}>
+                <Td
+                  key={cellEl.id}
+                  fontSize="14px"
+                >
                   {flexRender(
                     cellEl.column.columnDef.cell,
                     cellEl.getContext(),

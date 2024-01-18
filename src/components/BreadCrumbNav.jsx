@@ -19,7 +19,7 @@ const BreadCrumbNav = ({ link, breadCrumbData, addBtn }) => {
         p={3}
         justifyContent="space-between"
         rounded="lg"
-        boxShadow="sm"
+        // boxShadow="sm"
       >
         <Breadcrumb separator={(
           <FaChevronRight
@@ -29,8 +29,11 @@ const BreadCrumbNav = ({ link, breadCrumbData, addBtn }) => {
               )}
         >
           <BreadcrumbItem>
-            <IconButton onClick={() => navigate('/')}>
-              <FaHome />
+            <IconButton
+              onClick={() => navigate('/')}
+              size="sm"
+            >
+              <FaHome size={14} />
             </IconButton>
           </BreadcrumbItem>
           {breadCrumbData.map((item) => (
@@ -40,7 +43,7 @@ const BreadCrumbNav = ({ link, breadCrumbData, addBtn }) => {
               isCurrentPage={item.isCurrentPage}
             >
               <BreadcrumbLink
-                fontSize="md"
+                fontSize="14px"
                 color={item.isCurrentPage && 'blue.500'}
                 bgColor={item.isCurrentPage && 'blue.50'}
                 p={2}
@@ -56,7 +59,7 @@ const BreadCrumbNav = ({ link, breadCrumbData, addBtn }) => {
         {addBtn && (
         <Button
           colorScheme="green"
-          size="md"
+          size="sm"
           boxShadow="lg"
           onClick={() => navigate(link)}
           leftIcon={<FaPlus />}

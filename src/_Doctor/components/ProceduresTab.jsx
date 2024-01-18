@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 // import { useMemo } from 'react';
-import { HStack, Text } from '@chakra-ui/react';
+import { HStack, Text, VStack } from '@chakra-ui/react';
+import { useSearchParams } from 'react-router-dom';
 import { useGetProceduresQuery } from '../api/procedureDetails.api';
 import TableSelectRow from './TableSelectRow';
 import IndeterminateCheckbox from './IndeterminateCheckbox';
+import { useGetUserPersonalAccountDetailQuery } from '../../api/personalAccountCharges.api';
 
 // const columnHelper = createColumnHelper();
 
@@ -45,40 +48,31 @@ const column = [
 ];
 
 const ProceduresTab = () => {
-  const { data } = useGetProceduresQuery();
+  const [searchParams] = useSearchParams();
+  const patientID = searchParams.get('patient_id');
+  const { data } = useGetUserPersonalAccountDetailQuery(patientID);
+  console.log(data);
   return (
-    <>
-      <HStack w="100%" p={2} justifyContent="space-between">
-        <HStack w="1/2" flex={1}>
-          <Text
-            fontSize="xl"
-            fontWeight="semibold"
-            color="gray.700"
-          >
-            Selected Procedures
-
-          </Text>
-
-        </HStack>
-        <HStack w="md" flex={1} justifyContent="space-between">
-          <Text
-            fontSize="xl"
-            fontWeight="semibold"
-            color="gray.700"
-          >
-            Recent Procedures
-
-          </Text>
-          <Text color="gray.500">
-            View More
-          </Text>
-        </HStack>
-      </HStack>
-      <TableSelectRow
-        data={data}
-        column={column}
-      />
-    </>
+    <VStack
+      w="full"
+      p={2}
+      justifyContent="center"
+      alignItems="center"
+    >
+      {data?.map((item) => (
+        <VStack
+          key={item.personal_charge_id}
+          alignItems="flex-start"
+          bgColor="gray.100"
+          p={1}
+          rounded="lg"
+          w="50%"
+        >
+          <Text>{item.service_desc}</Text>
+          <Text>{item.amount }</Text>
+        </VStack>
+      ))}
+    </VStack>
   );
 };
 

@@ -1,219 +1,225 @@
+/* eslint-disable camelcase */
 import {
-  Button, FormControl, FormLabel, HStack, Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
+  Box,
+  Button, HStack,
+  Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
-import React from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import DiagnosisTab from './DiagnosisTab';
-import VitalSigns from './VitalSigns';
-import ProceduresTab from './ProceduresTab';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import PharmacyRequestsCard from './PharmacyRequestsCard';
+import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
+
+const tabList = [
+  { id: nanoid(), text: 'Radiology' },
+  { id: nanoid(), text: 'Lab' },
+  { id: nanoid(), text: 'Pharmacy' },
+  { id: nanoid(), text: 'Physiotherapy' },
+
+];
 
 const InternalRequests = () => {
   const navigate = useNavigate();
-  const data = [];
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+
+  const patient_id = searchParams.get('patient_id');
+
+  const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
+
   return (
-    <Tabs
-                  // isFitted
-      bgColor="white"
-      variant="unstyled"
-      alignItems="flex-start"
+    <VStack
+      // bgColor="green"
+      p={3}
+      w="full"
     >
-      <TabList
-        color="gray.500"
-        p={3}
+      <Box
+        width="45%"
+        rounded="lg"
+        // border="1px"
+        // borderColor="gray.200"
       >
-        {tabList.map((item) => (
-          <Tab
-            key={item.id}
-            fontWeight="semibold"
-            rounded="full"
-            bgColor="gray.50"
-            m={1}
-            fontSize="sm"
-            _selected={{
-              // bgGradient: 'linear(to-r,blue.500, blue.400)',
-              // color: 'white',
-              border: '2px',
-              color: 'white',
-              bgColor: 'gray.700',
-            }}
+        <Tabs
+          isFitted
+          // bgColor="white"
+          variant="unstyled"
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          <TabList
+            color="gray.500"
+            p={3}
           >
-            {item.text}
-
-          </Tab>
-
-        ))}
-
-      </TabList>
-
-      <TabPanels>
-        <TabPanel>
-          <FormControl>
-            <VStack>
-              <HStack
-                w="lg"
+            {tabList.map((item) => (
+              <Tab
+                key={item.id}
+                fontWeight="semibold"
+                rounded="full"
+                bgColor="gray.50"
+                mt={2}
+                mb={2}
+                m={1}
+                fontSize="sm"
+                _selected={{
+                  // bgGradient: 'linear(to-r,blue.500, blue.400)',
+                  color: 'white',
+                  // border: '2px',
+                  // borderColor: 'gray.500',
+                  // color: 'blue.500',
+                  bgColor: 'blue.700',
+                }}
               >
-                <FormLabel>Allergies</FormLabel>
+                {item.text}
 
-              </HStack>
-              <HStack
-                w="lg"
-                border="1px"
-                p={4}
-                rounded="xl"
-                boxShadow="xl"
+              </Tab>
+
+            ))}
+
+          </TabList>
+
+          <TabPanels>
+
+            <TabPanel>
+              <p>three!</p>
+            </TabPanel>
+
+            <TabPanel>
+              <VStack
+                justifyContent="center"
+                alignItems="center"
+              // spacing={}
               >
-                <Text
-                  fontWeight="bold"
-                  color="gray.600"
-                >
-                  Patient Allergies 1
-
-                </Text>
-              </HStack>
-
-              {/*  */}
-              <HStack
-                w="lg"
-                border="1px"
-                p={4}
-                rounded="xl"
-                boxShadow="xl"
-              >
-                <Text
-                  fontWeight="bold"
-                  color="gray.600"
-                >
-                  Patient Allergies 2
-
-                </Text>
-              </HStack>
-            </VStack>
-          </FormControl>
-          <HStack
-            w="90"
-            justifyContent="flex-end"
-          >
-            <Button mt={4}>Save Allergy</Button>
-
-          </HStack>
-        </TabPanel>
-
-        {/* diagnosis */}
-        <TabPanel>
-          <DiagnosisTab />
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
-        </TabPanel>
-        <TabPanel>
-          <VitalSigns data={data} />
-        </TabPanel>
-        <TabPanel bgColor="white">
-
-          {/* Procedure Header */}
-          <HStack
-            w="full"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-
-            <Text
-              fontSize="xl"
-              color="gray.700"
-            >
-              Patient Procedures
-
-            </Text>
-            <Button
-              colorScheme="blue"
-              leftIcon={<FaPlus />}
-              variant="outline"
-              onClick={() => navigate(`/add-patient-procedure/${id}`)}
-            >
-              Add New
-
-            </Button>
-          </HStack>
-
-          <ProceduresTab />
-          {/*  */}
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
-        </TabPanel>
-        <TabPanel>
-
-          <HStack
-            w="full"
-            justifyContent="space-between"
-            alignItems="center"
-            color="gray.700"
-          >
-            <Text
-              fontSize="xl"
-            >
-              Pharmacy Requests
-            </Text>
-
-            <Button
-              colorScheme="blue"
-              color="white"
-              border="2px"
-              borderColor="white"
-              _hover={{
-                bgColor: 'blue.500',
-              }}
-              leftIcon={<FaPlus />}
-              rounded="lg"
-              onClick={() => navigate({
-                pathname: `/add-pharmacy-request/${id}`,
-                search: `?patient_id=${data?.patient_id}`,
-              })}
-            >
-              Add New
-
-            </Button>
-          </HStack>
-
-          <VStack
-            justifyContent="center"
-            alignItems="center"
-          >
-            {pharmacyRequestData?.length > 0 ? (
-              <>
                 <HStack
-                  width="2xl"
-                  alignItems="flex-start"
+                  w="full"
+                  justifyContent="space-between"
+                  alignItems="center"
                 >
                   <Text
+                    color="gray.700"
                     fontWeight="bold"
                   >
-                    Recent Pharmacy Request
-
+                    Lab Requests
                   </Text>
+                  <Button
+                    leftIcon={<FaPlus />}
+                    variant="outline"
+                    colorScheme="blue"
+                    size="sm"
+                    onClick={() => navigate({
+                      pathname: `/add-lab-request/${id}`,
+                      search: `?patient_id=${patient_id}`,
+                    })}
+                  >
+                    New
+
+                  </Button>
                 </HStack>
-                {pharmacyRequestData?.map((item) => (
-                  <PharmacyRequestsCard
-                    item={item}
-                    key={item.id}
-                  />
-                ))}
-              </>
-            )
-              : (
-                <VStack>
-                  <Text>No Recent Pharmacy Requests</Text>
-                </VStack>
-              )}
+              </VStack>
+            </TabPanel>
+            <TabPanel>
+              {/* <Button
+                  colorScheme="blue"
+                  color="white"
+                  border="2px"
+                  borderColor="white"
+                  _hover={{
+                    bgColor: 'blue.500',
+                  }}
+                  leftIcon={<FaPlus />}
+                  rounded="lg"
+                  onClick={() => navigate({
+                    pathname: `/add-pharmacy-request/${id}`,
+                    search: `?patient_id=${data?.patient_id}`,
+                  })}
+                >
+                  Add New
 
-          </VStack>
+                </Button> */}
 
-          {/* pharmacy */}
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+              <VStack
+                justifyContent="center"
+                alignItems="center"
+                // spacing={}
+              >
+                <HStack
+                  w="full"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text
+                    color="gray.700"
+                    fontWeight="bold"
+                  >
+                    Pharmacy Requests
+                  </Text>
+                  <Button
+                    leftIcon={<FaPlus />}
+                    variant="outline"
+                    colorScheme="blue"
+                    size="sm"
+                    onClick={() => navigate({
+                      pathname: `/add-pharmacy-request/${id}`,
+                      search: `?patient_id=${patient_id}`,
+                    })}
+                  >
+                    New
+
+                  </Button>
+                </HStack>
+                {pharmacyRequestData?.length > 0 ? (
+                  <>
+                    <HStack />
+                    {pharmacyRequestData?.map((item) => (
+                      <PharmacyRequestsCard
+                        item={item}
+                        key={item.id}
+                      />
+                    ))}
+                  </>
+                )
+                  : (
+                    <VStack>
+                      <Text>No Recent Pharmacy Requests</Text>
+                    </VStack>
+                  )}
+
+              </VStack>
+
+              {/* pharmacy */}
+            </TabPanel>
+
+            {/* diagnosis */}
+            <TabPanel>
+              <HStack
+                w="full"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text
+                  color="gray.700"
+                  fontWeight="bold"
+                >
+                  Physiotherapy
+                </Text>
+                <Button
+                  leftIcon={<FaPlus />}
+                  variant="outline"
+                  colorScheme="blue"
+                  size="sm"
+                  onClick={() => navigate({
+                    pathname: `/add-patient-procedure/${id}`,
+                    search: `?patient_id=${patient_id}`,
+                  })}
+                >
+                  New
+
+                </Button>
+              </HStack>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
+    </VStack>
   );
 };
 

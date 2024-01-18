@@ -12,7 +12,7 @@ const PharmacyRequestsCard = ({ item }) => {
       border="1px"
       borderColor="gray.200"
       rounded="xl"
-      w="2xl"
+      w="xl"
       p={3}
             // as={Button}
       bgColor="gray.50"
@@ -33,6 +33,7 @@ const PharmacyRequestsCard = ({ item }) => {
               <Text
                 fontWeight="bold"
                 color="gray.600"
+                fontSize="14px"
               >
                 {item.medication?.medication_name}
 
@@ -89,12 +90,13 @@ const PharmacyRequestsCard = ({ item }) => {
             <Text
               color="gray.500"
               fontWeight="bold"
+              fontSize="12px"
             >
               Cost
               {' '}
             </Text>
             <Text
-              fontSize="lg"
+              fontSize="14px"
               fontWeight="bold"
               color="gray.600"
             >
@@ -111,6 +113,8 @@ const PharmacyRequestsCard = ({ item }) => {
             <Text
               color="gray.500"
               fontWeight="bold"
+              fontSize="12px"
+
             >
               Paid
             </Text>
@@ -118,12 +122,14 @@ const PharmacyRequestsCard = ({ item }) => {
             {item.pay_status === 1 ? (
               <Tag
                 colorScheme="green"
+                size="sm"
               >
                 PAID
               </Tag>
             ) : (
               <Tag
                 colorScheme="red"
+                size="sm"
               >
                 UNPAID
               </Tag>

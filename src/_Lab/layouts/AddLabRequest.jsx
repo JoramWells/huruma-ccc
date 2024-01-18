@@ -18,17 +18,19 @@ import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCh
 const selectStyles = {
   control: (provided, state) => ({
     ...provided,
-    minHeight: '45px',
-    height: '45px',
+    minHeight: '43px',
+    height: '43px',
     backgroundColor: '#F7FAFC',
     border: 0,
+    fontSize: '14px',
+    // fontWeight: 'bold',
   }),
   input: (provided) => ({
     ...provided,
   }),
 };
 
-const AddPatientProcedure = () => {
+const AddLabRequest = () => {
   const [cost, setCost] = useState(0);
   const [procedureName, setProcedureName] = useState(0);
   const { id } = useParams();
@@ -85,7 +87,7 @@ const AddPatientProcedure = () => {
         alignItems="flex-start"
         bgColor="white"
         spacing={6}
-        // boxShadow="lg"
+                // boxShadow="lg"
         border="2px"
         borderStyle="dashed"
         borderColor="gray.200"
@@ -95,24 +97,27 @@ const AddPatientProcedure = () => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <IconButton>
+          <IconButton
+            size="sm"
+          >
             <FaArrowLeft />
           </IconButton>
           <Text
-            fontSize="xl"
+            fontSize="14px"
             fontWeight="bold"
             color="gray.700"
           >
-            New Procedure
+            New Lab Test
 
           </Text>
         </HStack>
         <FormControl>
           <FormLabel
+            fontSize="14px"
             fontWeight="bold"
             color="gray.500"
           >
-            Select Procedure
+            Select/Search Lab Test
 
           </FormLabel>
           <Select
@@ -125,6 +130,7 @@ const AddPatientProcedure = () => {
         </FormControl>
         <FormControl>
           <FormLabel
+            fontSize="14px"
             fontWeight="bold"
             color="gray.500"
           >
@@ -132,7 +138,7 @@ const AddPatientProcedure = () => {
 
           </FormLabel>
           <Input
-            size="lg"
+            // size="lg"
             bgColor="gray.50"
             border={0}
             value={cost}
@@ -145,6 +151,7 @@ const AddPatientProcedure = () => {
         >
           <Button
             colorScheme="blue"
+            size="sm"
             onClick={() => addPersonalAccountCharge(inputValues)}
           >
             {isLoading ? 'loading...' : 'Save'}
@@ -158,4 +165,4 @@ const AddPatientProcedure = () => {
   );
 };
 
-export default AddPatientProcedure;
+export default AddLabRequest;
