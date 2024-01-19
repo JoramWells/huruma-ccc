@@ -31,7 +31,7 @@ const selectStyles = {
   }),
 };
 
-const AddLabRequest = () => {
+const AddRadiologyRequest = () => {
   const [cost, setCost] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [procedureName, setProcedureName] = useState(0);
@@ -189,7 +189,7 @@ const AddLabRequest = () => {
 
           </FormLabel>
           <Input
-            // size="lg"
+                        // size="lg"
             bgColor="gray.50"
             border={0}
             value={cost}
@@ -208,7 +208,7 @@ const AddLabRequest = () => {
 
           </FormLabel>
           <Input
-            // size="lg"
+                        // size="lg"
             bgColor="gray.50"
             border={0}
             value={quantity}
@@ -236,4 +236,4 @@ const AddLabRequest = () => {
   );
 };
 
-export default AddLabRequest;
+export default AddRadiologyRequest;

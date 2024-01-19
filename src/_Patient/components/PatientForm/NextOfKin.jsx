@@ -69,7 +69,7 @@ const NextOfKin = ({
               <FormLabel>Next of Kin</FormLabel>
               <Select
                 name="next_of_kin"
-                styles={customStyles}
+                // styles={customStyles}
                 options={nextOfKinOPtions}
                 value={values.next_of_kin}
                 onChange={(kin) => setFieldValue('next_of_kin', kin)}
@@ -79,7 +79,7 @@ const NextOfKin = ({
               <FormLabel>Next of Kin Full Name</FormLabel>
               <Input
                 name="next_of_kin_name"
-                size="lg"
+                // size="lg"
                 onChange={handleChange}
                 value={values.next_of_kin_name}
               />
@@ -89,7 +89,7 @@ const NextOfKin = ({
               <FormLabel>Next of Kin Phone Number</FormLabel>
               <Input
                 name="next_of_kin_cell_phone"
-                size="lg"
+                // size="lg"
                 onChange={handleChange}
                 value={values.next_of_kin_cell_phone}
               />

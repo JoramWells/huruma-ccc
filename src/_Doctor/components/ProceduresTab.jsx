@@ -2,6 +2,7 @@
 // import { useMemo } from 'react';
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
+import { nanoid } from '@reduxjs/toolkit';
 import { useGetProceduresQuery } from '../api/procedureDetails.api';
 import TableSelectRow from './TableSelectRow';
 import IndeterminateCheckbox from './IndeterminateCheckbox';
@@ -61,7 +62,7 @@ const ProceduresTab = () => {
     >
       {data?.map((item) => (
         <VStack
-          key={item.personal_charge_id}
+          key={nanoid()}
           alignItems="flex-start"
           bgColor="gray.100"
           p={1}

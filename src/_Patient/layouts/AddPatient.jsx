@@ -31,10 +31,10 @@ const AddPatient = () => {
   const [account_type_id, setAccountTypeID] = useState('');
 
   const steps = [
-    { title: 'Personal', description: 'Personal Information' },
-    { title: 'Next of Kin', description: 'Next of Kin Details' },
+    { title: 'Personal', description: 'Personal Info' },
+    { title: 'Next of Kin', description: 'NofK Details' },
     { title: 'Payment', description: 'Payment Details' },
-    { title: 'Complete', description: 'Complete Registration Details' },
+    { title: 'Finish', description: 'Complete Registration' },
   ];
 
   const [searchParams, setSearchParams] = useSearchParams();

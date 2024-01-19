@@ -29,19 +29,18 @@ import VitalSigns from '../components/VitalSigns';
 import ProceduresTab from '../components/ProceduresTab';
 import DiagnosisTab from '../components/DiagnosisTab';
 import PharmacyTab from '../components/PharmacyTab';
-import { useGetAppointmentQuery } from '../../api/appointments.api';
+import { useGetAppointmentDetailByIDQuery, useGetAppointmentQuery } from '../../api/appointments.api';
 import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
-import PharmacyRequestsCard from '../components/PharmacyRequestsCard';
 import InternalRequests from '../components/InternalRequests';
+import PatientDetailAppointment from '../../_Patient/layouts/PatientDetailAppointment';
 
 const tabList = [
-  { id: nanoid(), text: 'Allergies' },
-  { id: nanoid(), text: 'Diagnosis' },
-  { id: nanoid(), text: 'Radiology' },
-  { id: nanoid(), text: 'Vital Signs' },
+  { id: nanoid(), text: 'Admissions' },
+  { id: nanoid(), text: 'Appointments' },
+  { id: nanoid(), text: 'Bill Exclusion' },
+  { id: nanoid(), text: 'Internal Requests' },
   { id: nanoid(), text: 'Procedures' },
-  { id: nanoid(), text: 'Lab Requests' },
-  { id: nanoid(), text: 'Pharmacy Requests' },
+  { id: nanoid(), text: 'Vital Signs' },
 
 ];
 const Doctor = () => {
@@ -53,7 +52,7 @@ const Doctor = () => {
 
   const patient_id = searchParams.get('patient_id');
   const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
-  console.log(pharmacyRequestData, 'df');
+  const { data: appointmentsData } = useGetAppointmentDetailByIDQuery(patient_id);
 
   const breadCrumbData = [
     {
@@ -85,6 +84,7 @@ const Doctor = () => {
 
         <HStack
           p={4}
+          mb={1}
           bgColor="white"
         >
           <Avatar
@@ -114,18 +114,29 @@ const Doctor = () => {
         </HStack>
         {/*  */}
         <Tabs
-          bgColor="white"
+          // bgColor="white"
           color="gray.500"
           variant="enclosed"
           // isFitted
         >
           <TabList>
-            <Tab>Admissions</Tab>
-            <Tab>Appointments</Tab>
-            <Tab>Bill Exclusion</Tab>
-            <Tab>Internal Requests</Tab>
-            <Tab>Procedures</Tab>
-            <Tab>Vital Signs</Tab>
+            {tabList.map((item) => (
+              <Tab
+                key={item.id}
+                fontSize="14px"
+                // bgColor="white"
+                _selected={{
+                  bgColor: 'white',
+                  border: '1px',
+                  borderColor: 'gray.200',
+                  borderBottom: '0',
+                  color: 'blue.500',
+                }}
+              >
+                {item.text}
+              </Tab>
+            ))}
+
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -133,6 +144,7 @@ const Doctor = () => {
             </TabPanel>
             <TabPanel>
               <Text>Appointments</Text>
+              <PatientDetailAppointment data={appointmentsData} />
             </TabPanel>
             <TabPanel>
               <Text>Bill Exclusion</Text>

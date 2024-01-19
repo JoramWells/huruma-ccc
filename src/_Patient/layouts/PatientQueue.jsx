@@ -24,7 +24,14 @@ const UserNameAvatar = ({ fullName }) => (
       name={fullName}
       color="white"
     />
-    <Text>{fullName}</Text>
+    <Text
+      textTransform="uppercase"
+      fontWeight="bold"
+      color="gray.700"
+    >
+      {fullName}
+
+    </Text>
   </HStack>
 );
 

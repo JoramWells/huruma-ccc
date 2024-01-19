@@ -55,9 +55,15 @@ const SidebarItemLink = ({
                 bgColor: 'black',
               }}
               >
-                <FaChevronDown />
+                <FaChevronDown
+                  size={12}
+                />
               </Box>
-            ) : <FaChevronRight />}
+            ) : (
+              <FaChevronRight
+                size={12}
+              />
+            )}
 
           </Box>
 

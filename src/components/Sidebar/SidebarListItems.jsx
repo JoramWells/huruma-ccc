@@ -101,6 +101,7 @@ const SidebarListItems = () => {
           || pathname.includes('/charges-diagnosis')
           || pathname.includes('/personal-account-charge-detail')
           || pathname.includes('/personal-account-charges')
+          || pathname.includes('/confirm-patient-charges')
           || pathname.includes('/charges-detail')}
         onClick={onToggle}
         text="Charges"
@@ -108,7 +109,7 @@ const SidebarListItems = () => {
         itemList={[
           { id: nanoid(), title: 'Bill Transport', link: '/bill-transport' },
           { id: nanoid(), title: 'Bill Services', link: '/bill-services' },
-          { id: nanoid(), title: 'Confirm Patient Charges', link: '/patient-charges' },
+          { id: nanoid(), title: 'Confirm Patient Charges', link: '/confirm-patient-charges' },
           { id: nanoid(), title: 'Personal Account Charges', link: '/personal-account-charges' },
         ]}
         icon={<FaCalendarTimes size={20} />}
@@ -133,6 +134,7 @@ const SidebarListItems = () => {
       <SidebarItemLink
         selected={pathname === '/lab' || pathname.includes('/internal-lab-request')
           || pathname.includes('/lab-templates')
+          || pathname.includes('/add-lab-request')
           || pathname.includes('/add-lab-test')}
         onClick={onToggle}
         text="Lab"

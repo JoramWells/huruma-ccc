@@ -119,7 +119,7 @@ const DataTable2 = ({
           // border="1px"
           // borderColor="gray.200"
           // boxShadow="lg"
-          bgColor="gray.50"
+          bgColor="white"
         >
           <HStack fontSize="12px">
             <Text>
@@ -138,6 +138,7 @@ const DataTable2 = ({
             <Button
               onClick={() => table.previousPage()}
               isDisabled={!table.getCanPreviousPage()}
+              size="sm"
             >
               Prev
 
@@ -145,6 +146,7 @@ const DataTable2 = ({
             <Button
               onClick={() => table.nextPage()}
               isDisabled={!table.getCanNextPage()}
+              size="sm"
             >
               Next
 

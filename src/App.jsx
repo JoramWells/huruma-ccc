@@ -97,6 +97,9 @@ import AddPrescription from './_Medication/layouts/AddPrescription';
 import PatientReport from './_Patient/layouts/PatientReport';
 import AddPatientProcedure from './_Procedure/layouts/AddPatientProcedure';
 import AddLabRequest from './_Lab/layouts/AddLabRequest';
+import AddRadiologyRequest from './_Radiology/components/AddRadiologyRequest';
+import ConfirmPatientCharges from './_Charges/layouts/ConfirmPatientCharges';
+import BillTransport from './_Charges/layouts/BillTransport';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -249,10 +252,11 @@ function App() {
             <Route path="/add-patient" element={<AddPatient />} />
             <Route path="/patient-prescription/:id" element={<PatientPrescription />} />
             <Route path="/patient-detail/:id" element={<PatientDetail />} />
-            <Route path="/patient-detail/:id" element={<PatientDetail />} />
             <Route path="/add-prescription/:id" element={<AddPrescription />} />
             <Route path="/patient-reports" element={<PatientReport />} />
             <Route path="/add-patient-procedure/:id" element={<AddPatientProcedure />} />
+            <Route path="/confirm-patient-charges" element={<ConfirmPatientCharges />} />
+            <Route path="/bill-transport" element={<BillTransport />} />
 
             <Route path="/maternity" element={<MaternityServices />} />
             <Route path="/maternity-profile-detail/:id" element={<MaternityProfileDetail />} />
@@ -343,7 +347,9 @@ function App() {
             <Route path="/items" element={<Items />} />
             <Route path="/add-item" element={<AddItem />} />
 
+            {/* radiology */}
             <Route path="/radiology" element={<Radiology />} />
+            <Route path="/add-radiology-request/:id" element={<AddRadiologyRequest />} />
 
             <Route path="/add-subitem" element={<AddSubItem />} />
             <Route path="/item-type" element={<ItemType />} />

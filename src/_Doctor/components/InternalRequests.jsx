@@ -9,6 +9,8 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import PharmacyRequestsCard from './PharmacyRequestsCard';
 import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
+import { useGetInternalLabRequestQuery } from '../../api/internalLabRequests.api';
+import LabRequestsCard from './LabRequestsCard';
 
 const tabList = [
   { id: nanoid(), text: 'Radiology' },
@@ -26,6 +28,8 @@ const InternalRequests = () => {
   const patient_id = searchParams.get('patient_id');
 
   const { data: pharmacyRequestData } = useGetInternalPharmacyRequestQuery(patient_id);
+  const { data: labRequestData } = useGetInternalLabRequestQuery(patient_id);
+  console.log(labRequestData);
 
   return (
     <VStack
@@ -36,11 +40,13 @@ const InternalRequests = () => {
       <Box
         width="45%"
         rounded="lg"
-        // border="1px"
-        // borderColor="gray.200"
+        bgColor="white"
+        border="1px"
+        borderColor="gray.200"
+        // boxShadow="lg"
       >
         <Tabs
-          isFitted
+          // isFitted
           // bgColor="white"
           variant="unstyled"
           alignItems="flex-start"
@@ -54,9 +60,8 @@ const InternalRequests = () => {
               <Tab
                 key={item.id}
                 fontWeight="semibold"
-                rounded="full"
+                rounded="lg"
                 bgColor="gray.50"
-                mt={2}
                 mb={2}
                 m={1}
                 fontSize="sm"
@@ -66,7 +71,7 @@ const InternalRequests = () => {
                   // border: '2px',
                   // borderColor: 'gray.500',
                   // color: 'blue.500',
-                  bgColor: 'blue.700',
+                  bgColor: 'gray.700',
                 }}
               >
                 {item.text}
@@ -80,7 +85,34 @@ const InternalRequests = () => {
           <TabPanels>
 
             <TabPanel>
-              <p>three!</p>
+
+              <HStack
+                w="full"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text
+                  color="gray.600"
+                  fontWeight="bold"
+                  fontSize="14px"
+                >
+                  Radiology
+                </Text>
+                <Button
+                  leftIcon={<FaPlus />}
+                  variant="outline"
+                  colorScheme="blue"
+                  size="sm"
+                  onClick={() => navigate({
+                    pathname: `/add-radiology-request/${id}`,
+                    search: `?patient_id=${patient_id}`,
+                  })}
+                >
+                  New
+
+                </Button>
+              </HStack>
+
             </TabPanel>
 
             <TabPanel>
@@ -97,6 +129,7 @@ const InternalRequests = () => {
                   <Text
                     color="gray.700"
                     fontWeight="bold"
+                    fontSize="14px"
                   >
                     Lab Requests
                   </Text>
@@ -114,6 +147,22 @@ const InternalRequests = () => {
 
                   </Button>
                 </HStack>
+                {labRequestData?.length > 0 ? (
+                  <>
+                    <HStack />
+                    {labRequestData?.map((item) => (
+                      <LabRequestsCard
+                        item={item}
+                        key={item.id}
+                      />
+                    ))}
+                  </>
+                )
+                  : (
+                    <VStack>
+                      <Text>No Recent Pharmacy Requests</Text>
+                    </VStack>
+                  )}
               </VStack>
             </TabPanel>
             <TabPanel>

@@ -72,10 +72,10 @@ const PaymentDetail = ({
             w="full"
           >
             <FormControl>
-              <FormLabel>Select Payment Type</FormLabel>
+              <FormLabel fontSize="14px">Select Payment Type</FormLabel>
               <Select
                 options={accountTypeOptions}
-                styles={customStyles}
+                // styles={customStyles}
                 value={values.paymentType}
                 onChange={(type) => setFieldValue('paymentType', type)}
               />

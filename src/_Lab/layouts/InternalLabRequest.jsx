@@ -35,13 +35,13 @@ const InternalLabRequest = () => {
   } = useGetAllInternalLabRequestsQuery();
 
   // const { data } = useSelector((state) => state.patients);
-  // console.log(data);
+  console.log(data);
 
   const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient_detail',
+        accessorKey: 'patient',
         cell: (props) => (
           <Box onClick={() => navigate(`/patient-detail/${props.row.original.patient_id}`)}>
             <UserNameAvatar
@@ -55,14 +55,14 @@ const InternalLabRequest = () => {
       {
         header: 'Age',
         accessorKey: 'cell_phone',
-        cell: (props) => <Text>{moment().diff(moment(props.row.original.patient_detail.dob, 'YYYY'), 'years')}</Text>,
+        cell: (props) => <Text>{moment().diff(moment(props.row.original.patient.dob, 'YYYY'), 'years')}</Text>,
 
       },
       {
         header: 'Gender',
-        // accessorKey: 'patient_detail',
+        // accessorKey: 'patient',
         enableSorting: false,
-        cell: (props) => <Text>{props.row.original.patient_detail?.patient_gender === '1' ? 'MALE' : 'FEMALE'}</Text>,
+        cell: (props) => <Text>{props.row.original.patient?.patient_gender === '1' ? 'MALE' : 'FEMALE'}</Text>,
 
       },
       {
@@ -75,9 +75,10 @@ const InternalLabRequest = () => {
         header: 'Action',
         cell: (props) => (
           <Button
-            color="gray"
+            size="sm"
+            color="gray.700"
             leftIcon={<FaEye />}
-            onClick={() => navigate(`/internal-lab-request-detail/${props.row.original.lab_request_id}`)}
+            onClick={() => navigate(`/internal-lab-request-detail/${props.row.original.patient_id}`)}
           >
             Tests Requested
           </Button>

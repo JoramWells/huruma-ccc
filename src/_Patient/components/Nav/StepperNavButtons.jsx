@@ -5,15 +5,22 @@ import PropTypes from 'prop-types';
 const StepperNavButtons = ({
   handleNext, handleBack, activeStep,
 }) => (
-  <HStack mt={5} w="full" justifyContent="flex-end">
+  <HStack w="full" justifyContent="flex-end">
     <Button
       onClick={() => handleBack()}
       isDisabled={activeStep === 1}
+      size="sm"
     >
       Back
 
     </Button>
-    <Button type="submit">Next</Button>
+    <Button
+      type="submit"
+      size="sm"
+    >
+      Next
+
+    </Button>
     {/* {activeStep === 4 ? (
       <Button
         onClick={() => addPatient(inputValues)}
