@@ -34,7 +34,7 @@ const selectStyles = {
 const AddLabRequest = () => {
   const [cost, setCost] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [procedureName, setProcedureName] = useState(0);
+  const [procedureName, setProcedureName] = useState();
   const [urgency, setUrgency] = useState('');
   const { id } = useParams();
   const [searchParams] = useSearchParams();
@@ -81,7 +81,7 @@ const AddLabRequest = () => {
 
   const chargesInputValues = {
     amount: cost,
-    service_desc: procedureName,
+    service_desc: procedure?.label,
     // amount: procedure.procedure_cost,
     date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
     time_of_charge: moment(new Date()).format('hh:mm:ss'),

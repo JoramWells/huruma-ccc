@@ -133,8 +133,6 @@ const PatientQueue = () => {
 
   const filteredData = filterByDate();
 
-  console.log(filteredData);
-
   return (
     <VStack
       mt="55px"
@@ -148,18 +146,19 @@ const PatientQueue = () => {
         <BreadCrumbNav link="/add-patient" />
 
         <HStack
-          w="100%"
+          w="99%"
           justifyContent="space-between"
           bgColor="white"
-          p={3}
+          p={2}
+          pl={5}
           rounded="lg"
-          mt={2}
+          m="auto"
         >
           <Text
-            // fontSize="xl"
+            fontSize="16px"
             fontWeight="bold"
           >
-            Patients
+            Patients Queue
             <span style={{
               // fontSize: '18px',
               // fontWeight: 'normal',
@@ -174,9 +173,21 @@ const PatientQueue = () => {
             </span>
           </Text>
           <HStack>
-            <Button leftIcon={<FaPrint />}>Print Report</Button>
+            <Button
+              leftIcon={<FaPrint />}
+              size="sm"
+            >
+              Print Report
 
-            <Button leftIcon={<FaFileDownload />}>Download</Button>
+            </Button>
+
+            <Button
+              leftIcon={<FaFileDownload />}
+              size="sm"
+            >
+              Download
+
+            </Button>
 
           </HStack>
         </HStack>

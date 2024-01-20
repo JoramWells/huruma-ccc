@@ -1,17 +1,12 @@
-/* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/prop-types */
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Avatar,
   Box,
-  Button, FormControl, FormLabel, HStack,
-  Tab, TabList, TabPanel, TabPanels, Tabs, Tag, Text, Textarea, VStack,
+  Button, HStack,
+  Tab, TabList, TabPanel, TabPanels, Tabs, Text, VStack,
 } from '@chakra-ui/react';
 import {
   useNavigate,
@@ -22,13 +17,9 @@ import {
 import { nanoid } from '@reduxjs/toolkit';
 import moment from 'moment/moment';
 import { FaPlus } from 'react-icons/fa';
-import { useGetPatientQuery } from '../../api/patients.api';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
-import TableSelectRow from '../components/TableSelectRow';
 import VitalSigns from '../components/VitalSigns';
 import ProceduresTab from '../components/ProceduresTab';
-import DiagnosisTab from '../components/DiagnosisTab';
-import PharmacyTab from '../components/PharmacyTab';
 import { useGetAppointmentDetailByIDQuery, useGetAppointmentQuery } from '../../api/appointments.api';
 import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
 import InternalRequests from '../components/InternalRequests';

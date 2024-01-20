@@ -36,6 +36,7 @@ const PersonalAccountCharges = () => {
   } = useGetAllPersonalAccountChargesQuery();
 
   // const { data } = useSelector((state) => state.patients);
+  console.log(data);
 
   const columnsx = useMemo(
     () => [
@@ -70,13 +71,6 @@ const PersonalAccountCharges = () => {
               : parseInt(props.row.original.amount, 10)?.toLocaleString()}
           </Text>
         ),
-
-      },
-      {
-        header: 'Amount Paid',
-        accessorKey: 'amount',
-        enableSorting: true,
-        cell: (props) => <Text>{parseInt(props.getValue(), 10)?.toLocaleString()}</Text>,
 
       },
       {

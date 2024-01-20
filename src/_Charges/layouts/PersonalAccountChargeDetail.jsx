@@ -1,106 +1,162 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import { useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
-  HStack, Text, VStack,
+  Avatar,
+  Box, Button, HStack, IconButton, Text, VStack, useDisclosure,
 } from '@chakra-ui/react';
-import {
-  useLocation, useNavigate, useParams, useSearchParams,
-} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useCallback, useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
-import PropTypes from 'prop-types';
-
+import moment from 'moment/moment';
+import { FaArrowRight, FaEdit } from 'react-icons/fa';
+import IndeterminateCheckbox from '../../_Doctor/components/IndeterminateCheckbox';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
+import TablePharmacyRequest from '../../_Pharmacy/components/TablePharmacyRequest';
+import { useGetInternalLabRequestQuery } from '../../api/internalLabRequests.api';
 import { useGetUserPersonalAccountDetailQuery } from '../../api/personalAccountCharges.api';
-
-const PatientCard = ({
-  text, icon, onClick, selected,
-}) => {
-  const [step, setStep] = useState(0);
-  return (
-
-    <HStack
-      onClick={onClick}
-      w="full"
-      justifyContent="flex-start"
-      bgColor={selected ? 'blue.50' : 'whitesmoke'}
-      // border={selected && '1px'}
-      // borderColor="blue.100"
-      p={4}
-      rounded="lg"
-      transition="all 1s ease"
-      _hover={{
-        cursor: 'pointer',
-        // colorScheme: 'blue',
-        color: 'blue.500',
-        bgColor: 'blue.50',
-      }}
-      color={selected ? 'blue.500' : 'blue.700'}
-    >
-      {icon}
-      <Text>
-        {text}
-      </Text>
-    </HStack>
-  );
-};
-
-PatientCard.propTypes = {
-  selected: PropTypes.bool,
-};
-
-PatientCard.defaultProps = {
-  selected: false,
-};
+import TablePersonalAccountCharge from '../components/TablePersonalAccountCharge';
 
 const PersonalAccountChargeDetail = () => {
-  const [sideItem, setSideItem] = useState(0);
-  const { id } = useParams();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const stepSearch = searchParams.get('step');
-  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { data } = useGetUserPersonalAccountDetailQuery(id);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { data, isLoading } = useGetUserPersonalAccountDetailQuery(id);
+  console.log(data);
 
-  const breadCrumbData = [
+  const columns = useMemo(() => [
     {
-      id: nanoid(),
-      title: 'Personal Accounts',
-      link: '/personal-account-charges',
+      id: 'select',
+      header: ({ table }) => (
+        <IndeterminateCheckbox
+          {...{
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      cell: ({ row }) => (
+        <IndeterminateCheckbox
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      ),
     },
     {
-      id: nanoid(),
-      title: `${data?.patient_full_name_pac}`,
-      link: '/',
-      isCurrentPage: true,
+      header: 'Service',
+      accessorKey: 'service_desc',
+      cell: (props) => (
+        <Text>
+          {props.getValue()}
+        </Text>
+      ),
     },
-  ];
+    {
+      header: 'PAY STATUS',
+      accessorKey: 'pay_status',
+      cell: (props) => <Text>{props.getValue()}</Text>,
+    },
+    {
+      header: 'Quantity',
+      accessorKey: 'quantity',
+      cell: (props) => <Text>{props.getValue() === 0 ? 1 : props.getValue()}</Text>,
+    },
+    {
+      header: 'Cost',
+      accessorKey: 'amount',
+      cell: (props) => <Text>{props.getValue()}</Text>,
+    },
+    {
+      header: 'Cost',
+      cell: (props) => (
+        <IconButton
+          onClick={onOpen}
+        >
+          <FaEdit />
+        </IconButton>
+      ),
+    },
+    {
+      header: 'Total',
+      //   accessorKey: 'cost',
+      cell: (props) => (
+        <Text>
+          {props.row.original.quantity * (props.row.original.amount === 0
+            ? 1 : props.row.original.amount)}
+        </Text>
+      ),
+    },
 
-  const handleSetSideItem = useCallback((step) => {
-    setSideItem(step);
-    navigate({
-      pathname,
-      search: `?step=${step}`,
-    });
-  }, [setSideItem, navigate, pathname]);
-  console.log(data, 'dtx');
-
+  ], []);
   return (
     <VStack
-      h="100vh"
       w="full"
-      mt="65px"
+      h="100vh"
       bgColor="gray.50"
+      mt="65px"
       alignItems="center"
-      // justifyContent="center"
       p={3}
     >
-      <BreadCrumbNav addBtn={false} breadCrumbData={breadCrumbData} />
+      <BreadCrumbNav />
+      <HStack
+        bgColor="white"
+        w="full"
+        rounded="lg"
+        p={3}
+        border="1px"
+        borderColor="gray.200"
+      >
+        {data
+          && (
+            <>
+              <Avatar
+                name={`${data[0]?.patient?.first_name} ${data[0]?.patient?.middle_name}`}
+                size="lg"
+                color="white"
+                fontWeight="bold"
+              />
+              <VStack alignItems="flex-start">
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  color="gray.700"
+                >
+                  {data[0]?.patient.first_name}
+                  {' '}
+                  {data[0]?.patient.middle_name}
+                </Text>
 
+                <Text fontSize="lg" color="gray.500">
+                  {moment().diff(data[0]?.patient?.dob, 'years')}
+                  {' '}
+                  years
+                </Text>
+              </VStack>
+            </>
+          )}
+
+      </HStack>
+      <HStack
+        spacing={4}
+        justifyContent="center"
+      >
+        <TablePersonalAccountCharge
+          column={columns}
+          data={data}
+          onOpen={onOpen}
+          onClose={onClose}
+          isOpen={isOpen}
+
+        />
+
+      </HStack>
     </VStack>
   );
 };

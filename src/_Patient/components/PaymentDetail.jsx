@@ -6,6 +6,7 @@ import {
 import Select from 'react-select';
 import moment from 'moment/moment';
 import { Formik } from 'formik';
+import { useCallback } from 'react';
 import Corporate from './Cooporate';
 import { useGetAllAccountTypesQuery } from '../../api/accountType.api';
 import { useAddPatientMutation } from '../../api/patients.api';
@@ -44,9 +45,12 @@ const PaymentDetail = ({
 
   // const datax = useCallback(()=>{},)
 
-  const accountTypeOptions = data?.map((item) => ({
-    value: item.account_type_id, label: item.account_type_description,
-  }));
+  const accountTypeOptionsCallback = useCallback(() => data?.map((item) => ({
+    value: item.account_type_id,
+    label: item.account_type_description,
+  })), [data]);
+
+  const accountTypeOptions = accountTypeOptionsCallback();
 
   return (
 
@@ -79,11 +83,14 @@ const PaymentDetail = ({
                 value={values.paymentType}
                 onChange={(type) => setFieldValue('paymentType', type)}
               />
+
+              {/* {values.} */}
               {values.paymentType?.value === '1' && (
                 <Corporate
                   insuranceAccount={insuranceAccount}
                   setInsuranceAccount={setInsuranceAccount}
                   setCost={setCost}
+                  cost={cost}
                 />
               )}
 

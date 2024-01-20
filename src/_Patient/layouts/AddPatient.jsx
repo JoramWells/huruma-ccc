@@ -90,9 +90,8 @@ const AddPatient = () => {
 
   const chargesInputValues = useMemo(() => [
     {
-      amount: insuranceAccount?.value,
+      amount: cost,
       service_desc: consultation_type,
-      // amount: procedure.procedure_cost,
       date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
       time_of_charge: moment(new Date()).format('hh:mm:ss'),
       status: 1,
@@ -102,14 +101,16 @@ const AddPatient = () => {
       appointment_id: appointmentID,
     },
   ], [appointmentID, consultation_type,
-    patientID, insuranceAccount?.value]);
+    patientID,
+    cost,
+  ]);
 
   useEffect(() => {
     if (data) {
       setPatientID(data?.patient_id);
       setAppointmentID(data?.appointment_id);
     }
-    if (patientID) { addPersonalAccountCharge(chargesInputValues); }
+    if (patientID) { addPersonalAccountCharge(chargesInputValues[0]); }
   }, [data, addPersonalAccountCharge,
     patientID, chargesInputValues]);
 
@@ -125,7 +126,7 @@ const AddPatient = () => {
     inputValues,
   ]);
 
-  console.log(data, 'cki');
+  console.log(chargesInputValues, 'cki');
 
   return (
     <VStack w="full" h="100vh" bgColor="gray.50" mt="55px">
@@ -168,6 +169,7 @@ const AddPatient = () => {
           inputValues={inputValues}
           insuranceAccount={insuranceAccount}
           setInsuranceAccount={setInsuranceAccount}
+          cost={cost}
           setCost={setCost}
           handleNext={handleNext}
           handleBack={handleBack}

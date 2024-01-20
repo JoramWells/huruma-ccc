@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useGetInsurancesQuery } from '../../api/insurance.api';
 import { useGetInsuranceServiceCostMappingQuery } from '../../api/insuranceServiceCostMapping.api';
@@ -35,16 +35,17 @@ const Corporate = ({
 
   const navigate = useNavigate();
 
-  const { data } = useGetInsurancesQuery();
+  const { data, isLoading } = useGetInsurancesQuery();
 
   const { data: insuranceServiceCostData } = useGetInsuranceServiceCostMappingQuery(
     insuranceAccount?.value ? insuranceAccount?.value : 0,
   );
 
-  const insuranceOptions = data
-          && data.map((item) => (
-            { value: item.insurance_id, label: item.insurance_name }
-          ));
+  const insuranceOptionsCallback = useCallback(() => data?.map((item) => (
+    { value: item.insurance_id, label: item.insurance_name }
+  )), [data]);
+
+  const insuranceOptions = insuranceOptionsCallback();
 
   const statusOptions = [{ value: 'Active', label: 'Active' },
     { value: 'In Active', label: 'In Active' },
@@ -52,9 +53,10 @@ const Corporate = ({
 
   useEffect(() => {
     setCost(insuranceServiceCostData?.cost);
-  }, [setCost, insuranceServiceCostData?.cost]);
+    if (!cost) { setCost(insuranceServiceCostData?.cost); }
+  }, [setCost, insuranceServiceCostData?.cost, cost]);
 
-  console.log(insuranceServiceCostData);
+  console.log(cost, 'insys');
 
   return (
 
@@ -67,7 +69,7 @@ const Corporate = ({
     >
       <FormControl>
         <HStack w="full" alignItems="center" justifyContent="space-between">
-          <FormLabel fontSize="medium">Select Insurance Account</FormLabel>
+          <FormLabel fontSize="14px">Select Insurance Account</FormLabel>
           <Tag
             onClick={() => navigate('/add-insurance')}
             colorScheme="green"
@@ -81,7 +83,7 @@ const Corporate = ({
 
         </HStack>
         <Select
-          styles={customStyles}
+          // styles={customStyles}
           options={insuranceOptions}
           value={insuranceAccount}
           onChange={(e) => setInsuranceAccount(e)}
@@ -92,7 +94,7 @@ const Corporate = ({
       {/* select Department */}
       <FormControl>
         <HStack w="full" alignItems="center" justifyContent="space-between">
-          <FormLabel fontSize="medium">Company Scheme</FormLabel>
+          <FormLabel fontSize="14px">Company Scheme</FormLabel>
           <Tag
             onClick={() => navigate('/add-ward')}
             _hover={{
@@ -114,7 +116,12 @@ const Corporate = ({
       </FormControl>
 
       <FormControl>
-        <FormLabel>Staff Number</FormLabel>
+        <FormLabel
+          fontSize="14px"
+        >
+          Staff Number
+
+        </FormLabel>
         <Input
           // size="lg"
           placeholder="Enter Staff Number"
@@ -133,7 +140,12 @@ const Corporate = ({
       </FormControl>
 
       <FormControl>
-        <FormLabel>Principal Member Name</FormLabel>
+        <FormLabel
+          fontSize="14px"
+        >
+          Principal Member Name
+
+        </FormLabel>
         <Input
           // size="lg"
           value={mobileNo}
