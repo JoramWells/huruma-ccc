@@ -67,10 +67,10 @@ const EditDeletePatientModal = ({
         isOpen={isOpen}
         onClose={onClose}
         isCentered
-        size="2xl"
+        size="xl"
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent rounded="xl">
           <ModalHeader>
             {firstName}
             {' '}
@@ -81,9 +81,15 @@ const EditDeletePatientModal = ({
             <VStack spacing={6}>
               <FormControl>
 
-                <FormLabel mt={1}>First Name</FormLabel>
+                <FormLabel
+                  mt={1}
+                  fontSize="14px"
+                >
+                  First Name
+
+                </FormLabel>
                 <Input
-                  size="lg"
+                  // size="lg"
                   placeholder="Enter First Name"
                   value={first_name}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -93,9 +99,15 @@ const EditDeletePatientModal = ({
 
               <FormControl>
 
-                <FormLabel mt={1}>Middle Name</FormLabel>
+                <FormLabel
+                  mt={1}
+                  fontSize="14px"
+                >
+                  Middle Name
+
+                </FormLabel>
                 <Input
-                  size="lg"
+                  // size="lg"
                   placeholder="Enter Second Name"
                   value={middle_name}
                   onChange={(e) => setMiddleName(e.target.value)}
@@ -105,9 +117,15 @@ const EditDeletePatientModal = ({
 
               <FormControl>
 
-                <FormLabel mt={1}>Last Name</FormLabel>
+                <FormLabel
+                  mt={1}
+                  fontSize="14px"
+                >
+                  Last Name
+
+                </FormLabel>
                 <Input
-                  size="lg"
+                  // size="lg"
                   placeholder="Enter Last Name"
                   value={last_name}
                   onChange={(e) => setLastName(e.target.value)}
@@ -118,18 +136,28 @@ const EditDeletePatientModal = ({
               {/* category */}
 
               <FormControl>
-                <FormLabel>ID/Passport Number</FormLabel>
+                <FormLabel
+                  fontSize="14px"
+                >
+                  ID/Passport Number
+
+                </FormLabel>
                 <Input
-                  size="lg"
+                  // size="lg"
                   placeholder="Enter phone number"
                   value={id_number}
                   onChange={(e) => setID(e.target.value)}
                 />
               </FormControl>
               <FormControl>
-                <FormLabel>Mobile No</FormLabel>
+                <FormLabel
+                  fontSize="14px"
+                >
+                  Mobile No
+
+                </FormLabel>
                 <Input
-                  size="lg"
+                  // size="lg"
                   placeholder="Enter Cell Phone"
                   value={cell_phone}
                   onChange={(e) => setCellPhone(e.target.value)}
@@ -139,10 +167,20 @@ const EditDeletePatientModal = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="gray" mr={3} onClick={() => updatePatient(inputValues)}>
+            <Button
+              colorScheme="gray"
+              size="sm"
+              mr={3}
+              onClick={() => updatePatient(inputValues)}
+            >
               {isLoading ? 'loading...' : 'Save'}
             </Button>
-            <Button variant="ghost" colorScheme="red" onClick={() => deletePatient(id)}>
+            <Button
+              size="sm"
+              variant="ghost"
+              colorScheme="red"
+              onClick={() => deletePatient(id)}
+            >
               {isLoading ? 'loading..' : 'Delete'}
             </Button>
           </ModalFooter>

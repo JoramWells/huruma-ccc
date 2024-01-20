@@ -25,7 +25,7 @@ const customStyles = {
 const PaymentDetail = ({
   inputValues, insuranceAccount,
   setInsuranceAccount, paymentType, setPaymentType,
-  handleNext,
+  handleNext, handleBack, activeStep, cost, setCost,
 }) => {
   // const [accountType, setAccountType] = useState({ value: '', label: '' });
   // const [paymentOption, setPaymentOption] = useState({ value: '', label: '' });
@@ -83,12 +83,16 @@ const PaymentDetail = ({
                 <Corporate
                   insuranceAccount={insuranceAccount}
                   setInsuranceAccount={setInsuranceAccount}
+                  setCost={setCost}
                 />
               )}
 
             </FormControl>
 
-            <StepperNavButtons />
+            <StepperNavButtons
+              handleBack={handleBack}
+              activeStep={activeStep}
+            />
           </VStack>
         </form>
       )}

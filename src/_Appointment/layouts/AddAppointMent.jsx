@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import Select from 'react-select';
-import { useAddAppointmentMutation } from '../api/appointments.api';
+import { useAddAppointmentMutation } from '../../api/appointments.api';
 
 const appointmentCategoryOptions = [
   { value: '1', label: 'General Doctor Appointment' },

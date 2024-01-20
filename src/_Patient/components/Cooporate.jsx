@@ -10,9 +10,10 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useGetInsurancesQuery } from '../../api/insurance.api';
+import { useGetInsuranceServiceCostMappingQuery } from '../../api/insuranceServiceCostMapping.api';
 
 const customStyles = {
   control: (provided, state) => ({
@@ -25,7 +26,9 @@ const customStyles = {
   }),
 };
 
-const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
+const Corporate = ({
+  insuranceAccount, setInsuranceAccount, cost, setCost,
+}) => {
   const [mobileNo, setMobileNo] = useState('');
   const [insurance_membership_number, setInsuranceMemberShipNo] = useState('');
   // const [insuranceAccount, setInsuranceAccount] = useState({ value: '', label: '' });
@@ -33,6 +36,10 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
   const navigate = useNavigate();
 
   const { data } = useGetInsurancesQuery();
+
+  const { data: insuranceServiceCostData } = useGetInsuranceServiceCostMappingQuery(
+    insuranceAccount?.value ? insuranceAccount?.value : 0,
+  );
 
   const insuranceOptions = data
           && data.map((item) => (
@@ -42,6 +49,12 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
   const statusOptions = [{ value: 'Active', label: 'Active' },
     { value: 'In Active', label: 'In Active' },
   ];
+
+  useEffect(() => {
+    setCost(insuranceServiceCostData?.cost);
+  }, [setCost, insuranceServiceCostData?.cost]);
+
+  console.log(insuranceServiceCostData);
 
   return (
 
@@ -92,7 +105,7 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
 
         </HStack>
         <Select
-          styles={customStyles}
+          // styles={customStyles}
           options={statusOptions}
           value={insuranceAccount}
           onChange={(e) => setInsuranceAccount(e)}
@@ -103,7 +116,7 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
       <FormControl>
         <FormLabel>Staff Number</FormLabel>
         <Input
-          size="lg"
+          // size="lg"
           placeholder="Enter Staff Number"
           value={mobileNo}
           onChange={(e) => setMobileNo(e.target.value)}
@@ -113,7 +126,7 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
       <FormControl>
         <FormLabel>Insurance Membership Number</FormLabel>
         <Input
-          size="lg"
+          // size="lg"
           value={insurance_membership_number}
           onChange={(e) => setInsuranceMemberShipNo(e.target.value)}
         />
@@ -122,7 +135,7 @@ const Corporate = ({ insuranceAccount, setInsuranceAccount }) => {
       <FormControl>
         <FormLabel>Principal Member Name</FormLabel>
         <Input
-          size="lg"
+          // size="lg"
           value={mobileNo}
           onChange={(e) => setMobileNo(e.target.value)}
         />

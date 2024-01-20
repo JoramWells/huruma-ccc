@@ -12,6 +12,7 @@ const data = [
     text: 'Total Registered Patients',
     quantity: '75',
     link: '/',
+    // colorShceme
   },
   {
     id: nanoid(),
@@ -50,13 +51,13 @@ const Homepage = () => {
           <HStack w="70%" justifyContent="space-between" spacing={4}>
             {data.map((item) => (
               <Box
-                rounded="3xl"
+                rounded="2xl"
                 // boxShadow="lg"
                 p={3}
                 key={item.id}
                 border="1px"
                 flex={1}
-                height="150px"
+                height="125px"
                 borderColor="gray.200"
                 onClick={() => navigate('/pharmaceuticals')}
                 _hover={{
@@ -65,14 +66,21 @@ const Homepage = () => {
                 }}
                 bgColor="white"
               >
-                <IconButton rounded="full" size="lg">
-                  <FaBookMedical size={25} color="gray" />
+                <IconButton
+                  rounded="full"
+                  size="md"
+                  bgColor="green.50"
+                >
+                  <FaBookMedical
+                    size={15}
+                    color="green"
+                  />
                 </IconButton>
                 <Box ml={10}>
-                  <Text fontSize="3xl" fontWeight="bold">
+                  <Text fontSize="xl" fontWeight="bold">
                     {item.quantity}
                   </Text>
-                  <Text fontSize="xl" color="gray.500">
+                  <Text fontSize="16px" color="gray.500">
                     {item.text}
                   </Text>
 

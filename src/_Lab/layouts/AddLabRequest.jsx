@@ -152,7 +152,7 @@ const AddLabRequest = () => {
 
           </FormLabel>
           <Select
-            styles={selectStyles}
+            // styles={selectStyles}
             value={procedure}
             options={procedureOptions}
             onChange={(val) => setProcedure(val)}
@@ -171,7 +171,7 @@ const AddLabRequest = () => {
 
           </FormLabel>
           <Select
-            styles={selectStyles}
+            // styles={selectStyles}
             value={urgency}
             options={urgencyOptions}
             onChange={(val) => setUrgency(val)}

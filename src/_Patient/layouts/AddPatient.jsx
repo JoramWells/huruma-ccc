@@ -3,7 +3,9 @@
 import {
   Box, Button, VStack,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import moment from 'moment/moment';
@@ -12,6 +14,7 @@ import PaymentDetail from '../components/PaymentDetail';
 import StepperNav from '../components/Nav/StepperNav';
 import PersonalDetail from '../components/PersonalDetail';
 import NextOfKin from '../components/PatientForm/NextOfKin';
+import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCharges.api';
 
 const sunrise = moment('6:00 a.m', 'h:mm a');
 const sunset = moment('6:00 p.m', 'h:mm a');
@@ -26,6 +29,9 @@ const AddPatient = () => {
   const [nextOfKinData, setNextOfKinData] = useState({});
   const [insuranceAccount, setInsuranceAccount] = useState('');
   const [paymentType, setPaymentType] = useState('');
+  const [cost, setCost] = useState(0);
+  const [patientID, setPatientID] = useState('');
+  const [appointmentID, setAppointmentID] = useState('');
 
   const [activeStep, setActiveStep] = useState(1);
   const [account_type_id, setAccountTypeID] = useState('');
@@ -64,19 +70,62 @@ const AddPatient = () => {
   nextOfKinData.next_of_kin = nextOfKinData.next_of_kin?.value;
 
   // OPD DAY || OPD NIGHT
-  const consultation_type = '28';
+  const consultation_type = 'CONSULTATION CONSULTATION-OPD DAY';
   const accountType = paymentType?.paymentType?.value;
 
-  const inputValues = {
-    account_type_id: accountType,
-    consultation_type,
-    insuranceAccount,
-    ...personalData,
-    ...nextOfKinData,
-  };
+  const inputValues = useMemo(() => [
 
-  const [addPatient, { isLoading }] = useAddPatientMutation();
-  console.log(inputValues);
+    {
+      account_type_id: accountType,
+      consultation_type: '28',
+      insuranceAccount,
+      ...personalData,
+      ...nextOfKinData,
+    },
+  ], [accountType, personalData, nextOfKinData, insuranceAccount]);
+
+  const [addPatient, { isLoading, data }] = useAddPatientMutation();
+  const [addPersonalAccountCharge,
+    { isLoading: isLoadingCharges }] = useAddPersonalAccountChargeMutation();
+
+  const chargesInputValues = useMemo(() => [
+    {
+      amount: insuranceAccount?.value,
+      service_desc: consultation_type,
+      // amount: procedure.procedure_cost,
+      date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
+      time_of_charge: moment(new Date()).format('hh:mm:ss'),
+      status: 1,
+      patient_id: patientID,
+      hospital_id: 18,
+      quantity: 0,
+      appointment_id: appointmentID,
+    },
+  ], [appointmentID, consultation_type,
+    patientID, insuranceAccount?.value]);
+
+  useEffect(() => {
+    if (data) {
+      setPatientID(data?.patient_id);
+      setAppointmentID(data?.appointment_id);
+    }
+    if (patientID) { addPersonalAccountCharge(chargesInputValues); }
+  }, [data, addPersonalAccountCharge,
+    patientID, chargesInputValues]);
+
+  const handleSubmit = useCallback(() => {
+    addPatient(inputValues);
+
+    // timeout
+    // setTimeout(() => {
+    //   addPersonalAccountCharge(chargesInputValues);
+    // }, 3000);
+  }, [addPatient,
+    // appointmentID, patientID,
+    inputValues,
+  ]);
+
+  console.log(data, 'cki');
 
   return (
     <VStack w="full" h="100vh" bgColor="gray.50" mt="55px">
@@ -95,6 +144,7 @@ const AddPatient = () => {
         {activeStep === 1 && (
         <PersonalDetail
           handleNext={handleNext}
+          handleBack={handleBack}
           setPersonalData={setPersonalData}
           activeStep={activeStep}
         />
@@ -104,7 +154,9 @@ const AddPatient = () => {
         {activeStep === 2 && (
         <NextOfKin
           handleNext={handleNext}
+          handleBack={handleBack}
           setNextOfKinData={setNextOfKinData}
+          activeStep={activeStep}
         />
         )}
 
@@ -116,7 +168,10 @@ const AddPatient = () => {
           inputValues={inputValues}
           insuranceAccount={insuranceAccount}
           setInsuranceAccount={setInsuranceAccount}
+          setCost={setCost}
           handleNext={handleNext}
+          handleBack={handleBack}
+          activeStep={activeStep}
         />
         )}
 
@@ -124,9 +179,9 @@ const AddPatient = () => {
         {activeStep === 4 && (
           <Button
             colorScheme="green"
-            onClick={() => addPatient(inputValues)}
+            onClick={() => handleSubmit()}
           >
-            {isLoading ? 'loading...' : 'Complete'}
+            {isLoading || isLoadingCharges ? 'loading...' : 'Save Patient'}
 
           </Button>
         )}

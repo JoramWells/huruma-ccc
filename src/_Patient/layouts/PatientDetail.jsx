@@ -154,7 +154,7 @@ const PatientDetail = () => {
           >
             <Avatar
               name={`${data?.first_name} ${data?.last_name}`}
-              size="xl"
+              size="lg"
               color="white"
             />
             <VStack spacing={2}>

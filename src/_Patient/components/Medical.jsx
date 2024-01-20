@@ -33,19 +33,46 @@ const Medical = () => {
         spacing={4}
       >
         {/* <RecordVitals /> */}
-        <Button onClick={() => navigate({
-          pathname: '/add-vitals',
-          search: `?patient_id=${id}`,
-        })}
+        <Button
+          size="sm"
+          onClick={() => navigate({
+            pathname: '/add-vitals',
+            search: `?patient_id=${id}`,
+          })}
         >
           Vitals
 
         </Button>
-        <Button>Procedure Services</Button>
-        <Button>Lab Requests</Button>
-        <Button>Radiology Requests</Button>
-        <Button>Pharmacy Requests</Button>
-        <Button>Department Drugs Requests</Button>
+        <Button
+          size="sm"
+        >
+          Procedure Services
+
+        </Button>
+        <Button
+          size="sm"
+        >
+          Lab Requests
+
+        </Button>
+        <Button
+          size="sm"
+        >
+          Radiology Requests
+
+        </Button>
+        <Button
+          size="sm"
+        >
+          Pharmacy Requests
+
+        </Button>
+        <Button
+          size="sm"
+        >
+          Department Drugs Requests
+
+        </Button>
 
       </HStack>
     </VStack>

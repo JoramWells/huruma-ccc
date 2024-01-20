@@ -87,7 +87,7 @@ const AddPatientProcedure = () => {
         spacing={6}
         // boxShadow="lg"
         border="2px"
-        borderStyle="dashed"
+        // borderStyle="dashed"
         borderColor="gray.200"
       >
         <HStack
@@ -99,7 +99,7 @@ const AddPatientProcedure = () => {
             <FaArrowLeft />
           </IconButton>
           <Text
-            fontSize="xl"
+            fontSize="16px"
             fontWeight="bold"
             color="gray.700"
           >
@@ -116,7 +116,7 @@ const AddPatientProcedure = () => {
 
           </FormLabel>
           <Select
-            styles={selectStyles}
+            // styles={selectStyles}
             value={procedure}
             options={procedureOptions}
             onChange={(val) => setProcedure(val)}
@@ -127,12 +127,13 @@ const AddPatientProcedure = () => {
           <FormLabel
             fontWeight="bold"
             color="gray.500"
+            fontSize="14px"
           >
             Cost
 
           </FormLabel>
           <Input
-            size="lg"
+            // size="lg"
             bgColor="gray.50"
             border={0}
             value={cost}
@@ -145,6 +146,7 @@ const AddPatientProcedure = () => {
         >
           <Button
             colorScheme="blue"
+            size="sm"
             onClick={() => addPersonalAccountCharge(inputValues)}
           >
             {isLoading ? 'loading...' : 'Save'}

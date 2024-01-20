@@ -33,6 +33,7 @@ import { useGetAppointmentDetailByIDQuery, useGetAppointmentQuery } from '../../
 import { useGetInternalPharmacyRequestQuery } from '../../_Pharmacy/api/internalPharmacyRequest.api';
 import InternalRequests from '../components/InternalRequests';
 import PatientDetailAppointment from '../../_Patient/layouts/PatientDetailAppointment';
+import PatientDetailAdmission from '../../_Patient/layouts/PatientDetailAdmission';
 
 const tabList = [
   { id: nanoid(), text: 'Admissions' },
@@ -89,7 +90,7 @@ const Doctor = () => {
         >
           <Avatar
             name={`${data?.patient?.first_name} ${data?.patient?.last_name}`}
-            size="xl"
+            size="md"
           />
           <VStack
             justifyContent="flex-start"
@@ -97,14 +98,14 @@ const Doctor = () => {
             mt={5}
             mb={5}
           >
-            <Text fontSize="2xl" fontWeight="semibold">
+            <Text fontSize="16px" fontWeight="semibold">
               {data?.patient?.first_name}
               {' '}
               {data?.patient?.middle_name}
               {' '}
               {data?.patient?.last_name}
             </Text>
-            <Text fontSize="lg" color="gray.500">
+            <Text fontSize="14px" color="gray.500">
               {moment().diff(data?.patient?.dob, 'years')}
               {' '}
               years
@@ -141,6 +142,7 @@ const Doctor = () => {
           <TabPanels>
             <TabPanel>
               <Text>Admissions</Text>
+              <PatientDetailAdmission data={appointmentsData} />
             </TabPanel>
             <TabPanel>
               <Text>Appointments</Text>
