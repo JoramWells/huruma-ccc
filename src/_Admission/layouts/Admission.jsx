@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment/moment';
 import BreadCrumbNav from '../../components/BreadCrumbNav';
 import DataTable2 from '../../components/tables/DataTable';
-import { useGetAdmissionsQuery } from '../../api/admissions.api';
+import { useGetAllAdmissionsQuery } from '../../api/admissions.api';
 import UserNameAvatar from '../../components/UserNameAvatar';
 
 const Admission = () => {
@@ -19,15 +19,15 @@ const Admission = () => {
 
   const {
     data, isLoading,
-  } = useGetAdmissionsQuery();
+  } = useGetAllAdmissionsQuery();
 
-  // const { data } = useSelector((state) => state.admission);
+  console.log(data);
 
   const columns = useMemo(
     () => [
       {
         header: 'Patient Name',
-        accessorKey: 'patient_detail',
+        accessorKey: 'patient',
         cell: (props) => (
           <HStack>
             <Avatar
@@ -38,7 +38,9 @@ const Admission = () => {
               name={props.getValue() ? `${props.getValue()?.first_name
               } ${props.getValue()?.middle_name}` : '0'}
             />
-            <Text>
+            <Text
+              textTransform="uppercase"
+            >
               {props.getValue() ? `${props.getValue()?.first_name
               } ${props.getValue()?.middle_name}` : '0'}
             </Text>
@@ -102,7 +104,7 @@ const Admission = () => {
       },
       {
         header: 'Action',
-        cell: () => (
+        cell: (props) => (
           <Menu size="lg">
             <MenuButton
               colorScheme="gray"
@@ -116,7 +118,7 @@ const Admission = () => {
               boxShadow="lg"
             >
               <MenuItem
-                onClick={() => navigate('/admission-profile')}
+                onClick={() => navigate(`/admission-profile/${props.row.original.admission_id}`)}
               >
                 Admission Profile
 

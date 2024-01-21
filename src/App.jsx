@@ -100,6 +100,7 @@ import AddLabRequest from './_Lab/layouts/AddLabRequest';
 import AddRadiologyRequest from './_Radiology/components/AddRadiologyRequest';
 import ConfirmPatientCharges from './_Charges/layouts/ConfirmPatientCharges';
 import BillTransport from './_Charges/layouts/BillTransport';
+import AdmissionProfile from './_Admission/layouts/AdmissionProfile';
 
 // Medication
 const MedicationCategory = lazy(() => import('./_Medication/layouts/MedicationCategory'));
@@ -270,6 +271,13 @@ function App() {
 
             <Route path="/admission" element={<Admission />} />
             <Route path="/add-admission" element={<AddAdmission />} />
+            <Route path="/admission-type" element={<AdmissionType />} />
+            <Route path="/admission-detail" element={<AdmissionDetail />} />
+            <Route path="/admission-profile/:id" element={<AdmissionProfile />} />
+            <Route path="/bed-allocation" element={<AdmissionBedAllocation />} />
+            <Route path="/admission-category" element={<AdmissionCategory />} />
+            <Route path="/add-admission-category" element={<AddAdmissionCategory />} />
+            <Route path="/admission-detail/:id" element={<AdmissionDetail />} />
 
             {/* lab */}
             <Route path="/lab-tests-summary-sub-section" element={<LabTestsSummarySubSection />} />
@@ -278,13 +286,6 @@ function App() {
             <Route path="/add-lab-request/:id" element={<AddLabRequest />} />
             <Route path="/internal-lab-request" element={<InternalLabRequest />} />
             <Route path="/internal-lab-request-detail/:id" element={<InternalLabRequestDetail />} />
-
-            <Route path="/admission-type" element={<AdmissionType />} />
-            <Route path="/admission-detail" element={<AdmissionDetail />} />
-            <Route path="/bed-allocation" element={<AdmissionBedAllocation />} />
-            <Route path="/admission-category" element={<AdmissionCategory />} />
-            <Route path="/add-admission-category" element={<AddAdmissionCategory />} />
-            <Route path="/admission-detail/:id" element={<AdmissionDetail />} />
 
             <Route path="/miscellaneous-charges" element={<MiscellaneousCharges />} />
 

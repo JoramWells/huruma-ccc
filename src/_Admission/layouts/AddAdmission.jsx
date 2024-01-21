@@ -1,189 +1,209 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import {
-  Box,
-  Button,
-  Checkbox,
-  CloseButton,
-  FormControl,
-  FormLabel,
-  HStack,
-  Input,
-  Stack,
-  Tag,
-  Text,
-  VStack,
+  Box, Button, VStack,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Select from 'react-select';
-import { addSuppliers } from '../../_reducers/supplierSlice';
-import { getAllSupplierClassification } from '../../_reducers/supplierClassificationSlice';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import moment from 'moment/moment';
+import { useAddPatientMutation } from '../../api/patients.api';
+import { useAddPersonalAccountChargeMutation } from '../../api/personalAccountCharges.api';
+import PersonalDetail from '../../_Patient/components/PersonalDetail';
+import NextOfKin from '../../_Patient/components/PatientForm/NextOfKin';
+import PaymentDetail from '../../_Patient/components/PaymentDetail';
+import StepperNav from '../components/Nav/StepperNav';
+import { useAddAdmissionMutation } from '../../api/admissions.api';
+
+const sunrise = moment('6:00 a.m', 'h:mm a');
+const sunset = moment('6:00 p.m', 'h:mm a');
+
+const isDay = () => {
+  const currentTime = moment();
+  return currentTime.isBetween(sunrise, sunset);
+};
 
 const AddAdmission = () => {
-  const [supplierName, setSupplierName] = useState('');
-  const [mobileNo, setMobileNo] = useState('');
-  const [classification, setClassification] = useState({ value: '', label: '' });
-  const [status, setStatus] = useState({ value: 'Active', label: 'Active' });
+  const [personalData, setPersonalData] = useState({});
+  const [nextOfKinData, setNextOfKinData] = useState({});
+  const [insuranceAccount, setInsuranceAccount] = useState('');
+  const [paymentType, setPaymentType] = useState('');
+  const [cost, setCost] = useState(0);
+  const [patientID, setPatientID] = useState('');
+  const [appointmentID, setAppointmentID] = useState('');
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [activeStep, setActiveStep] = useState(1);
+  const [account_type_id, setAccountTypeID] = useState('');
 
-  // const { loading } = useSelector((state) => state.suppliers);
-  // const classificationSupplierData = useSelector((state) => state.supplierClassification.data);
-
-  // const classificationSupplierOptions = classificationSupplierData
-  // && classificationSupplierData.map((item) => (
-  //   { value: item.classificationName, label: item.classificationName }
-  // ));
-
-  const inputValues = {
-    supplierName,
-    mobileNo,
-    classification: classification.value,
-    status: status.value,
-  };
-
-  const statusOptions = [{ value: 'Active', label: 'Active' },
-    { value: 'In Active', label: 'In Active' },
+  const steps = [
+    { title: 'Personal', description: 'Personal Info' },
+    { title: 'Next of Kin', description: 'NofK Details' },
+    { title: 'Payment', description: 'Payment Details' },
+    { title: 'Finish', description: 'Complete Admission' },
   ];
 
-  // useEffect(() => {
-  //   dispatch(getAllSupplierClassification());
-  // }, []);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleNext = () => {
+    setActiveStep((prevStep) => prevStep + 1);
+    // navigate({
+    //   pathname: '/add-invoice',
+    //   search: `?id=${invoiceId}`,
+    // });
+    setSearchParams(activeStep);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevStep) => prevStep - 1);
+  };
+
+  // DATA STRUCTURE
+  // personalData={
+  //   patient_gender:{value:'MALE', label:'MALE'}
+  // residence:{value:1, label:'Nanyuki}
+  // }
+
+  personalData.patient_gender = personalData.patient_gender?.value;
+  personalData.residence = personalData.residence?.value;
+
+  nextOfKinData.next_of_kin = nextOfKinData.next_of_kin?.value;
+
+  // OPD DAY || OPD NIGHT
+  const consultation_type = 'CONSULTATION CONSULTATION-OPD DAY';
+  const accountType = paymentType?.paymentType?.value;
+
+  const inputValues = useMemo(() => [
+
+    {
+      account_type_id: accountType,
+      consultation_type: '28',
+      insuranceAccount,
+      ...personalData,
+      ...nextOfKinData,
+    },
+  ], [accountType, personalData, nextOfKinData, insuranceAccount]);
+
+  const [addPatient, { isLoading, data }] = useAddPatientMutation();
+  const [addPersonalAccountCharge,
+    { isLoading: isLoadingCharges }] = useAddPersonalAccountChargeMutation();
+
+  const [addAdmission] = useAddAdmissionMutation();
+
+  // const chargesInputValues = useMemo(() => [
+  //   {
+  //     amount: cost,
+  //     service_desc: consultation_type,
+  //     date_of_charge: moment(new Date()).format('MM-DD-YYYY'),
+  //     time_of_charge: moment(new Date()).format('hh:mm:ss'),
+  //     status: 1,
+  //     patient_id: patientID,
+  //     hospital_id: 18,
+  //     quantity: 0,
+  //     appointment_id: appointmentID,
+  //   },
+  // ], [appointmentID, consultation_type,
+  //   patientID,
+  //   cost,
+  // ]);
+
+  const chargesInputValues = useMemo(() => [
+    {
+      appointment_id: appointmentID,
+      patient_id: patientID,
+      amount: cost,
+      admission_date: moment(new Date()).format('MM-DD-YYYY'),
+      admission_time: moment(new Date()).format('hh:mm:ss'),
+      hospital_id: 18,
+    },
+  ], [appointmentID,
+    patientID,
+    cost,
+  ]);
+
+  useEffect(() => {
+    if (data) {
+      setPatientID(data?.patient_id);
+      setAppointmentID(data?.appointment_id);
+    }
+    if (patientID) { addAdmission(chargesInputValues[0]); }
+  }, [data, addAdmission,
+    patientID, chargesInputValues]);
+
+  const handleSubmit = useCallback(() => {
+    addPatient(inputValues[0]);
+
+    // timeout
+    // setTimeout(() => {
+    //   addPersonalAccountCharge(chargesInputValues);
+    // }, 3000);
+  }, [addPatient, inputValues,
+  ]);
+
+  console.log(chargesInputValues, 'cki');
 
   return (
-    <VStack
-      w="full"
-      h="100vh"
-      alignItems="center"
-      justifyContent="center"
-      bgColor="gray.50"
-    >
-      <VStack
+    <VStack w="full" h="100vh" bgColor="gray.50" mt="55px">
+
+      {/* stepper navigation */}
+      <StepperNav activeStep={activeStep} steps={steps} />
+
+      <Box
         w="50%"
-        mt={5}
-        bgColor="white"
-        boxShadow="lg"
-        p={3}
+        p={5}
         rounded="lg"
-        spacing={10}
+        bgColor="white"
       >
 
-        <HStack w="full" justifyContent="space-between">
-          <Text fontSize="2xl" fontWeight="semibold">New Admission</Text>
-          <CloseButton />
-        </HStack>
+        {/* PERSONAL DETAILS */}
+        {activeStep === 1 && (
+        <PersonalDetail
+          handleNext={handleNext}
+          handleBack={handleBack}
+          setPersonalData={setPersonalData}
+          activeStep={activeStep}
+        />
+        )}
 
-        {/* supplier name */}
-        <FormControl>
-          <FormLabel>Enter Patient Name</FormLabel>
-          <Input
-            placeholder="Enter Patient Name"
-            value={supplierName}
-            onChange={(e) => setSupplierName(e.target.value)}
-          />
-        </FormControl>
+        {/* NEXT OF KIN */}
+        {activeStep === 2 && (
+        <NextOfKin
+          handleNext={handleNext}
+          handleBack={handleBack}
+          setNextOfKinData={setNextOfKinData}
+          activeStep={activeStep}
+        />
+        )}
 
-        <FormControl>
-          <HStack w="full" alignItems="center" justifyContent="space-between">
-            <FormLabel fontSize="medium">Select Doctor</FormLabel>
-            <Tag
-              onClick={() => navigate('/add-supplier-classification')}
-              _hover={{
-                cursor: 'pointer',
-              }}
-            >
-              NEW
+        {/* payment detail */}
+        {activeStep === 3 && (
+        <PaymentDetail
+          paymentType={paymentType}
+          setPaymentType={setPaymentType}
+          inputValues={inputValues}
+          insuranceAccount={insuranceAccount}
+          setInsuranceAccount={setInsuranceAccount}
+          cost={cost}
+          setCost={setCost}
+          handleNext={handleNext}
+          handleBack={handleBack}
+          activeStep={activeStep}
+        />
+        )}
 
-            </Tag>
-
-          </HStack>
-          <Select
-            // options={classificationSupplierOptions}
-            value={classification}
-            onChange={(e) => setClassification(e)}
-          />
-
-        </FormControl>
-
-        <FormControl>
-          <FormLabel>Admission Date</FormLabel>
-          <Input
-            placeholder="Enter Admission Date"
-            value={mobileNo}
-            onChange={(e) => setMobileNo(e.target.value)}
-          />
-        </FormControl>
-
-        {/* select Department */}
-        <FormControl>
-          <HStack w="full" alignItems="center" justifyContent="space-between">
-            <FormLabel fontSize="medium">Select Ward</FormLabel>
-            <Tag
-              onClick={() => navigate('/add-ward')}
-              _hover={{
-                cursor: 'pointer',
-              }}
-            >
-              NEW
-
-            </Tag>
-
-          </HStack>
-          <Select
-            // options={classificationSupplierOptions}
-            value={classification}
-            onChange={(e) => setClassification(e)}
-          />
-
-        </FormControl>
-
-        {/* select Department */}
-        <FormControl>
-          <HStack w="full" alignItems="center" justifyContent="space-between">
-            <FormLabel fontSize="medium">Select Bed</FormLabel>
-            <Tag
-              onClick={() => navigate('/add-bed')}
-              _hover={{
-                cursor: 'pointer',
-              }}
-            >
-              NEW
-
-            </Tag>
-
-          </HStack>
-          <Select
-            // options={classificationSupplierOptions}
-            value={classification}
-            onChange={(e) => setClassification(e)}
-          />
-
-        </FormControl>
-
-        {/* select Store */}
-        <FormControl>
-          <FormLabel fontSize="medium">Select Hospital</FormLabel>
-          <Select
-            value={status}
-            options={statusOptions}
-            onChange={(e) => setStatus(e)}
-          />
-
-        </FormControl>
-
-        <HStack w="full" justifyContent="end">
+        {/* complete info */}
+        {activeStep === 4 && (
           <Button
-            size="lg"
-            colorScheme="blue"
-            onClick={() => dispatch(addSuppliers(inputValues))}
+            colorScheme="green"
+            onClick={() => handleSubmit()}
           >
-            {/* {loading ? 'loading...' : 'Save'} */}
-            Save
+            {isLoading || isLoadingCharges ? 'loading...' : 'Save Patient'}
+
           </Button>
-        </HStack>
-      </VStack>
+        )}
+
+      </Box>
     </VStack>
   );
 };

@@ -5,16 +5,13 @@ import {
 } from '@chakra-ui/react';
 // import axios from "axios"
 import { FaFileDownload, FaPrint } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import BreadCrumbNav from '../components/BreadCrumbNav';
 import DataTable2 from '../components/tables/DataTable';
-import { getAllWardTypes } from '../_reducers/wardTypeSlice';
+import { useGetAllWardTypesQuery } from '../api/wardType.api';
 
 const WardType = () => {
-  const dispatch = useDispatch();
-
-  const { data } = useSelector((state) => state.wardType);
+  const { data } = useGetAllWardTypesQuery();
 
   const columns = useMemo(
     () => [
@@ -43,10 +40,6 @@ const WardType = () => {
   //   dispatch(getAllPriceLists())
   // },[dispatch])
   console.log(data);
-
-  useEffect(() => {
-    dispatch(getAllWardTypes());
-  }, [dispatch]);
 
   return (
     <VStack
@@ -77,7 +70,7 @@ const WardType = () => {
             >
               {' '}
               (
-              {subrowData.length}
+              {subrowData?.length}
               )
 
             </span>

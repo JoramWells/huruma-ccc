@@ -39,6 +39,8 @@ import { serviceTypeApi } from './api/serviceType.api';
 import { internalLabRequestsApi } from './api/internalLabRequests.api';
 import { aLabApi } from './_Lab/api/alab.api';
 import { internalPharmacyRequestApi } from './_Pharmacy/api/internalPharmacyRequest.api';
+import { wardTypesApi } from './api/wardType.api';
+import { admissionCategoryApi } from './api/admissionCategory.api';
 
 export const store = configureStore({
   reducer: {
@@ -82,6 +84,8 @@ export const store = configureStore({
     [internalLabRequestsApi.reducerPath]: internalLabRequestsApi.reducer,
     [aLabApi.reducerPath]: aLabApi.reducer,
     [internalPharmacyRequestApi.reducerPath]: internalPharmacyRequestApi.reducer,
+    [wardTypesApi.reducerPath]: wardTypesApi.reducer,
+    [admissionCategoryApi.reducerPath]: admissionCategoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(patientsApi.middleware)
@@ -124,5 +128,7 @@ export const store = configureStore({
     .concat(internalLabRequestsApi.middleware)
     .concat(aLabApi.middleware)
     .concat(internalPharmacyRequestApi.middleware)
+    .concat(wardTypesApi.middleware)
+    .concat(admissionCategoryApi.middleware)
   ,
 });
